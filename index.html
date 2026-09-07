@@ -250,10 +250,12 @@ tr:hover{
 
     <div class="filters">
 
-        <div class="filter-group">
-            <label for="seasonFilter">Sezóna</label>
-            <select id="seasonFilter"></select>
-        </div>
+<div class="filter-group">
+    <label for="opponentFilter">Opponent</label>
+    <select id="opponentFilter">
+        <option value="all">Všetci súperi</option>
+    </select>
+</div>
 
         <div class="filter-group">
             <label for="competitionFilter">Súťaž</label>
@@ -281,8 +283,6 @@ fetch("data.json")
     allMatches = data;
 
     createFilters(data);
-
-    render(data);
 
 })
 .catch(error => {
