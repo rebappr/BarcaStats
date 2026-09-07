@@ -6,42 +6,52 @@
 
 <title>Barca Stats</title>
 
-<style>
-
-body{
-    font-family: Arial, sans-serif;
+<link relonts.googleapis.com
+<link rel="preconnect" href="httpsef="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"dy{
+    font-family:'Roboto',sans-serif;
+    font-size:10px;
     margin:20px;
 }
 
 h1{
     color:#004D98;
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.filters{
+    margin-bottom:20px;
 }
 
 label{
-    font-weight:bold;
+    font-weight:500;
+    margin-right:5px;
 }
 
 select{
-    padding:8px;
-    margin:15px 0;
+    font-family:'Roboto',sans-serif;
+    font-size:10px;
+    padding:5px;
+    margin-right:15px;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    margin-top:20px;
 }
 
 th{
     background:#004D98;
     color:white;
-    padding:10px;
+    padding:8px;
     text-align:left;
+    font-size:10px;
 }
 
 td{
     border:1px solid #ddd;
-    padding:8px;
+    padding:6px;
+    font-size:10px;
 }
 
 tr:nth-child(even){
@@ -52,20 +62,80 @@ tr:hover{
     background:#eef4ff;
 }
 
+.result-win{
+    background:#d4edda !important;
+    color:#155724;
+    font-weight:bold;
+}
+
+.result-draw{
+    background:#fff3cd !important;
+    color:#856404;
+    font-weight:bold;
+}
+
+.result-loss{
+    background:#f8d7da !important;
+    color:#721c24;
+    font-weight:bold;
+}
+
+@media (max-width:768px){
+
+    body{
+        margin:10px;
+        font-size:10px;
+    }
+
+    .filters{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+    }
+
+    select{
+        width:100%;
+    }
+
+    table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    th,
+    td{
+        font-size:9px;
+        padding:4px;
+    }
+
+}
+
 </style>
 
 </head>
+
 <body>
 
 <h1>Barca Stats</h1>
 
-<label for="competitionFilter">Súťaž:</label>
+<div class="filters">
 
-<select id="competitionFilter">
-    <option value="all">Všetky súťaže</option>
-</select>
+    <label for="seasonFilter">Sezóna:</label>
+    <select id="seasonFilter">
+        <option value="all">Všetky sezóny</option>
+    </select>
 
-<div id="matches">Načítavam...</div>
+    <label for="competitionFilter">Súťaž:</label>
+    <select id="competitionFilter">
+        <option value="all">Všetky súťaže</option>
+    </select>
+
+</div>
+
+<div id="matches">
+    Načítavam...
+</div>
 
 <script>
 
@@ -77,53 +147,9 @@ fetch("data.json")
 
     allMatches = data;
 
-    const competitions = [
-        ...new Set(
-            data
-                .map(row => row["Competition"])
-                .filter(Boolean)
-        )
-    ];
+    createFilters(data);
 
-    competitions.sort();
-
-    const select =
-        document.getElementById("competitionFilter");
-
-    competitions.forEach(comp => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = comp;
-        option.textContent = comp;
-
-        select.appendChild(option);
-
-    });
-
-    render(allMatches);
-
-    select.addEventListener("change", function(){
-
-        const selected = this.value;
-
-        if(selected === "all"){
-
-            render(allMatches);
-
-        } else {
-
-            const filtered =
-                allMatches.filter(
-                    row => row["Competition"] === selected
-                );
-
-            render(filtered);
-
-        }
-
-    });
+    render(data);
 
 })
 .catch(error => {
@@ -135,36 +161,169 @@ fetch("data.json")
 
 });
 
+function createFilters(data){
+
+    const seasonFilter =
+        document.getElementById("seasonFilter");
+
+    const competitionFilter =
+        document.getElementById("competitionFilter");
+
+    const seasons = [
+        ...new Set(
+            data
+                .map(row => row["Season"])
+                .filter(Boolean)
+        )
+    ];
+
+    seasons.sort().reverse();
+
+    seasons.forEach(season => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = season;
+        option.textContent = season;
+
+        seasonFilter.appendChild(option);
+
+    });
+
+    const competitions = [
+        ...new Set(
+            data
+                .map(row => row["Competition"])
+                .filter(Boolean)
+        )
+    ];
+
+    competitions.sort();
+
+    competitions.forEach(comp => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = comp;
+        option.textContent = comp;
+
+        competitionFilter.appendChild(option);
+
+    });
+
+    seasonFilter.addEventListener(
+        "change",
+        applyFilters
+    );
+
+    competitionFilter.addEventListener(
+        "change",
+        applyFilters
+    );
+
+}
+
+function applyFilters(){
+
+    const selectedSeason =
+        document.getElementById("seasonFilter").value;
+
+    const selectedCompetition =
+        document.getElementById("competitionFilter").value;
+
+    let filtered = [...allMatches];
+
+    if(selectedSeason !== "all"){
+
+        filtered = filtered.filter(
+            row => row["Season"] === selectedSeason
+        );
+
+    }
+
+    if(selectedCompetition !== "all"){
+
+        filtered = filtered.filter(
+            row => row["Competition"] === selectedCompetition
+        );
+
+    }
+
+    render(filtered);
+
+}
+
+function getResultClass(match){
+
+    const homeGoals =
+        parseInt(match["Goals home team"]);
+
+    const awayGoals =
+        parseInt(match["Goals away team"]);
+
+    if(isNaN(homeGoals) || isNaN(awayGoals)){
+        return "";
+    }
+
+    const isBarcaHome =
+        (match["Home team"] || "")
+        .toLowerCase()
+        .includes("barcelona");
+
+    const barcaGoals =
+        isBarcaHome ? homeGoals : awayGoals;
+
+    const opponentGoals =
+        isBarcaHome ? awayGoals : homeGoals;
+
+    if(barcaGoals > opponentGoals){
+        return "result-win";
+    }
+
+    if(barcaGoals < opponentGoals){
+        return "result-loss";
+    }
+
+    return "result-draw";
+}
+
 function render(data){
 
     let html = `
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Competition</th>
-                <th>Home team</th>
-                <th>Away team</th>
-                <th>Result</th>
-            </tr>
+    <table>
+        <tr>
+            <th>Season</th>
+            <th>Date</th>
+            <th>Competition</th>
+            <th>Home team</th>
+            <th>Away team</th>
+            <th>Result</th>
+        </tr>
     `;
 
     data.forEach(match => {
 
         html += `
-            <tr>
-                <td>${match["Date"] || ""}</td>
-                <td>${match["Competition"] || ""}</td>
-                <td>${match["Home team"] || ""}</td>
-                <td>${match["Away team"] || ""}</td>
-                <td>${match["Result"] || ""}</td>
-            </tr>
+        <tr>
+            <td>${match["Season"] || ""}</td>
+            <td>${match["Date"] || ""}</td>
+            <td>${match["Competition"] || ""}</td>
+            <td>${match["Home team"] || ""}</td>
+            <td>${match["Away team"] || ""}</td>
+            <td class="${getResultClass(match)}">
+                ${match["Result"] || ""}
+            </td>
+        </tr>
         `;
 
     });
 
     html += `</table>`;
 
-    document.getElementById("matches").innerHTML = html;
+    document.getElementById("matches").innerHTML =
+        html;
 
 }
 
