@@ -75,7 +75,7 @@ label{
     font-weight:600;
 }
 
-select{
+input[list]{
     border:1px solid #d1d5db;
     border-radius:8px;
     padding:8px 12px;
@@ -88,17 +88,14 @@ select{
     display:inline-block;
     background:white;
     border-radius:12px;
-    overflow:hidden; /* dôležité */
+    overflow:hidden;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
-    max-width:100%;
 }
-
 
 .table-scroll{
     max-height:800px;
     overflow-y:auto;
     overflow-x:auto;
-    border-radius:12px;
 }
 
 table{
@@ -115,31 +112,22 @@ thead th:last-child{
     border-top-right-radius:12px;
 }
 
+th{
+    padding:8px 10px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--barca-blue);
+    color:white;
+    white-space:nowrap;
+}
+
 td{
     padding:6px 8px;
     border-bottom:1px solid #edf2f7;
     white-space:nowrap;
 }
 
-th{
-    padding:6px 8px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:var(--barca-blue);
-    color:white;
-}
-
-thead{
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-   
-th:last-child,
-td:last-child{
-    text-align:center;
-}
 tr:hover{
     background:#f8fafc;
 }
@@ -151,66 +139,7 @@ tr:hover{
     background:#e0e7ff;
     color:#3730a3;
     font-weight:600;
-    font-size:12px;
-    line-height:1.2;
 }
-
-.result-badge{
-    padding:4px 8px;
-    border-radius:999px;
-    font-weight:600;
-    display:inline-block;
-    min-width:45px;
-    text-align:center;
-}
-
-.competition-cell{
-    width:1%;
-    white-space:nowrap;
-}
-
-.opponent-cell{
-    width:1%;
-    white-space:nowrap;
-}
-
-.result-win{
-    background:#dcfce7 !important;
-    color:#166534;
-}
-
-.result-draw{
-    background:#fef9c3 !important;
-    color:#854d0e;
-}
-
-.result-loss{
-    background:#fee2e2 !important;
-    color:#991b1b;
-}
-
-.empty{
-    padding:20px;
-    text-align:center;
-}
-
-@media (max-width:768px){
-
-    .container{
-        padding:10px;
-    }
-
-    .header h1{
-        font-size:24px;
-    }
-
-    .filters{
-        flex-direction:column;
-    }
-
-    select{
-        width:100%;
-    }
 
 .result-badge{
     padding:4px 8px;
@@ -236,6 +165,34 @@ tr:hover{
     color:#991b1b;
 }
 
+.competition-cell,
+.opponent-cell{
+    width:1%;
+}
+
+.empty{
+    padding:20px;
+    text-align:center;
+}
+
+@media (max-width:768px){
+
+    .container{
+        padding:10px;
+    }
+
+    .header h1{
+        font-size:24px;
+    }
+
+    .filters{
+        flex-direction:column;
+    }
+
+    input[list]{
+        width:100%;
+    }
+
 }
 
 </style>
@@ -251,24 +208,23 @@ tr:hover{
 
     <div class="filters">
 
-<div class="filter-group">
-    <label for="seasonFilter">Sezóna</label>
-    <select id="seasonFilter"></select>
-</div>
+        <div class="filter-group">
+            <label for="seasonFilter">Sezóna</label>
+            <input id="seasonFilter" list="seasonList">
+            <datalist id="seasonList"></datalist>
+        </div>
 
-<div class="filter-group">
-    <label for="opponentFilter">Opponent</label>
-    <select id="opponentFilter">
-        <option value="all">Všetci súperi</option>
-    </select>
-</div>
+        <div class="filter-group">
+            <label for="competitionFilter">Súťaž</label>
+            <input id="competitionFilter" list="competitionList">
+            <datalist id="competitionList"></datalist>
+        </div>
 
-<div class="filter-group">
-    <label for="competitionFilter">Súťaž</label>
-    <select id="competitionFilter">
-        <option value="all">Všetky súťaže</option>
-    </select>
-</div>
+        <div class="filter-group">
+            <label for="opponentFilter">Opponent</label>
+            <input id="opponentFilter" list="opponentList">
+            <datalist id="opponentList"></datalist>
+        </div>
 
     </div>
 
@@ -311,13 +267,19 @@ function createFilters(data){
     const opponentFilter =
         document.getElementById("opponentFilter");
 
-    // SEZÓNY
+    const seasonList =
+        document.getElementById("seasonList");
+
+    const competitionList =
+        document.getElementById("competitionList");
+
+    const opponentList =
+        document.getElementById("opponentList");
 
     const seasons = [
         ...new Set(
-            data
-                .map(row => row["Season"])
-                .filter(Boolean)
+            data.map(row => row["Season"])
+            .filter(Boolean)
         )
     ];
 
@@ -329,36 +291,19 @@ function createFilters(data){
             document.createElement("option");
 
         option.value = season;
-        option.textContent = season;
 
-        seasonFilter.appendChild(option);
+        seasonList.appendChild(option);
 
     });
 
-    const allSeasonsOption =
-        document.createElement("option");
-
-    allSeasonsOption.value = "all";
-    allSeasonsOption.textContent =
-        "Všetky sezóny";
-
-    seasonFilter.appendChild(allSeasonsOption);
-
-    // predvolená sezóna = najnovšia
-
     if(seasons.length > 0){
-
         seasonFilter.value = seasons[0];
-
     }
-
-    // SÚŤAŽE
 
     const competitions = [
         ...new Set(
-            data
-                .map(row => row["Competition"])
-                .filter(Boolean)
+            data.map(row => row["Competition"])
+            .filter(Boolean)
         )
     ];
 
@@ -370,17 +315,13 @@ function createFilters(data){
             document.createElement("option");
 
         option.value = comp;
-        option.textContent = comp;
 
-        competitionFilter.appendChild(option);
+        competitionList.appendChild(option);
 
     });
 
-    // SÚPERI
-
     const opponents = [
         ...new Set(
-
             data.map(match => {
 
                 const home =
@@ -395,9 +336,7 @@ function createFilters(data){
                     ? away
                     : home;
 
-            })
-            .filter(Boolean)
-
+            }).filter(Boolean)
         )
     ];
 
@@ -409,63 +348,62 @@ function createFilters(data){
             document.createElement("option");
 
         option.value = opponent;
-        option.textContent = opponent;
 
-        opponentFilter.appendChild(option);
+        opponentList.appendChild(option);
 
     });
 
-    // LISTENERS
-
     seasonFilter.addEventListener(
-        "change",
+        "input",
         applyFilters
     );
 
     competitionFilter.addEventListener(
-        "change",
+        "input",
         applyFilters
     );
 
     opponentFilter.addEventListener(
-        "change",
+        "input",
         applyFilters
     );
 
-    // po načítaní zobraz iba aktuálnu sezónu
-
     applyFilters();
-
 }
 
 function applyFilters(){
 
     const season =
-        document.getElementById("seasonFilter").value;
+        document.getElementById("seasonFilter")
+        .value.trim();
 
     const competition =
-        document.getElementById("competitionFilter").value;
+        document.getElementById("competitionFilter")
+        .value.trim();
 
     const opponent =
-        document.getElementById("opponentFilter").value;
+        document.getElementById("opponentFilter")
+        .value.trim();
 
     let filtered = [...allMatches];
 
-    if(season !== "all"){
+    if(season !== ""){
 
         filtered = filtered.filter(
             row => row["Season"] === season
         );
+
     }
 
-    if(competition !== "all"){
+    if(competition !== ""){
 
         filtered = filtered.filter(
             row => row["Competition"] === competition
         );
+
     }
 
-    if(opponent !== "all"){
+    if(opponent !== ""){
 
         filtered = filtered.filter(match => {
 
@@ -481,11 +419,13 @@ function applyFilters(){
                     : home;
 
             return currentOpponent === opponent;
+
         });
 
     }
 
     render(filtered);
+
 }
 
 function getResultClass(match){
@@ -530,6 +470,7 @@ function getResultClass(match){
 
     return "result-badge result-draw";
 }
+
 function render(matches){
 
     if(matches.length === 0){
@@ -542,62 +483,67 @@ function render(matches){
 
     let html = `
     <div class="table-wrapper">
-    <div class="table-scroll">
-    <table>
-        <thead>
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>Date</th>
+                        <th>Competition</th>
+                        <th>Opponent</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
+    matches.forEach(match => {
+
+        const home =
+            match["Home team"] || "";
+
+        const away =
+            match["Away team"] || "";
+
+        const opponent =
+            home.toLowerCase().includes("barcelona")
+                ? away
+                : home;
+
+        html += `
             <tr>
-                <th>Season</th>
-                <th>Date</th>
-                <th>Competition</th>
-                <th>Opponent</th>
-                <th>Result</th>
+                <td>${match["Season"] || ""}</td>
+
+                <td>${match["Date"] || ""}</td>
+
+                <td class="competition-cell">
+                    <span class="badge">
+                        ${match["Competition"] || ""}
+                    </span>
+                </td>
+
+                <td class="opponent-cell">
+                    ${opponent}
+                </td>
+
+                <td>
+                    ${
+                        match["Result"] === "-:-"
+                        ? ""
+                        : `<span class="${getResultClass(match)}">
+                            ${match["Result"]}
+                           </span>`
+                    }
+                </td>
             </tr>
-        </thead>
-        <tbody>
-    `;
+        `;
 
-matches.forEach(match => {
-
-    const homeTeam = match["Home team"] || "";
-    const awayTeam = match["Away team"] || "";
-
-    const opponent =
-        homeTeam.toLowerCase().includes("barcelona")
-            ? awayTeam
-            : homeTeam;
+    });
 
     html += `
-    <tr>
-        <td>${match["Season"] || ""}</td>
-
-        <td>${match["Date"] || ""}</td>
-
-<td class="competition-cell">
-    <span class="badge">
-        ${match["Competition"] || ""}
-    </span>
-</td>
-
-        <td class="opponent-cell">${opponent}</td>
-
-<td>
-    ${
-        match["Result"] === "-:-"
-        ? ""
-        : `<span class="${getResultClass(match)}">
-            ${match["Result"]}
-           </span>`
-    }
-</td>
-    </tr>
-    `;
-
-});
-
-    html += `
-        </tbody>
-    </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
     </div>
     `;
 
@@ -609,4 +555,3 @@ matches.forEach(match => {
 
 </body>
 </html>
-``
