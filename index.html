@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Barca Stats</title>
+<title>FC Barcelona</title>
 
-<https://fonts.googleapis.com
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigincss2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">lue:#004D98;
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --barca-blue:#004D98;
     --barca-red:#A50044;
 }
 
@@ -166,17 +172,17 @@ tr:hover{
     table{
         min-width:900px;
     }
-
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
     <div class="header">
-        <h1>Barca Stats</h1>
+        <h1>FC Barcelona</h1>
     </div>
 
     <div class="filters">
@@ -238,8 +244,8 @@ function createFilters(data){
     const seasons = [
         ...new Set(
             data
-                .map(row => row["Season"])
-                .filter(Boolean)
+            .map(row => row["Season"])
+            .filter(Boolean)
         )
     ];
 
@@ -260,8 +266,8 @@ function createFilters(data){
     const competitions = [
         ...new Set(
             data
-                .map(row => row["Competition"])
-                .filter(Boolean)
+            .map(row => row["Competition"])
+            .filter(Boolean)
         )
     ];
 
@@ -305,7 +311,6 @@ function applyFilters(){
         filtered = filtered.filter(
             row => row["Season"] === season
         );
-
     }
 
     if(competition !== "all"){
@@ -313,22 +318,29 @@ function applyFilters(){
         filtered = filtered.filter(
             row => row["Competition"] === competition
         );
-
     }
 
     render(filtered);
-
 }
 
 function getResultClass(match){
 
-    const home =
-        parseInt(match["Goals home team"]);
+    const result = match["Result"] || "";
 
-    const away =
-        parseInt(match["Goals away team"]);
+    if(
+        result === "" ||
+        result === "-:-" ||
+        !result.includes(":")
+    ){
+        return "";
+    }
 
-    if(isNaN(home) || isNaN(away)){
+    const parts = result.split(":");
+
+    const homeGoals = parseInt(parts[0]);
+    const awayGoals = parseInt(parts[1]);
+
+    if(isNaN(homeGoals) || isNaN(awayGoals)){
         return "";
     }
 
@@ -338,10 +350,10 @@ function getResultClass(match){
         .includes("barcelona");
 
     const barcaGoals =
-        isBarcaHome ? home : away;
+        isBarcaHome ? homeGoals : awayGoals;
 
     const opponentGoals =
-        isBarcaHome ? away : home;
+        isBarcaHome ? awayGoals : homeGoals;
 
     if(barcaGoals > opponentGoals){
         return "result-win";
@@ -399,9 +411,12 @@ function render(matches){
             <td>${match["Away team"] || ""}</td>
 
             <td class="${getResultClass(match)}">
-                ${match["Result"] || ""}
+                ${
+                    match["Result"] === "-:-"
+                    ? ""
+                    : (match["Result"] || "")
+                }
             </td>
-
         </tr>
         `;
 
@@ -416,10 +431,10 @@ function render(matches){
 
     document.getElementById("matches").innerHTML =
         html;
-
 }
 
 </script>
 
 </body>
 </html>
+``
