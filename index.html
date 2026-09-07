@@ -6,33 +6,86 @@
 
 <title>Barca Stats</title>
 
-<link relonts.googleapis.com
-<link rel="preconnect" href="httpsef="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"dy{
-    font-family:'Roboto',sans-serif;
-    font-size:10px;
-    margin:20px;
+<https://fonts.googleapis.com
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigincss2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">lue:#004D98;
+    --barca-red:#A50044;
 }
 
-h1{
-    color:#004D98;
-    font-size:24px;
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Roboto',sans-serif;
+    font-size:12px;
+    margin:0;
+    background:#f4f6f9;
+    color:#1f2937;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+}
+
+.header{
+    background:linear-gradient(
+        135deg,
+        var(--barca-blue),
+        var(--barca-red)
+    );
+    color:white;
+    padding:24px;
+    border-radius:16px;
     margin-bottom:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.header h1{
+    margin:0;
+    font-size:32px;
 }
 
 .filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
     margin-bottom:20px;
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.filter-group{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
 }
 
 label{
-    font-weight:500;
-    margin-right:5px;
+    font-weight:600;
 }
 
 select{
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:8px 12px;
+    font-size:12px;
     font-family:'Roboto',sans-serif;
-    font-size:10px;
-    padding:5px;
-    margin-right:15px;
+    background:white;
+}
+
+.table-wrapper{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.table-scroll{
+    overflow-x:auto;
 }
 
 table{
@@ -41,56 +94,69 @@ table{
 }
 
 th{
-    background:#004D98;
+    background:var(--barca-blue);
     color:white;
-    padding:8px;
+    padding:12px;
     text-align:left;
-    font-size:10px;
+    font-size:12px;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
 td{
-    border:1px solid #ddd;
-    padding:6px;
-    font-size:10px;
-}
-
-tr:nth-child(even){
-    background:#f7f7f7;
+    padding:10px 12px;
+    border-bottom:1px solid #edf2f7;
 }
 
 tr:hover{
-    background:#eef4ff;
+    background:#f8fafc;
+}
+
+.badge{
+    background:#e0e7ff;
+    color:#3730a3;
+    padding:4px 8px;
+    border-radius:999px;
+    font-weight:600;
+    white-space:nowrap;
 }
 
 .result-win{
-    background:#d4edda !important;
-    color:#155724;
-    font-weight:bold;
+    background:#dcfce7 !important;
+    color:#166534;
+    font-weight:700;
 }
 
 .result-draw{
-    background:#fff3cd !important;
-    color:#856404;
-    font-weight:bold;
+    background:#fef9c3 !important;
+    color:#854d0e;
+    font-weight:700;
 }
 
 .result-loss{
-    background:#f8d7da !important;
-    color:#721c24;
-    font-weight:bold;
+    background:#fee2e2 !important;
+    color:#991b1b;
+    font-weight:700;
+}
+
+.empty{
+    padding:20px;
+    text-align:center;
 }
 
 @media (max-width:768px){
 
-    body{
-        margin:10px;
-        font-size:10px;
+    .container{
+        padding:10px;
+    }
+
+    .header h1{
+        font-size:24px;
     }
 
     .filters{
-        display:flex;
         flex-direction:column;
-        gap:8px;
     }
 
     select{
@@ -98,43 +164,43 @@ tr:hover{
     }
 
     table{
-        display:block;
-        overflow-x:auto;
-        white-space:nowrap;
-    }
-
-    th,
-    td{
-        font-size:9px;
-        padding:4px;
+        min-width:900px;
     }
 
 }
 
 </style>
-
 </head>
-
 <body>
 
-<h1>Barca Stats</h1>
+<div class="container">
 
-<div class="filters">
+    <div class="header">
+        <h1>Barca Stats</h1>
+    </div>
 
-    <label for="seasonFilter">Sezóna:</label>
-    <select id="seasonFilter">
-        <option value="all">Všetky sezóny</option>
-    </select>
+    <div class="filters">
 
-    <label for="competitionFilter">Súťaž:</label>
-    <select id="competitionFilter">
-        <option value="all">Všetky súťaže</option>
-    </select>
+        <div class="filter-group">
+            <label for="seasonFilter">Sezóna</label>
+            <select id="seasonFilter">
+                <option value="all">Všetky sezóny</option>
+            </select>
+        </div>
 
-</div>
+        <div class="filter-group">
+            <label for="competitionFilter">Súťaž</label>
+            <select id="competitionFilter">
+                <option value="all">Všetky súťaže</option>
+            </select>
+        </div>
 
-<div id="matches">
-    Načítavam...
+    </div>
+
+    <div id="matches">
+        Načítavam...
+    </div>
+
 </div>
 
 <script>
@@ -157,7 +223,7 @@ fetch("data.json")
     console.error(error);
 
     document.getElementById("matches").innerHTML =
-        "<b>Chyba pri načítaní data.json</b>";
+        "<div class='empty'>Chyba pri načítaní data.json</div>";
 
 });
 
@@ -222,31 +288,30 @@ function createFilters(data){
         "change",
         applyFilters
     );
-
 }
 
 function applyFilters(){
 
-    const selectedSeason =
+    const season =
         document.getElementById("seasonFilter").value;
 
-    const selectedCompetition =
+    const competition =
         document.getElementById("competitionFilter").value;
 
     let filtered = [...allMatches];
 
-    if(selectedSeason !== "all"){
+    if(season !== "all"){
 
         filtered = filtered.filter(
-            row => row["Season"] === selectedSeason
+            row => row["Season"] === season
         );
 
     }
 
-    if(selectedCompetition !== "all"){
+    if(competition !== "all"){
 
         filtered = filtered.filter(
-            row => row["Competition"] === selectedCompetition
+            row => row["Competition"] === competition
         );
 
     }
@@ -257,13 +322,13 @@ function applyFilters(){
 
 function getResultClass(match){
 
-    const homeGoals =
+    const home =
         parseInt(match["Goals home team"]);
 
-    const awayGoals =
+    const away =
         parseInt(match["Goals away team"]);
 
-    if(isNaN(homeGoals) || isNaN(awayGoals)){
+    if(isNaN(home) || isNaN(away)){
         return "";
     }
 
@@ -273,10 +338,10 @@ function getResultClass(match){
         .includes("barcelona");
 
     const barcaGoals =
-        isBarcaHome ? homeGoals : awayGoals;
+        isBarcaHome ? home : away;
 
     const opponentGoals =
-        isBarcaHome ? awayGoals : homeGoals;
+        isBarcaHome ? away : home;
 
     if(barcaGoals > opponentGoals){
         return "result-win";
@@ -289,38 +354,65 @@ function getResultClass(match){
     return "result-draw";
 }
 
-function render(data){
+function render(matches){
+
+    if(matches.length === 0){
+
+        document.getElementById("matches").innerHTML =
+            "<div class='empty'>Žiadne zápasy</div>";
+
+        return;
+    }
 
     let html = `
+    <div class="table-wrapper">
+    <div class="table-scroll">
     <table>
-        <tr>
-            <th>Season</th>
-            <th>Date</th>
-            <th>Competition</th>
-            <th>Home team</th>
-            <th>Away team</th>
-            <th>Result</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Season</th>
+                <th>Date</th>
+                <th>Competition</th>
+                <th>Home team</th>
+                <th>Away team</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
 
-    data.forEach(match => {
+    matches.forEach(match => {
 
         html += `
         <tr>
             <td>${match["Season"] || ""}</td>
             <td>${match["Date"] || ""}</td>
-            <td>${match["Competition"] || ""}</td>
+
+            <td>
+                <span class="badge">
+                    ${match["Competition"] || ""}
+                </span>
+            </td>
+
             <td>${match["Home team"] || ""}</td>
+
             <td>${match["Away team"] || ""}</td>
+
             <td class="${getResultClass(match)}">
                 ${match["Result"] || ""}
             </td>
+
         </tr>
         `;
 
     });
 
-    html += `</table>`;
+    html += `
+        </tbody>
+    </table>
+    </div>
+    </div>
+    `;
 
     document.getElementById("matches").innerHTML =
         html;
