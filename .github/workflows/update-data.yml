@@ -1,10 +1,30 @@
-name: Test
+name: Update JSON
 
 on:
- workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+  workflow_dispatch:
 
 jobs:
- test:
-  runs-on: ubuntu-latest
- steps:
-  - run: echo "funguje"
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Sheet
+        run: |
+          curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/bySeason" -o data.json
+
+      - name: Commit Changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add data.json
+
+          if ! git diff --staged --quiet; then
+            git commit -m "Update data"
+            git push
+          fi
