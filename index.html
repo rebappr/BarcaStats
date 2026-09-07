@@ -296,10 +296,6 @@ function createFilters(data){
 
     });
 
-    if(seasons.length > 0){
-        seasonFilter.value = seasons[0];
-    }
-
     const competitions = [
         ...new Set(
             data.map(row => row["Competition"])
