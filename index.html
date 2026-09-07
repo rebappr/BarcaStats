@@ -69,6 +69,7 @@ body{
     display:flex;
     flex-direction:column;
     gap:4px;
+    min-width:140px;
 }
 
 label{
@@ -76,11 +77,16 @@ label{
 }
 
 input[list]{
+    width:100%;
+    max-width:220px;
+
     border:1px solid #d1d5db;
     border-radius:8px;
     padding:8px 12px;
+
     font-size:12px;
     font-family:'Roboto',sans-serif;
+
     background:white;
 }
 
@@ -187,10 +193,17 @@ tr:hover{
 
     .filters{
         flex-direction:column;
+        width:100%;
+    }
+
+    .filter-group{
+        width:100%;
+        min-width:0;
     }
 
     input[list]{
         width:100%;
+        max-width:none;
     }
 
 }
@@ -209,13 +222,13 @@ tr:hover{
     <div class="filters">
 
         <div class="filter-group">
-            <label for="seasonFilter">Sezóna</label>
+            <label for="seasonFilter">Season</label>
             <input id="seasonFilter" list="seasonList">
             <datalist id="seasonList"></datalist>
         </div>
 
         <div class="filter-group">
-            <label for="competitionFilter">Súťaž</label>
+            <label for="competitionFilter">Competition</label>
             <input id="competitionFilter" list="competitionList">
             <datalist id="competitionList"></datalist>
         </div>
