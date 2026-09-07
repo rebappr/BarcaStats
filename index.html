@@ -1,31 +1,174 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Barca Stats</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+}
+
+h1{
+    color:#004D98;
+}
+
+label{
+    font-weight:bold;
+}
+
+select{
+    padding:8px;
+    margin:15px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th{
+    background:#004D98;
+    color:white;
+    padding:10px;
+    text-align:left;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:8px;
+}
+
+tr:nth-child(even){
+    background:#f7f7f7;
+}
+
+tr:hover{
+    background:#eef4ff;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>Barca Stats</h1>
+
+<label for="competitionFilter">Súťaž:</label>
+
+<select id="competitionFilter">
+    <option value="all">Všetky súťaže</option>
+</select>
+
+<div id="matches">Načítavam...</div>
+
+<script>
+
+let allMatches = [];
+
+fetch("data.json")
+.then(response => response.json())
+.then(data => {
+
+    allMatches = data;
+
+    const competitions = [
+        ...new Set(
+            data
+                .map(row => row["Competition"])
+                .filter(Boolean)
+        )
+    ];
+
+    competitions.sort();
+
+    const select =
+        document.getElementById("competitionFilter");
+
+    competitions.forEach(comp => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = comp;
+        option.textContent = comp;
+
+        select.appendChild(option);
+
+    });
+
+    render(allMatches);
+
+    select.addEventListener("change", function(){
+
+        const selected = this.value;
+
+        if(selected === "all"){
+
+            render(allMatches);
+
+        } else {
+
+            const filtered =
+                allMatches.filter(
+                    row => row["Competition"] === selected
+                );
+
+            render(filtered);
+
+        }
+
+    });
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    document.getElementById("matches").innerHTML =
+        "<b>Chyba pri načítaní data.json</b>";
+
+});
+
 function render(data){
 
     let html = `
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Competition</th>
-            <th>Home team</th>
-            <th>Away team</th>
-            <th>Result</th>
-        </tr>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Competition</th>
+                <th>Home team</th>
+                <th>Away team</th>
+                <th>Result</th>
+            </tr>
     `;
 
     data.forEach(match => {
 
         html += `
-        <tr>
-            <td>${match["Date"] || ""}</td>
-            <td>${match["Competition"] || ""}</td>
-            <td>${match["Home team"] || ""}</td>
-            <td>${match["Away team"] || ""}</td>
-            <td>${match["Result"] || ""}</td>
-        </tr>
+            <tr>
+                <td>${match["Date"] || ""}</td>
+                <td>${match["Competition"] || ""}</td>
+                <td>${match["Home team"] || ""}</td>
+                <td>${match["Away team"] || ""}</td>
+                <td>${match["Result"] || ""}</td>
+            </tr>
         `;
 
     });
 
-    html += "</table>";
+    html += `</table>`;
 
     document.getElementById("matches").innerHTML = html;
+
 }
+
+</script>
+
+</body>
+</html>
