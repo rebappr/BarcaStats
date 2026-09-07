@@ -98,6 +98,7 @@ select{
     max-height:800px;
     overflow-y:auto;
     overflow-x:auto;
+    border-radius:12px;
 }
 
 table{
@@ -251,18 +252,23 @@ tr:hover{
     <div class="filters">
 
 <div class="filter-group">
+    <label for="seasonFilter">Sezóna</label>
+    <select id="seasonFilter"></select>
+</div>
+
+<div class="filter-group">
     <label for="opponentFilter">Opponent</label>
     <select id="opponentFilter">
         <option value="all">Všetci súperi</option>
     </select>
 </div>
 
-        <div class="filter-group">
-            <label for="competitionFilter">Súťaž</label>
-            <select id="competitionFilter">
-                <option value="all">Všetky súťaže</option>
-            </select>
-        </div>
+<div class="filter-group">
+    <label for="competitionFilter">Súťaž</label>
+    <select id="competitionFilter">
+        <option value="all">Všetky súťaže</option>
+    </select>
+</div>
 
     </div>
 
@@ -440,6 +446,9 @@ function applyFilters(){
     const competition =
         document.getElementById("competitionFilter").value;
 
+    const opponent =
+        document.getElementById("opponentFilter").value;
+
     let filtered = [...allMatches];
 
     if(season !== "all"){
@@ -454,6 +463,26 @@ function applyFilters(){
         filtered = filtered.filter(
             row => row["Competition"] === competition
         );
+    }
+
+    if(opponent !== "all"){
+
+        filtered = filtered.filter(match => {
+
+            const home =
+                match["Home team"] || "";
+
+            const away =
+                match["Away team"] || "";
+
+            const currentOpponent =
+                home.toLowerCase().includes("barcelona")
+                    ? away
+                    : home;
+
+            return currentOpponent === opponent;
+        });
+
     }
 
     render(filtered);
