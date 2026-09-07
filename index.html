@@ -97,7 +97,8 @@ select{
 }
 
 table{
-    width:100%;
+    width:auto;
+    table-layout:auto;
     border-collapse:collapse;
 }
 
@@ -114,7 +115,7 @@ th{
 }
 
 td{
-    padding:8px 10px;
+    padding:6px 8px;
     border-bottom:1px solid #edf2f7;
     white-space:nowrap;
 }
@@ -144,6 +145,16 @@ tr:hover{
     display:inline-block;
     min-width:45px;
     text-align:center;
+}
+
+.competition-cell{
+    width:1%;
+    white-space:nowrap;
+}
+
+.opponent-cell{
+    width:1%;
+    white-space:nowrap;
 }
 
 .result-win{
@@ -447,13 +458,13 @@ matches.forEach(match => {
 
         <td>${match["Date"] || ""}</td>
 
-        <td>
-            <span class="badge">
-                ${match["Competition"] || ""}
-            </span>
-        </td>
+<td class="competition-cell">
+    <span class="badge">
+        ${match["Competition"] || ""}
+    </span>
+</td>
 
-        <td>${opponent}</td>
+        <td class="opponent-cell">${opponent}</td>
 
 <td>
     ${
