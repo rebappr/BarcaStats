@@ -88,9 +88,11 @@ select{
     display:inline-block;
     background:white;
     border-radius:12px;
+    overflow:hidden; /* dôležité */
     box-shadow:0 2px 8px rgba(0,0,0,.08);
     max-width:100%;
 }
+
 
 .table-scroll{
     max-height:800px;
@@ -102,7 +104,14 @@ table{
     width:auto;
     border-collapse:collapse;
     table-layout:auto;
-    border-radius:12px;
+}
+
+thead th:first-child{
+    border-top-left-radius:12px;
+}
+
+thead th:last-child{
+    border-top-right-radius:12px;
 }
 
 td{
@@ -112,15 +121,19 @@ td{
 }
 
 th{
-    padding:8px 10px;
-    white-space:nowrap;
     position:sticky;
     top:0;
     z-index:100;
     background:var(--barca-blue);
     color:white;
 }
-    
+
+thead{
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+   
 th:last-child,
 td:last-child{
     text-align:center;
