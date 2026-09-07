@@ -1,81 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Barca Stats</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #004D98;
+            color: white;
+        }
+
+        select {
+            padding: 8px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
 <h1>Barca Stats</h1>
+
+<label>Súťaž:</label>
 
 <select id="competitionFilter">
     <option value="all">Všetky súťaže</option>
 </select>
 
-<div id="data"></div>
+<div id="matches"></div>
 
 <script>
 
-let allData = [];
+let allMatches = [];
 
-fetch("data.json")
-  .then(res => res.json())
-  .then(data => {
+fetch("./data.json")
+    .then(response => response.json())
+    .then(data => {
 
-    // odstránenie prázdnych riadkov
-    allData = data.filter(
-      row => row["2026/27"] &&
-             row["2026/27"] !== "" &&
-             row["Season:"] &&
-             row["Season:"] !== ""
-    );
+        allMatches = data;
 
-    // jedinečné súťaže
+        createCompetitionFilter(data);
+
+        renderMatches(data);
+
+    });
+
+function createCompetitionFilter(data) {
+
     const competitions = [
-      ...new Set(allData.map(row => row["2026/27"]))
+        ...new Set(
+            data.map(match => match.Competition)
+        )
     ];
 
-    const select = document.getElementById("competitionFilter");
+    const select =
+        document.getElementById("competitionFilter");
 
-    competitions.forEach(comp => {
-      const option = document.createElement("option");
-      option.value = comp;
-      option.textContent = comp;
-      select.appendChild(option);
+    competitions.sort();
+
+    competitions.forEach(competition => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = competition;
+        option.textContent = competition;
+
+        select.appendChild(option);
+
     });
 
-    render(allData);
+    select.addEventListener("change", filterMatches);
 
-    select.addEventListener("change", function() {
+}
 
-      const selected = this.value;
+function filterMatches() {
 
-      const filtered =
-        selected === "all"
-        ? allData
-        : allData.filter(
-            row => row["2026/27"] === selected
-          );
+    const selectedCompetition =
+        document.getElementById("competitionFilter").value;
 
-      render(filtered);
-    });
-  });
+    if (selectedCompetition === "all") {
 
-function render(rows) {
+        renderMatches(allMatches);
 
-  let html = `
-  <table border="1">
-    <tr>
-      <th>Dátum</th>
-      <th>Súťaž</th>
-    </tr>
-  `;
+        return;
+    }
 
-  rows.forEach(row => {
+    const filteredMatches =
+        allMatches.filter(match =>
+            match.Competition === selectedCompetition
+        );
 
-    html += `
-      <tr>
-        <td>${row["Season:"]}</td>
-        <td>${row["2026/27"]}</td>
-      </tr>
+    renderMatches(filteredMatches);
+
+}
+
+function renderMatches(matches) {
+
+    let html = `
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Competition</th>
+                <th>Home team</th>
+                <th>Away team</th>
+                <th>Result</th>
+            </tr>
     `;
-  });
 
-  html += "</table>";
+    matches.forEach(match => {
 
-  document.getElementById("data").innerHTML = html;
+        html += `
+        <tr>
+            <td>${match.Date}</td>
+            <td>${match.Competition}</td>
+            <td>${match["Home team"]}</td>
+            <td>${match["Away team"]}</td>
+            <td>${match.Result}</td>
+        </tr>
+        `;
+
+    });
+
+    html += "</table>";
+
+    document.getElementById("matches").innerHTML = html;
+
 }
 
 </script>
+
+</body>
+</html>
