@@ -252,9 +252,7 @@ tr:hover{
 
         <div class="filter-group">
             <label for="seasonFilter">Sezóna</label>
-            <select id="seasonFilter">
-                <option value="all">Všetky sezóny</option>
-            </select>
+            <select id="seasonFilter"></select>
         </div>
 
         <div class="filter-group">
@@ -304,41 +302,57 @@ function createFilters(data){
     const competitionFilter =
         document.getElementById("competitionFilter");
 
+    const opponentFilter =
+        document.getElementById("opponentFilter");
+
+    // SEZÓNY
+
     const seasons = [
         ...new Set(
             data
-            .map(row => row["Season"])
-            .filter(Boolean)
+                .map(row => row["Season"])
+                .filter(Boolean)
         )
     ];
 
-seasons.sort().reverse();
+    seasons.sort().reverse();
 
-seasons.forEach(season => {
+    seasons.forEach(season => {
 
-    const option =
+        const option =
+            document.createElement("option");
+
+        option.value = season;
+        option.textContent = season;
+
+        seasonFilter.appendChild(option);
+
+    });
+
+    const allSeasonsOption =
         document.createElement("option");
 
-    option.value = season;
-    option.textContent = season;
+    allSeasonsOption.value = "all";
+    allSeasonsOption.textContent =
+        "Všetky sezóny";
 
-    seasonFilter.appendChild(option);
+    seasonFilter.appendChild(allSeasonsOption);
 
-});
+    // predvolená sezóna = najnovšia
 
-/* automaticky vyber najnovšiu sezónu */
+    if(seasons.length > 0){
 
-if(seasons.length > 0){
+        seasonFilter.value = seasons[0];
 
-    seasonFilter.value = seasons[0];
+    }
 
-}
+    // SÚŤAŽE
 
     const competitions = [
         ...new Set(
             data
-            .map(row => row["Competition"])
-            .filter(Boolean)
+                .map(row => row["Competition"])
+                .filter(Boolean)
         )
     ];
 
@@ -356,6 +370,47 @@ if(seasons.length > 0){
 
     });
 
+    // SÚPERI
+
+    const opponents = [
+        ...new Set(
+
+            data.map(match => {
+
+                const home =
+                    match["Home team"] || "";
+
+                const away =
+                    match["Away team"] || "";
+
+                return home
+                    .toLowerCase()
+                    .includes("barcelona")
+                    ? away
+                    : home;
+
+            })
+            .filter(Boolean)
+
+        )
+    ];
+
+    opponents.sort();
+
+    opponents.forEach(opponent => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = opponent;
+        option.textContent = opponent;
+
+        opponentFilter.appendChild(option);
+
+    });
+
+    // LISTENERS
+
     seasonFilter.addEventListener(
         "change",
         applyFilters
@@ -365,6 +420,16 @@ if(seasons.length > 0){
         "change",
         applyFilters
     );
+
+    opponentFilter.addEventListener(
+        "change",
+        applyFilters
+    );
+
+    // po načítaní zobraz iba aktuálnu sezónu
+
+    applyFilters();
+
 }
 
 function applyFilters(){
