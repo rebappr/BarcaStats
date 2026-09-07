@@ -17,7 +17,7 @@ jobs:
 
       - name: Download Sheet
         run: |
-          curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/bySeason" -o data.json
+          curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/Database" -o data.json
 
       - name: Commit Changes
         run: |
