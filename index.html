@@ -88,10 +88,13 @@ select{
     border-radius:12px;
     overflow:hidden;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
+    width:fit-content;
+    max-width:100%;
 }
 
 .table-scroll{
     overflow-x:auto;
+    border-collapse:collapse;
 }
 
 table{
@@ -108,13 +111,18 @@ th{
     position:sticky;
     top:0;
     z-index:10;
+    white-space:nowrap;
 }
 
 td{
     padding:10px 12px;
     border-bottom:1px solid #edf2f7;
+    white-space:nowrap;
 }
-
+th:last-child,
+td:last-child{
+    text-align:center;
+}
 tr:hover{
     background:#f8fafc;
 }
