@@ -393,42 +393,48 @@ function render(matches){
                 <th>Season</th>
                 <th>Date</th>
                 <th>Competition</th>
-                <th>Home team</th>
-                <th>Away team</th>
+                <th>Opponent</th>
                 <th>Result</th>
             </tr>
         </thead>
         <tbody>
     `;
 
-    matches.forEach(match => {
+matches.forEach(match => {
 
-        html += `
-        <tr>
-            <td>${match["Season"] || ""}</td>
-            <td>${match["Date"] || ""}</td>
+    const homeTeam = match["Home team"] || "";
+    const awayTeam = match["Away team"] || "";
 
-            <td>
-                <span class="badge">
-                    ${match["Competition"] || ""}
-                </span>
-            </td>
+    const opponent =
+        homeTeam.toLowerCase().includes("barcelona")
+            ? awayTeam
+            : homeTeam;
 
-            <td>${match["Home team"] || ""}</td>
+    html += `
+    <tr>
+        <td>${match["Season"] || ""}</td>
 
-            <td>${match["Away team"] || ""}</td>
+        <td>${match["Date"] || ""}</td>
 
-            <td class="${getResultClass(match)}">
-                ${
-                    match["Result"] === "-:-"
-                    ? ""
-                    : (match["Result"] || "")
-                }
-            </td>
-        </tr>
-        `;
+        <td>
+            <span class="badge">
+                ${match["Competition"] || ""}
+            </span>
+        </td>
 
-    });
+        <td>${opponent}</td>
+
+        <td class="${getResultClass(match)}">
+            ${
+                match["Result"] === "-:-"
+                ? ""
+                : (match["Result"] || "")
+            }
+        </td>
+    </tr>
+    `;
+
+});
 
     html += `
         </tbody>
