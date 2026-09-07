@@ -30,6 +30,8 @@ body{
 }
 
 .container{
+    width:fit-content;
+    max-width:100%;
     margin:auto;
     padding:20px;
 }
@@ -83,39 +85,31 @@ select{
 }
 
 .table-wrapper{
+    display:inline-block;
     background:white;
     border-radius:12px;
-    overflow:hidden;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
-    width:fit-content;
     max-width:100%;
 }
 
 .table-scroll{
     overflow-x:auto;
-    border-collapse:collapse;
 }
 
 table{
-    table-layout:auto;
+    width:auto;
     border-collapse:collapse;
-}
-
-th{
-    background:var(--barca-blue);
-    color:white;
-    padding:8px;
-    text-align:left;
-    font-size:12px;
-    position:sticky;
-    top:0;
-    z-index:10;
-    white-space:nowrap;
+    table-layout:auto;
 }
 
 td{
     padding:6px 8px;
     border-bottom:1px solid #edf2f7;
+    white-space:nowrap;
+}
+
+th{
+    padding:8px 10px;
     white-space:nowrap;
 }
 th:last-child,
