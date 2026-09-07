@@ -1,151 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <title>Barca Stats</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
+<title>Barca Stats</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+<style>
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+}
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
+h1{
+    color:#004D98;
+}
 
-        th {
-            background-color: #004D98;
-            color: white;
-        }
+select{
+    padding:8px;
+    margin:15px 0;
+}
 
-        select {
-            padding: 8px;
-            margin-bottom: 20px;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+}
 
-    </style>
+th{
+    background:#004D98;
+    color:white;
+    padding:10px;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:8px;
+}
+
+tr:nth-child(even){
+    background:#f7f7f7;
+}
+
+</style>
 </head>
+
 <body>
 
 <h1>Barca Stats</h1>
 
-<label>Súťaž:</label>
+<label for="competitionFilter">Súťaž:</label>
 
 <select id="competitionFilter">
     <option value="all">Všetky súťaže</option>
 </select>
 
-<div id="matches"></div>
+<div id="matches">Načítavam...</div>
 
 <script>
 
 let allMatches = [];
 
-fetch("./data.json")
-    .then(response => response.json())
-    .then(data => {
+fetch("data.json")
+.then(response => response.json())
+.then(data => {
 
-        allMatches = data;
+    console.log("Prvý záznam:");
+    console.log(data[0]);
 
-        createCompetitionFilter(data);
+    allMatches = data;
 
-        renderMatches(data);
+    const competitions = [...new Set(
+        data
+            .map(row => row["Competition"])
+            .filter(Boolean)
+    )];
 
-    });
-
-function createCompetitionFilter(data) {
-
-    const competitions = [
-        ...new Set(
-            data.map(match => match.Competition)
-        )
-    ];
+    competitions.sort();
 
     const select =
         document.getElementById("competitionFilter");
 
-    competitions.sort();
-
-    competitions.forEach(competition => {
+    competitions.forEach(comp => {
 
         const option =
             document.createElement("option");
 
-        option.value = competition;
-        option.textContent = competition;
+        option.value = comp;
+        option.textContent = comp;
 
         select.appendChild(option);
 
     });
 
-    select.addEventListener("change", filterMatches);
+    render(data);
 
-}
+    select.addEventListener("change", function(){
 
-function filterMatches() {
+        const value = this.value;
 
-    const selectedCompetition =
-        document.getElementById("competitionFilter").value;
+        if(value === "all"){
 
-    if (selectedCompetition === "all") {
+            render(allMatches);
 
-        renderMatches(allMatches);
+        }else{
 
-        return;
-    }
+            render(
+                allMatches.filter(
+                    row => row["Competition"] === value
+                )
+            );
 
-    const filteredMatches =
-        allMatches.filter(match =>
-            match.Competition === selectedCompetition
-        );
-
-    renderMatches(filteredMatches);
-
-}
-
-function renderMatches(matches) {
-
-    let html = `
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Competition</th>
-                <th>Home team</th>
-                <th>Away team</th>
-                <th>Result</th>
-            </tr>
-    `;
-
-    matches.forEach(match => {
-
-        html += `
-        <tr>
-            <td>${match.Date}</td>
-            <td>${match.Competition}</td>
-            <td>${match["Home team"]}</td>
-            <td>${match["Away team"]}</td>
-            <td>${match.Result}</td>
-        </tr>
-        `;
+        }
 
     });
 
-    html += "</table>";
+})
+.catch(error => {
 
-    document.getElementById("matches").innerHTML = html;
+    console.error(error);
 
-}
+    document.getElementById("matches")
+        .innerHTML =
+        "<b>Chyba pri načítaní data.json</b>";
 
-</script>
+});
 
-</body>
-</html>
+function render(data){
+
+    let html = `
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Season</th>
+            <th>Competition</th>
+            <th>Date</th>
+            <th>Home team</th>
+            <th>A
