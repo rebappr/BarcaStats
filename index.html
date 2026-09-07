@@ -311,19 +311,27 @@ function createFilters(data){
         )
     ];
 
-    seasons.sort().reverse();
+seasons.sort().reverse();
 
-    seasons.forEach(season => {
+seasons.forEach(season => {
 
-        const option =
-            document.createElement("option");
+    const option =
+        document.createElement("option");
 
-        option.value = season;
-        option.textContent = season;
+    option.value = season;
+    option.textContent = season;
 
-        seasonFilter.appendChild(option);
+    seasonFilter.appendChild(option);
 
-    });
+});
+
+/* automaticky vyber najnovšiu sezónu */
+
+if(seasons.length > 0){
+
+    seasonFilter.value = seasons[0];
+
+}
 
     const competitions = [
         ...new Set(
