@@ -92,7 +92,7 @@ body{
 .section-title{
     margin-top:0;
     font-size: 16px;
-    padding: 4 0 4 0;
+    padding: 4px 0;
 }
 
 .meta-grid{
@@ -1050,9 +1050,8 @@ Match Information
 <div class="team-header home">
     ${
         teamALogo
-            ? `<img srcogo}`
-            : ""
-    }
+            ? `<img src="${teamALogo}" class="team}
+
     <div class="team-name">
         ${escapeHtml(teamA)}
     </div>
@@ -1063,6 +1062,7 @@ Match Information
 </div>
 
 <div class="team-header away">
+
     <div class="team-name">
         ${escapeHtml(teamB)}
     </div>
@@ -1072,6 +1072,7 @@ Match Information
             ? `${teamBLogo}`
             : ""
     }
+
 </div>
 
     </div>
