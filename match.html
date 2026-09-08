@@ -52,12 +52,21 @@ body{
     font-size:72px;
     font-weight:700;
     margin:10px 0;
+    text-align:center;
 }
 
 .teams{
-    display:flex;
-    justify-content:space-between;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
     align-items:center;
+}
+
+.team-name:first-child{
+    text-align:left;
+}
+
+.team-name:last-child{
+    text-align:right;
 }
 
 .team-name{
