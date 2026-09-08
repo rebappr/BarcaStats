@@ -996,13 +996,17 @@ document.getElementById("app").innerHTML = `
 <div class="hero">
 
     <div style="text-transform:uppercase;">
-      ${escapeHtml(match["Date"] || "")} |
-${escapeHtml(match["Competition"] || "")} |
-${
-    String(match["Competition"] || "").trim() === "La Liga"
-        ? `${match["Matchday"] || ""}. Matchday`
-        : `Matchday ${match["Matchday"] || ""}`
-}
+        ${escapeHtml(match["Date"] || "")}
+        |
+        ${escapeHtml(match["Competition"] || "")}
+        |
+        ${
+            String(match["Competition"] || "")
+                .trim()
+                .toLowerCase() === "la liga"
+                ? `${match["Matchday"] || ""}. Matchday`
+                : `Matchday ${match["Matchday"] || ""}`
+        }
     </div>
 
 </div>
