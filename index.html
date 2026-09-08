@@ -486,45 +486,57 @@ function render(matches){
 
     matches.forEach(match => {
 
-    html += `
-    <tr>
+        html += `
+        <tr>
 
-        <td>
-            ${match["Season"] || ""}
-        </td>
+            <td>
+                ${match["Season"] || ""}
+            </td>
 
-        <td>
-            <a
-                href="match.html?id=${match["ID"]}"
-                style="
-                    text-decoration:none;
-       l">
-            <span class="badge">
-                ${match["Competition"] || ""}
-            </span>
-        </td>
+            <td>
+                <a
+                    href="match.html?id=${match["ID"]}"
+                    style="
+                        color:inherit;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+                    ${match["Date"] || ""}
+                </a>
+            </td>
 
-        <td class="opponent-cell">
-            ${match["Opp. Team"] || ""}
-        </td>
+            <td class="competition-cell">
+                <span class="badge">
+                    ${match["Competition"] || ""}
+                </span>
+            </td>
 
-        <td>
-            ${
-                match["Result"] === "-:-"
-                ? ""
-                : `<a
+            <td class="opponent-cell">
+                ${match["Opp. Team"] || ""}
+            </td>
+
+            <td>
+
+                ${
+                    match["Result"] === "-:-"
+                    ? ""
+                    : `
+                    <a
                         href="match.html?id=${match["ID"]}"
-                        style="
-                            text-decoration:none;
-             </span>
-                   </a>`
-            }
-        </td>
+                        style="text-decoration:none;">
+                        <span class="${getResultClass(match)}">
+                            ${match["Result"]}
+                        </span>
+                    </a>
+                    `
+                }
 
-    </tr>
-    `;
+            </td>
 
-});
+        </tr>
+        `;
+
+    });
 
     html += `
                 </tbody>
@@ -536,7 +548,6 @@ function render(matches){
     document.getElementById("matches").innerHTML =
         html;
 }
-
 </script>
 
 </body>
