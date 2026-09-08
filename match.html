@@ -295,7 +295,7 @@ fetch("data.json")
                     String(matchId).trim()
             );
 
-        if (!match) {
+if (!match) {
 
     document.getElementById("app").innerHTML =
         "<div class='card'>Match not found</div>";
@@ -303,20 +303,38 @@ fetch("data.json")
     return;
 }
 
-            document.getElementById("app").innerHTML =
-                "<div class='card'>Match not found</div>";
-
-            return;
-        }
-
-        renderMatch(match);
+renderMatch(match);
 
     })
+
 .catch(error => {
 
     console.error(error);
 
-    function renderMatch(match){
+    document.getElementById("app").innerHTML = `
+        <div class="card">
+            Error:<br>
+            ${error.message}
+        </div>
+    `;
+
+});
+    
+function escapeHtml(str) {
+
+    if (str === null || str === undefined) {
+        return "";
+    }
+
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function renderMatch(match){
 
     const homeMatch =
         String(match["Home/Away"] || "").trim() === "Home";
@@ -356,28 +374,8 @@ fetch("data.json")
     const timelineHtml = getTimeline(match);
 
     document.getElementById("app").innerHTML = `
-
-    document.getElementById("app").innerHTML = `
-        <div class="card">
-            Error:<br>
-            ${error.message}
-        </div>
+        ...
     `;
-
-});
-
-function escapeHtml(str) {
-
-    if (str === null || str === undefined) {
-        return "";
-    }
-
-    return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 }
 
 function getPlayers(match,prefix=""){
