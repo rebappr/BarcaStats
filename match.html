@@ -994,6 +994,19 @@ document.getElementById("app").innerHTML = `
 
 <div class="hero">
 
+    <div style="margin-top:15px;">
+        ${escapeHtml(match["Competition"] || "")}
+        <br>Matchday ${match["Matchday"] || ""}
+    </div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+Match Information
+</h2>
+
     <div class="teams">
 
 <div class="team-name">
@@ -1009,19 +1022,6 @@ document.getElementById("app").innerHTML = `
 </div>
 
     </div>
-
-    <div style="margin-top:15px;">
-        ${escapeHtml(match["Competition"] || "")}
-        <br>Matchday ${match["Matchday"] || ""}
-    </div>
-
-</div>
-
-<div class="card">
-
-<h2 class="section-title">
-Match Information
-</h2>
 
 <div class="meta-grid">
 
