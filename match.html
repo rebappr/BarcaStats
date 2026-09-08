@@ -455,23 +455,20 @@ function getPlayers(match,prefix=""){
                     ${escapeHtml(number || "")}
                 </div>
 
-                ${
-                    subbedOff.includes(String(player).trim())
-                        ? '<span class="sub-off">⬇</span>'
-                        : ''
-                }
+                <span class="player-name">
+    ${escapeHtml(player)}
+    ${
+        String(player).trim() === String(captain).trim()
+            ? ' <strong>(C)</strong>'
+            : ''
+    }
+</span>
 
-                ${escapeHtml(player)}
-                    ${
-                        String(player).trim() === String(captain).trim()
-                                ? ' <strong>(C)</strong>'
-                            : ''
-                    }
-                    ${
-                        subbedOff.includes(String(player).trim())
-                            ? ' <span title="Substituted off">⬇️</span>'
-                            : ''
-                    }
+${
+    subbedOff.includes(String(player).trim())
+        ? '<span class="sub-off">↓</span>'
+        : ''
+}
             </div>
             `;
         }
