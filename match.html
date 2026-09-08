@@ -465,6 +465,65 @@ function getTimeline(match){
     return html || "";
 }
 
+function hasStartingXI(match,prefix=""){
+
+    for(let i=1;i<=11;i++){
+
+        if(match[`${prefix}Player name ${i}`]){
+            return true;
+        }
+
+    }
+
+    return false;
+
+}
+
+${
+    hasBench(match) ||
+    hasBench(match,"Opp. ")
+    ? `
+    <div class="card">
+
+        <h2 class="section-title">
+            Bench
+        </h2>
+
+        <div class="lineups">
+
+            <div class="team-card">
+                ${getBench(match)}
+            </div>
+
+            <div class="team-card">
+                ${getBench(match,"Opp. ")}
+            </div>
+
+        </div>
+
+    </div>
+    `
+    : ""
+}
+
+${
+    hasTimeline(match)
+    ? `
+    <div class="card">
+
+        <h2 class="section-title">
+            Match Timeline
+        </h2>
+
+        <div class="timeline">
+            ${getTimeline(match)}
+        </div>
+
+    </div>
+    `
+    : ""
+}
+
 function renderMatch(match){
 
 document.getElementById("app").innerHTML = `
@@ -536,27 +595,34 @@ ${match["Opp. Manager"] || "-"}
 
 </div>
 
-<div class="card">
+${
+    hasStartingXI(match) ||
+    hasStartingXI(match,"Opp. ")
+    ? `
+    <div class="card">
 
-<h2 class="section-title">
-Starting XI
-</h2>
+        <h2 class="section-title">
+            Starting XI
+        </h2>
 
-<div class="lineups">
+        <div class="lineups">
 
-<div class="team-card">
-<h3>FC Barcelona</h3>
-${getPlayers(match)}
-</div>
+            <div class="team-card">
+                <h3>FC Barcelona</h3>
+                ${getPlayers(match)}
+            </div>
 
-<div class="team-card">
-<h3>${match["Opp. Team"]}</h3>
-${getPlayers(match,"Opp. ")}
-</div>
+            <div class="team-card">
+                <h3>${match["Opp. Team"] || ""}</h3>
+                ${getPlayers(match,"Opp. ")}
+            </div>
 
-</div>
+        </div>
 
-</div>
+    </div>
+    `
+    : ""
+}
 
 <div class="card">
 
