@@ -232,9 +232,11 @@ fetch("data.json")
 .then(data => {
 
     const match =
-        data.find(
-            row => String(row.ID) === String(matchId)
-        );
+    data.find(
+        row =>
+            String(row.ID).trim() ===
+            String(matchId).trim()
+    );
 
     if(!match){
 
