@@ -462,13 +462,12 @@ function getPlayers(match,prefix=""){
             ? ' <strong>(C)</strong>'
             : ''
     }
+    ${
+        subbedOff.includes(String(player).trim())
+            ? ' <strong style="color:#dc2626;">⬇</strong>'
+            : ''
+    }
 </span>
-
-${
-    subbedOff.includes(String(player).trim())
-        ? '<span class="sub-off">↓</span>'
-        : ''
-}
             </div>
             `;
         }
