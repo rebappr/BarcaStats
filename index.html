@@ -329,25 +329,13 @@ function createFilters(data){
 
     });
 
-    const opponents = [
-        ...new Set(
-            data.map(match => {
-
-                const home =
-                    match["Home team"] || "";
-
-                const away =
-                    match["Away team"] || "";
-
-                return home
-                    .toLowerCase()
-                    .includes("barcelona")
-                    ? away
-                    : home;
-
-            }).filter(Boolean)
-        )
-    ];
+const opponents = [
+    ...new Set(
+        data
+            .map(match => match["Opp. Team"])
+            .filter(Boolean)
+    )
+];
 
     opponents.sort();
 
@@ -412,27 +400,17 @@ function applyFilters(){
 
     }
 
-    if(opponent !== ""){
+   if(opponent !== ""){
 
-        filtered = filtered.filter(match => {
+    filtered = filtered.filter(match => {
 
-            const home =
-                match["Home team"] || "";
+        return (
+            match["Opp. Team"] === opponent
+        );
 
-            const away =
-                match["Away team"] || "";
+    });
 
-            const currentOpponent =
-                home.toLowerCase().includes("barcelona")
-                    ? away
-                    : home;
-
-            return currentOpponent === opponent;
-
-        });
-
-    }
-
+}
     render(filtered);
 
 }
@@ -508,46 +486,45 @@ function render(matches){
 
     matches.forEach(match => {
 
-        const home =
-            match["Home team"] || "";
+    html += `
+    <tr>
 
-        const away =
-            match["Away team"] || "";
+        <td>
+            ${match["Season"] || ""}
+        </td>
 
-        const opponent =
-            home.toLowerCase().includes("barcelona")
-                ? away
-                : home;
+        <td>
+            <a
+                href="match.html?id=${match["ID"]}"
+                style="
+                    text-decoration:none;
+       l">
+            <span class="badge">
+                ${match["Competition"] || ""}
+            </span>
+        </td>
 
-        html += `
-            <tr>
-                <td>${match["Season"] || ""}</td>
+        <td class="opponent-cell">
+            ${match["Opp. Team"] || ""}
+        </td>
 
-                <td>${match["Date"] || ""}</td>
+        <td>
+            ${
+                match["Result"] === "-:-"
+                ? ""
+                : `<a
+                        href="match.html?id=${match["ID"]}"
+                        style="
+                            text-decoration:none;
+             </span>
+                   </a>`
+            }
+        </td>
 
-                <td class="competition-cell">
-                    <span class="badge">
-                        ${match["Competition"] || ""}
-                    </span>
-                </td>
+    </tr>
+    `;
 
-                <td class="opponent-cell">
-                    ${opponent}
-                </td>
-
-                <td>
-                    ${
-                        match["Result"] === "-:-"
-                        ? ""
-                        : `<span class="${getResultClass(match)}">
-                            ${match["Result"]}
-                           </span>`
-                    }
-                </td>
-            </tr>
-        `;
-
-    });
+});
 
     html += `
                 </tbody>
