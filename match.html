@@ -246,6 +246,22 @@ body{
     text-align:left;
 }
 
+.event-home .event-icon{
+    float:right;
+    margin-left:6px;
+    margin-right:0;
+}
+
+.event-away .event-icon{
+    margin-right:6px;
+}
+
+.event-box::after{
+    content:"";
+    display:block;
+    clear:both;
+}
+
 .back-btn{
     position:fixed;
     right:20px;
@@ -630,19 +646,15 @@ function getTimeline(match){
 
         goals.forEach(goal => {
 
-            let content = `
-                <strong>${escapeHtml(goal.player)}</strong>
-            `;
+          let content =
+    `<span class="event-icon">⚽</span>${escapeHtml(goal.player)}`;
 
-            if(goal.assist){
+if(goal.assist){
 
-                content += `
-                    <br>
-                    <small>Assist: ${escapeHtml(goal.assist)}</small>
-                `;
+    content +=
+        ` (${escapeHtml(goal.assist)})`;
 
-            }
-
+}
             html += eventRow(
                 goal.side,
                 goal.minute,
