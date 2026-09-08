@@ -22,16 +22,16 @@
 }
 
 body{
-    font-family:'Roboto',sans-serif;
-    font-size:12px;
     margin:0;
+    font-family:'Roboto',sans-serif;
     background:#f4f6f9;
     color:#1f2937;
+    font-size:13px;
 }
 
 .container{
-    width:fit-content;
-    max-width:100%;
+    width:100%;
+    max-width:1400px;
     margin:auto;
     padding:20px;
 }
@@ -69,7 +69,7 @@ body{
     display:flex;
     flex-direction:column;
     gap:4px;
-    min-width:140px;
+    min-width:160px;
 }
 
 label{
@@ -78,20 +78,13 @@ label{
 
 input[list]{
     width:100%;
-    max-width:220px;
-
     border:1px solid #d1d5db;
     border-radius:8px;
     padding:8px 12px;
-
-    font-size:12px;
     font-family:'Roboto',sans-serif;
-
-    background:white;
 }
 
 .table-wrapper{
-    display:inline-block;
     background:white;
     border-radius:12px;
     overflow:hidden;
@@ -100,61 +93,50 @@ input[list]{
 
 .table-scroll{
     max-height:800px;
-    overflow-y:auto;
-    overflow-x:auto;
+    overflow:auto;
 }
 
 table{
-    width:auto;
+    width:100%;
     border-collapse:collapse;
-    table-layout:auto;
-}
-
-thead th:first-child{
-    border-top-left-radius:12px;
-}
-
-thead th:last-child{
-    border-top-right-radius:12px;
+    min-width:750px;
 }
 
 th{
-    padding:8px 10px;
     position:sticky;
     top:0;
-    z-index:100;
     background:var(--barca-blue);
     color:white;
-    white-space:nowrap;9
     text-align:left;
+    padding:10px;
+    z-index:100;
 }
 
 td{
-    padding:6px 8px;
+    padding:10px;
     border-bottom:1px solid #edf2f7;
-    white-space:nowrap;
 }
 
-tr:hover{
+tbody tr:hover{
     background:#f8fafc;
 }
 
 .badge{
     display:inline-block;
-    padding:2px 6px;
+    padding:3px 8px;
     border-radius:999px;
-    background:#e0e7ff;
-    color:#3730a3;
+    background:#dbeafe;
+    color:#1e40af;
     font-weight:600;
 }
 
 .result-badge{
+    display:inline-block;
+    min-width:50px;
+    text-align:center;
     padding:4px 8px;
     border-radius:999px;
     font-weight:600;
-    display:inline-block;
-    min-width:45px;
-    text-align:center;
 }
 
 .result-win{
@@ -172,14 +154,15 @@ tr:hover{
     color:#991b1b;
 }
 
-.competition-cell,
-.opponent-cell{
-    width:1%;
+.match-link{
+    color:inherit;
+    text-decoration:none;
+    font-weight:600;
 }
 
 .empty{
-    padding:20px;
     text-align:center;
+    padding:30px;
 }
 
 @media (max-width:768px){
@@ -194,17 +177,11 @@ tr:hover{
 
     .filters{
         flex-direction:column;
-        width:100%;
     }
 
     .filter-group{
         width:100%;
         min-width:0;
-    }
-
-    input[list]{
-        width:100%;
-        max-width:none;
     }
 
 }
@@ -272,28 +249,10 @@ fetch("data.json")
 
 function createFilters(data){
 
-    const seasonFilter =
-        document.getElementById("seasonFilter");
-
-    const competitionFilter =
-        document.getElementById("competitionFilter");
-
-    const opponentFilter =
-        document.getElementById("opponentFilter");
-
-    const seasonList =
-        document.getElementById("seasonList");
-
-    const competitionList =
-        document.getElementById("competitionList");
-
-    const opponentList =
-        document.getElementById("opponentList");
-
     const seasons = [
         ...new Set(
             data.map(row => row["Season"])
-            .filter(Boolean)
+                .filter(Boolean)
         )
     ];
 
@@ -306,14 +265,16 @@ function createFilters(data){
 
         option.value = season;
 
-        seasonList.appendChild(option);
+        document
+            .getElementById("seasonList")
+            .appendChild(option);
 
     });
 
     const competitions = [
         ...new Set(
             data.map(row => row["Competition"])
-            .filter(Boolean)
+                .filter(Boolean)
         )
     ];
 
@@ -326,17 +287,18 @@ function createFilters(data){
 
         option.value = comp;
 
-        competitionList.appendChild(option);
+        document
+            .getElementById("competitionList")
+            .appendChild(option);
 
     });
 
-const opponents = [
-    ...new Set(
-        data
-            .map(match => match["Opp. Team"])
-            .filter(Boolean)
-    )
-];
+    const opponents = [
+        ...new Set(
+            data.map(match => match["Opp. Team"])
+                .filter(Boolean)
+        )
+    ];
 
     opponents.sort();
 
@@ -347,45 +309,45 @@ const opponents = [
 
         option.value = opponent;
 
-        opponentList.appendChild(option);
+        document
+            .getElementById("opponentList")
+            .appendChild(option);
 
     });
 
-    seasonFilter.addEventListener(
-        "input",
-        applyFilters
-    );
+    document
+        .getElementById("seasonFilter")
+        .addEventListener("input",applyFilters);
 
-    competitionFilter.addEventListener(
-        "input",
-        applyFilters
-    );
+    document
+        .getElementById("competitionFilter")
+        .addEventListener("input",applyFilters);
 
-    opponentFilter.addEventListener(
-        "input",
-        applyFilters
-    );
+    document
+        .getElementById("opponentFilter")
+        .addEventListener("input",applyFilters);
 
     applyFilters();
+
 }
 
 function applyFilters(){
 
     const season =
         document.getElementById("seasonFilter")
-        .value.trim();
+            .value.trim();
 
     const competition =
         document.getElementById("competitionFilter")
-        .value.trim();
+            .value.trim();
 
     const opponent =
         document.getElementById("opponentFilter")
-        .value.trim();
+            .value.trim();
 
     let filtered = [...allMatches];
 
-    if(season !== ""){
+    if(season){
 
         filtered = filtered.filter(
             row => row["Season"] === season
@@ -393,7 +355,7 @@ function applyFilters(){
 
     }
 
-    if(competition !== ""){
+    if(competition){
 
         filtered = filtered.filter(
             row => row["Competition"] === competition
@@ -401,62 +363,35 @@ function applyFilters(){
 
     }
 
-   if(opponent !== ""){
+    if(opponent){
 
-    filtered = filtered.filter(match => {
-
-        return (
-            match["Opp. Team"] === opponent
+        filtered = filtered.filter(
+            row => row["Opp. Team"] === opponent
         );
 
-    });
+    }
 
-}
     render(filtered);
 
 }
 
 function getResultClass(match){
 
-    const result = match["Result"] || "";
+    switch(match["Result type"]){
 
-    if(
-        result === "" ||
-        result === "-:-" ||
-        !result.includes(":")
-    ){
-        return "";
+        case "W":
+            return "result-badge result-win";
+
+        case "D":
+            return "result-badge result-draw";
+
+        case "L":
+            return "result-badge result-loss";
+
+        default:
+            return "";
     }
 
-    const parts = result.split(":");
-
-    const homeGoals = parseInt(parts[0]);
-    const awayGoals = parseInt(parts[1]);
-
-    if(isNaN(homeGoals) || isNaN(awayGoals)){
-        return "";
-    }
-
-    const isBarcaHome =
-        (match["Home team"] || "")
-        .toLowerCase()
-        .includes("barcelona");
-
-    const barcaGoals =
-        isBarcaHome ? homeGoals : awayGoals;
-
-    const opponentGoals =
-        isBarcaHome ? awayGoals : homeGoals;
-
-    if(barcaGoals > opponentGoals){
-        return "result-badge result-win";
-    }
-
-    if(barcaGoals < opponentGoals){
-        return "result-badge result-loss";
-    }
-
-    return "result-badge result-draw";
 }
 
 function render(matches){
@@ -496,23 +431,19 @@ function render(matches){
 
             <td>
                 <a
-                    href="match.html?id=${match["ID"]}"
-                    style="
-                        color:inherit;
-                        text-decoration:none;
-                        font-weight:600;
-                    ">
+                    class="match-link"
+                    href="match.html?id=${match["ID"]}">
                     ${match["Date"] || ""}
                 </a>
             </td>
 
-            <td class="competition-cell">
+            <td>
                 <span class="badge">
                     ${match["Competition"] || ""}
                 </span>
             </td>
 
-            <td class="opponent-cell">
+            <td>
                 ${match["Opp. Team"] || ""}
             </td>
 
@@ -521,7 +452,7 @@ function render(matches){
                 ${
                     match["Result"] === "-:-"
                     ? ""
-                    : 
+                    : `
                     <a
                         href="match.html?id=${match["ID"]}"
                         style="text-decoration:none;">
@@ -529,25 +460,26 @@ function render(matches){
                             ${match["Result"]}
                         </span>
                     </a>
-                    
+                    `
                 }
 
             </td>
 
         </tr>
-        ;
+        `;
 
     });
 
-    html += 
+    html += `
                 </tbody>
             </table>
         </div>
     </div>
-    ;
+    `;
 
     document.getElementById("matches").innerHTML =
         html;
+
 }
 
 </script>
