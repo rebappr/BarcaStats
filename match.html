@@ -978,12 +978,12 @@ function renderMatch(match){
 const homeMatch = isHomeMatch(match);
     
 const teamALogo = homeMatch
-    ? (match["Team Logo"] || "")
+    ? "logos/fc-barcelona.png"
     : (match["Opp. Team Logo"] || "");
 
 const teamBLogo = homeMatch
     ? (match["Opp. Team Logo"] || "")
-    : (match["Team Logo"] || "");
+    : "logos/fc-barcelona.png";
 
 const barcaTitle = homeMatch
     ? "FC Barcelona"
