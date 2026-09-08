@@ -995,8 +995,8 @@ document.getElementById("app").innerHTML = `
 
 <div class="hero">
 
-    <div>
-        ${escapeHtml(match["Competition"] || "")} | ${
+    <div class="text-transform: uppercase;">
+       ${escapeHtml(match["Date"] || "") | ${escapeHtml(match["Competition"] || "")} | ${
     String(match["Competition"] || "").trim() === "La Liga"
         ? `${match["Matchday"] || ""}. Matchday`
         : `Matchday ${match["Matchday"] || ""}`
