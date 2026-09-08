@@ -8,7 +8,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
 
 <style>
 
@@ -61,11 +64,11 @@ body{
     align-items:center;
 }
 
-.team-name:first-child{
+.teams .team-name:first-of-type{
     text-align:left;
 }
 
-.team-name:last-child{
+.teams .team-name:last-of-type{
     text-align:right;
 }
 
@@ -275,27 +278,56 @@ const params = new URLSearchParams(location.search);
 const matchId = params.get("id");
 
 fetch("data.json")
-.then(r => r.json())
-.then(data => {
+    .then(r => {
 
-    const match =
-    data.find(
-        row =>
-            String(row.ID).trim() ===
-            String(matchId).trim()
-    );
+        if (!r.ok) {
+            throw new Error(`HTTP ${r.status}`);
+        }
 
-    if(!match){
+        return r.json();
+    })
+    .then(data => {
+
+        const match =
+            data.find(
+                row =>
+                    String(row.ID).trim() ===
+                    String(matchId).trim()
+            );
+
+        if (!match) {
+
+            document.getElementById("app").innerHTML =
+                "<div class='card'>Match not found</div>";
+
+            return;
+        }
+
+        renderMatch(match);
+
+    })
+    .catch(error => {
+
+        console.error(error);
 
         document.getElementById("app").innerHTML =
-            "<div class='card'>Match not found</div>";
+            "<div class='card'>Failed to load data</div>";
 
-        return;
+    });
+
+function escapeHtml(str) {
+
+    if (str === null || str === undefined) {
+        return "";
     }
 
-    renderMatch(match);
-
-});
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 function getPlayers(match,prefix=""){
 
@@ -309,15 +341,15 @@ function getPlayers(match,prefix=""){
         const number =
             match[`${prefix}Player number ${i}`];
 
-        if(player){
+        if(player && String(player).trim()){
 
             html += `
             <div class="player">
                 <div class="number">
-                    ${number || ""}
+                    ${escapeHtml(number || "")}
                 </div>
 
-                ${player}
+                ${escapeHtml(player)}
             </div>
             `;
         }
@@ -338,7 +370,7 @@ function getBench(match,prefix=""){
         const number =
             match[`${prefix}On the bench number ${i}`];
 
-        if(player){
+        if(player && String(player).trim()){
 
             html += `
             <div class="player">
@@ -366,7 +398,13 @@ function getTimeline(match){
         team
     ){
 
-        if(!minute) return;
+        if (
+    minute === null ||
+    minute === undefined ||
+    String(minute).trim() === ""
+){
+    return;
+}
 
         events.push({
             minute,
@@ -485,7 +523,7 @@ function getTimeline(match){
         <div class="timeline-item">
 
             <div class="timeline-minute">
-                ${event.minute}'
+                ${escapeHtml(event.minute)}'
             </div>
 
             <div class="timeline-icon">
@@ -502,7 +540,7 @@ function getTimeline(match){
                     };
                 "
             >
-                ${event.text}
+                ${escapeHtml(event.text)}
             </div>
 
         </div>
@@ -537,12 +575,6 @@ function hasBench(match,prefix=""){
     }
 
     return false;
-
-}
-
-function hasTimeline(match){
-
-    return getTimeline(match).trim() !== "";
 
 }
 
@@ -581,6 +613,8 @@ function showLineup(team){
     
 function renderMatch(match){
 
+const timelineHtml = getTimeline(match);
+
 document.getElementById("app").innerHTML = `
 
 <div class="hero">
@@ -592,20 +626,20 @@ document.getElementById("app").innerHTML = `
         </div>
 
         <div class="score">
-            ${match["Result"] || "-:-"}
+            ${escapeHtml(match["Result"] || "-:-")}
         </div>
 
         <div class="team-name">
-            ${match["Opp. Team"] || ""}
+            ${escapeHtml(match["Opp. Team"] || "")}
         </div>
 
     </div>
 
     <div style="margin-top:15px;">
-        ${match["Competition"] || ""}
+        ${escapeHtml(match["Competition"] || "")}
         • Matchday ${match["Matchday"] || ""}
         <br>
-        ${match["Date"] || ""}
+        ${escapeHtml(match["Date"] || "")}
     </div>
 
 </div>
@@ -621,28 +655,28 @@ Match Information
 <div class="meta">
 <div class="meta-label">Venue</div>
 <div class="meta-value">
-${match["Venue"] || "-"}
+${escapeHtml(match["Venue"] || "-")}
 </div>
 </div>
 
 <div class="meta">
 <div class="meta-label">Referee</div>
 <div class="meta-value">
-${match["Referee"] || "-"}
+${escapeHtml(match["Referee"] || "-")}
 </div>
 </div>
 
 <div class="meta">
 <div class="meta-label">Manager</div>
 <div class="meta-value">
-${match["Manager"] || "-"}
+${escapeHtml(match["Manager"] || "-")}
 </div>
 </div>
 
 <div class="meta">
 <div class="meta-label">Opponent Manager</div>
 <div class="meta-value">
-${match["Opp. Manager"] || "-"}
+${escapeHtml(match["Opp. Manager"] || "-")}
 </div>
 </div>
 
@@ -717,7 +751,7 @@ ${getBench(match,"Opp. ")}
 </div>
 
 ${
-    hasTimeline(match)
+    timelineHtml
     ? `
     <div class="card">
 
@@ -726,7 +760,7 @@ ${
         </h2>
 
         <div class="timeline">
-            ${getTimeline(match)}
+            ${timelineHtml}
         </div>
 
     </div>
@@ -748,7 +782,35 @@ if(window.innerWidth <= 900){
 
 }
 }
+window.addEventListener("resize", () => {
 
+    const barca =
+        document.getElementById("lineup-barca");
+
+    const opp =
+        document.getElementById("lineup-opp");
+
+    if (!barca || !opp) {
+        return;
+    }
+
+    if (window.innerWidth > 900) {
+
+        barca.classList.remove("mobile-hidden");
+        opp.classList.remove("mobile-hidden");
+
+    } else {
+
+        if (
+            !barca.classList.contains("mobile-hidden") &&
+            !opp.classList.contains("mobile-hidden")
+        ) {
+
+            opp.classList.add("mobile-hidden");
+        }
+    }
+
+});
 </script>
 
 </body>
