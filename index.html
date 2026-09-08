@@ -42,25 +42,25 @@ body{
     );
     color:white;
     padding:24px;
-    border-radius:16px;
+    border-radius:18px;
     margin-bottom:20px;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    box-shadow:0 4px 16px rgba(0,0,0,.15);
 }
 
 .header h1{
     margin:0;
-    font-size:20px;
+    font-size:32px;
 }
 
 .filters{
     display:flex;
     flex-wrap:wrap;
     gap:15px;
-    margin-bottom:20px;
     background:white;
-    padding:15px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .filter-group{
@@ -70,22 +70,22 @@ body{
     min-width:180px;
 }
 
-label{
-    font-weight:600;
+.filter-group label{
+    font-weight:700;
 }
 
 input[list]{
     border:1px solid #d1d5db;
     border-radius:8px;
-    padding:8px 12px;
-    font-family:'Roboto',sans-serif;
+    padding:10px 12px;
+    font-family:inherit;
 }
 
 .table-wrapper{
     background:white;
-    border-radius:12px;
+    border-radius:16px;
     overflow:hidden;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .table-scroll{
@@ -96,21 +96,21 @@ input[list]{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:750px;
+    min-width:800px;
 }
 
 th{
-    position:sticky;
-    top:0;
     background:var(--barca-blue);
     color:white;
-    padding:10px;
     text-align:left;
+    padding:12px;
+    position:sticky;
+    top:0;
     z-index:10;
 }
 
 td{
-    padding:10px;
+    padding:12px;
     border-bottom:1px solid #edf2f7;
 }
 
@@ -118,8 +118,17 @@ tbody tr:hover{
     background:#f8fafc;
 }
 
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:999px;
+    background:#dbeafe;
+    color:#1e40af;
+    font-weight:600;
+}
+
 .match-link{
-    color:inherit;
+    color:#111827;
     text-decoration:none;
     font-weight:600;
 }
@@ -128,22 +137,13 @@ tbody tr:hover{
     text-decoration:underline;
 }
 
-.badge{
-    display:inline-block;
-    padding:3px 8px;
-    border-radius:999px;
-    background:#dbeafe;
-    color:#1e40af;
-    font-weight:600;
-}
-
 .result-badge{
     display:inline-block;
-    min-width:50px;
+    min-width:52px;
     text-align:center;
-    padding:4px 8px;
     border-radius:999px;
-    font-weight:600;
+    padding:4px 10px;
+    font-weight:700;
 }
 
 .result-win{
@@ -162,18 +162,18 @@ tbody tr:hover{
 }
 
 .empty{
+    padding:40px;
     text-align:center;
-    padding:30px;
 }
 
-@media (max-width:768px){
+@media(max-width:768px){
 
     .container{
         padding:10px;
     }
 
     .header h1{
-        font-size:18px;
+        font-size:24px;
     }
 
     .filters{
@@ -181,7 +181,6 @@ tbody tr:hover{
     }
 
     .filter-group{
-        width:100%;
         min-width:0;
     }
 
@@ -189,7 +188,6 @@ tbody tr:hover{
 
 </style>
 </head>
-
 <body>
 
 <div class="container">
@@ -252,8 +250,8 @@ function createFilters(data){
 
     const seasons = [
         ...new Set(
-            data.map(row => row["Season"])
-                .filter(Boolean)
+            data.map(x => x["Season"])
+            .filter(Boolean)
         )
     ];
 
@@ -274,8 +272,8 @@ function createFilters(data){
 
     const competitions = [
         ...new Set(
-            data.map(row => row["Competition"])
-                .filter(Boolean)
+            data.map(x => x["Competition"])
+            .filter(Boolean)
         )
     ];
 
@@ -296,8 +294,8 @@ function createFilters(data){
 
     const opponents = [
         ...new Set(
-            data.map(match => match["Opp. Team"])
-                .filter(Boolean)
+            data.map(x => x["Opp. Team"])
+            .filter(Boolean)
         )
     ];
 
@@ -334,24 +332,30 @@ function createFilters(data){
 
 function applyFilters(){
 
+    let filtered = [...allMatches];
+
     const season =
-        document.getElementById("seasonFilter")
-            .value.trim();
+        document
+            .getElementById("seasonFilter")
+            .value
+            .trim();
 
     const competition =
-        document.getElementById("competitionFilter")
-            .value.trim();
+        document
+            .getElementById("competitionFilter")
+            .value
+            .trim();
 
     const opponent =
-        document.getElementById("opponentFilter")
-            .value.trim();
-
-    let filtered = [...allMatches];
+        document
+            .getElementById("opponentFilter")
+            .value
+            .trim();
 
     if(season){
 
         filtered = filtered.filter(
-            row => row["Season"] === season
+            x => x["Season"] === season
         );
 
     }
@@ -359,7 +363,7 @@ function applyFilters(){
     if(competition){
 
         filtered = filtered.filter(
-            row => row["Competition"] === competition
+            x => x["Competition"] === competition
         );
 
     }
@@ -367,7 +371,7 @@ function applyFilters(){
     if(opponent){
 
         filtered = filtered.filter(
-            row => row["Opp. Team"] === opponent
+            x => x["Opp. Team"] === opponent
         );
 
     }
@@ -403,6 +407,7 @@ function render(matches){
             "<div class='empty'>Žiadne zápasy</div>";
 
         return;
+
     }
 
     let html = `
@@ -426,9 +431,7 @@ function render(matches){
         html += `
         <tr>
 
-            <td>
-                ${match["Season"] || ""}
-            </td>
+            <td>${match["Season"] || ""}</td>
 
             <td>
                 <a
@@ -449,6 +452,7 @@ function render(matches){
             </td>
 
             <td>
+
                 ${
                     match["Result"] === "-:-"
                     ? "-"
@@ -462,6 +466,7 @@ function render(matches){
                     </a>
                     `
                 }
+
             </td>
 
         </tr>
