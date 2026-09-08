@@ -501,7 +501,8 @@ function getTimeline(match){
                 minute: match[`Goal min ${i}`],
                 side: homeMatch ? "left" : "right",
                 player: match[`Goal Player ${i}`],
-                assist: match[`Assist Player ${i}`] || ""
+                assist: match[`Assist Player ${i}`] || "",
+                penalty: match[`Penalty Player ${i}`]
             });
 
         }
@@ -512,7 +513,8 @@ function getTimeline(match){
                 minute: match[`Opp. Goal min ${i}`],
                 side: homeMatch ? "right" : "left",
                 player: match[`Opp. Goal Player ${i}`],
-                assist: match[`Opp. Assist player ${i}`] || ""
+                assist: match[`Opp. Assist player ${i}`] || "",
+                penalty: match[`Opp. Penalty Player ${i}`]
             });
 
         }
@@ -662,9 +664,14 @@ function getTimeline(match){
         goals.forEach(goal => {
 
             let content = `
-                <span class="event-icon">⚽</span>
-                <strong>${escapeHtml(goal.player)}</strong>
-            `;
+    <span class="event-icon">⚽</span>
+    <strong>${escapeHtml(goal.player)}</strong>
+    ${
+        goal.penalty
+            ? ' <span style="font-weight:normal;">(penalty)</span>'
+            : ''
+    }
+`;
 
             if(goal.assist){
 
