@@ -334,6 +334,47 @@ const oppTitle = homeMatch
 
     console.error(error);
 
+    function renderMatch(match){
+
+    const homeMatch =
+        String(match["Home/Away"] || "").trim() === "Home";
+
+    const teamA = homeMatch
+        ? "FC Barcelona"
+        : (match["Opp. Team"] || "");
+
+    const teamB = homeMatch
+        ? (match["Opp. Team"] || "")
+        : "FC Barcelona";
+
+    const barcaTitle = homeMatch
+        ? "FC Barcelona"
+        : (match["Opp. Team"] || "");
+
+    const oppTitle = homeMatch
+        ? (match["Opp. Team"] || "")
+        : "FC Barcelona";
+
+    const barcaPlayers = homeMatch
+        ? getPlayers(match)
+        : getPlayers(match,"Opp. ");
+
+    const oppPlayers = homeMatch
+        ? getPlayers(match,"Opp. ")
+        : getPlayers(match);
+
+    const barcaBench = homeMatch
+        ? getBench(match)
+        : getBench(match,"Opp. ");
+
+    const oppBench = homeMatch
+        ? getBench(match,"Opp. ")
+        : getBench(match);
+
+    const timelineHtml = getTimeline(match);
+
+    document.getElementById("app").innerHTML = `
+
     document.getElementById("app").innerHTML = `
         <div class="card">
             Error:<br>
