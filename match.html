@@ -478,6 +478,17 @@ function getPlayers(match,prefix=""){
 
 function getBench(match,prefix=""){
 
+    const subbedOn = [];
+
+for(let i=1;i<=6;i++){
+
+    const player = match[`${prefix}Sub on ${i}`];
+
+    if(player){
+        subbedOn.push(String(player).trim());
+    }
+}
+
     let html="";
 
     for(let i=1;i<=12;i++){
@@ -496,7 +507,12 @@ function getBench(match,prefix=""){
                     ${number || ""}
                 </div>
 
-                ${player}
+                ${escapeHtml(player)}
+${
+    subbedOn.includes(String(player).trim())
+        ? ' <strong style="color:#16a34a;">⬆</strong>'
+        : ''
+}
             </div>
             `;
         }
