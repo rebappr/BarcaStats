@@ -1045,38 +1045,39 @@ document.getElementById("app").innerHTML = `
 Match Information
 </h2>
 
-    <div class="teams">
+<div class="teams">
 
-<div class="team-header home">
-    ${
-        teamALogo
-            ? `<img src="${team            : ""
-    }
+    <div class="team-header home">
+        ${
+            teamALogo
+                ? `${teamALogo}" class="team-logo">`
+                : ""
+        }
 
-    <div class="team-name">
-        ${escapeHtml(teamA)}
-    </div>
-</div>
-
-<div class="score">
-    ${escapeHtml(match["Result"] || "-:-")}
-</div>
-
-<div class="team-header away">
-
-    <div class="team-name">
-        ${escapeHtml(teamB)}
+        <div class="team-name">
+            ${escapeHtml(teamA)}
+        </div>
     </div>
 
-    ${
-        teamBLogo
-            ? `${teamBLogo}">`
-            : ""
-    }
+    <div class="score">
+        ${escapeHtml(match["Result"] || "-:-")}
+    </div>
 
-</div>
+    <div class="team-header away">
+
+        <div class="team-name">
+            ${escapeHtml(teamB)}
+        </div>
+
+        ${
+            teamBLogo
+                ? `${teamBLogo}" class="team-logo">`
+                : ""
+        }
 
     </div>
+
+</div>
 
 <div class="meta-grid">
 
