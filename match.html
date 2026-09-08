@@ -282,6 +282,13 @@ body{
     display:none;
 }
 
+.sub-off{
+    color:#dc2626;
+    font-weight:700;
+    margin-left:4px;
+}
+
+
 @media(max-width:900px){
 
     .lineup-tabs{
@@ -416,6 +423,17 @@ function getPlayers(match,prefix=""){
 
     const captain = match[`${prefix}Captain`] || "";
 
+    const subbedOff = [];
+
+    for(let i=1;i<=6;i++){
+
+        const player = match[`${prefix}Sub off ${i}`];
+
+        if(player){
+            subbedOff.push(String(player).trim());
+    }
+}
+
     let html="";
 
     for(let i=1;i<=11;i++){
@@ -434,11 +452,22 @@ function getPlayers(match,prefix=""){
                     ${escapeHtml(number || "")}
                 </div>
 
+                ${
+                    subbedOff.includes(String(player).trim())
+                        ? '<span class="sub-off">⬇</span>'
+                        : ''
+                }
+
                 ${escapeHtml(player)}
                     ${
                         String(player).trim() === String(captain).trim()
-                        ? ' <strong>(C)</strong>'
-                        : ''
+                                ? ' <strong>(C)</strong>'
+                            : ''
+                    }
+                    ${
+                        subbedOff.includes(String(player).trim())
+                            ? ' <span title="Substituted off">⬇️</span>'
+                            : ''
                     }
             </div>
             `;
