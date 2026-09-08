@@ -306,14 +306,18 @@ fetch("data.json")
         renderMatch(match);
 
     })
-    .catch(error => {
+.catch(error => {
 
-        console.error(error);
+    console.error(error);
 
-        document.getElementById("app").innerHTML =
-            "<div class='card'>Failed to load data</div>";
+    document.getElementById("app").innerHTML = `
+        <div class="card">
+            Error:<br>
+            ${error.message}
+        </div>
+    `;
 
-    });
+});
 
 function escapeHtml(str) {
 
