@@ -297,29 +297,11 @@ fetch("data.json")
 
         if (!match) {
 
-            const barcaPlayers = homeMatch
-    ? getPlayers(match)
-    : getPlayers(match,"Opp. ");
+    document.getElementById("app").innerHTML =
+        "<div class='card'>Match not found</div>";
 
-const oppPlayers = homeMatch
-    ? getPlayers(match,"Opp. ")
-    : getPlayers(match);
-
-const barcaBench = homeMatch
-    ? getBench(match)
-    : getBench(match,"Opp. ");
-
-const oppBench = homeMatch
-    ? getBench(match,"Opp. ")
-    : getBench(match);
-
-const barcaTitle = homeMatch
-    ? "FC Barcelona"
-    : (match["Opp. Team"] || "");
-
-const oppTitle = homeMatch
-    ? (match["Opp. Team"] || "")
-    : "FC Barcelona";
+    return;
+}
 
             document.getElementById("app").innerHTML =
                 "<div class='card'>Match not found</div>";
@@ -793,7 +775,7 @@ ${
         class="lineup-tab"
         onclick="showLineup('opp')">
 
-        ${match["Opp. Team"] || ""}
+        ${escapeHtml(oppTitle)}
 
     </button>
 
@@ -819,7 +801,7 @@ ${barcaBench}
         id="lineup-opp"
         class="team-card">
 
-<h3>${match["Opp. Team"] || ""}</h3>
+<h3>${escapeHtml(oppTitle)}</h3>
 
 <h4>Starting XI</h4>
 ${oppPlayers}
