@@ -520,7 +520,7 @@ function render(matches){
                 ${
                     match["Result"] === "-:-"
                     ? ""
-                    : `
+                    : 
                     <a
                         href="match.html?id=${match["ID"]}"
                         style="text-decoration:none;">
@@ -528,26 +528,27 @@ function render(matches){
                             ${match["Result"]}
                         </span>
                     </a>
-                    `
+                    
                 }
 
             </td>
 
         </tr>
-        `;
+        ;
 
     });
 
-    html += `
+    html += 
                 </tbody>
             </table>
         </div>
     </div>
-    `;
+    ;
 
     document.getElementById("matches").innerHTML =
         html;
 }
+
 </script>
 
 </body>
