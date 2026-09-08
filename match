@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Match Detail</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --barca-blue:#004D98;
+    --barca-red:#A50044;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:'Roboto',sans-serif;
+    background:#f4f6f9;
+    color:#1f2937;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        var(--barca-blue),
+        var(--barca-red)
+    );
+    color:white;
+}
+
+.hero h1{
+    margin:0;
+    font-size:36px;
+}
+
+.hero p{
+    margin:8px 0 0;
+    opacity:.9;
+}
+
+.section-title{
+    margin:0 0 15px;
+    font-size:20px;
+}
+
+.lineups{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.team-card{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:15px;
+}
+
+.team-card h3{
+    margin-top:0;
+}
+
+.player{
+    padding:4px 0;
+}
+
+.event{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    padding:8px 0;
+    border-bottom:1px solid #edf2f7;
+}
+
+.minute{
+    font-weight:700;
+    min-width:50px;
+}
+
+.goal{
+    color:#15803d;
+}
+
+.yellow{
+    color:#ca8a04;
+}
+
+.red{
+    color:#dc2626;
+}
+
+.sub{
+    color:#2563eb;
+}
+
+.meta-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.meta{
+    background:#f8fafc;
+    border-radius:10px;
+    padding:12px;
+}
+
+.meta-label{
+    font-size:11px;
+    color:#6b7280;
+    text-transform:uppercase;
+}
+
+.meta-value{
+    font-weight:600;
+    margin-top:4px;
+}
+
+@media (max-width:768px){
+
+    .lineups{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:26px;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="content">
+        Načítavam...
+    </div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const matchId = params.get("id");
+
+fetch("data.json")
+.then(r => r.json())
+.then(data => {
+
+    const match = data.find(row =>
+        String(row["ID"]) === String(matchId)
+    );
+
+    if(!match){
+
+        document.getElementById("content").innerHTML =
+            "<div class='card'>Zápas nebol nájdený.</div>";
+
+        return;
+    }
+
+    render(match);
+
+});
+
+function getPlayers(match,prefix=""){
+
+    let html="";
+
+    for(let i=1;i<=11;i++){
+
+        const name =
+            match[`${prefix}Player name ${i}`];
+
+        const number =
+            match[`${prefix}Player number ${i}`];
+
+        if(name){
+
+            html += `
+            <div class="player">
+                <strong>${number || ""}</strong>
+                ${name}
+            </div>
+            `;
+        }
+    }
+
+    return html;
+}
+
+function getBench(match,prefix=""){
+
+    let html="";
+
+    for(let i=1;i<=12;i++){
+
+        const name =
+            match[`${prefix}On the bench name ${i}`];
+
+        const number =
+            match[`${prefix}On the bench number ${i}`];
+
+        if(name){
+
+            html += `
+            <div class="player">
+                <strong>${number || ""}</strong>
+                ${name}
+            </div>
+            `;
+        }
+    }
+
+    return html;
+}
+
+function getGoals(match,prefix=""){
+
+    let html="";
+
+    for(let i=1;i<=12;i++){
+
+        const minute =
+            match[`${prefix}Goal min ${i}`];
+
+        const player =
+            match[`${prefix}Goal Player ${i}`];
+
+        const assist =
+            match[`${prefix}Assist Player ${i}`];
+
+        if(player){
+
+            html += `
+            <div class="event">
+                <div class="minute">${minute}'</div>
+
+                <div>
+                    <div class="goal">
+                        ⚽ ${player}
+                    </div>
+
+                    ${
+                        assist
+                        ? `<div>🅰 ${assist}</div>`
+                        : ""
+                    }
+                </div>
+            </div>
+            `;
+        }
+    }
+
+    return html || "Žiadne góly";
+}
+
+function getSubs(match,prefix=""){
+
+    let html="";
+
+    for(let i=1;i<=6;i++){
+
+        const minute =
+            match[`${prefix}Sub min ${i}`];
+
+        const on =
+            match[`${prefix}Sub on ${i}`];
+
+        const off =
+            match[`${prefix}Sub off ${i}`];
+
+        if(on){
+
+            html += `
+            <div class="event">
+                <div class="minute">${minute}'</div>
+
+                <div class="sub">
+                    ⬆ ${on}<br>
+                    ⬇ ${off}
+                </div>
+            </div>
+            `;
+        }
+    }
+
+    return html || "Žiadne striedania";
+}
+
+function getYellow(match,prefix=""){
+
+    let html="";
+
+    for(let i=1;i<=12;i++){
+
+        const minute =
+            match[`${prefix}Yellow min ${i}`];
+
+        const player =
+            match[`${prefix}Yellow player ${i}`];
+
+        if(player){
+
+            html += `
+            <div class="event yellow">
+                <div class="minute">${minute}'</div>
+                <div>🟨 ${player}</div>
+            </div>
+            `;
+        }
+    }
+
+    return html || "Žiadne žlté karty";
+}
+
+function getRed(match,prefix=""){
+
+    let html="";
+
+    for(let i=1;i<=5;i++){
+
+        const minute =
+            match[`${prefix}Red min ${i}`];
+
+        const player =
+            match[`${prefix}Red player ${i}`];
+
+        if(player){
+
+            html += `
+            <div class="event red">
+                <div class="minute">${minute}'</div>
+                <div>🟥 ${player}</div>
+            </div>
+            `;
+        }
+    }
+
+    return html || "Žiadne červené karty";
+}
+
+function render(match){
+
+document.getElementById("content").innerHTML = `
+
+<div class="card hero">
+
+    <h1>
+        FC Barcelona ${match["Result"]} ${match["Opp. Team"]}
+    </h1>
+
+    <p>
+        ${match["Competition"]} • Matchday ${match["Matchday"]}
+    </p>
+
+    <p>
+        ${match["Date"]}
+    </p>
+
+</div>
+
+<div class="card">
+
+<div class="meta-grid">
+
+<div class="meta">
+<div class="meta-label">Venue</div>
+<div class="meta-value">${match["Venue"] || "-"}</div>
+</div>
+
+<div class="meta">
+<div class="meta-label">Referee</div>
+<div class="meta-value">${match["Referee"] || "-"}</div>
+</div>
+
+<div class="meta">
+<div class="meta-label">Barcelona System</div>
+<div class="meta-value">${match["System"] || "-"}</div>
+</div>
+
+<div class="meta">
+<div class="meta-label">Opponent System</div>
+<div class="meta-value">${match["Opp. System"] || "-"}</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">Starting XI</h2>
+
+<div class="lineups">
+
+<div class="team-card">
+<h3>FC Barcelona</h3>
+${getPlayers(match)}
+</div>
+
+<div class="team-card">
+<h3>${match["Opp. Team"]}</h3>
+${getPlayers(match,"Opp. ")}
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">Bench</h2>
+
+<div class="lineups">
+
+<div class="team-card">
+${getBench(match)}
+</div>
+
+<div class="team-card">
+${getBench(match,"Opp. ")}
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+<h2 class="section-title">Goals</h2>
+
+${getGoals(match)}
+${getGoals(match,"Opp. ")}
+
+</div>
+
+<div class="card">
+<h2 class="section-title">Substitutions</h2>
+
+${getSubs(match)}
+${getSubs(match,"Opp. ")}
+
+</div>
+
+<div class="card">
+<h2 class="section-title">Yellow Cards</h2>
+
+${getYellow(match)}
+${getYellow(match,"Opp. ")}
+
+</div>
+
+<div class="card">
+<h2 class="section-title">Red Cards</h2>
+
+${getRed(match)}
+${getRed(match,"Opp. ")}
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
+``
