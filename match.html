@@ -680,9 +680,7 @@ document.getElementById("app").innerHTML = `
 
     <div style="margin-top:15px;">
         ${escapeHtml(match["Competition"] || "")}
-        • Matchday ${match["Matchday"] || ""}
-        <br>
-        ${escapeHtml(match["Date"] || "")}
+        <br>Matchday ${match["Matchday"] || ""}
     </div>
 
 </div>
@@ -694,6 +692,13 @@ Match Information
 </h2>
 
 <div class="meta-grid">
+
+<div class="meta">
+<div class="meta-label">Date</div>
+<div class="meta-value">
+${escapeHtml(match["Date"] || "")}
+</div>
+</div>
 
 <div class="meta">
 <div class="meta-label">Venue</div>
