@@ -502,7 +502,7 @@ function getTimeline(match){
                 side: homeMatch ? "left" : "right",
                 player: match[`Goal Player ${i}`],
                 assist: match[`Assist Player ${i}`] || "",
-                penalty: match[`Penalty Player ${i}`]
+                penalty: match[`Penalty player ${i}`]
             });
 
         }
@@ -514,7 +514,7 @@ function getTimeline(match){
                 side: homeMatch ? "right" : "left",
                 player: match[`Opp. Goal Player ${i}`],
                 assist: match[`Opp. Assist player ${i}`] || "",
-                penalty: match[`Opp. Penalty Player ${i}`]
+                penalty: match[`Opp. Penalty player ${i}`]
             });
 
         }
