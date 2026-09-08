@@ -139,16 +139,6 @@ tbody tr:hover{
     font-weight:600;
 }
 
-.match-link{
-    color:#111827;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.match-link:hover{
-    text-decoration:underline;
-}
-
 .result-badge{
     display:inline-block;
     min-width:52px;
@@ -438,53 +428,43 @@ function render(matches){
                 <tbody>
     `;
 
-    matches.forEach(match => {
+matches.forEach(match => {
 
-        html += `
-        <tr>
+    html += 
+    <tr onclick="window.location.href='match.html?id=${match.ID}'">
 
-            <td>${match["Season"] || ""}</td>
+        <td>${match.Season || ""}</td>
 
-            <td>
-                <a
-                    class="match-link"
-                    href="match.html?id=${match["ID"]}">
-                    ${match["Date"] || ""}
-                </a>
-            </td>
+        <td>
+            ${match.Date || ""}
+        </td>
 
-            <td>
-                <span class="badge">
-                    ${match["Competition"] || ""}
+        <td>
+            <span class="badge">
+                ${match.Competition || ""}
+            </span>
+        </td>
+
+        <td>
+            ${match["Opp. Team"] || ""}
+        </td>
+
+        <td>
+            ${
+                match.Result === "-:-"
+                ? "-"
+                : 
+                <span class="${getResultClass(match)}">
+                    ${match.Result}
                 </span>
-            </td>
+                
+            }
+        </td>
 
-            <td>
-                ${match["Opp. Team"] || ""}
-            </td>
+    </tr>
+    ;
 
-            <td>
-
-                ${
-                    match["Result"] === "-:-"
-                    ? "-"
-                    : `
-                    <a
-                        href="match.html?id=${match["ID"]}"
-                        style="text-decoration:none;">
-                        <span class="${getResultClass(match)}">
-                            ${match["Result"]}
-                        </span>
-                    </a>
-                    `
-                }
-
-            </td>
-
-        </tr>
-        `;
-
-    });
+});
 
     html += `
                 </tbody>
