@@ -524,10 +524,15 @@ function getTimeline(match){
     // MISSED PENALTIES
 
 for(let i=1;i<=2;i++){
-
-    if(
+console.log(
+    match[`Penalty player ${i}`],
+    match[`Penalty scored ${i}`]
+);
+   if(
     match[`Penalty player ${i}`] &&
-    String(match[`Penalty scored ${i}`] || "").trim() === "not in"
+    String(match[`Penalty scored ${i}`] || "")
+        .trim()
+        .toLowerCase() === "not in"
 ){
 
     goals.push({
