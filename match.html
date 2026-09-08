@@ -201,6 +201,42 @@ body{
     border-radius:12px;
 }
 
+.timeline-section{
+    margin-bottom:30px;
+}
+
+.timeline-section h3{
+    font-size:16px;
+    margin-bottom:15px;
+    color:#004D98;
+}
+
+.event-row{
+    display:grid;
+    grid-template-columns:1fr 60px 1fr;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.event-minute{
+    text-align:center;
+    font-weight:700;
+}
+
+.event-home{
+    text-align:right;
+}
+
+.event-away{
+    text-align:left;
+}
+
+.event-box{
+    background:#f8fafc;
+    padding:10px 12px;
+    border-radius:10px;
+}
+
 .back-btn{
     position:fixed;
     right:20px;
@@ -406,163 +442,260 @@ function getBench(match,prefix=""){
 
 function getTimeline(match){
 
-    const events = [];
+    const goals = [];
+    const substitutions = [];
+    const cards = [];
 
-    function addEvent(
-        minute,
-        icon,
-        text,
-        team
-    ){
+    const homeMatch =
+        String(match["Home/Away"] || "").trim() === "Home";
 
-        if (
-    minute === null ||
-    minute === undefined ||
-    String(minute).trim() === ""
-){
-    return;
-}
+    function sortByMinute(arr){
 
-        events.push({
-            minute,
-            icon,
-            text,
-            team
+        arr.sort((a,b) => {
+
+            const ma =
+                parseInt(String(a.minute).match(/\d+/)?.[0] || 0);
+
+            const mb =
+                parseInt(String(b.minute).match(/\d+/)?.[0] || 0);
+
+            return ma - mb;
+
         });
 
     }
+
+    // GOALS
+
     for(let i=1;i<=12;i++){
 
         if(match[`Goal Player ${i}`]){
 
-            addEvent(
-                match[`Goal min ${i}`],
-                "⚽",
-                `${match[`Goal Player ${i}`]}`,
-                "barca"
-            );
+            goals.push({
+                minute: match[`Goal min ${i}`],
+                side: homeMatch ? "left" : "right",
+                player: match[`Goal Player ${i}`],
+                assist: match[`Goal Assist ${i}`] || ""
+            });
+
         }
 
         if(match[`Opp. Goal Player ${i}`]){
 
-            addEvent(
-                match[`Opp. Goal min ${i}`],
-                "⚽",
-                `${match[`Opp. Goal Player ${i}`]}`,
-                "opp"
-            );
+            goals.push({
+                minute: match[`Opp. Goal min ${i}`],
+                side: homeMatch ? "right" : "left",
+                player: match[`Opp. Goal Player ${i}`],
+                assist: match[`Opp. Goal Assist ${i}`] || ""
+            });
+
         }
 
-        if(match[`Yellow player ${i}`]){
-
-            addEvent(
-                match[`Yellow min ${i}`],
-                "🟨",
-                match[`Yellow player ${i}`],
-                "barca"
-            );
-        }
-
-        if(match[`Opp. Yellow player ${i}`]){
-
-            addEvent(
-                match[`Opp. Yellow min ${i}`],
-                "🟨",
-                match[`Opp. Yellow player ${i}`],
-                "opp"
-            );
-        }
     }
 
-    for(let i=1;i<=5;i++){
-
-        if(match[`Red player ${i}`]){
-
-            addEvent(
-                match[`Red min ${i}`],
-                "🟥",
-                match[`Red player ${i}`],
-                "barca"
-            );
-        }
-
-        if(match[`Opp. Red player ${i}`]){
-
-            addEvent(
-                match[`Opp. Red min ${i}`],
-                "🟥",
-                match[`Opp. Red player ${i}`],
-                "opp"
-            );
-        }
-    }
+    // SUBSTITUTIONS
 
     for(let i=1;i<=6;i++){
 
         if(match[`Sub on ${i}`]){
 
-            addEvent(
-                match[`Sub min ${i}`],
-                "🔄",
-                `${match[`Sub on ${i}`]} ⇢ ${match[`Sub off ${i}`]}`,
-                "barca"
-            );
+            substitutions.push({
+                minute: match[`Sub min ${i}`],
+                side: homeMatch ? "left" : "right",
+                on: match[`Sub on ${i}`],
+                off: match[`Sub off ${i}`]
+            });
+
         }
 
         if(match[`Opp. Sub on ${i}`]){
 
-            addEvent(
-                match[`Opp. Sub min ${i}`],
-                "🔄",
-                `${match[`Opp. Sub on ${i}`]} ⇢ ${match[`Opp. Sub off ${i}`]}`,
-                "opp"
-            );
+            substitutions.push({
+                minute: match[`Opp. Sub min ${i}`],
+                side: homeMatch ? "right" : "left",
+                on: match[`Opp. Sub on ${i}`],
+                off: match[`Opp. Sub off ${i}`]
+            });
+
         }
+
     }
 
-    events.sort((a,b)=>{
+    // YELLOW CARDS
 
-        const ma =
-            parseInt(String(a.minute).match(/\d+/)?.[0] || 0);
+    for(let i=1;i<=12;i++){
 
-        const mb =
-            parseInt(String(b.minute).match(/\d+/)?.[0] || 0);
+        if(match[`Yellow player ${i}`]){
 
-        return ma - mb;
+            cards.push({
+                minute: match[`Yellow min ${i}`],
+                side: homeMatch ? "left" : "right",
+                icon: "🟨",
+                player: match[`Yellow player ${i}`]
+            });
 
-    });
+        }
+
+        if(match[`Opp. Yellow player ${i}`]){
+
+            cards.push({
+                minute: match[`Opp. Yellow min ${i}`],
+                side: homeMatch ? "right" : "left",
+                icon: "🟨",
+                player: match[`Opp. Yellow player ${i}`]
+            });
+
+        }
+
+    }
+
+    // RED CARDS
+
+    for(let i=1;i<=5;i++){
+
+        if(match[`Red player ${i}`]){
+
+            cards.push({
+                minute: match[`Red min ${i}`],
+                side: homeMatch ? "left" : "right",
+                icon: "🟥",
+                player: match[`Red player ${i}`]
+            });
+
+        }
+
+        if(match[`Opp. Red player ${i}`]){
+
+            cards.push({
+                minute: match[`Opp. Red min ${i}`],
+                side: homeMatch ? "right" : "left",
+                icon: "🟥",
+                player: match[`Opp. Red player ${i}`]
+            });
+
+        }
+
+    }
+
+    sortByMinute(goals);
+    sortByMinute(substitutions);
+    sortByMinute(cards);
 
     let html = "";
 
-    events.forEach(event => {
+    function eventRow(side, minute, content){
+
+        return `
+            <div class="event-row">
+
+                ${
+                    side === "left"
+                    ? `<div class="event-home"><div class="event-box">${content}</div></div>`
+                    : `<div></div>`
+                }
+
+                <div class="event-minute">
+                    ${escapeHtml(minute)}'
+                </div>
+
+                ${
+                    side === "right"
+                    ? `<div class="event-away"><div class="event-box">${content}</div></div>`
+                    : `<div></div>`
+                }
+
+            </div>
+        `;
+    }
+
+    // GOALS
+
+    if(goals.length){
 
         html += `
-        <div class="timeline-item">
-
-            <div class="timeline-minute">
-                ${escapeHtml(event.minute)}'
-            </div>
-
-            <div class="timeline-icon">
-                ${event.icon}
-            </div>
-
-            <div
-                class="timeline-content"
-                style="
-                    border-left:4px solid ${
-                        event.team === "barca"
-                        ? "#004D98"
-                        : "#A50044"
-                    };
-                "
-            >
-                ${escapeHtml(event.text)}
-            </div>
-
-        </div>
+            <div class="timeline-section">
+                <h3>⚽ Goals</h3>
         `;
-    });
+
+        goals.forEach(goal => {
+
+            let content = `
+                <strong>${escapeHtml(goal.player)}</strong>
+            `;
+
+            if(goal.assist){
+
+                content += `
+                    <br>
+                    <small>Assist: ${escapeHtml(goal.assist)}</small>
+                `;
+
+            }
+
+            html += eventRow(
+                goal.side,
+                goal.minute,
+                content
+            );
+
+        });
+
+        html += `</div>`;
+
+    }
+
+    // SUBSTITUTIONS
+
+    if(substitutions.length){
+
+        html += `
+            <div class="timeline-section">
+                <h3>🔄 Substitutions</h3>
+        `;
+
+        substitutions.forEach(sub => {
+
+            html += eventRow(
+                sub.side,
+                sub.minute,
+                `
+                <strong>${escapeHtml(sub.on)}</strong>
+                <br>
+                <small>for ${escapeHtml(sub.off || "")}</small>
+                `
+            );
+
+        });
+
+        html += `</div>`;
+
+    }
+
+    // CARDS
+
+    if(cards.length){
+
+        html += `
+            <div class="timeline-section">
+                <h3>🟨 Cards</h3>
+        `;
+
+        cards.forEach(card => {
+
+            html += eventRow(
+                card.side,
+                card.minute,
+                `
+                ${card.icon}
+                ${escapeHtml(card.player)}
+                `
+            );
+
+        });
+
+        html += `</div>`;
+
+    }
 
     return html;
 }
