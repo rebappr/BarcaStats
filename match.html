@@ -228,10 +228,10 @@ body{
         display:none;
     }
 
-    .teams{
-        flex-direction:column;
-        gap:15px;
-    }
+.teams{
+    grid-template-columns:1fr;
+    gap:15px;
+}
 
     .lineups{
         display:block;
@@ -643,15 +643,15 @@ ${match["Opp. Manager"] || "-"}
 
 ${
     hasStartingXI(match) ||
-    hasStartingXI(match,"Opp. ")
+    hasStartingXI(match,"Opp. ") ||
+    hasBench(match) ||
+    hasBench(match,"Opp. ")
     ? `
     <div class="card">
 
         <h2 class="section-title">
-            Starting XI
+            Squads
         </h2>
-
-        <div class="lineups">
 
 <div class="lineup-tabs">
 
@@ -681,7 +681,11 @@ ${
 
         <h3>FC Barcelona</h3>
 
-        ${getPlayers(match)}
+<h4>Starting XI</h4>
+${getPlayers(match)}
+
+<h4>Bench</h4>
+${getBench(match)}
 
     </div>
 
@@ -689,48 +693,19 @@ ${
         id="lineup-opp"
         class="team-card">
 
-        <h3>${match["Opp. Team"] || ""}</h3>
+<h3>${match["Opp. Team"] || ""}</h3>
 
-        ${getPlayers(match,"Opp. ")}
+<h4>Starting XI</h4>
+${getPlayers(match,"Opp. ")}
+
+<h4>Bench</h4>
+${getBench(match,"Opp. ")}
 
     </div>
 
 </div>
 
-        </div>
-
-    </div>
-    `
-    : ""
-}
-
-${
-    hasBench(match) ||
-    hasBench(match,"Opp. ")
-    ? `
-    <div class="card">
-
-        <h2 class="section-title">
-            Bench
-        </h2>
-
-        <div class="lineups">
-        <div class="team-card">
-    <h3>FC Barcelona</h3>
-    ${getBench(match)}
 </div>
-
-<div class="team-card">
-    <h3>${match["Opp. Team"] || ""}</h3>
-    ${getBench(match,"Opp. ")}
-</div>
-
-        </div>
-
-    </div>
-    `
-    : ""
-}
 
 ${
     hasTimeline(match)
