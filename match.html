@@ -773,6 +773,17 @@ ${barcaPlayers}
 <h4>Bench</h4>
 ${barcaBench}
 
+<h4>Manager</h4>
+
+<div class="player">
+    <div class="number">M</div>
+    ${escapeHtml(
+        homeMatch
+            ? (match["Manager"] || "-")
+            : (match["Opp. Manager"] || "-")
+    )}
+</div>
+
     </div>
 
     <div
@@ -784,8 +795,16 @@ ${barcaBench}
 <h4>Starting XI</h4>
 ${oppPlayers}
 
-<h4>Bench</h4>
-${oppBench}
+<h4>Manager</h4>
+
+<div class="player">
+    <div class="number">M</div>
+    ${escapeHtml(
+        homeMatch
+            ? (match["Opp. Manager"] || "-")
+            : (match["Manager"] || "-")
+    )}
+</div>
 
     </div>
 
