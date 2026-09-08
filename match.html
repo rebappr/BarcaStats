@@ -502,7 +502,11 @@ function getTimeline(match){
                 side: homeMatch ? "left" : "right",
                 player: match[`Goal Player ${i}`],
                 assist: match[`Assist Player ${i}`] || "",
-                penalty: match[`Penalty player ${i}`]
+                penalty:
+                    match[`Penalty player ${i}`] &&
+                    String(match[`Penalty scored ${i}`] || "")
+                        .trim()
+                        .toLowerCase() !== "not in"
             });
 
         }
@@ -514,7 +518,11 @@ function getTimeline(match){
                 side: homeMatch ? "right" : "left",
                 player: match[`Opp. Goal Player ${i}`],
                 assist: match[`Opp. Assist player ${i}`] || "",
-                penalty: match[`Opp. Penalty player ${i}`]
+                penalty:
+                    match[`Opp. Penalty player ${i}`] &&
+                    String(match[`Opp. Penalty scored ${i}`] || "")
+                        .trim()
+                        .toLowerCase() !== "not in"
             });
 
         }
@@ -525,27 +533,27 @@ function getTimeline(match){
 
 for(let i=1;i<=2;i++){
 
-   if(
-    match[`Penalty player ${i}`] &&
-    String(match[`Penalty scored ${i}`] || "")
-        .trim()
-        .toLowerCase() === "not in"
-){
+    if(
+        match[`Penalty player ${i}`] &&
+        String(match[`Penalty scored ${i}`] || "")
+            .trim()
+            .toLowerCase() === "not in"
+    ){
 
-    goals.push({
-        minute: match[`Penalty min ${i}`],
-        side: homeMatch ? "left" : "right",
-        player: match[`Penalty player ${i}`],
-        missedPenalty: true
-    });
-
-}
+        goals.push({
+            minute: match[`Penalty min ${i}`],
+            side: homeMatch ? "left" : "right",
+            player: match[`Penalty player ${i}`],
+            missedPenalty: true
+        });
 
     }
 
     if(
         match[`Opp. Penalty player ${i}`] &&
-        String(match[`Opp. Penalty scored ${i}`] || "").trim() === "not in"
+        String(match[`Opp. Penalty scored ${i}`] || "")
+            .trim()
+            .toLowerCase() === "not in"
     ){
 
         goals.push({
@@ -558,7 +566,6 @@ for(let i=1;i<=2;i++){
     }
 
 }
-
     // SUBSTITUTIONS
 
     for(let i=1;i<=6;i++){
