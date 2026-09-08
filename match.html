@@ -1050,7 +1050,8 @@ Match Information
 <div class="team-header home">
     ${
         teamALogo
-            ? `<img src="${teamALogo}" class="team}
+            ? `<img src="${team            : ""
+    }
 
     <div class="team-name">
         ${escapeHtml(teamA)}
@@ -1069,7 +1070,7 @@ Match Information
 
     ${
         teamBLogo
-            ? `${teamBLogo}`
+            ? `${teamBLogo}">`
             : ""
     }
 
