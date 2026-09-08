@@ -414,6 +414,8 @@ function escapeHtml(str) {
 
 function getPlayers(match,prefix=""){
 
+    const captain = match[`${prefix}Captain`] || "";
+
     let html="";
 
     for(let i=1;i<=11;i++){
@@ -433,6 +435,11 @@ function getPlayers(match,prefix=""){
                 </div>
 
                 ${escapeHtml(player)}
+                    ${
+                        String(player).trim() === String(captain).trim()
+                        ? ' <strong>(C)</strong>'
+                        : ''
+                    }
             </div>
             `;
         }
