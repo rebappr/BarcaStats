@@ -985,6 +985,14 @@ const teamBLogo = homeMatch
     ? (match["Opp. Team Logo"] || "")
     : "logos/fc-barcelona.png";
 
+const teamA = homeMatch
+    ? "FC Barcelona"
+    : (match["Opp. Team"] || "");
+
+const teamB = homeMatch
+    ? (match["Opp. Team"] || "")
+    : "FC Barcelona";
+
 const barcaTitle = homeMatch
     ? "FC Barcelona"
     : (match["Opp. Team"] || "");
@@ -1040,6 +1048,7 @@ Match Information
 <div class="teams">
 
     <div class="team-header home">
+
         ${
             teamALogo
                 ? `${teamALogo}`
@@ -1049,6 +1058,7 @@ Match Information
         <div class="team-name">
             ${escapeHtml(teamA)}
         </div>
+
     </div>
 
     <div class="score">
