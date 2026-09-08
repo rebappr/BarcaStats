@@ -1051,7 +1051,9 @@ Match Information
 
         ${
             teamALogo
-                ? `<img src="${teamALogo}" class="team-logo"    }
+                ? `${teamALogo}`
+                : ""
+        }
 
         <div class="team-name">
             ${escapeHtml(teamA)}
@@ -1071,7 +1073,7 @@ Match Information
 
         ${
             teamBLogo
-                ? `${teamBLogo}">`
+                ? `${teamBLogo}`
                 : ""
         }
 
