@@ -776,6 +776,49 @@ ${
     : ""
 }
 `;
+
+if(window.innerWidth <= 900){
+
+    const opp =
+        document.getElementById("lineup-opp");
+
+    if(opp){
+        opp.classList.add("mobile-hidden");
+    }
+
+}
+
+}
+
+window.addEventListener("resize", () => {
+
+    const barca =
+        document.getElementById("lineup-barca");
+
+    const opp =
+        document.getElementById("lineup-opp");
+
+    if (!barca || !opp) {
+        return;
+    }
+
+    if (window.innerWidth > 900) {
+
+        barca.classList.remove("mobile-hidden");
+        opp.classList.remove("mobile-hidden");
+
+    } else {
+
+        if (
+            !barca.classList.contains("mobile-hidden") &&
+            !opp.classList.contains("mobile-hidden")
+        ) {
+            opp.classList.add("mobile-hidden");
+        }
+
+    }
+
+});
 </script>
 
 </body>
