@@ -234,7 +234,7 @@ body{
     }
 
     .lineups{
-        grid-template-columns:1fr;
+        display:block;
     }
 
     .score{
@@ -653,21 +653,47 @@ ${
 
         <div class="lineups">
 
-<div
-    id="lineup-barca"
-    class="team-card">
+<div class="lineup-tabs">
 
-    <h3>FC Barcelona</h3>
-    ${getPlayers(match)}
+    <button
+        class="lineup-tab active"
+        onclick="showLineup('barca')">
+
+        FC Barcelona
+
+    </button>
+
+    <button
+        class="lineup-tab"
+        onclick="showLineup('opp')">
+
+        ${match["Opp. Team"] || ""}
+
+    </button>
 
 </div>
 
-<div
-    id="lineup-opp"
-    class="team-card">
+<div class="lineups">
 
-    <h3>${match["Opp. Team"] || ""}</h3>
-    ${getPlayers(match,"Opp. ")}
+    <div
+        id="lineup-barca"
+        class="team-card">
+
+        <h3>FC Barcelona</h3>
+
+        ${getPlayers(match)}
+
+    </div>
+
+    <div
+        id="lineup-opp"
+        class="team-card">
+
+        <h3>${match["Opp. Team"] || ""}</h3>
+
+        ${getPlayers(match,"Opp. ")}
+
+    </div>
 
 </div>
 
