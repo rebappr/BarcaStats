@@ -975,6 +975,8 @@ function isHomeMatch(match){
     
 function renderMatch(match){
 
+const homeMatch = isHomeMatch(match);
+    
 const teamALogo = homeMatch
     ? (match["Team Logo"] || "")
     : (match["Opp. Team Logo"] || "");
@@ -982,8 +984,6 @@ const teamALogo = homeMatch
 const teamBLogo = homeMatch
     ? (match["Opp. Team Logo"] || "")
     : (match["Team Logo"] || "");
-
-const homeMatch = isHomeMatch(match);
 
 const teamA = homeMatch
     ? "FC Barcelona"
