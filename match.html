@@ -646,13 +646,19 @@ function getTimeline(match){
 
         goals.forEach(goal => {
 
-          let content =
-    `<span class="event-icon">⚽</span>${escapeHtml(goal.player)}`;
+          let content = `
+    <span class="event-icon">⚽</span>
+    <strong>${escapeHtml(goal.player)}</strong>
+`;
 
 if(goal.assist){
 
-    content +=
-        ` (${escapeHtml(goal.assist)})`;
+    content += `
+        <br>
+        <small>
+            Assist: ${escapeHtml(goal.assist)}
+        </small>
+    `;
 
 }
             html += eventRow(
