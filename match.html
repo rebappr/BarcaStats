@@ -687,14 +687,17 @@ if(goal.assist){
         substitutions.forEach(sub => {
 
             html += eventRow(
-                sub.side,
-                sub.minute,
-                `
-                <strong>${escapeHtml(sub.on)}</strong>
-                <br>
-                <small>for ${escapeHtml(sub.off || "")}</small>
-                `
-            );
+    sub.side,
+    sub.minute,
+    `
+    <span class="event-icon">🔄</span>
+    <strong>${escapeHtml(sub.on)}</strong>
+    <br>
+    <small>
+        for ${escapeHtml(sub.off || "")}
+    </small>
+    `
+);
 
         });
 
@@ -716,13 +719,15 @@ if(goal.assist){
         cards.forEach(card => {
 
             html += eventRow(
-                card.side,
-                card.minute,
-                `
-                ${card.icon}
-                ${escapeHtml(card.player)}
-                `
-            );
+    card.side,
+    card.minute,
+    `
+    <span class="event-icon">
+        ${card.icon}
+    </span>
+    ${escapeHtml(card.player)}
+    `
+);
 
         });
 
