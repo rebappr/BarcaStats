@@ -430,7 +430,7 @@ function render(matches){
 
 matches.forEach(match => {
 
-    html += `
+    html += 
     <tr onclick="window.location.href='match.html?id=${match.ID}'">
 
         <td>${match.Season || ""}</td>
@@ -452,12 +452,12 @@ matches.forEach(match => {
         <td>
             ${
                 match.Result === "-:-"
-                ? "-"
-                : `
+                ? "-:-"
+                : 
                 <span class="${getResultClass(match)}">
                     ${match.Result}
                 </span>
-                `
+                
             }
         </td>
 
@@ -465,12 +465,12 @@ matches.forEach(match => {
     `;
 
 });
-    html += `
+    html += 
                 </tbody>
             </table>
         </div>
     </div>
-    `;
+    ;
 
     document.getElementById("matches").innerHTML =
         html;
