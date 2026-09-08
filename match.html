@@ -479,50 +479,26 @@ function hasStartingXI(match,prefix=""){
 
 }
 
-${
-    hasBench(match) ||
-    hasBench(match,"Opp. ")
-    ? `
-    <div class="card">
+function hasBench(match,prefix=""){
 
-        <h2 class="section-title">
-            Bench
-        </h2>
+    for(let i=1;i<=12;i++){
 
-        <div class="lineups">
+        if(match[`${prefix}On the bench name ${i}`]){
+            return true;
+        }
 
-            <div class="team-card">
-                ${getBench(match)}
-            </div>
+    }
 
-            <div class="team-card">
-                ${getBench(match,"Opp. ")}
-            </div>
+    return false;
 
-        </div>
-
-    </div>
-    `
-    : ""
 }
 
-${
-    hasTimeline(match)
-    ? `
-    <div class="card">
+function hasTimeline(match){
 
-        <h2 class="section-title">
-            Match Timeline
-        </h2>
+    return getTimeline(match).trim() !== "";
 
-        <div class="timeline">
-            ${getTimeline(match)}
-        </div>
-
-    </div>
-    `
-    : ""
 }
+
 
 function renderMatch(match){
 
@@ -624,38 +600,50 @@ ${
     : ""
 }
 
-<div class="card">
+${
+    hasBench(match) ||
+    hasBench(match,"Opp. ")
+    ? `
+    <div class="card">
 
-<h2 class="section-title">
-Bench
-</h2>
+        <h2 class="section-title">
+            Bench
+        </h2>
 
-<div class="lineups">
+        <div class="lineups">
 
-<div class="team-card">
-${getBench(match)}
-</div>
+            <div class="team-card">
+                ${getBench(match)}
+            </div>
 
-<div class="team-card">
-${getBench(match,"Opp. ")}
-</div>
+            <div class="team-card">
+                ${getBench(match,"Opp. ")}
+            </div>
 
-</div>
+        </div>
 
-</div>
+    </div>
+    `
+    : ""
+}
 
-<div class="card">
+${
+    hasTimeline(match)
+    ? `
+    <div class="card">
 
-<h2 class="section-title">
-Match Timeline
-</h2>
+        <h2 class="section-title">
+            Match Timeline
+        </h2>
 
-<div class="timeline">
-${getTimeline(match)}
-</div>
+        <div class="timeline">
+            ${getTimeline(match)}
+        </div>
 
-</div>
-
+    </div>
+    `
+    : ""
+}
 `;
 
 }
