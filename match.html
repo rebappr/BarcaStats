@@ -613,9 +613,11 @@ function getTimeline(match){
     if(goals.length){
 
         html += `
-            <div class="timeline-section">
-                <h3>⚽ Goals</h3>
-        `;
+            <div class="card">
+                <h2 class="section-title">
+                    ⚽ Goals
+                </h2>
+            `;
 
         goals.forEach(goal => {
 
@@ -649,9 +651,11 @@ function getTimeline(match){
     if(substitutions.length){
 
         html += `
-            <div class="timeline-section">
-                <h3>🔄 Substitutions</h3>
-        `;
+    <div class="card">
+        <h2 class="section-title">
+            🔄 Substitutions
+        </h2>
+`;
 
         substitutions.forEach(sub => {
 
@@ -676,9 +680,11 @@ function getTimeline(match){
     if(cards.length){
 
         html += `
-            <div class="timeline-section">
-                <h3>🟨 Cards</h3>
-        `;
+    <div class="card">
+        <h2 class="section-title">
+            🟨 Cards
+        </h2>
+`;
 
         cards.forEach(card => {
 
@@ -953,20 +959,8 @@ ${oppBench}
 
 ${
     timelineHtml
-    ? `
-    <div class="card">
-
-        <h2 class="section-title">
-            Match Timeline
-        </h2>
-
-        <div class="timeline">
-            ${timelineHtml}
-        </div>
-
-    </div>
-    `
-    : ""
+        ? timelineHtml
+        : ""
 }
 `;
 
