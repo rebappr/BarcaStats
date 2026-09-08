@@ -1049,35 +1049,34 @@ Match Information
 
     <div class="team-header home">
 
-        ${
-            teamALogo
-                ? `${teamALogo}`
-                : ""
-        }
+    ${
+        teamALogo
+            ? `${teamALogo}`
+            : ""
+    }
 
-        <div class="team-name">
-            ${escapeHtml(teamA)}
-        </div>
-
+    <div class="team-name">
+        ${escapeHtml(teamA)}
     </div>
+
+</div>
 
     <div class="score">
         ${escapeHtml(match["Result"] || "-:-")}
     </div>
 
-    <div class="team-header away">
+   <div class="team-header away">
 
-        <div class="team-name">
-            ${escapeHtml(teamB)}
-        </div>
-
-        ${
-            teamBLogo
-                ? `${teamBLogo}`
-                : ""
-        }
-
+    <div class="team-name">
+        ${escapeHtml(teamB)}
     </div>
+
+    ${
+        teamBLogo
+            ? `<img src="${teamB           : ""
+    }
+
+</div>
 
 </div>
 
