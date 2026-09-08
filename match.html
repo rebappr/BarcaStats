@@ -521,6 +521,40 @@ function getTimeline(match){
 
     }
 
+    // MISSED PENALTIES
+
+for(let i=1;i<=2;i++){
+
+    if(
+        match[`Penalty player ${i}`] &&
+        String(match[`Penalty scored ${i}`] || "").trim() === "not in"
+    ){
+
+        goals.push({
+            minute: match[`Penalty min ${i}`],
+            side: homeMatch ? "left" : "right",
+            player: match[`Penalty player ${i}`],
+            missedPenalty: true
+        });
+
+    }
+
+    if(
+        match[`Opp. Penalty player ${i}`] &&
+        String(match[`Opp. Penalty scored ${i}`] || "").trim() === "not in"
+    ){
+
+        goals.push({
+            minute: match[`Opp. Penalty min ${i}`],
+            side: homeMatch ? "right" : "left",
+            player: match[`Opp. Penalty player ${i}`],
+            missedPenalty: true
+        });
+
+    }
+
+}
+
     // SUBSTITUTIONS
 
     for(let i=1;i<=6;i++){
@@ -663,15 +697,31 @@ function getTimeline(match){
 
         goals.forEach(goal => {
 
-            let content = `
-    <span class="event-icon">⚽</span>
-    <strong>${escapeHtml(goal.player)}</strong>
-    ${
-        goal.penalty
-            ? ' <span style="font-weight:normal;">(penalty)</span>'
-            : ''
-    }
-`;
+           let content = "";
+
+if(goal.missedPenalty){
+
+    content = `
+        <span class="event-icon">❌</span>
+        <strong>${escapeHtml(goal.player)}</strong>
+        <span style="font-weight:normal;">
+            (missed penalty)
+        </span>
+    `;
+
+}else{
+
+    content = `
+        <span class="event-icon">⚽</span>
+        <strong>${escapeHtml(goal.player)}</strong>
+        ${
+            goal.penalty
+                ? ' <span style="font-weight:normal;">(penalty)</span>'
+                : ''
+        }
+    `;
+
+}
 
             if(goal.assist){
 
