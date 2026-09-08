@@ -526,16 +526,18 @@ function getTimeline(match){
 for(let i=1;i<=2;i++){
 
     if(
-        match[`Penalty player ${i}`] &&
-        String(match[`Penalty scored ${i}`] || "").trim() === "not in"
-    ){
+    match[`Penalty player ${i}`] &&
+    String(match[`Penalty scored ${i}`] || "").trim() === "not in"
+){
 
-        goals.push({
-            minute: match[`Penalty min ${i}`],
-            side: homeMatch ? "left" : "right",
-            player: match[`Penalty player ${i}`],
-            missedPenalty: true
-        });
+    goals.push({
+        minute: match[`Penalty min ${i}`],
+        side: homeMatch ? "left" : "right",
+        player: match[`Penalty player ${i}`],
+        missedPenalty: true
+    });
+
+}
 
     }
 
