@@ -297,6 +297,30 @@ fetch("data.json")
 
         if (!match) {
 
+            const barcaPlayers = homeMatch
+    ? getPlayers(match)
+    : getPlayers(match,"Opp. ");
+
+const oppPlayers = homeMatch
+    ? getPlayers(match,"Opp. ")
+    : getPlayers(match);
+
+const barcaBench = homeMatch
+    ? getBench(match)
+    : getBench(match,"Opp. ");
+
+const oppBench = homeMatch
+    ? getBench(match,"Opp. ")
+    : getBench(match);
+
+const barcaTitle = homeMatch
+    ? "FC Barcelona"
+    : (match["Opp. Team"] || "");
+
+const oppTitle = homeMatch
+    ? (match["Opp. Team"] || "")
+    : "FC Barcelona";
+
             document.getElementById("app").innerHTML =
                 "<div class='card'>Match not found</div>";
 
@@ -614,8 +638,22 @@ function showLineup(team){
     }
 
 }
+
+function isHomeMatch(match){
+    return String(match["Home/Away"] || "").trim() === "Home";
+}
     
 function renderMatch(match){
+
+const homeMatch = isHomeMatch(match);
+
+const teamA = homeMatch
+    ? "FC Barcelona"
+    : (match["Opp. Team"] || "");
+
+const teamB = homeMatch
+    ? (match["Opp. Team"] || "")
+    : "FC Barcelona";
 
 const timelineHtml = getTimeline(match);
 
@@ -625,17 +663,17 @@ document.getElementById("app").innerHTML = `
 
     <div class="teams">
 
-        <div class="team-name">
-            FC Barcelona
-        </div>
+<div class="team-name">
+    ${escapeHtml(teamA)}
+</div>
 
-        <div class="score">
-            ${escapeHtml(match["Result"] || "-:-")}
-        </div>
+<div class="score">
+    ${escapeHtml(match["Result"] || "-:-")}
+</div>
 
-        <div class="team-name">
-            ${escapeHtml(match["Opp. Team"] || "")}
-        </div>
+<div class="team-name">
+    ${escapeHtml(teamB)}
+</div>
 
     </div>
 
@@ -706,7 +744,7 @@ ${
         class="lineup-tab active"
         onclick="showLineup('barca')">
 
-        FC Barcelona
+        ${escapeHtml(barcaTitle)}
 
     </button>
 
@@ -726,13 +764,13 @@ ${
         id="lineup-barca"
         class="team-card">
 
-        <h3>FC Barcelona</h3>
+        ${escapeHtml(oppTitle)}
 
 <h4>Starting XI</h4>
-${getPlayers(match)}
+${barcaPlayers}
 
 <h4>Bench</h4>
-${getBench(match)}
+${barcaBench}
 
     </div>
 
@@ -743,10 +781,10 @@ ${getBench(match)}
 <h3>${match["Opp. Team"] || ""}</h3>
 
 <h4>Starting XI</h4>
-${getPlayers(match,"Opp. ")}
+${oppPlayers}
 
 <h4>Bench</h4>
-${getBench(match,"Opp. ")}
+${oppBench}
 
     </div>
 
