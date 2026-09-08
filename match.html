@@ -606,8 +606,6 @@ function getTimeline(match){
     sortByMinute(substitutions);
     sortByMinute(cards);
 
-    let html = "";
-
     function eventRow(side, minute, content){
 
         return `
@@ -615,7 +613,13 @@ function getTimeline(match){
 
                 ${
                     side === "left"
-                    ? `<div class="event-home"><div class="event-box">${content}</div></div>`
+                    ? `
+                        <div class="event-home">
+                            <div class="event-box">
+                                ${content}
+                            </div>
+                        </div>
+                    `
                     : `<div></div>`
                 }
 
@@ -625,7 +629,13 @@ function getTimeline(match){
 
                 ${
                     side === "right"
-                    ? `<div class="event-away"><div class="event-box">${content}</div></div>`
+                    ? `
+                        <div class="event-away">
+                            <div class="event-box">
+                                ${content}
+                            </div>
+                        </div>
+                    `
                     : `<div></div>`
                 }
 
@@ -633,35 +643,40 @@ function getTimeline(match){
         `;
     }
 
+    let goalsHtml = "";
+    let substitutionsHtml = "";
+    let cardsHtml = "";
+
     // GOALS
 
     if(goals.length){
 
-        html += `
+        goalsHtml += `
             <div class="card">
                 <h2 class="section-title">
-                    Goals
+                    ⚽ Goals
                 </h2>
-            `;
+        `;
 
         goals.forEach(goal => {
 
-          let content = `
-    <span class="event-icon">⚽</span>
-    <strong>${escapeHtml(goal.player)}</strong>
-`;
+            let content = `
+                <span class="event-icon">⚽</span>
+                <strong>${escapeHtml(goal.player)}</strong>
+            `;
 
-if(goal.assist){
+            if(goal.assist){
 
-    content += `
-        <br>
-        <small>
-            Assist: ${escapeHtml(goal.assist)}
-        </small>
-    `;
+                content += `
+                    <br>
+                    <small>
+                        Assist: ${escapeHtml(goal.assist)}
+                    </small>
+                `;
 
-}
-            html += eventRow(
+            }
+
+            goalsHtml += eventRow(
                 goal.side,
                 goal.minute,
                 content
@@ -669,7 +684,9 @@ if(goal.assist){
 
         });
 
-        html += `</div>`;
+        goalsHtml += `
+            </div>
+        `;
 
     }
 
@@ -677,31 +694,33 @@ if(goal.assist){
 
     if(substitutions.length){
 
-        html += `
-    <div class="card">
-        <h2 class="section-title">
-           Substitutions
-        </h2>
-`;
+        substitutionsHtml += `
+            <div class="card">
+                <h2 class="section-title">
+                    🔄 Substitutions
+                </h2>
+        `;
 
         substitutions.forEach(sub => {
 
-            html += eventRow(
-    sub.side,
-    sub.minute,
-    `
-    <span class="event-icon">🔄</span>
-    <strong>${escapeHtml(sub.on)}</strong>
-    <br>
-    <small>
-        for ${escapeHtml(sub.off || "")}
-    </small>
-    `
-);
+            substitutionsHtml += eventRow(
+                sub.side,
+                sub.minute,
+                `
+                <span class="event-icon">🔄</span>
+                <strong>${escapeHtml(sub.on)}</strong>
+                <br>
+                <small>
+                    for ${escapeHtml(sub.off || "")}
+                </small>
+                `
+            );
 
         });
 
-        html += `</div>`;
+        substitutionsHtml += `
+            </div>
+        `;
 
     }
 
@@ -709,33 +728,39 @@ if(goal.assist){
 
     if(cards.length){
 
-        html += `
-    <div class="card">
-        <h2 class="section-title">
-            Cards
-        </h2>
-`;
+        cardsHtml += `
+            <div class="card">
+                <h2 class="section-title">
+                    🟨 Cards
+                </h2>
+        `;
 
         cards.forEach(card => {
 
-            html += eventRow(
-    card.side,
-    card.minute,
-    `
-    <span class="event-icon">
-        ${card.icon}
-    </span>
-    ${escapeHtml(card.player)}
-    `
-);
+            cardsHtml += eventRow(
+                card.side,
+                card.minute,
+                `
+                <span class="event-icon">
+                    ${card.icon}
+                </span>
+                ${escapeHtml(card.player)}
+                `
+            );
 
         });
 
-        html += `</div>`;
+        cardsHtml += `
+            </div>
+        `;
 
     }
 
-    return html;
+    return {
+        goalsHtml,
+        substitutionsHtml,
+        cardsHtml
+    };
 }
 
 function hasStartingXI(match,prefix=""){
@@ -839,7 +864,7 @@ const oppBench = homeMatch
     ? getBench(match,"Opp. ")
     : getBench(match);
 
-const timelineHtml = getTimeline(match);
+const timeline = getTimeline(match);
 
 document.getElementById("app").innerHTML = `
 
@@ -900,6 +925,8 @@ ${escapeHtml(match["Referee"] || "-")}
 </div>
 
 </div>
+
+${timeline.goalsHtml}
 
 ${
     hasStartingXI(match) ||
@@ -989,11 +1016,8 @@ ${oppBench}
 : ""
 }
 
-${
-    timelineHtml
-        ? timelineHtml
-        : ""
-}
+${timeline.substitutionsHtml}
+${timeline.cardsHtml}
 `;
 
 if(window.innerWidth <= 900){
