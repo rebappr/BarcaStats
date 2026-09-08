@@ -8,10 +8,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"red:#A50044;
-    --success:#22c55e;
-    --warning:#facc15;
-    --danger:#ef4444;
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --barca-blue:#004D98;
+    --barca-red:#A50044;
 }
 
 *{
@@ -20,9 +23,9 @@
 
 body{
     margin:0;
-    background:#f3f6fa;
-    font-family:'Roboto',sans-serif;
+    background:#f4f6f9;
     color:#1f2937;
+    font-family:'Roboto',sans-serif;
 }
 
 .container{
@@ -37,24 +40,24 @@ body{
         var(--barca-blue),
         var(--barca-red)
     );
-
     color:white;
     border-radius:24px;
     padding:40px;
     margin-bottom:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.score{
+    font-size:72px;
+    font-weight:700;
+    margin:10px 0;
 }
 
 .teams{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
-    text-align:center;
-}
-
-.team{
-    flex:1;
 }
 
 .team-name{
@@ -62,29 +65,16 @@ body{
     font-weight:700;
 }
 
-.score{
-    font-size:70px;
-    font-weight:900;
-    line-height:1;
-}
-
-.match-meta{
-    margin-top:20px;
-    text-align:center;
-    opacity:.9;
-}
-
 .card{
     background:white;
     border-radius:18px;
     padding:20px;
     margin-bottom:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
 
 .section-title{
-    margin:0 0 15px;
-    font-size:22px;
+    margin-top:0;
 }
 
 .meta-grid{
@@ -95,18 +85,18 @@ body{
 
 .meta{
     background:#f8fafc;
-    border-radius:14px;
     padding:15px;
+    border-radius:12px;
 }
 
 .meta-label{
     font-size:11px;
     text-transform:uppercase;
     color:#6b7280;
-    margin-bottom:5px;
 }
 
 .meta-value{
+    margin-top:4px;
     font-weight:700;
 }
 
@@ -118,35 +108,26 @@ body{
 
 .team-card{
     background:#f8fafc;
-    border-radius:16px;
     padding:15px;
-}
-
-.team-card h3{
-    margin-top:0;
+    border-radius:12px;
 }
 
 .player{
     display:flex;
-    align-items:center;
     gap:10px;
-    padding:8px;
-    border-radius:10px;
-}
-
-.player:hover{
-    background:white;
+    align-items:center;
+    padding:6px 0;
 }
 
 .number{
-    width:32px;
-    height:32px;
+    width:28px;
+    height:28px;
     border-radius:50%;
     background:var(--barca-blue);
     color:white;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     font-size:12px;
     font-weight:700;
 }
@@ -158,9 +139,9 @@ body{
 .timeline::before{
     content:"";
     position:absolute;
-    left:24px;
     top:0;
     bottom:0;
+    left:24px;
     width:3px;
     background:#e5e7eb;
 }
@@ -169,13 +150,12 @@ body{
     display:flex;
     gap:15px;
     margin-bottom:18px;
-    position:relative;
 }
 
 .timeline-minute{
-    width:50px;
-    font-weight:700;
+    width:48px;
     text-align:center;
+    font-weight:700;
 }
 
 .timeline-icon{
@@ -183,18 +163,18 @@ body{
     height:36px;
     border-radius:50%;
     background:white;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
     display:flex;
-    justify-content:center;
     align-items:center;
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    justify-content:center;
     z-index:2;
 }
 
 .timeline-content{
     flex:1;
     background:#f8fafc;
+    padding:12px;
     border-radius:12px;
-    padding:10px 14px;
 }
 
 .back-btn{
@@ -206,26 +186,21 @@ body{
     text-decoration:none;
     padding:12px 18px;
     border-radius:999px;
-    box-shadow:0 10px 20px rgba(0,0,0,.2);
-}
-
-.loading{
-    text-align:center;
-    padding:50px;
 }
 
 @media(max-width:900px){
 
     .teams{
         flex-direction:column;
-    }
-
-    .score{
-        font-size:50px;
+        gap:15px;
     }
 
     .lineups{
         grid-template-columns:1fr;
+    }
+
+    .score{
+        font-size:48px;
     }
 
 }
@@ -237,24 +212,23 @@ body{
 
 <div class="container">
 
-    <div id="app" class="loading">
-        Načítavam zápas...
-    </div>
+<div id="app">
+Načítavam...
+</div>
 
 </div>
 
-<a href="index.html" class="back-btn">← Matches</a>
+<a href="index.html" class="back-btn">
+← Matches
+</a>
 
 <script>
 
-const params =
-    new URLSearchParams(window.location.search);
-
-const matchId =
-    params.get("id");
+const params = new URLSearchParams(location.search);
+const matchId = params.get("id");
 
 fetch("data.json")
-.then(response => response.json())
+.then(r => r.json())
 .then(data => {
 
     const match =
@@ -265,10 +239,9 @@ fetch("data.json")
     if(!match){
 
         document.getElementById("app").innerHTML =
-            "<div class='card'>Zápas nebol nájdený.</div>";
+            "<div class='card'>Match not found</div>";
 
         return;
-
     }
 
     renderMatch(match);
@@ -277,7 +250,7 @@ fetch("data.json")
 
 function getPlayers(match,prefix=""){
 
-    let html = "";
+    let html="";
 
     for(let i=1;i<=11;i++){
 
@@ -291,19 +264,22 @@ function getPlayers(match,prefix=""){
 
             html += `
             <div class="player">
-                <div class="number">${number||""}</div>
+                <div class="number">
+                    ${number || ""}
+                </div>
+
                 ${player}
-            </div>`;
+            </div>
+            `;
         }
     }
 
     return html;
-
 }
 
 function getBench(match,prefix=""){
 
-    let html = "";
+    let html="";
 
     for(let i=1;i<=12;i++){
 
@@ -317,161 +293,302 @@ function getBench(match,prefix=""){
 
             html += `
             <div class="player">
-                <div class="number">${number||""}</div>
+                <div class="number">
+                    ${number || ""}
+                </div>
+
                 ${player}
-            </div>`;
+            </div>
+            `;
         }
     }
 
     return html;
+}
 
+function getTimeline(match){
+
+    const events = [];
+
+    function addEvent(
+        minute,
+        icon,
+        text,
+        team
+    ){
+
+        if(!minute) return;
+
+        events.push({
+            minute,
+            icon,
+            text,
+            team
+        });
+
+    }
+    for(let i=1;i<=12;i++){
+
+        if(match[`Goal Player ${i}`]){
+
+            addEvent(
+                match[`Goal min ${i}`],
+                "⚽",
+                `${match[`Goal Player ${i}`]}`,
+                "barca"
+            );
+        }
+
+        if(match[`Opp. Goal Player ${i}`]){
+
+            addEvent(
+                match[`Opp. Goal min ${i}`],
+                "⚽",
+                `${match[`Opp. Goal Player ${i}`]}`,
+                "opp"
+            );
+        }
+
+        if(match[`Yellow player ${i}`]){
+
+            addEvent(
+                match[`Yellow min ${i}`],
+                "🟨",
+                match[`Yellow player ${i}`],
+                "barca"
+            );
+        }
+
+        if(match[`Opp. Yellow player ${i}`]){
+
+            addEvent(
+                match[`Opp. Yellow min ${i}`],
+                "🟨",
+                match[`Opp. Yellow player ${i}`],
+                "opp"
+            );
+        }
+    }
+
+    for(let i=1;i<=5;i++){
+
+        if(match[`Red player ${i}`]){
+
+            addEvent(
+                match[`Red min ${i}`],
+                "🟥",
+                match[`Red player ${i}`],
+                "barca"
+            );
+        }
+
+        if(match[`Opp. Red player ${i}`]){
+
+            addEvent(
+                match[`Opp. Red min ${i}`],
+                "🟥",
+                match[`Opp. Red player ${i}`],
+                "opp"
+            );
+        }
+    }
+
+    for(let i=1;i<=6;i++){
+
+        if(match[`Sub on ${i}`]){
+
+            addEvent(
+                match[`Sub min ${i}`],
+                "🔄",
+                `${match[`Sub on ${i}`]} ⇢ ${match[`Sub off ${i}`]}`,
+                "barca"
+            );
+        }
+
+        if(match[`Opp. Sub on ${i}`]){
+
+            addEvent(
+                match[`Opp. Sub min ${i}`],
+                "🔄",
+                `${match[`Opp. Sub on ${i}`]} ⇢ ${match[`Opp. Sub off ${i}`]}`,
+                "opp"
+            );
+        }
+    }
+
+    events.sort((a,b)=>{
+
+        const ma =
+            parseInt(String(a.minute).match(/\d+/)?.[0] || 0);
+
+        const mb =
+            parseInt(String(b.minute).match(/\d+/)?.[0] || 0);
+
+        return ma - mb;
+
+    });
+
+    let html = "";
+
+    events.forEach(event => {
+
+        html += `
+        <div class="timeline-item">
+
+            <div class="timeline-minute">
+                ${event.minute}'
+            </div>
+
+            <div class="timeline-icon">
+                ${event.icon}
+            </div>
+
+            <div
+                class="timeline-content"
+                style="
+                    border-left:4px solid ${
+                        event.team === "barca"
+                        ? "#004D98"
+                        : "#A50044"
+                    };
+                "
+            >
+                ${event.text}
+            </div>
+
+        </div>
+        `;
+    });
+
+    return html || "Žiadne udalosti";
 }
 
 function renderMatch(match){
 
-    document.getElementById("app").innerHTML = `
+document.getElementById("app").innerHTML = `
 
-    <div class="hero">
+<div class="hero">
 
-        <div class="teams">
+    <div class="teams">
 
-            <div class="team">
-                <div class="team-name">
-                    FC Barcelona
-                </div>
-            </div>
-
-            <div class="team">
-
-                <div class="score">
-                    ${match["Result"] || "-:-"}
-                </div>
-
-            </div>
-
-            <div class="team">
-                <div class="team-name">
-                    ${match["Opp. Team"] || ""}
-                </div>
-            </div>
-
+        <div class="team-name">
+            FC Barcelona
         </div>
 
-        <div class="match-meta">
+        <div class="score">
+            ${match["Result"] || "-:-"}
+        </div>
 
-            ${match["Competition"] || ""}
-            • Matchday ${match["Matchday"] || ""}
-
-            <br>
-
-            ${match["Date"] || ""}
-
+        <div class="team-name">
+            ${match["Opp. Team"] || ""}
         </div>
 
     </div>
 
-    <div class="card">
-
-        <h2 class="section-title">
-            Match Information
-        </h2>
-
-        <div class="meta-grid">
-
-            <div class="meta">
-                <div class="meta-label">Venue</div>
-                <div class="meta-value">
-                    ${match["Venue"] || "-"}
-                </div>
-            </div>
-
-            <div class="meta">
-                <div class="meta-label">Referee</div>
-                <div class="meta-value">
-                    ${match["Referee"] || "-"}
-                </div>
-            </div>
-
-            <div class="meta">
-                <div class="meta-label">
-                    Barcelona Manager
-                </div>
-                <div class="meta-value">
-                    ${match["Manager"] || "-"}
-                </div>
-            </div>
-
-            <div class="meta">
-                <div class="meta-label">
-                    Opponent Manager
-                </div>
-                <div class="meta-value">
-                    ${match["Opp. Manager"] || "-"}
-                </div>
-            </div>
-
-        </div>
-
+    <div style="margin-top:15px;">
+        ${match["Competition"] || ""}
+        • Matchday ${match["Matchday"] || ""}
+        <br>
+        ${match["Date"] || ""}
     </div>
 
-    <div class="card">
+</div>
 
-        <h2 class="section-title">
-            Starting XI
-        </h2>
+<div class="card">
 
-        <div class="lineups">
+<h2 class="section-title">
+Match Information
+</h2>
 
-            <div class="team-card">
-                <h3>FC Barcelona</h3>
-                ${getPlayers(match)}
-            </div>
+<div class="meta-grid">
 
-            <div class="team-card">
-                <h3>${match["Opp. Team"] || ""}</h3>
-                ${getPlayers(match,"Opp. ")}
-            </div>
+<div class="meta">
+<div class="meta-label">Venue</div>
+<div class="meta-value">
+${match["Venue"] || "-"}
+</div>
+</div>
 
-        </div>
+<div class="meta">
+<div class="meta-label">Referee</div>
+<div class="meta-value">
+${match["Referee"] || "-"}
+</div>
+</div>
 
-    </div>
+<div class="meta">
+<div class="meta-label">Manager</div>
+<div class="meta-value">
+${match["Manager"] || "-"}
+</div>
+</div>
 
-    <div class="card">
+<div class="meta">
+<div class="meta-label">Opponent Manager</div>
+<div class="meta-value">
+${match["Opp. Manager"] || "-"}
+</div>
+</div>
 
-        <h2 class="section-title">
-            Bench
-        </h2>
+</div>
 
-        <div class="lineups">
+</div>
 
-            <div class="team-card">
-                ${getBench(match)}
-            </div>
+<div class="card">
 
-            <div class="team-card">
-                ${getBench(match,"Opp. ")}
-            </div>
+<h2 class="section-title">
+Starting XI
+</h2>
 
-        </div>
+<div class="lineups">
 
-    </div>
+<div class="team-card">
+<h3>FC Barcelona</h3>
+${getPlayers(match)}
+</div>
 
-    <div class="card">
+<div class="team-card">
+<h3>${match["Opp. Team"]}</h3>
+${getPlayers(match,"Opp. ")}
+</div>
 
-        <h2 class="section-title">
-            Match Timeline
-        </h2>
+</div>
 
-        <div class="timeline">
-            Timeline bude doplnená z Goal min,
-            Yellow min, Red min,
-            Sub min, Penalty min a
-            Penalty Shoot-out scored.
-        </div>
+</div>
 
-    </div>
+<div class="card">
 
-    `;
+<h2 class="section-title">
+Bench
+</h2>
+
+<div class="lineups">
+
+<div class="team-card">
+${getBench(match)}
+</div>
+
+<div class="team-card">
+${getBench(match,"Opp. ")}
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+Match Timeline
+</h2>
+
+<div class="timeline">
+${getTimeline(match)}
+</div>
+
+</div>
+
+`;
 
 }
 
