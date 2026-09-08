@@ -140,6 +140,26 @@ body{
     font-size:13px;
     margin:10px 0 6px;
 }
+
+.team-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.team-header.home{
+    justify-content:flex-start;
+}
+
+.team-header.away{
+    justify-content:flex-end;
+}
+
+.team-logo{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+}
     
 .player{
     display:flex;
@@ -955,6 +975,14 @@ function isHomeMatch(match){
     
 function renderMatch(match){
 
+const teamALogo = homeMatch
+    ? (match["Team Logo"] || "")
+    : (match["Opp. Team Logo"] || "");
+
+const teamBLogo = homeMatch
+    ? (match["Opp. Team Logo"] || "")
+    : (match["Team Logo"] || "");
+
 const homeMatch = isHomeMatch(match);
 
 const teamA = homeMatch
@@ -1019,16 +1047,31 @@ Match Information
 
     <div class="teams">
 
-<div class="team-name">
-    ${escapeHtml(teamA)}
+<div class="team-header home">
+    ${
+        teamALogo
+            ? `<img srcogo}`
+            : ""
+    }
+    <div class="team-name">
+        ${escapeHtml(teamA)}
+    </div>
 </div>
 
 <div class="score">
     ${escapeHtml(match["Result"] || "-:-")}
 </div>
 
-<div class="team-name">
-    ${escapeHtml(teamB)}
+<div class="team-header away">
+    <div class="team-name">
+        ${escapeHtml(teamB)}
+    </div>
+
+    ${
+        teamBLogo
+            ? `${teamBLogo}`
+            : ""
+    }
 </div>
 
     </div>
