@@ -197,7 +197,36 @@ body{
     border-radius:999px;
 }
 
+.lineup-tabs{
+    display:none;
+}
+
 @media(max-width:900px){
+
+    .lineup-tabs{
+        display:flex;
+        margin-bottom:15px;
+        gap:8px;
+    }
+
+    .lineup-tab{
+        flex:1;
+        border:none;
+        background:#e5e7eb;
+        padding:10px;
+        border-radius:10px;
+        font-weight:600;
+        cursor:pointer;
+    }
+
+    .lineup-tab.active{
+        background:#004D98;
+        color:white;
+    }
+
+    .mobile-hidden{
+        display:none;
+    }
 
     .teams{
         flex-direction:column;
@@ -508,7 +537,39 @@ function hasTimeline(match){
 
 }
 
+function showLineup(team){
 
+    const barca =
+        document.getElementById("lineup-barca");
+
+    const opp =
+        document.getElementById("lineup-opp");
+
+    const tabs =
+        document.querySelectorAll(".lineup-tab");
+
+    tabs.forEach(tab =>
+        tab.classList.remove("active")
+    );
+
+    if(team === "barca"){
+
+        barca.classList.remove("mobile-hidden");
+        opp.classList.add("mobile-hidden");
+
+        tabs[0].classList.add("active");
+
+    }else{
+
+        opp.classList.remove("mobile-hidden");
+        barca.classList.add("mobile-hidden");
+
+        tabs[1].classList.add("active");
+
+    }
+
+}
+    
 function renderMatch(match){
 
 document.getElementById("app").innerHTML = `
@@ -592,15 +653,23 @@ ${
 
         <div class="lineups">
 
-            <div class="team-card">
-                <h3>FC Barcelona</h3>
-                ${getPlayers(match)}
-            </div>
+<div
+    id="lineup-barca"
+    class="team-card">
 
-            <div class="team-card">
-                <h3>${match["Opp. Team"] || ""}</h3>
-                ${getPlayers(match,"Opp. ")}
-            </div>
+    <h3>FC Barcelona</h3>
+    ${getPlayers(match)}
+
+</div>
+
+<div
+    id="lineup-opp"
+    class="team-card">
+
+    <h3>${match["Opp. Team"] || ""}</h3>
+    ${getPlayers(match,"Opp. ")}
+
+</div>
 
         </div>
 
@@ -619,15 +688,17 @@ ${
             Bench
         </h2>
 
-        <div class="lineups">
+        <div class="lineups"><
+        
+    div class="team-card">
+    <h3>FC Barcelona</h3>
+    ${getBench(match)}
+</div>
 
-            <div class="team-card">
-                ${getBench(match)}
-            </div>
-
-            <div class="team-card">
-                ${getBench(match,"Opp. ")}
-            </div>
+<div class="team-card">
+    <h3>${match["Opp. Team"] || ""}</h3>
+    ${getBench(match,"Opp. ")}
+</div>
 
         </div>
 
@@ -654,6 +725,19 @@ ${
     : ""
 }
 `;
+
+if(window.innerWidth <= 900){
+
+    const opp =
+        document.getElementById("lineup-opp");
+
+    if(opp){
+
+        opp.classList.add("mobile-hidden");
+
+    }
+
+}
 
 }
 
