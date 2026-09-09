@@ -1077,19 +1077,6 @@ ${escapeHtml(match["Competition"] || "")}
 </div>
 </div>
 
-const matchday = String(match["Matchday"] || "").trim();
-
-const isNumericMatchday =
-    /^\d+$/.test(matchday);
-
-let matchdayText = "";
-
-if (isNumericMatchday) {
-    matchdayText = `${matchday}. Matchday`;
-} else {
-    matchdayText = matchday;
-}
-
 <div class="meta">
 <div class="meta-label">Venue</div>
 <div class="meta-value">
