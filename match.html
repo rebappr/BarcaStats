@@ -154,12 +154,6 @@ body{
 .team-header.away{
     justify-content:flex-end;
 }
-
-.team-logo{
-    width:40px;
-    height:40px;
-    object-fit:contain;
-}
     
 .player{
     display:flex;
@@ -976,14 +970,6 @@ function isHomeMatch(match){
 function renderMatch(match){
 
 const homeMatch = isHomeMatch(match);
-    
-const teamALogo = homeMatch
-    ? "logos/fc-barcelona.png"
-    : (match["Opp. Team Logo"] || "");
-
-const teamBLogo = homeMatch
-    ? (match["Opp. Team Logo"] || "")
-    : "logos/fc-barcelona.png";
 
 const teamA = homeMatch
     ? "FC Barcelona"
@@ -1045,29 +1031,24 @@ document.getElementById("app").innerHTML = `
 Match Information
 </h2>
 
-<div class="teams">
-  <div class="team-header home">
-    ${
-      teamALogo
-        ? `<img src="${teamALogo}" alt="${escapeHtml(teamA)} logo">
-      ${escapeHtml(teamA)}
-    </div>
-  </div>
+<<div class="teams">
 
-  <div class="score">
-    ${escapeHtml(match["Result"] || "-:-")}
-  </div>
-
-  <div class="team-header away">
-    <div class="team-name">
-      ${escapeHtml(teamB)}
+    <div class="team-header home">
+        <div class="team-name">
+            ${escapeHtml(teamA)}
+        </div>
     </div>
-    ${
-      teamBLogo
-        ? `<img src="${teamB">`
-        : ""
-    }
-  </div>
+
+    <div class="score">
+        ${escapeHtml(match["Result"] || "-:-")}
+    </div>
+
+    <div class="team-header away">
+        <div class="team-name">
+            ${escapeHtml(teamB)}
+        </div>
+    </div>
+
 </div>
 
 <div class="meta-grid">
