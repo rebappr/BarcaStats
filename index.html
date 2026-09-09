@@ -195,27 +195,6 @@ tbody tr:hover{
     text-align:center;
 }
 
-.toggle-btn{
-    border:none;
-    border-radius:8px;
-    padding:8px 12px;
-    background:var(--barca-blue);
-    color:white;
-    font-family:inherit;
-    font-size:12px;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.toggle-btn:hover{
-    opacity:.9;
-}
-
-.hide-competition th:nth-child(2),
-.hide-competition td:nth-child(2){
-    display:none;
-}
-
 @media(max-width:768px){
 
     .container{
@@ -293,15 +272,7 @@ tbody tr:hover{
             <input id="opponentFilter" list="opponentList">
             <datalist id="opponentList"></datalist>
         </div>
-
-        <div class="filter-group">
-            <label>&nbsp;</label>
-            <button id="toggleCompetition" class="toggle-btn">
-                Full Details
-            </button>
-        </div>
         
-
     </div>
 
     <div id="matches">
@@ -313,29 +284,6 @@ tbody tr:hover{
 <script>
 
 let allMatches = [];
-
-let competitionVisible = window.innerWidth > 900;
-
-function updateCompetitionView(){
-
-    document.body.classList.toggle(
-        "hide-competition",
-        !competitionVisible
-    );
-
-    const button =
-        document.getElementById("toggleCompetition");
-
-    if(button){
-
-        button.textContent =
-            competitionVisible
-                ? "Compact View"
-                : "Full Details";
-
-    }
-
-}
 
 fetch("data.json")
 .then(response => response.json())
@@ -437,18 +385,6 @@ function createFilters(data){
 
     applyFilters();
     
-        updateCompetitionView();
-        
-        document
-            .getElementById("toggleCompetition")
-            .addEventListener("click", () => {
-        
-                competitionVisible =
-                    !competitionVisible;
-        
-                updateCompetitionView();
-        
-            });
 }
 
 function applyFilters(){
