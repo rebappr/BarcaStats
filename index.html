@@ -345,93 +345,99 @@ fetch("data.json")
 
 });
 
-function createFilters(data){
+function updateFilterOptions() {
+
+    const seasonValue =
+        document.getElementById("seasonFilter")
+            .value.trim();
+
+    const competitionValue =
+        document.getElementById("competitionFilter")
+            .value.trim();
+
+    const opponentValue =
+        document.getElementById("opponentFilter")
+            .value.trim();
+
+    let filtered = [...allMatches];
+
+    if (seasonValue) {
+        filtered = filtered.filter(
+            x => x["Season"] === seasonValue
+        );
+    }
+
+    if (competitionValue) {
+        filtered = filtered.filter(
+            x => x["Competition"] === competitionValue
+        );
+    }
+
+    if (opponentValue) {
+        filtered = filtered.filter(
+            x => x["Opp. Team"] === opponentValue
+        );
+    }
 
     const seasons = [
         ...new Set(
-            data.map(x => x["Season"])
-            .filter(Boolean)
+            filtered
+                .map(x => x["Season"])
+                .filter(Boolean)
+        )
+    ];
+
+    const competitions = [
+        ...new Set(
+            filtered
+                .map(x => x["Competition"])
+                .filter(Boolean)
+        )
+    ];
+
+    const opponents = [
+        ...new Set(
+            filtered
+                .map(x => x["Opp. Team"])
+                .filter(Boolean)
         )
     ];
 
     seasons.sort().reverse();
-
-seasons.forEach(season => {
-
-    const option =
-        document.createElement("option");
-
-    option.value = season;
-
-    document
-        .getElementById("seasonList")
-        .appendChild(option);
-
-});
-
-    const competitions = [
-        ...new Set(
-            data.map(x => x["Competition"])
-            .filter(Boolean)
-        )
-    ];
-    
     competitions.sort();
-
-competitions.forEach(comp => {
-
-    const option =
-        document.createElement("option");
-
-    option.value = comp;
-
-    document
-        .getElementById("competitionList")
-        .appendChild(option);
-
-});
-
-    const opponents = [
-        ...new Set(
-            data.map(x => x["Opp. Team"])
-            .filter(Boolean)
-        )
-    ];
-    
     opponents.sort();
-opponents.forEach(opponent => {
 
-    const option =
-        document.createElement("option");
+    document.getElementById("seasonList").innerHTML = "";
+    document.getElementById("competitionList").innerHTML = "";
+    document.getElementById("opponentList").innerHTML = "";
 
-    option.value = opponent;
+    seasons.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        document.getElementById("seasonList")
+            .appendChild(option);
+    });
 
-    document
-        .getElementById("opponentList")
-        .appendChild(option);
+    competitions.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        document.getElementById("competitionList")
+            .appendChild(option);
+    });
 
-});
+    opponents.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        document.getElementById("opponentList")
+            .appendChild(option);
+    });
 
-document
-    .getElementById("seasonFilter")
-    .addEventListener("input", applyFilters);
-
-document
-    .getElementById("competitionFilter")
-    .addEventListener("input", applyFilters);
-
-document
-    .getElementById("opponentFilter")
-    .addEventListener("input", applyFilters);
-
-    loadFilters();
-    applyFilters();
-    
 }
 
 function applyFilters(){
 
     saveFilters();
+    updateFilterOptions();
 
     let filtered = [...allMatches];
 
