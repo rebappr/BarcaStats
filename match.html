@@ -1007,6 +1007,19 @@ const oppBench = homeMatch
 
 const timeline = getTimeline(match);
 
+const competition = String(match["Competition"] || "").trim();
+
+let matchdayText = "";
+
+if (competition.toLowerCase() !== "group stage") {
+
+    matchdayText =
+        competition.toLowerCase() === "la liga"
+            ? `${match["Matchday"] || ""}. Matchday`
+            : `Matchday ${match["Matchday"] || ""}`;
+
+}
+
 document.getElementById("app").innerHTML = `
 
 <div class="hero">
@@ -1015,14 +1028,7 @@ document.getElementById("app").innerHTML = `
         ${escapeHtml(match["Date"] || "")}
         |
         ${escapeHtml(match["Competition"] || "")}
-        |
-        ${
-            String(match["Competition"] || "")
-                .trim()
-                .toLowerCase() === "la liga"
-                ? `${match["Matchday"] || ""}. Matchday`
-                : `Matchday ${match["Matchday"] || ""}`
-        }
+        ${matchdayText ? `| ${matchdayText}` : ""}
     </div>
 
 </div>
