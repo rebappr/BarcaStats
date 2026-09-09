@@ -575,6 +575,10 @@ function updateFilterLists(){
 
     });
 
+    seasonFilter.value = currentSeason;
+    competitionFilter.value = currentCompetition;
+    opponentFilter.value = currentOpponent;
+
 }
 function applyFilters(){
 
@@ -626,10 +630,6 @@ function applyFilters(){
     
     updateFilterLists();
     render(filtered);
-
-    seasonFilter.value = currentSeason;
-    competitionFilter.value = currentCompetition;
-    opponentFilter.value = currentOpponent;
 
 }
 
