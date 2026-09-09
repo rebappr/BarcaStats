@@ -390,6 +390,15 @@ function createFilters(data){
     
     });
 
+    const competitions = [
+        ...new Set(
+            data.map(x => x["Competition"])
+            .filter(Boolean)
+        )
+    ];
+    
+    competitions.sort();
+
     competitions.forEach(comp => {
     
         const option =
@@ -404,6 +413,14 @@ function createFilters(data){
     
     });
 
+    const opponents = [
+        ...new Set(
+            data.map(x => x["Opp. Team"])
+            .filter(Boolean)
+        )
+    ];
+    
+    opponents.sort();
     opponents.forEach(opponent => {
     
         const option =
@@ -481,14 +498,14 @@ function updateFilterLists(){
         );
     }
 
-    const seasonList =
-        document.getElementById("seasonList");
-
-    const competitionList =
-        document.getElementById("competitionList");
-
-    const opponentList =
-        document.getElementById("opponentList");
+    const seasonFilter =
+        document.getElementById("seasonFilter");
+    
+    const competitionFilter =
+        document.getElementById("competitionFilter");
+    
+    const opponentFilter =
+        document.getElementById("opponentFilter");
 
     seasonList.innerHTML = "";
     competitionList.innerHTML = "";
