@@ -1011,13 +1011,13 @@ const competition = String(match["Competition"] || "").trim();
 
 let matchdayText = "";
 
-if (competition.toLowerCase() !== "group stage") {
+const showMatchday =
+    competition.toLowerCase() === "la liga";
 
-    matchdayText =
-        competition.toLowerCase() === "la liga"
-            ? `${match["Matchday"] || ""}. Matchday`
-            : `Matchday ${match["Matchday"] || ""}`;
+let matchdayText = "";
 
+if (showMatchday) {
+    matchdayText = `${match["Matchday"] || ""}. Matchday`;
 }
 
 document.getElementById("app").innerHTML = `
@@ -1076,7 +1076,7 @@ ${escapeHtml(match["Competition"] || "")}
 </div>
 
 ${
-    competition.toLowerCase() !== "group stage"
+    showMatchday
         ? `
         <div class="meta">
             <div class="meta-label">Matchday</div>
