@@ -434,6 +434,28 @@ function updateFilterOptions() {
 
 }
 
+function createFilters(){
+
+    loadFilters();
+
+    updateFilterOptions();
+
+    document
+        .getElementById("seasonFilter")
+        .addEventListener("input", applyFilters);
+
+    document
+        .getElementById("competitionFilter")
+        .addEventListener("input", applyFilters);
+
+    document
+        .getElementById("opponentFilter")
+        .addEventListener("input", applyFilters);
+
+    applyFilters();
+
+}
+
 function applyFilters(){
 
     saveFilters();
