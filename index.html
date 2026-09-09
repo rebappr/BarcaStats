@@ -112,12 +112,6 @@ input[list]{
 table{
     width:100%;
     border-collapse:collapse;
-    table-layout:auto;
-}
-
-th,
-td{
-    padding:8px;
 }
 
 th:nth-child(1),
@@ -126,6 +120,16 @@ th:nth-child(4),
 td:nth-child(4){
     width:1%;
     white-space:nowrap;
+}
+
+th:nth-child(3),
+td:nth-child(3){
+    width:auto;
+}
+
+th,
+td{
+    padding:8px;
 }
 
 th{
@@ -212,32 +216,50 @@ tbody tr:hover{
     display:none;
 }
 
-@media(max-width:900px){
+@media(max-width:768px){
 
     .container{
-        padding:8px;
-    }
-
-    table{
-    min-width:0;
-    }
-    
-    th,
-    td{
-    padding:6px 4px;
-    font-size:11px;
-    }
-    
-    .header h1{
-        font-size:16px;
+        padding:6px;
     }
 
     .filters{
         flex-direction:column;
+        gap:8px;
+        padding:12px;
     }
 
     .filter-group{
+        width:100%;
         min-width:0;
+    }
+
+    input[list],
+    .toggle-btn{
+        width:100%;
+    }
+
+    th,
+    td{
+        padding:6px 4px;
+        font-size:11px;
+    }
+
+    .result-badge{
+        min-width:44px;
+        padding:3px 8px;
+    }
+
+    .header h1{
+        font-size:16px;
+    }
+
+    
+    table{
+    min-width:0;
+    }
+    
+    .header h1{
+        font-size:16px;
     }
 
 }
@@ -291,6 +313,29 @@ tbody tr:hover{
 <script>
 
 let allMatches = [];
+
+let competitionVisible = window.innerWidth > 900;
+
+function updateCompetitionView(){
+
+    document.body.classList.toggle(
+        "hide-competition",
+        !competitionVisible
+    );
+
+    const button =
+        document.getElementById("toggleCompetition");
+
+    if(button){
+
+        button.textContent =
+            competitionVisible
+                ? "Compact View"
+                : "Full Details";
+
+    }
+
+}
 
 fetch("data.json")
 .then(response => response.json())
