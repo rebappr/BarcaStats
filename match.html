@@ -1046,39 +1046,28 @@ Match Information
 </h2>
 
 <div class="teams">
-
-    <div class="team-header home">
-
-        ${
-            teamALogo
-                ? `<img src="${ logo">`
-                : ""
-        }
-
-        <div class="team-name">
-            ${escapeHtml(teamA)}
-        </div>
-
+  <div class="team-header home">
+    ${
+      teamALogo
+        ? `<img src="${teamALogo}" alt="${escapeHtml(teamA)} logo="team-name">
+      ${escapeHtml(teamA)}
     </div>
+  </div>
 
-    <div class="score">
-        ${escapeHtml(match["Result"] || "-:-")}
+  <div class="score">
+    ${escapeHtml(match["Result"] || "-:-")}
+  </div>
+
+  <div class="team-header away">
+    <div class="team-name">
+      ${escapeHtml(teamB)}
     </div>
-
-    <div class="team-header away">
-
-        <div class="team-name">
-            ${escapeHtml(teamB)}
-        </div>
-
-        ${
-            teamBLogo
-                ? `<{teamBLogo} logo">`
-                : ""
-        }
-
-    </div>
-
+    ${
+      teamBLogo
+        ? `<img src="${teamB">`
+        : ""
+    }
+  </div>
 </div>
 
 <div class="meta-grid">
