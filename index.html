@@ -13,9 +13,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/ct.css
-<script src="https://cdn.jsdelivr.net/npm/tom-s/tom-select.complete.min.jsscript>
-
 <style>
 
 :root{
@@ -195,21 +192,11 @@ tbody tr:hover{
     text-align:center;
 }
 
-select{
+input[list]{
     border:1px solid #d1d5db;
     border-radius:8px;
     padding:8px 10px;
     font-family:inherit;
-    font-size:12px;
-    width:100%;
-}
-
-.ts-control{
-    border-radius:8px !important;
-    min-height:38px !important;
-}
-
-.ts-dropdown{
     font-size:12px;
 }
 
@@ -280,23 +267,20 @@ select{
 
         <div class="filter-group">
             <label for="seasonFilter">Season</label>
-                <select id="seasonFilter">
-                    <option value="">All Seasons</option>
-                </select>
+            <input id="seasonFilter" list="seasonList">
+            <datalist id="seasonList"></datalist>
         </div>
-
+        
         <div class="filter-group">
             <label for="competitionFilter">Competition</label>
-                <select id="competitionFilter">
-                    <option value="">All Competitions</option>
-                </select>
+            <input id="competitionFilter" list="competitionList">
+            <datalist id="competitionList"></datalist>
         </div>
-
+        
         <div class="filter-group">
             <label for="opponentFilter">Opponent</label>
-                <select id="opponentFilter">
-                    <option value="">All Opponents</option>
-                </select>
+            <input id="opponentFilter" list="opponentList">
+            <datalist id="opponentList"></datalist>
         </div>
         
     </div>
@@ -310,10 +294,6 @@ select{
 <script>
 
 let allMatches = [];
-
-let seasonTom;
-let competitionTom;
-let opponentTom;
 
 function saveFilters(){
 
@@ -376,19 +356,18 @@ function createFilters(data){
 
     seasons.sort().reverse();
 
-    seasons.forEach(season => {
-    
-        const option =
-            document.createElement("option");
-    
-        option.value = season;
-        option.textContent = season;
-    
-        document
-            .getElementById("seasonFilter")
-            .appendChild(option);
-    
-    });
+seasons.forEach(season => {
+
+    const option =
+        document.createElement("option");
+
+    option.value = season;
+
+    document
+        .getElementById("seasonList")
+        .appendChild(option);
+
+});
 
     const competitions = [
         ...new Set(
@@ -399,19 +378,18 @@ function createFilters(data){
     
     competitions.sort();
 
-    competitions.forEach(comp => {
-    
-        const option =
-            document.createElement("option");
-    
-        option.value = comp;
-        option.textContent = comp;
-    
-        document
-            .getElementById("competitionFilter")
-            .appendChild(option);
-    
-    });
+competitions.forEach(comp => {
+
+    const option =
+        document.createElement("option");
+
+    option.value = comp;
+
+    document
+        .getElementById("competitionList")
+        .appendChild(option);
+
+});
 
     const opponents = [
         ...new Set(
@@ -421,164 +399,36 @@ function createFilters(data){
     ];
     
     opponents.sort();
-    opponents.forEach(opponent => {
-    
-        const option =
-            document.createElement("option");
-    
-        option.value = opponent;
-        option.textContent = opponent;
-    
-        document
-            .getElementById("opponentFilter")
-            .appendChild(option);
-    
-    });
+opponents.forEach(opponent => {
+
+    const option =
+        document.createElement("option");
+
+    option.value = opponent;
 
     document
-        .getElementById("seasonFilter")
-        .addEventListener("change", applyFilters);
+        .getElementById("opponentList")
+        .appendChild(option);
 
-    document
-        .getElementById("competitionFilter")
-        .addEventListener("change", applyFilters);
+});
 
-    document
-        .getElementById("opponentFilter")
-        .addEventListener("change", applyFilters);
+document
+    .getElementById("seasonFilter")
+    .addEventListener("input", applyFilters);
+
+document
+    .getElementById("competitionFilter")
+    .addEventListener("input", applyFilters);
+
+document
+    .getElementById("opponentFilter")
+    .addEventListener("input", applyFilters);
 
     loadFilters();
-    seasonTom = new TomSelect("#seasonFilter", {
-        create: false,
-        sortField: "text"
-    });
-    
-    competitionTom = new TomSelect("#competitionFilter", {
-        create: false,
-        sortField: "text"
-    });
-    
-    opponentTom = new TomSelect("#opponentFilter", {
-        create: false,
-        sortField: "text"
-    });
     applyFilters();
     
 }
 
-function updateFilterLists(){
-
-    const selectedSeason =
-        document.getElementById("seasonFilter").value.trim();
-
-    const selectedCompetition =
-        document.getElementById("competitionFilter").value.trim();
-
-    const selectedOpponent =
-        document.getElementById("opponentFilter").value.trim();
-
-    const currentSeason = selectedSeason;
-    const currentCompetition = selectedCompetition;
-    const currentOpponent = selectedOpponent;
-
-    let filtered = [...allMatches];
-
-    if(selectedSeason){
-        filtered = filtered.filter(
-            x => x["Season"] === selectedSeason
-        );
-    }
-
-    if(selectedCompetition){
-        filtered = filtered.filter(
-            x => x["Competition"] === selectedCompetition
-        );
-    }
-
-    if(selectedOpponent){
-        filtered = filtered.filter(
-            x => x["Opp. Team"] === selectedOpponent
-        );
-    }
-
-    const seasonFilter =
-        document.getElementById("seasonFilter");
-    
-    const competitionFilter =
-        document.getElementById("competitionFilter");
-    
-    const opponentFilter =
-        document.getElementById("opponentFilter");
-
-    seasonFilter.innerHTML =
-        '<option value="">All Seasons</option>';
-    
-    competitionFilter.innerHTML =
-        '<option value="">All Competitions</option>';
-    
-    opponentFilter.innerHTML =
-        '<option value="">All Opponents</option>';
-
-    [...new Set(
-        filtered
-            .map(x => x["Season"])
-            .filter(Boolean)
-    )]
-    .sort()
-    .reverse()
-    .forEach(value => {
-
-    const option =
-        document.createElement("option");
-    
-    option.value = value;
-    option.textContent = value;
-    
-    seasonFilter.appendChild(option);
-
-    });
-
-    [...new Set(
-        filtered
-            .map(x => x["Competition"])
-            .filter(Boolean)
-    )]
-    .sort()
-    .forEach(value => {
-
-    const option =
-        document.createElement("option");
-    
-    option.value = value;
-    option.textContent = value;
-    
-    competitionFilter.appendChild(option);
-
-    });
-
-    [...new Set(
-        filtered
-            .map(x => x["Opp. Team"])
-            .filter(Boolean)
-    )]
-    .sort()
-    .forEach(value => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = value;
-        option.textContent = value;
-
-        opponentFilter.appendChild(option);
-
-    });
-
-    seasonFilter.value = currentSeason;
-    competitionFilter.value = currentCompetition;
-    opponentFilter.value = currentOpponent;
-
-}
 function applyFilters(){
 
     saveFilters();
