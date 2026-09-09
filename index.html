@@ -462,11 +462,7 @@ matches.forEach(match => {
         </td>
 
         <td class="result-column">
-            ${
-                <span class="${getResultClass(match)}">
-                    ${match.Result || "-:-"}
-                </span>
-            }
+            ${getResultClass(match)}">${match.Result || "-:-"}
         </td>
 
     </tr>
