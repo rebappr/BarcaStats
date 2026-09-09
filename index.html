@@ -447,6 +447,7 @@ function createFilters(data){
         .getElementById("opponentFilter")
         .addEventListener("change", applyFilters);
 
+    loadFilters();
     seasonTom = new TomSelect("#seasonFilter", {
         create: false,
         sortField: "text"
@@ -461,8 +462,6 @@ function createFilters(data){
         create: false,
         sortField: "text"
     });
-    
-    loadFilters();
     applyFilters();
     
 }
