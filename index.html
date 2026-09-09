@@ -166,6 +166,11 @@ tbody tr:hover{
     color:#991b1b;
 }
 
+.result-empty{
+    background:#f3f4f6;
+    color:#6b7280;
+}
+
 .empty{
     padding:40px;
     text-align:center;
@@ -387,6 +392,10 @@ function applyFilters(){
 
 function getResultClass(match){
 
+    if (!match.Result || match.Result.trim() === "") {
+        return "result-badge result-empty";
+    }
+
     switch(match["Result type"]){
 
         case "W":
@@ -399,7 +408,7 @@ function getResultClass(match){
             return "result-badge result-loss";
 
         default:
-            return "result-badge";
+            return "result-badge result-empty";
     }
 
 }
