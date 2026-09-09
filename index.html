@@ -295,6 +295,38 @@ tbody tr:hover{
 
 let allMatches = [];
 
+function saveFilters(){
+
+    localStorage.setItem(
+        "seasonFilter",
+        document.getElementById("seasonFilter").value
+    );
+
+    localStorage.setItem(
+        "competitionFilter",
+        document.getElementById("competitionFilter").value
+    );
+
+    localStorage.setItem(
+        "opponentFilter",
+        document.getElementById("opponentFilter").value
+    );
+
+}
+
+function loadFilters(){
+
+    document.getElementById("seasonFilter").value =
+        localStorage.getItem("seasonFilter") || "";
+
+    document.getElementById("competitionFilter").value =
+        localStorage.getItem("competitionFilter") || "";
+
+    document.getElementById("opponentFilter").value =
+        localStorage.getItem("opponentFilter") || "";
+
+}
+
 fetch("data.json")
 .then(response => response.json())
 .then(data => {
@@ -302,6 +334,17 @@ fetch("data.json")
     allMatches = data;
 
     createFilters(data);
+
+const savedScroll =
+    localStorage.getItem("matchesScrollY");
+
+if(savedScroll){
+
+    setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScroll));
+    }, 100);
+
+}
 
 })
 .catch(error => {
@@ -393,11 +436,14 @@ function createFilters(data){
         .getElementById("opponentFilter")
         .addEventListener("input", applyFilters);
 
+    loadFilters();
     applyFilters();
     
 }
 
 function applyFilters(){
+
+    saveFilters();
 
     let filtered = [...allMatches];
 
@@ -440,6 +486,15 @@ function applyFilters(){
         filtered = filtered.filter(
             x => x["Opp. Team"] === opponent
         );
+
+    }
+
+    function saveScrollPosition(){
+
+    localStorage.setItem(
+        "matchesScrollY",
+        window.scrollY
+    );
 
     }
 
@@ -499,7 +554,7 @@ function render(matches){
 matches.forEach(match => {
 
     html += `
-    <tr onclick="window.location.href='match.html?id=${match.ID}'">
+    <tr onclick="saveScrollPosition(); window.location.href='match.html?id=${match.ID}'">
 
         <td>
             ${match.Date || ""}
