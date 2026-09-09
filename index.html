@@ -182,7 +182,7 @@ tbody tr:hover{
     text-align:center;
 }
 
-@media(max-width:768px){
+@media(max-width:900px){
 
     .container{
         padding:10px;
@@ -205,9 +205,7 @@ td:nth-child(1),
 th:nth-child(2),
 td:nth-child(2),
 th:nth-child(3),
-td:nth-child(3),
-th:nth-child(4),
-td:nth-child(4){
+td:nth-child(3){
     width:1%;
 }
 
@@ -449,7 +447,6 @@ function render(matches){
                     <tr>
                         <th>Date</th>
                         <th>Competition</th>
-                        <th>Matchday</th>
                         <th>Opponent</th>
                         <th>Result</th>
                     </tr>
@@ -468,10 +465,7 @@ matches.forEach(match => {
 
         <td>
             ${match.Competition || ""}
-        </td>
-
-        <td>
-            ${match.Matchday || ""}
+            ${match.Matchday ? " - " + match.Matchday : ""}
         </td>
 
         <td>
