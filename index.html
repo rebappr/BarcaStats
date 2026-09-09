@@ -327,6 +327,15 @@ function loadFilters(){
 
 }
 
+    function saveScrollPosition(){
+
+    localStorage.setItem(
+        "matchesScrollY",
+        window.scrollY
+    );
+
+    }
+
 fetch("data.json")
 .then(response => response.json())
 .then(data => {
@@ -486,15 +495,6 @@ function applyFilters(){
         filtered = filtered.filter(
             x => x["Opp. Team"] === opponent
         );
-
-    }
-
-    function saveScrollPosition(){
-
-    localStorage.setItem(
-        "matchesScrollY",
-        window.scrollY
-    );
 
     }
 
