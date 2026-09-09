@@ -1009,14 +1009,18 @@ const timeline = getTimeline(match);
 
 const competition = String(match["Competition"] || "").trim();
 
-let matchdayText = "";
+const matchday = String(match["Matchday"] || "").trim();
 
-const showMatchday =
-    competition.toLowerCase() === "la liga";
+const isNumericMatchday =
+    /^\d+$/.test(matchday);
 
-if (showMatchday) {
-    matchdayText = `${match["Matchday"] || ""}.`;
-}
+const matchdayLabel =
+    isNumericMatchday ? "Matchday" : "Stage";
+
+const heroMatchday =
+    isNumericMatchday
+        ? `${matchday}. Matchday`
+        : matchday;
 
 document.getElementById("app").innerHTML = `
 
