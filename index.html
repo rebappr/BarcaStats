@@ -13,6 +13,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/ct.css
+<script src="https://cdn.jsdelivr.net/npm/tom-s/tom-select.complete.min.jsscript>
+
 <style>
 
 :root{
@@ -84,14 +87,6 @@ td{
 
 .filter-group label{
     font-weight:700;
-    font-size:12px;
-}
-
-input[list]{
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    padding:8px 10px;
-    font-family:inherit;
     font-size:12px;
 }
 
@@ -200,6 +195,24 @@ tbody tr:hover{
     text-align:center;
 }
 
+select{
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:8px 10px;
+    font-family:inherit;
+    font-size:12px;
+    width:100%;
+}
+
+.ts-control{
+    border-radius:8px !important;
+    min-height:38px !important;
+}
+
+.ts-dropdown{
+    font-size:12px;
+}
+
 @media(max-width:768px){
 
     .container{
@@ -267,20 +280,23 @@ tbody tr:hover{
 
         <div class="filter-group">
             <label for="seasonFilter">Season</label>
-            <input id="seasonFilter" list="seasonList">
-            <datalist id="seasonList"></datalist>
+                <select id="seasonFilter">
+                    <option value="">All Seasons</option>
+                </select>
         </div>
 
         <div class="filter-group">
             <label for="competitionFilter">Competition</label>
-            <input id="competitionFilter" list="competitionList">
-            <datalist id="competitionList"></datalist>
+                <select id="competitionFilter">
+                    <option value="">All Competitions</option>
+                </select>
         </div>
 
         <div class="filter-group">
             <label for="opponentFilter">Opponent</label>
-            <input id="opponentFilter" list="opponentList">
-            <datalist id="opponentList"></datalist>
+                <select id="opponentFilter">
+                    <option value="">All Opponents</option>
+                </select>
         </div>
         
     </div>
@@ -294,6 +310,10 @@ tbody tr:hover{
 <script>
 
 let allMatches = [];
+
+let seasonTom;
+let competitionTom;
+let opponentTom;
 
 function saveFilters(){
 
@@ -357,60 +377,45 @@ function createFilters(data){
     seasons.sort().reverse();
 
     seasons.forEach(season => {
-
+    
         const option =
             document.createElement("option");
-
+    
         option.value = season;
-
+        option.textContent = season;
+    
         document
-            .getElementById("seasonList")
+            .getElementById("seasonFilter")
             .appendChild(option);
-
+    
     });
-
-    const competitions = [
-        ...new Set(
-            data.map(x => x["Competition"])
-            .filter(Boolean)
-        )
-    ];
-
-    competitions.sort();
 
     competitions.forEach(comp => {
-
+    
         const option =
             document.createElement("option");
-
+    
         option.value = comp;
-
+        option.textContent = comp;
+    
         document
-            .getElementById("competitionList")
+            .getElementById("competitionFilter")
             .appendChild(option);
-
+    
     });
 
-    const opponents = [
-        ...new Set(
-            data.map(x => x["Opp. Team"])
-            .filter(Boolean)
-        )
-    ];
-
-    opponents.sort();
-
     opponents.forEach(opponent => {
-
+    
         const option =
             document.createElement("option");
-
+    
         option.value = opponent;
-
+        option.textContent = opponent;
+    
         document
-            .getElementById("opponentList")
+            .getElementById("opponentFilter")
             .appendChild(option);
-
+    
     });
 
     document
@@ -425,6 +430,21 @@ function createFilters(data){
         .getElementById("opponentFilter")
         .addEventListener("input", applyFilters);
 
+    seasonTom = new TomSelect("#seasonFilter", {
+        create: false,
+        sortField: "text"
+    });
+    
+    competitionTom = new TomSelect("#competitionFilter", {
+        create: false,
+        sortField: "text"
+    });
+    
+    opponentTom = new TomSelect("#opponentFilter", {
+        create: false,
+        sortField: "text"
+    });
+    
     loadFilters();
     applyFilters();
     
