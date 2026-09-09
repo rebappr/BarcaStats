@@ -425,7 +425,6 @@ function render(matches){
             <table>
                 <thead>
                     <tr>
-                        <th>Season</th>
                         <th>Date</th>
                         <th>Competition</th>
                         <th>Opponent</th>
@@ -439,8 +438,6 @@ matches.forEach(match => {
 
     html += `
     <tr onclick="window.location.href='match.html?id=${match.ID}'">
-
-        <td>${match.Season || ""}</td>
 
         <td>
             ${match.Date || ""}
