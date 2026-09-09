@@ -478,6 +478,10 @@ function updateFilterLists(){
     const selectedOpponent =
         document.getElementById("opponentFilter").value.trim();
 
+    const currentSeason = selectedSeason;
+    const currentCompetition = selectedCompetition;
+    const currentOpponent = selectedOpponent;
+
     let filtered = [...allMatches];
 
     if(selectedSeason){
@@ -571,31 +575,10 @@ function updateFilterLists(){
 
     });
 
-    seasonTom.destroy();
-    competitionTom.destroy();
-    opponentTom.destroy();
-
-    seasonTom = new TomSelect("#seasonFilter", {
-        create: false,
-        sortField: "text"
-    });
-
-    competitionTom = new TomSelect("#competitionFilter", {
-        create: false,
-        sortField: "text"
-    });
-
-    opponentTom = new TomSelect("#opponentFilter", {
-        create: false,
-        sortField: "text"
-    });
-
 }
 function applyFilters(){
 
     saveFilters();
-
-    updateFilterLists();
 
     let filtered = [...allMatches];
 
@@ -640,8 +623,13 @@ function applyFilters(){
         );
 
     }
-
+    
+    updateFilterLists();
     render(filtered);
+
+    seasonFilter.value = currentSeason;
+    competitionFilter.value = currentCompetition;
+    opponentFilter.value = currentOpponent;
 
 }
 
