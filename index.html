@@ -507,9 +507,14 @@ function updateFilterLists(){
     const opponentFilter =
         document.getElementById("opponentFilter");
 
-    seasonList.innerHTML = "";
-    competitionList.innerHTML = "";
-    opponentList.innerHTML = "";
+    seasonFilter.innerHTML =
+        '<option value="">All Seasons</option>';
+    
+    competitionFilter.innerHTML =
+        '<option value="">All Competitions</option>';
+    
+    opponentFilter.innerHTML =
+        '<option value="">All Opponents</option>';
 
     [...new Set(
         filtered
@@ -556,18 +561,36 @@ function updateFilterLists(){
     .sort()
     .forEach(value => {
 
-    const option =
-        document.createElement("option");
-    
-    option.value = value;
-    option.textContent = value;
-    
-    opponentFilter.appendChild(option);
+        const option =
+            document.createElement("option");
+
+        option.value = value;
+        option.textContent = value;
+
+        opponentFilter.appendChild(option);
 
     });
 
-}
+    seasonTom.destroy();
+    competitionTom.destroy();
+    opponentTom.destroy();
 
+    seasonTom = new TomSelect("#seasonFilter", {
+        create: false,
+        sortField: "text"
+    });
+
+    competitionTom = new TomSelect("#competitionFilter", {
+        create: false,
+        sortField: "text"
+    });
+
+    opponentTom = new TomSelect("#opponentFilter", {
+        create: false,
+        sortField: "text"
+    });
+
+}
 function applyFilters(){
 
     saveFilters();
