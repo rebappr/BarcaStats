@@ -437,15 +437,15 @@ function createFilters(data){
 
     document
         .getElementById("seasonFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     document
         .getElementById("competitionFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     document
         .getElementById("opponentFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     seasonTom = new TomSelect("#seasonFilter", {
         create: false,
@@ -520,11 +520,13 @@ function updateFilterLists(){
     .reverse()
     .forEach(value => {
 
-        const option =
-            document.createElement("option");
-
-        option.value = value;
-        seasonList.appendChild(option);
+    const option =
+        document.createElement("option");
+    
+    option.value = value;
+    option.textContent = value;
+    
+    seasonFilter.appendChild(option);
 
     });
 
@@ -536,11 +538,13 @@ function updateFilterLists(){
     .sort()
     .forEach(value => {
 
-        const option =
-            document.createElement("option");
-
-        option.value = value;
-        competitionList.appendChild(option);
+    const option =
+        document.createElement("option");
+    
+    option.value = value;
+    option.textContent = value;
+    
+    competitionFilter.appendChild(option);
 
     });
 
@@ -552,11 +556,13 @@ function updateFilterLists(){
     .sort()
     .forEach(value => {
 
-        const option =
-            document.createElement("option");
-
-        option.value = value;
-        opponentList.appendChild(option);
+    const option =
+        document.createElement("option");
+    
+    option.value = value;
+    option.textContent = value;
+    
+    opponentFilter.appendChild(option);
 
     });
 
