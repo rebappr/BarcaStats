@@ -105,12 +105,19 @@ input[list]{
 .table-scroll{
     overflow:auto;
     max-height:800px;
+    display:flex;
+    justify-content:center;
 }
 
 table{
-    width:100%;
+    width:auto;
     border-collapse:collapse;
-    min-width:800px;
+    table-layout:auto;
+}
+
+th,
+td{
+    white-space:nowrap;
 }
 
 th{
