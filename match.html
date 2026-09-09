@@ -1075,12 +1075,18 @@ ${escapeHtml(match["Competition"] || "")}
 </div>
 </div>
 
-<div class="meta">
-<div class="meta-label">Matchday</div>
-<div class="meta-value">
-${escapeHtml(match["Matchday"] || "")}
-</div>
-</div>
+${
+    competition.toLowerCase() !== "group stage"
+        ? `
+        <div class="meta">
+            <div class="meta-label">Matchday</div>
+            <div class="meta-value">
+                ${escapeHtml(match["Matchday"] || "")}
+            </div>
+        </div>
+        `
+        : ""
+}
 
 <div class="meta">
 <div class="meta-label">Venue</div>
