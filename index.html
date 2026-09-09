@@ -430,9 +430,106 @@ function createFilters(data){
     
 }
 
+function updateFilterLists(){
+
+    const selectedSeason =
+        document.getElementById("seasonFilter").value.trim();
+
+    const selectedCompetition =
+        document.getElementById("competitionFilter").value.trim();
+
+    const selectedOpponent =
+        document.getElementById("opponentFilter").value.trim();
+
+    let filtered = [...allMatches];
+
+    if(selectedSeason){
+        filtered = filtered.filter(
+            x => x["Season"] === selectedSeason
+        );
+    }
+
+    if(selectedCompetition){
+        filtered = filtered.filter(
+            x => x["Competition"] === selectedCompetition
+        );
+    }
+
+    if(selectedOpponent){
+        filtered = filtered.filter(
+            x => x["Opp. Team"] === selectedOpponent
+        );
+    }
+
+    const seasonList =
+        document.getElementById("seasonList");
+
+    const competitionList =
+        document.getElementById("competitionList");
+
+    const opponentList =
+        document.getElementById("opponentList");
+
+    seasonList.innerHTML = "";
+    competitionList.innerHTML = "";
+    opponentList.innerHTML = "";
+
+    [...new Set(
+        filtered
+            .map(x => x["Season"])
+            .filter(Boolean)
+    )]
+    .sort()
+    .reverse()
+    .forEach(value => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = value;
+        seasonList.appendChild(option);
+
+    });
+
+    [...new Set(
+        filtered
+            .map(x => x["Competition"])
+            .filter(Boolean)
+    )]
+    .sort()
+    .forEach(value => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = value;
+        competitionList.appendChild(option);
+
+    });
+
+    [...new Set(
+        filtered
+            .map(x => x["Opp. Team"])
+            .filter(Boolean)
+    )]
+    .sort()
+    .forEach(value => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = value;
+        opponentList.appendChild(option);
+
+    });
+
+}
+
 function applyFilters(){
 
     saveFilters();
+
+    updateFilterLists();
 
     let filtered = [...allMatches];
 
