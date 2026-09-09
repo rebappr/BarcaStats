@@ -1015,7 +1015,7 @@ const showMatchday =
     competition.toLowerCase() === "la liga";
 
 if (showMatchday) {
-    matchdayText = `${match["Matchday"] || ""}. Matchday`;
+    matchdayText = `${match["Matchday"] || ""}.`;
 }
 
 document.getElementById("app").innerHTML = `
@@ -1073,17 +1073,17 @@ ${escapeHtml(match["Competition"] || "")}
 </div>
 </div>
 
-${
-    showMatchday
-        ? `
-        <div class="meta">
-            <div class="meta-label">Matchday</div>
-            <div class="meta-value">
-                ${escapeHtml(match["Matchday"] || "")}
-            </div>
-        </div>
-        `
-        : ""
+const matchday = String(match["Matchday"] || "").trim();
+
+const isNumericMatchday =
+    /^\d+$/.test(matchday);
+
+let matchdayText = "";
+
+if (isNumericMatchday) {
+    matchdayText = `${matchday}. Matchday`;
+} else {
+    matchdayText = matchday;
 }
 
 <div class="meta">
