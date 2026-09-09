@@ -327,15 +327,6 @@ function loadFilters(){
 
 }
 
-    function saveScrollPosition(){
-
-    localStorage.setItem(
-        "matchesScrollY",
-        window.scrollY
-    );
-
-    }
-
 fetch("data.json")
 .then(response => response.json())
 .then(data => {
@@ -343,17 +334,6 @@ fetch("data.json")
     allMatches = data;
 
     createFilters(data);
-
-const savedScroll =
-    localStorage.getItem("matchesScrollY");
-
-if(savedScroll){
-
-    setTimeout(() => {
-        window.scrollTo(0, parseInt(savedScroll));
-    }, 100);
-
-}
 
 })
 .catch(error => {
@@ -554,7 +534,7 @@ function render(matches){
 matches.forEach(match => {
 
     html += `
-    <tr onclick="saveScrollPosition(); window.location.href='match.html?id=${match.ID}'">
+    <tr onclick="window.location.href='match.html?id=${match.ID}'">
 
         <td>
             ${match.Date || ""}
