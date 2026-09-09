@@ -427,6 +427,7 @@ function render(matches){
                     <tr>
                         <th>Date</th>
                         <th>Competition</th>
+                        <th>Matchday</th>
                         <th>Opponent</th>
                         <th>Result</th>
                     </tr>
@@ -444,9 +445,11 @@ matches.forEach(match => {
         </td>
 
         <td>
-            <span class="badge">
-                ${match.Competition || ""}
-            </span>
+            ${match.Competition || ""}
+        </td>
+
+        <td>
+            ${match.Matchday || ""}
         </td>
 
         <td>
