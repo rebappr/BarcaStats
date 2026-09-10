@@ -330,8 +330,13 @@ fetch("data.json")
 .then(response => response.json())
 .then(data => {
 
-    allMatches = data;
+    allMatches = Array.isArray(data)
+    ? data
+    : data.matches || [];
 
+    console.log("allMatches:", allMatches);
+    console.log("isArray:", Array.isArray(allMatches));
+    
     createFilters(data);
 
 })
