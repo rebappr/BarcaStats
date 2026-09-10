@@ -73,7 +73,6 @@ body{
     border-radius:12px;
     letter-spacing:.3px;
 }
-`
 
 .widget-card{
     background:white;
@@ -153,7 +152,7 @@ td{
 
 .table-scroll{
     overflow-x:auto;
-    overflow-y:auto;
+    overflow-y:visible;
 }
 
 table{
@@ -173,7 +172,7 @@ td:nth-child(3){
 th:nth-child(2),
 td:nth-child(2){
     width:1%;
-    white*space:nowrap;
+    white-space:nowrap;
 }
 
 th:nth-child(4),
@@ -785,20 +784,21 @@ Object.keys(grouped)
         </div>
         `;
 
+        html += `
         <div class="table-wrapper">
             <div class="table-scroll">
                 <table>
                     <thead>
                         <tr>
-                            <th>Matchday</th>
-                            <th>Date</th>
-                            <th>Venue</th>
-                            <th>Opponent</th>
-                            <th>Result</th>
+        *                   <th>Matchday</t*>
+                            <th>Date</th*
+                            <th>Venue</th*
+                            <th>Opponent<*th>
+                            <th>Result*/th>
                         </tr>
-                    </thead>
+               *    </thead>
                     <tbody>
-        `;
+        `*
 
         grouped[competition].forEach(match => {
 
