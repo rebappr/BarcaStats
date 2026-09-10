@@ -504,7 +504,6 @@ function applyFilters(){
     const seasonFilter =
         document.getElementById("seasonFilter");
 
-    // sezóna nesmie zostať prázdna
     if(!seasonFilter.value){
 
         seasonFilter.value = [...new Set(
@@ -515,9 +514,6 @@ function applyFilters(){
         .sort()
         .reverse()[0];
     }
-
-    saveFilters();
-    updateFilterOptions();
 
     let filtered = [...allMatches];
 
@@ -567,7 +563,10 @@ function applyFilters(){
         new Date(a.Date.split(".").reverse().join("-")) -
         new Date(b.Date.split(".").reverse().join("-"))
     );
-    
+
+    saveFilters();
+    updateFilterOptions();
+
     render(filtered);
 
 }
