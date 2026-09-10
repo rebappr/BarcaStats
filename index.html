@@ -321,7 +321,12 @@ function loadFilters(){
     const savedSeason =
         localStorage.getItem("seasonFilter");
 
-    if(savedSeason){
+    if(
+        savedSeason &&
+        [...new Set(
+            allMatches.map(x => x["Season"])
+        )].includes(savedSeason)
+    ){
 
         document.getElementById("seasonFilter").value =
             savedSeason;
@@ -428,16 +433,36 @@ function updateFilterOptions() {
     competitions.sort();
     opponents.sort();
 
-    document.getElementById("seasonList").innerHTML = "";
+    document.getElementById("seasonFilter").innerHTML = "";
     document.getElementById("competitionList").innerHTML = "";
     document.getElementById("opponentList").innerHTML = "";
 
-    seasons.forEach(value => {
-        const option = document.createElement("option");
-        option.value = value;
-        document.getElementById("seasonList")
-            .appendChild(option);
-    });
+const seasonSelect =
+    document.getElementById("seasonFilter");
+
+const currentSeason =
+    seasonSelect.value;
+
+seasonSelect.innerHTML = "";
+
+seasons.forEach(value => {
+
+    const option =
+        document.createElement("option");
+
+    option.value = value;
+    option.textContent = value;
+
+    seasonSelect.appendChild(option);
+
+});
+
+if(
+    currentSeason &&
+    seasons.includes(currentSeason)
+){
+    seasonSelect.value = currentSeason;
+}
 
     competitions.forEach(value => {
         const option = document.createElement("option");
