@@ -406,37 +406,29 @@ function updateFilterOptions() {
     competitions.sort();
     opponents.sort();
 
-const seasonSelect =
-    document.getElementById("seasonFilter");
-
-const currentSeason =
-    seasonSelect.value;
+const seasonSelect = document.getElementById("seasonFilter");
+const currentSeason = seasonSelect.value;
 
 seasonSelect.innerHTML = "";
 
-seasons
-    .sort()
-    .reverse()
-    .forEach(value => {
+// vytvor možnosti sezón
+seasons.sort().reverse().forEach(season => {
 
-        const option =
-            document.createElement("option");
+    const option = document.createElement("option");
 
-        option.value = value;
-        option.textContent = value;
+    option.value = season;
+    option.textContent = season;
 
-        seasonSelect.appendChild(option);
+    seasonSelect.appendChild(option);
 
-    });
+});
 
-if (
-    currentSeason &&
-    seasons.includes(currentSeason)
-) {
+// obnov predchádzajúcu hodnotu
+if (currentSeason && seasons.includes(currentSeason)) {
 
     seasonSelect.value = currentSeason;
 
-} else {
+} else if (seasons.length > 0) {
 
     seasonSelect.value = seasons[0];
 
