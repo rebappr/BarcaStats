@@ -639,9 +639,32 @@ function render(matches){
 
     let html = "";
 
-    Object.keys(grouped)
-        .sort()
-        .forEach(competition => {
+const competitionOrder = [
+    "La Liga",
+    "UEFA Champions League"
+];
+
+Object.keys(grouped)
+    .sort((a, b) => {
+
+        const aIndex = competitionOrder.indexOf(a);
+        const bIndex = competitionOrder.indexOf(b);
+
+        if (aIndex !== -1 && bIndex !== -1) {
+            return aIndex - bIndex;
+        }
+
+        if (aIndex !== -1) {
+            return -1;
+        }
+
+        if (bIndex !== -1) {
+            return 1;
+        }
+
+        return a.localeCompare(b);
+    })
+    .forEach(competition => {
 
         html += `
         <h2 style="
