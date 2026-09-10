@@ -316,8 +316,27 @@ function saveFilters(){
 
 function loadFilters(){
 
-    document.getElementById("seasonFilter").value =
-        localStorage.getItem("seasonFilter") || "";
+    const savedSeason =
+        localStorage.getItem("seasonFilter");
+
+    if(savedSeason){
+
+        document.getElementById("seasonFilter").value =
+            savedSeason;
+
+    } else {
+
+        const latestSeason = [...new Set(
+            allMatches
+                .map(x => x["Season"])
+                .filter(Boolean)
+        )]
+        .sort()
+        .reverse()[0];
+
+        document.getElementById("seasonFilter").value =
+            latestSeason || "";
+    }
 
     document.getElementById("competitionFilter").value =
         localStorage.getItem("competitionFilter") || "";
@@ -458,10 +477,26 @@ function createFilters(){
 
 function applyFilters(){
 
+    const seasonFilter =
+        document.getElementById("seasonFilter");
+
+    // sezóna nesmie zostať prázdna
+    if(!seasonFilter.value){
+
+        seasonFilter.value = [...new Set(
+            allMatches
+                .map(x => x["Season"])
+                .filter(Boolean)
+        )]
+        .sort()
+        .reverse()[0];
+    }
+
     saveFilters();
     updateFilterOptions();
 
     let filtered = [...allMatches];
+``
 
     const season =
         document
