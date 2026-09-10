@@ -330,9 +330,17 @@ fetch("data.json")
 .then(response => response.json())
 .then(data => {
 
-    allMatches = Array.isArray(data)
-    ? data
-    : data.matches || [];
+if (!Array.isArray(data)) {
+
+    document.getElementById("matches").innerHTML =
+        "<div class='empty'>Data sa nepodarilo načítať.</div>";
+
+    console.error("Namiesto poľa prišlo:", data);
+
+    return;
+}
+
+allMatches = data;
 
     console.log("allMatches:", allMatches);
     console.log("isArray:", Array.isArray(allMatches));
