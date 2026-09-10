@@ -318,33 +318,6 @@ function saveFilters(){
 
 function loadFilters(){
 
-    const savedSeason =
-        localStorage.getItem("seasonFilter");
-
-    if(
-        savedSeason &&
-        [...new Set(
-            allMatches.map(x => x["Season"])
-        )].includes(savedSeason)
-    ){
-
-        document.getElementById("seasonFilter").value =
-            savedSeason;
-
-    } else {
-
-        const latestSeason = [...new Set(
-            allMatches
-                .map(x => x["Season"])
-                .filter(Boolean)
-        )]
-        .sort()
-        .reverse()[0];
-
-        document.getElementById("seasonFilter").value =
-            latestSeason || "";
-    }
-
     document.getElementById("competitionFilter").value =
         localStorage.getItem("competitionFilter") || "";
 
@@ -433,18 +406,6 @@ function updateFilterOptions() {
     competitions.sort();
     opponents.sort();
 
-    document.getElementById("seasonFilter").innerHTML = "";
-    document.getElementById("competitionList").innerHTML = "";
-    document.getElementById("opponentList").innerHTML = "";
-
-const seasonSelect =
-    document.getElementById("seasonFilter");
-
-const currentSeason =
-    seasonSelect.value;
-
-seasonSelect.innerHTML = "";
-
 const seasonSelect =
     document.getElementById("seasonFilter");
 
@@ -472,15 +433,17 @@ if (
     currentSeason &&
     seasons.includes(currentSeason)
 ) {
+
     seasonSelect.value = currentSeason;
+
+} else {
+
+    seasonSelect.value = seasons[0];
+
 }
 
-if(
-    currentSeason &&
-    seasons.includes(currentSeason)
-){
-    seasonSelect.value = currentSeason;
-}
+document.getElementById("competitionList").innerHTML = "";
+document.getElementById("opponentList").innerHTML = "";
 
     competitions.forEach(value => {
         const option = document.createElement("option");
@@ -504,9 +467,25 @@ function createFilters(){
 
     updateFilterOptions();
 
+    const savedSeason =
+        localStorage.getItem("seasonFilter");
+
+    const seasonSelect =
+        document.getElementById("seasonFilter");
+
+    if(
+        savedSeason &&
+        [...seasonSelect.options]
+            .some(o => o.value === savedSeason)
+    ){
+
+        seasonSelect.value = savedSeason;
+
+    }
+
     document
         .getElementById("seasonFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     document
         .getElementById("competitionFilter")
@@ -541,7 +520,6 @@ function applyFilters(){
     updateFilterOptions();
 
     let filtered = [...allMatches];
-``
 
     const season =
         document
