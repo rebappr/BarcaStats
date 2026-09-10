@@ -562,6 +562,11 @@ function applyFilters(){
         );
 
     }
+
+    filtered.sort((a, b) =>
+        new Date(a.Date.split(".").reverse().join("-")) -
+        new Date(b.Date.split(".").reverse().join("-"))
+    );
     
     render(filtered);
 
