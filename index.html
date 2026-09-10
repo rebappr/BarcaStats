@@ -407,7 +407,7 @@ function updateFilterOptions() {
 
     const seasons = [
         ...new Set(
-            filtered
+            allMatches
                 .map(x => x["Season"])
                 .filter(Boolean)
         )
@@ -445,17 +445,35 @@ const currentSeason =
 
 seasonSelect.innerHTML = "";
 
-seasons.forEach(value => {
+const seasonSelect =
+    document.getElementById("seasonFilter");
 
-    const option =
-        document.createElement("option");
+const currentSeason =
+    seasonSelect.value;
 
-    option.value = value;
-    option.textContent = value;
+seasonSelect.innerHTML = "";
 
-    seasonSelect.appendChild(option);
+seasons
+    .sort()
+    .reverse()
+    .forEach(value => {
 
-});
+        const option =
+            document.createElement("option");
+
+        option.value = value;
+        option.textContent = value;
+
+        seasonSelect.appendChild(option);
+
+    });
+
+if (
+    currentSeason &&
+    seasons.includes(currentSeason)
+) {
+    seasonSelect.value = currentSeason;
+}
 
 if(
     currentSeason &&
