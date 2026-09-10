@@ -610,61 +610,83 @@ function render(matches){
 
     }
 
-    let html = `
-    <div class="table-wrapper">
-        <div class="table-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Competition</th>
-                        <th>Opponent</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-    `;
+    const grouped = {};
 
-matches.forEach(match => {
+    matches.forEach(match => {
 
-    html += `
-    <tr onclick="window.location.href='match.html?id=${match.ID}'">
+        const competition =
+            match.Competition || "Unknown";
 
-        <td>
-            ${match.Date || ""}
-        </td>
+        if(!grouped[competition]){
+            grouped[competition] = [];
+        }
 
-        <td>
-            ${match.Competition || ""}
-            ${match.Matchday ? " - " + match.Matchday : ""}
-        </td>
+        grouped[competition].push(match);
 
-        <td>
-            ${match["Opp. Team"] || ""}
-        </td>
+    });
 
-        <td class="result-column">
-            <span class="${getResultClass(match)}">
-                ${match.Result || "-:-"}
-            </span>
-        </td>
+    let html = "";
 
-    </tr>
-    `;
+    Object.keys(grouped)
+        .sort()
+        .forEach(competition => {
 
-});
-    html += `
-                </tbody>
-            </table>
+        html += `
+        <h2 style="
+            margin:20px 0 10px;
+            color:var(--barca-blue);
+        ">
+            ${competition}
+        </h2>
+
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Matchday</th>
+                            <th>Opponent</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        grouped[competition].forEach(match => {
+
+            html += `
+            <tr onclick="window.location.href='match.html?id=${match.ID}'">
+
+                <td>${match.Date || ""}</td>
+
+                <td>${match.Matchday || ""}</td>
+
+                <td>${match["Opp. Team"] || ""}</td>
+
+                <td>
+                    <span class="${getResultClass(match)}">
+                        ${match.Result || "-:-"}
+                    </span>
+                </td>
+
+            </tr>
+            `;
+
+        });
+
+        html += `
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    `;
+        `;
 
-    document.getElementById("matches").innerHTML =
-        html;
+    });
+
+    document.getElementById("matches").innerHTML = html;
 
 }
-
 </script>
 
 </body>
