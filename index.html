@@ -48,6 +48,33 @@ body{
     min-width:0;
 }
 
+.section-title{
+    margin:0 0 12px;
+    padding:12px 18px;
+    background:white;
+    border-radius:16px;
+    color:var(--barca-blue);
+    font-size:20px;
+    font-weight:700;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.competition-title{
+    margin:20px 0 8px;
+    padding:10px 14px;
+    background:linear-gradient(
+        135deg,
+        var(--barca-blue),
+        var(--barca-red)
+    );
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    border-radius:12px;
+    letter-spacing:.3px;
+}
+`
+
 .widget-card{
     background:white;
     border-radius:16px;
@@ -340,9 +367,13 @@ select{
 <div class="content-layout">
 
     <div class="left-panel">
+    
+        <h2 class="section-title">Matches</h2>
+    
         <div id="matches">
             Loading...
         </div>
+    
     </div>
 
     <div class="right-panel">
@@ -749,12 +780,10 @@ Object.keys(grouped)
     .forEach(competition => {
 
         html += `
-        <h2 style="
-            margin:20px 0 10px;
-            color:var(--barca-blue);
-        ">
+        <div class="competition-title">
             ${competition}
-        </h2>
+        </div>
+        `;
 
         <div class="table-wrapper">
             <div class="table-scroll">
