@@ -192,12 +192,14 @@ tbody tr:hover{
     text-align:center;
 }
 
-input[list]{
+input[list],
+select{
     border:1px solid #d1d5db;
     border-radius:8px;
     padding:8px 10px;
     font-family:inherit;
     font-size:12px;
+    background:white;
 }
 
 @media(max-width:768px){
@@ -218,6 +220,7 @@ input[list]{
     }
 
     input[list],
+    select,
     .toggle-btn{
         width:100%;
     }
@@ -267,8 +270,7 @@ input[list]{
 
         <div class="filter-group">
             <label for="seasonFilter">Season</label>
-            <input id="seasonFilter" list="seasonList">
-            <datalist id="seasonList"></datalist>
+            <select id="seasonFilter"></select>
         </div>
         
         <div class="filter-group">
