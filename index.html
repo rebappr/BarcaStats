@@ -639,6 +639,26 @@ function render(matches){
 
     let html = "";
 
+    Object.keys(grouped).forEach(competition => {
+    
+        if (competition === "La Liga") {
+    
+            grouped[competition].sort((a, b) =>
+                Number(a.Matchday || 0) -
+                Number(b.Matchday || 0)
+            );
+    
+        } else {
+    
+            grouped[competition].sort((a, b) =>
+                new Date(a.Date.split(".").reverse().join("-")) -
+                new Date(b.Date.split(".").reverse().join("-"))
+            );
+    
+        }
+    
+    });
+
 const competitionOrder = [
     "La Liga",
     "UEFA Champions League"
