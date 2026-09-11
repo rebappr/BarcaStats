@@ -432,12 +432,14 @@ select:focus{
 
         <div class="filter-group">
             <label for="seasonFilter">Season</label>
+            <input id="seasonFilter" list="competitionList">
             <select id="seasonFilter"></select>
         </div>
         
         <div class="filter-group">
             <label for="competitionFilter">Competition</label>
-            <select id="competitionFilter"></select>
+            <input id="competitionFilter" list="competitionList">
+            <datalist id="competitionList"></datalist>
         </div>
         
         <div class="filter-group">
@@ -700,11 +702,11 @@ function createFilters(){
 
     document
         .getElementById("seasonFilter")
-        .addEventListener("change", applyFilters);
+        .addEventListener("input", applyFilters);
 
     document
         .getElementById("competitionFilter")
-        .addEventListener("change", applyFilters);
+        .addEventListener("input", applyFilters);
 
     document
         .getElementById("opponentFilter")
