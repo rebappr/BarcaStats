@@ -450,15 +450,14 @@ select:focus{
         
         <div class="filter-group">
             <label for="competitionFilter">Competition</label>
-            <input id="competitionFilter" list="competitionList">
-            <datalist id="competitionList"></datalist>
+            <select id="competitionFilter"></select>
         </div>
         
         <div class="filter-group">
             <label for="opponentFilter">Opponent</label>
-            <input id="opponentFilter" list="opponentList">
-            <datalist id="opponentList"></datalist>
+            <select id="opponentFilter"></select>
         </div>
+
         
     </div>
 
@@ -653,28 +652,55 @@ if (currentSeason && seasons.includes(currentSeason)) {
 
 }
 
-document.getElementById("competitionList").innerHTML = "";
+const competitionSelect =
+    document.getElementById("competitionFilter");
+
+const currentCompetition =
+    competitionSelect.value;
+
+competitionSelect.innerHTML =
+    '<option value="">All</option>';
 
 competitions.forEach(value => {
 
-    const option = document.createElement("option");
+    const option =
+        document.createElement("option");
 
     option.value = value;
+    option.textContent = value;
 
-    document
-        .getElementById("competitionList")
-        .appendChild(option);
+    competitionSelect.appendChild(option);
 
 });
 
-    document.getElementById("opponentList").innerHTML = "";
-    
-    opponents.forEach(value => {
-        const option = document.createElement("option");
-        option.value = value;
-        document.getElementById("opponentList")
-            .appendChild(option);
-    });
+if (competitions.includes(currentCompetition)) {
+    competitionSelect.value = currentCompetition;
+}
+
+const opponentSelect =
+    document.getElementById("opponentFilter");
+
+const currentOpponent =
+    opponentSelect.value;
+
+opponentSelect.innerHTML =
+    '<option value="">All</option>';
+
+opponents.forEach(value => {
+
+    const option =
+        document.createElement("option");
+
+    option.value = value;
+    option.textContent = value;
+
+    opponentSelect.appendChild(option);
+
+});
+
+if (opponents.includes(currentOpponent)) {
+    opponentSelect.value = currentOpponent;
+}
 
     const competitionInput =
     document.getElementById("competitionFilter");
@@ -722,15 +748,15 @@ function createFilters(){
 
     document
         .getElementById("seasonFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     document
         .getElementById("competitionFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     document
         .getElementById("opponentFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     applyFilters();
 
