@@ -565,8 +565,7 @@ if (!Array.isArray(data)) {
 function updateFilterOptions() {
 
     const seasonValue =
-        document.getElementById("seasonFilter")
-            .value.trim();
+        document.getElementById("seasonFilter").value.trim();
 
     let seasonFiltered = [...allMatches];
 
@@ -584,7 +583,7 @@ function updateFilterOptions() {
                 .map(x => x["Season"])
                 .filter(Boolean)
         )
-    ];
+    ].sort().reverse();
 
     const competitions = [
         ...new Set(
@@ -592,7 +591,7 @@ function updateFilterOptions() {
                 .map(x => x["Competition"])
                 .filter(Boolean)
         )
-    ];
+    ].sort();
 
     const opponents = [
         ...new Set(
@@ -600,133 +599,84 @@ function updateFilterOptions() {
                 .map(x => x["Opp. Team"])
                 .filter(Boolean)
         )
-    ];
+    ].sort();
 
-    seasons.sort().reverse();
-    competitions.sort();
-    opponents.sort();
-        ...new Set(
-            allMatches
-                .map(x => x["Season"])
-                .filter(Boolean)
-        )
-    ];
+    // Season
+    const seasonSelect =
+        document.getElementById("seasonFilter");
 
-    const competitions = [
-        ...new Set(
-            filtered
-                .map(x => x["Competition"])
-                .filter(Boolean)
-        )
-    ];
+    const currentSeason =
+        seasonSelect.value;
 
-    const opponents = [
-        ...new Set(
-            filtered
-                .map(x => x["Opp. Team"])
-                .filter(Boolean)
-        )
-    ];
+    seasonSelect.innerHTML = "";
 
-    seasons.sort().reverse();
-    competitions.sort();
-    opponents.sort();
+    seasons.forEach(season => {
 
-const seasonSelect = document.getElementById("seasonFilter");
-const currentSeason = seasonSelect.value;
+        const option =
+            document.createElement("option");
 
-seasonSelect.innerHTML = "";
+        option.value = season;
+        option.textContent = season;
 
-// vytvor možnosti sezón
-seasons.sort().reverse().forEach(season => {
+        seasonSelect.appendChild(option);
 
-    const option = document.createElement("option");
+    });
 
-    option.value = season;
-    option.textContent = season;
+    if (seasons.includes(currentSeason)) {
+        seasonSelect.value = currentSeason;
+    }
 
-    seasonSelect.appendChild(option);
+    // Competition
+    const competitionSelect =
+        document.getElementById("competitionFilter");
 
-});
+    const currentCompetition =
+        competitionSelect.value;
 
-// obnov predchádzajúcu hodnotu
-if (currentSeason && seasons.includes(currentSeason)) {
+    competitionSelect.innerHTML =
+        '<option value="">All competitions</option>';
 
-    seasonSelect.value = currentSeason;
+    competitions.forEach(value => {
 
-} else if (seasons.length > 0) {
+        const option =
+            document.createElement("option");
 
-    seasonSelect.value = seasons[0];
+        option.value = value;
+        option.textContent = value;
 
-}
+        competitionSelect.appendChild(option);
 
-const competitionSelect =
-    document.getElementById("competitionFilter");
+    });
 
-const currentCompetition =
-    competitionSelect.value;
+    if (competitions.includes(currentCompetition)) {
+        competitionSelect.value = currentCompetition;
+    }
 
-competitionSelect.innerHTML =
-    '<option value="">All competitions</option>';
+    // Opponent
+    const opponentSelect =
+        document.getElementById("opponentFilter");
 
-competitions.forEach(value => {
+    const currentOpponent =
+        opponentSelect.value;
 
-    const option =
-        document.createElement("option");
+    opponentSelect.innerHTML =
+        '<option value="">All opponents</option>';
 
-    option.value = value;
-    option.textContent = value;
+    opponents.forEach(value => {
 
-    competitionSelect.appendChild(option);
+        const option =
+            document.createElement("option");
 
-});
+        option.value = value;
+        option.textContent = value;
 
-competitionSelect.value = currentCompetition;
-}
+        opponentSelect.appendChild(option);
 
-const opponentSelect =
-    document.getElementById("opponentFilter");
+    });
 
-const currentOpponent =
-    opponentSelect.value;
-
-opponentSelect.innerHTML =
-    '<option value="">All opponents</option>';
-
-opponents.forEach(value => {
-
-    const option =
-        document.createElement("option");
-
-    option.value = value;
-    option.textContent = value;
-
-    opponentSelect.appendChild(option);
-
-});
-
-opponentSelect.value = currentOpponent;
-}
-
-    const competitionInput =
-    document.getElementById("competitionFilter");
-
-if (
-    competitionInput.value &&
-    !competitions.includes(competitionInput.value)
-) {
-    competitionInput.value = "";
-}
-
-const opponentInput =
-    document.getElementById("opponentFilter");
-
-if (
-    opponentInput.value &&
-    !opponents.includes(opponentInput.value)
-) {
-    opponentInput.value = "";
-}
+    if (opponents.includes(currentOpponent)) {
+        opponentSelect.value = currentOpponent;
+    }
 
 }
 
