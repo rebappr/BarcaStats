@@ -328,7 +328,7 @@ tbody tr:hover{
 }
 
 input[list],
-select{
+select:focus{
     height:42px;
     border:none;
     border-radius:12px;
@@ -336,6 +336,11 @@ select{
     color:white;
     padding:0 14px;
     font-family:inherit;
+}
+
+select option{
+    background:#0f172a;
+    color:white;
 }
 
 input[list]:focus,
@@ -432,8 +437,7 @@ select:focus{
         
         <div class="filter-group">
             <label for="competitionFilter">Competition</label>
-            <input id="competitionFilter" list="competitionList">
-            <datalist id="competitionList"></datalist>
+            <select id="competitionFilter"></select>
         </div>
         
         <div class="filter-group">
@@ -632,15 +636,36 @@ if (currentSeason && seasons.includes(currentSeason)) {
 
 }
 
-document.getElementById("competitionList").innerHTML = "";
-document.getElementById("opponentList").innerHTML = "";
+const competitionSelect =
+    document.getElementById("competitionFilter");
 
-    competitions.forEach(value => {
-        const option = document.createElement("option");
-        option.value = value;
-        document.getElementById("competitionList")
-            .appendChild(option);
-    });
+const currentCompetition =
+    competitionSelect.value;
+
+competitionSelect.innerHTML = "";
+
+const allOption = document.createElement("option");
+allOption.value = "";
+allOption.textContent = "All Competitions";
+competitionSelect.appendChild(allOption);
+
+competitions.forEach(value => {
+
+    const option = document.createElement("option");
+
+    option.value = value;
+    option.textContent = value;
+
+    competitionSelect.appendChild(option);
+
+});
+
+if (
+    currentCompetition &&
+    competitions.includes(currentCompetition)
+) {
+    competitionSelect.value = currentCompetition;
+}
 
     opponents.forEach(value => {
         const option = document.createElement("option");
@@ -679,7 +704,7 @@ function createFilters(){
 
     document
         .getElementById("competitionFilter")
-        .addEventListener("input", applyFilters);
+        .addEventListener("change", applyFilters);
 
     document
         .getElementById("opponentFilter")
