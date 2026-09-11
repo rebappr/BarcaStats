@@ -338,17 +338,15 @@ select{
     font-size:13px;
 }
 
-inputhover,
+input:hover,
 select:hover{
     background:rgba(255,255,255,.15);
 }
 
-inputfocus,
+input:focus,
 select:focus{
     outline:none;
-
     border-color:#3b82f6;
-
     box-shadow:
         0 0 0 3px rgba(59,130,246,.25);
 }
@@ -447,7 +445,6 @@ select:focus{
 
         <div class="filter-group">
             <label for="seasonFilter">Season</label>
-            <input id="seasonFilter" list="seasonList">
             <select id="seasonFilter"></select>
         </div>
         
