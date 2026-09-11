@@ -55,6 +55,7 @@ html[data-theme="dark"]{
 
         --meta-bg:#dfe5eb;
         --meta-border:#e2e8f0;
+        --border-dark:#1e293b;
 
         --muted:#64748b;
 
@@ -73,6 +74,7 @@ html[data-theme="light"]{
 
     --meta-bg:#dfe5eb;
     --meta-border:#e2e8f0;
+    --border-dark:#1e293b;
 
     --muted:#64748b;
 
