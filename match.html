@@ -11,7 +11,7 @@
     <linkle-touch-icon.png
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="s.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
@@ -30,9 +30,15 @@
 
 body{
     margin:0;
-    background:#f4f6f9;
-    color:#1f2937;
-    font-family:'Roboto',sans-serif;
+    font-family:'Inter',sans-serif;
+
+    background:
+        radial-gradient(circle at top left,#004D98 0%,transparent 35%),
+        radial-gradient(circle at top right,#A50044 0%,transparent 35%),
+        #0f172a;
+
+    color:white;
+    min-height:100vh;
 }
 
 .container{
@@ -42,22 +48,25 @@ body{
 }
 
 .hero{
-    background:linear-gradient(
-        135deg,
-        var(--barca-blue),
-        var(--barca-red)
-    );
-    color:white;
-    border-radius:24px;
-    padding:10px;
-    margin-bottom:20px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,77,152,.95),
+            rgba(165,0,68,.95)
+        );
+
+    border-radius:28px;
+    padding:30px;
+    margin-bottom:24px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35);
 }
 
 .score{
-    font-size:30px;
+    font-size:42px;
     font-weight:700;
+    color:white;
     margin:10px 0;
     text-align:center;
 }
@@ -82,18 +91,32 @@ body{
 }
 
 .card{
-    background:white;
-    border-radius:18px;
-    padding:20px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:24px;
+
+    padding:24px;
     margin-bottom:20px;
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+    transition:.3s;
 }
 
+.card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.25);
+}
+
+
 .section-title{
-    margin:0 0 8px 0;
-    font-size: 16px;
-    padding: 0;
-    color:var(--barca-red);
+    color:white;
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:18px;
 }
 
 .meta-grid{
@@ -103,15 +126,16 @@ body{
 }
 
 .meta{
-    background:#f8fafc;
-    padding:15px;
-    border-radius:12px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    padding:16px;
+    border-radius:16px;
 }
 
 .meta-label{
     font-size:11px;
     text-transform:uppercase;
-    color:#6b7280;
+    color:#94a3b8;
 }
 
 .meta-value{
@@ -127,9 +151,10 @@ body{
 }
 
 .team-card{
-    background:#f8fafc;
-    padding:15px;
-    border-radius:12px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:18px;
 }
 
 .team-card h3{
@@ -177,7 +202,12 @@ body{
     width:24px;
     height:24px;
     border-radius:50%;
-    background:var(--barca-blue);
+    background:
+        linear-gradient(
+            135deg,
+            #004D98,
+            #A50044
+        );
     color:white;
     display:flex;
     justify-content:center;
@@ -254,9 +284,10 @@ body{
 }
 
 .event-box{
-    background:#f8fafc;
-    padding:6px 10px;
-    border-radius:10px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    padding:10px 14px;
     display:inline-block;
     font-size:13px;
     line-height:1.1;
@@ -296,11 +327,19 @@ body{
     position:fixed;
     right:20px;
     bottom:20px;
-    background:var(--barca-blue);
+    background:
+        linear-gradient(
+            135deg,
+            #004D98,
+            #A50044
+        );
     color:white;
     text-decoration:none;
-    padding:12px 18px;
+    padding:14px 22px;
     border-radius:999px;
+    font-weight:700;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
 }
 
 .lineup-tabs{
