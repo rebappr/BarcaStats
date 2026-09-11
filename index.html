@@ -521,6 +521,9 @@ function saveFilters(){
 
 function loadFilters(){
 
+    document.getElementById("seasonFilter").value =
+        localStorage.getItem("seasonFilter") || "";
+
     document.getElementById("competitionFilter").value =
         localStorage.getItem("competitionFilter") || "";
 
@@ -672,6 +675,26 @@ competitions.forEach(value => {
         document.getElementById("opponentList")
             .appendChild(option);
     });
+
+    const competitionInput =
+    document.getElementById("competitionFilter");
+
+if (
+    competitionInput.value &&
+    !competitions.includes(competitionInput.value)
+) {
+    competitionInput.value = "";
+}
+
+const opponentInput =
+    document.getElementById("opponentFilter");
+
+if (
+    opponentInput.value &&
+    !opponents.includes(opponentInput.value)
+) {
+    opponentInput.value = "";
+}
 
 }
 
