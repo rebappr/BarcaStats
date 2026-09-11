@@ -508,6 +508,31 @@ select:focus{
 
 <script>
 
+(function(){
+
+    if(!localStorage.getItem("theme")){
+
+        const systemTheme =
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+
+        document.documentElement.setAttribute(
+            "data-theme",
+            systemTheme
+        );
+
+    }else{
+
+        document.documentElement.setAttribute(
+            "data-theme",
+            localStorage.getItem("theme")
+        );
+
+    }
+
+})();
+
 let allMatches = [];
 
 function saveFilters(){
