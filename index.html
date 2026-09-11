@@ -568,35 +568,43 @@ function updateFilterOptions() {
         document.getElementById("seasonFilter")
             .value.trim();
 
-    const competitionValue =
-        document.getElementById("competitionFilter")
-            .value.trim();
-
-    const opponentValue =
-        document.getElementById("opponentFilter")
-            .value.trim();
-
-    let filtered = [...allMatches];
+    let seasonFiltered = [...allMatches];
 
     if (seasonValue) {
-        filtered = filtered.filter(
+
+        seasonFiltered = seasonFiltered.filter(
             x => x["Season"] === seasonValue
         );
-    }
 
-    if (competitionValue) {
-        filtered = filtered.filter(
-            x => x["Competition"] === competitionValue
-        );
-    }
-
-    if (opponentValue) {
-        filtered = filtered.filter(
-            x => x["Opp. Team"] === opponentValue
-        );
     }
 
     const seasons = [
+        ...new Set(
+            allMatches
+                .map(x => x["Season"])
+                .filter(Boolean)
+        )
+    ];
+
+    const competitions = [
+        ...new Set(
+            seasonFiltered
+                .map(x => x["Competition"])
+                .filter(Boolean)
+        )
+    ];
+
+    const opponents = [
+        ...new Set(
+            seasonFiltered
+                .map(x => x["Opp. Team"])
+                .filter(Boolean)
+        )
+    ];
+
+    seasons.sort().reverse();
+    competitions.sort();
+    opponents.sort();
         ...new Set(
             allMatches
                 .map(x => x["Season"])
@@ -659,7 +667,7 @@ const currentCompetition =
     competitionSelect.value;
 
 competitionSelect.innerHTML =
-    '<option value="">All</option>';
+    '<option value="">All competitions</option>';
 
 competitions.forEach(value => {
 
@@ -673,8 +681,7 @@ competitions.forEach(value => {
 
 });
 
-if (competitions.includes(currentCompetition)) {
-    competitionSelect.value = currentCompetition;
+competitionSelect.value = currentCompetition;
 }
 
 const opponentSelect =
@@ -684,7 +691,7 @@ const currentOpponent =
     opponentSelect.value;
 
 opponentSelect.innerHTML =
-    '<option value="">All</option>';
+    '<option value="">All opponents</option>';
 
 opponents.forEach(value => {
 
@@ -698,8 +705,7 @@ opponents.forEach(value => {
 
 });
 
-if (opponents.includes(currentOpponent)) {
-    opponentSelect.value = currentOpponent;
+opponentSelect.value = currentOpponent;
 }
 
     const competitionInput =
