@@ -700,7 +700,7 @@ for(let i=1;i<=12;i++){
 
         if(match[`Sub on ${i}`]){
 
-            substitutions.push({
+            events.push({
                 minute: match[`Sub min ${i}`],
                 side: homeMatch ? "left" : "right",
                 on: match[`Sub on ${i}`],
@@ -711,7 +711,7 @@ for(let i=1;i<=12;i++){
 
         if(match[`Opp. Sub on ${i}`]){
 
-            substitutions.push({
+            events.push({
                 minute: match[`Opp. Sub min ${i}`],
                 side: homeMatch ? "right" : "left",
                 on: match[`Opp. Sub on ${i}`],
@@ -836,7 +836,6 @@ events.forEach(event => {
         `;
 
         if(event.assist){
-
             content += `
                 <br>
                 <small>
@@ -871,7 +870,13 @@ events.forEach(event => {
 
 });
 
-}
+timelineHtml += `
+</div>
+`;
+
+return {
+    timelineHtml
+};
 
 function hasStartingXI(match,prefix=""){
 
@@ -1146,19 +1151,10 @@ ${escapeHtml(match["Referee"] || "-")}
 
 <div class="right-column">
 
-    <div class="card">
-
-        <h2 class="section-title">
-            Timeline
-        </h2>
-
-${timeline.timelineHtml}
-
-    </div>
+    ${timeline.timelineHtml}
 
 </div>
 
-</div>
 `;
 
 if(window.innerWidth <= 900){
