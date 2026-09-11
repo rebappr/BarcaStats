@@ -22,7 +22,7 @@
     --surface:#1e293b;
 }
 
-[data-theme="dark"]{
+html[data-theme="dark"]{
 
     --bg:#0f172a;
     --text:#ffffff;
@@ -63,7 +63,7 @@
     }
 }
 
-[data-theme="light"]{
+html[data-theme="light"]{
 
     --bg:#f8fafc;
     --text:#0f172a;
