@@ -638,36 +638,19 @@ if (currentSeason && seasons.includes(currentSeason)) {
 
 }
 
-const competitionSelect =
-    document.getElementById("competitionFilter");
-
-const currentCompetition =
-    competitionSelect.value;
-
-competitionSelect.innerHTML = "";
-
-const allOption = document.createElement("option");
-allOption.value = "";
-allOption.textContent = "All Competitions";
-competitionSelect.appendChild(allOption);
+document.getElementById("competitionList").innerHTML = "";
 
 competitions.forEach(value => {
 
     const option = document.createElement("option");
 
     option.value = value;
-    option.textContent = value;
 
-    competitionSelect.appendChild(option);
+    document
+        .getElementById("competitionList")
+        .appendChild(option);
 
 });
-
-if (
-    currentCompetition &&
-    competitions.includes(currentCompetition)
-) {
-    competitionSelect.value = currentCompetition;
-}
 
     opponents.forEach(value => {
         const option = document.createElement("option");
