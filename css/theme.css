@@ -80,11 +80,11 @@ html[data-theme="dark"]{
         --surface:#f8fafc;
 
     --result-win:#15803d;
-    --result-draw:#a16207;
+    --result-draw:#334155;
     --result-loss:#b91c1c;
 
     --result-win-bg:#dcfce7;
-    --result-draw-bg:#fef3c7;
+    --result-draw-bg:#f1f5f9;
     --result-loss-bg:#fee2e2;
 
 }
@@ -107,10 +107,10 @@ html[data-theme="light"]{
     --surface:#f8fafc;
 
     --result-win:#15803d;
-    --result-draw:#a16207;
+    --result-draw:#334155;
     --result-loss:#b91c1c;
 
     --result-win-bg:#dcfce7;
-    --result-draw-bg:#fef3c7;
+    --result-draw-bg:#f1f5f9;
     --result-loss-bg:#fee2e2;
 }
