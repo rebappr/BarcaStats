@@ -182,7 +182,8 @@ td{
 .filter-group{
     display:flex;
     flex-direction:column;
-    gap:5px;
+    gap:6px;
+    flex:1;
     min-width:180px;
 }
 
@@ -328,7 +329,8 @@ tbody tr:hover{
 }
 
 input[list],
-select:focus{
+select{
+    width:100%;
     height:42px;
     border:none;
     border-radius:12px;
@@ -336,6 +338,7 @@ select:focus{
     color:white;
     padding:0 14px;
     font-family:inherit;
+    font-size:12px;
 }
 
 select option{
