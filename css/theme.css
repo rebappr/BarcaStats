@@ -22,6 +22,23 @@
     --surface:#1e293b;
 }
 
+[data-theme="dark"]{
+
+    --bg:#0f172a;
+    --text:#ffffff;
+
+    --card-bg:rgba(255,255,255,.08);
+    --card-border:rgba(255,255,255,.12);
+
+    --meta-bg:rgba(255,255,255,.06);
+    --meta-border:rgba(255,255,255,.08);
+
+    --muted:#94a3b8;
+
+    --divider:rgba(148,163,184,.35);
+    --surface:#1e293b;
+}
+
 /* =========================
    LIGHT THEME
    ========================= */
@@ -44,4 +61,21 @@
         --divider:#cbd5e1;
         --surface:#f8fafc;
     }
+}
+
+[data-theme="light"]{
+
+    --bg:#f8fafc;
+    --text:#0f172a;
+
+    --card-bg:#ffffff;
+    --card-border:#e2e8f0;
+
+    --meta-bg:#f8fafc;
+    --meta-border:#e2e8f0;
+
+    --muted:#64748b;
+
+    --divider:#cbd5e1;
+    --surface:#f8fafc;
 }
