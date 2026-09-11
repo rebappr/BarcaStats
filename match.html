@@ -504,8 +504,8 @@ function getPlayers(match,prefix=""){
 
         const player = match[`${prefix}Sub off ${i}`];
 
-        if(player){
-            events.push(String(player).trim());
+if(player){
+    subbedOff.push(String(player).trim());
     }
 }
 
@@ -556,9 +556,9 @@ for(let i=1;i<=6;i++){
 
     const player = match[`${prefix}Sub on ${i}`];
 
-    if(player){
-        events.push(String(player).trim());
-    }
+if(player){
+    subbedOn.push(String(player).trim());
+}
 }
 
     let html="";
@@ -778,7 +778,7 @@ for(let i=1;i<=12;i++){
 
     }
 
-    sortByMinute(evnets);
+    sortByMinute(events);
 
     function eventRow(side, minute, content){
 
@@ -825,140 +825,52 @@ let timelineHtml = `
     </h2>
 `;
 
-let timelineHtml = `
-<div class="card">
-    <h2 class="section-title">
-        Timeline
-    </h2>
-`;
-    // GOALS
+events.forEach(event => {
 
-    if(goals.length){
+    let content = "";
 
-goalsHtml += `
-    <div>
-`;
+    if(event.assist !== undefined){
 
-        goals.forEach(goal => {
-
-           let content = "";
-
-if(goal.missedPenalty){
-
-    content = `
-        <span class="event-icon">❌</span>
-        <strong>${escapeHtml(goal.player)}</strong>
-        <span style="font-weight:normal;">
-            (missed penalty)
-        </span>
-    `;
-
-}else{
-
-    content = `
-        <span class="event-icon">⚽</span>
-        <strong>${escapeHtml(goal.player)}</strong>
-        ${
-            goal.penalty
-                ? ' <span style="font-weight:normal;">(penalty)</span>'
-                : ''
-        }
-    `;
-
-}
-
-            if(goal.assist){
-
-                content += `
-                    <br>
-                    <small>
-                        Assist: ${escapeHtml(goal.assist)}
-                    </small>
-                `;
-
-            }
-
-            goalsHtml += eventRow(
-                goal.side,
-                goal.minute,
-                content
-            );
-
-        });
-
-        goalsHtml += `
-            </div>
+        content = `
+            ⚽ <strong>${escapeHtml(event.player)}</strong>
         `;
 
-    }
+        if(event.assist){
 
-    // SUBSTITUTIONS
-
-    if(substitutions.length){
-
-substitutionsHtml += `
-    <h3 class="timeline-title">
-        Substitutions
-    </h3>
-`;
-
-        substitutions.forEach(sub => {
-
-            substitutionsHtml += eventRow(
-                sub.side,
-                sub.minute,
-                `
-                <span class="event-icon">🔄</span>
-                <strong>${escapeHtml(sub.on)}</strong>
+            content += `
                 <br>
                 <small>
-                    for ${escapeHtml(sub.off || "")}
+                    Assist: ${escapeHtml(event.assist)}
                 </small>
-                `
-            );
+            `;
+        }
 
-        });
+    }else if(event.on){
 
-        substitutionsHtml += `
-            </div>
+        content = `
+            🔄 <strong>${escapeHtml(event.on)}</strong>
+            <br>
+            <small>
+                for ${escapeHtml(event.off)}
+            </small>
         `;
 
-    }
+    }else if(event.icon){
 
-    // CARDS
-
-    if(cards.length){
-
-cardsHtml += `
-    <h3 class="timeline-title">
-        Cards
-    </h3>
-`;
-
-        cards.forEach(card => {
-
-            cardsHtml += eventRow(
-                card.side,
-                card.minute,
-                `
-                <span class="event-icon">
-                    ${card.icon}
-                </span>
-                ${escapeHtml(card.player)}
-                `
-            );
-
-        });
-
-        cardsHtml += `
-            </div>
+        content = `
+            ${event.icon}
+            ${escapeHtml(event.player)}
         `;
-
     }
 
-return {
-    timelineHtml
-};
+    timelineHtml += eventRow(
+        event.side,
+        event.minute,
+        content
+    );
+
+});
+
 }
 
 function hasStartingXI(match,prefix=""){
