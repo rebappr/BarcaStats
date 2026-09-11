@@ -462,92 +462,6 @@ renderMatch(match);
 
     console.error(error);
 
-const squadsHtml =
-    hasStartingXI(match) ||
-    hasStartingXI(match,"Opp. ") ||
-    hasBench(match) ||
-    hasBench(match,"Opp. ")
-    ? `
-    <div class="card">
-
-        <h2 class="section-title">
-            Squads
-        </h2>
-
-        <div class="lineup-tabs">
-
-            <button
-                class="lineup-tab active"
-                onclick="showLineup('barca')">
-
-                ${escapeHtml(barcaTitle)}
-
-            </button>
-
-            <button
-                class="lineup-tab"
-                onclick="showLineup('opp')">
-
-                ${escapeHtml(oppTitle)}
-
-            </button>
-
-        </div>
-
-        <div class="lineups">
-
-            <div
-                id="lineup-barca"
-                class="team-card">
-
-                <h3>${escapeHtml(barcaTitle)}</h3>
-
-                ${barcaPlayers}
-
-                <h4>Bench</h4>
-                ${barcaBench}
-
-                <h4>Manager</h4>
-
-                <div class="player">
-                    ${escapeHtml(
-                        homeMatch
-                            ? (match["Manager"] || "-")
-                            : (match["Opp. Manager"] || "-")
-                    )}
-                </div>
-
-            </div>
-
-            <div
-                id="lineup-opp"
-                class="team-card">
-
-                <h3>${escapeHtml(oppTitle)}</h3>
-
-                ${oppPlayers}
-
-                <h4>Bench</h4>
-                ${oppBench}
-
-                <h4>Manager</h4>
-
-                <div class="player">
-                    ${escapeHtml(
-                        homeMatch
-                            ? (match["Opp. Manager"] || "-")
-                            : (match["Manager"] || "-")
-                    )}
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-`
-: "";
-
     document.getElementById("app").innerHTML = `
         <div class="card">
             Error:<br>
@@ -1153,6 +1067,94 @@ const heroMatchday =
     isNumericMatchday
         ? `${matchday}. Matchday`
         : matchday;
+
+const squadsHtml =
+    hasStartingXI(match) ||
+    hasStartingXI(match,"Opp. ") ||
+    hasBench(match) ||
+    hasBench(match,"Opp. ")
+    ? `
+    <div class="card">
+
+        <h2 class="section-title">
+            Squads
+        </h2>
+
+        <div class="lineup-tabs">
+
+            <button
+                class="lineup-tab active"
+                onclick="showLineup('barca')">
+
+                ${escapeHtml(barcaTitle)}
+
+            </button>
+
+            <button
+                class="lineup-tab"
+                onclick="showLineup('opp')">
+
+                ${escapeHtml(oppTitle)}
+
+            </button>
+
+        </div>
+
+        <div class="lineups">
+
+            <div
+                id="lineup-barca"
+                class="team-card">
+
+                <h3>${escapeHtml(barcaTitle)}</h3>
+
+                ${barcaPlayers}
+
+                <h4>Bench</h4>
+
+                ${barcaBench}
+
+                <h4>Manager</h4>
+
+                <div class="player">
+                    ${escapeHtml(
+                        homeMatch
+                            ? (match["Manager"] || "-")
+                            : (match["Opp. Manager"] || "-")
+                    )}
+                </div>
+
+            </div>
+
+            <div
+                id="lineup-opp"
+                class="team-card">
+
+                <h3>${escapeHtml(oppTitle)}</h3>
+
+                ${oppPlayers}
+
+                <h4>Bench</h4>
+
+                ${oppBench}
+
+                <h4>Manager</h4>
+
+                <div class="player">
+                    ${escapeHtml(
+                        homeMatch
+                            ? (match["Opp. Manager"] || "-")
+                            : (match["Manager"] || "-")
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+`
+: "";
 
 document.getElementById("app").innerHTML = `
 
