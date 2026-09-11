@@ -25,11 +25,10 @@ body{
     margin:0;
     font-family:'Inter',sans-serif;
     background:
-        radial-gradient(circle at top left,#004D98 0%,transparent 35%),
-        radial-gradient(circle at top right,#A50044 0%,transparent 35%),
-        #0f172a;
-
-    color:#ffffff;
+    radial-gradient(circle at top left,#004D98 0%,transparent 35%),
+    radial-gradient(circle at top right,#A50044 0%,transparent 35%),
+    var(--bg);
+    color:var(--text);
     font-size:12px;
     min-height:100vh;
 }
@@ -53,11 +52,11 @@ body{
 .section-title{
     margin:0 0 12px;
     padding:16px 20px;
-    background:rgba(255,255,255,.08);
     backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.12);
     border-radius:24px;
-    color:white;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    color:var(--text);
     font-size:18px;
 }
 
@@ -80,9 +79,9 @@ body{
 }
 
 .widget-card{
-    background:rgba(255,255,255,.08);
+    background:var(--card-bg);
     backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid var(--card-border);
     border-radius:24px;
     padding:22px;
     margin-bottom:20px;
@@ -92,7 +91,7 @@ body{
 .widget-card h2{
     margin-top:0;
     font-size:18px;
-    color:white;
+    color:var(--text);
 }
 
 th{
@@ -161,9 +160,9 @@ td{
     display:flex;
     flex-wrap:wrap;
     gap:15px;
-    background:rgba(255,255,255,.08);
+    background:var(--card-bg);
     backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid var(--card-border);
     padding:20px;
     border-radius:24px;
     margin-bottom:20px;
@@ -180,9 +179,9 @@ td{
 }
 
 .table-wrapper{
-    background:rgba(255,255,255,.08);
+    background:var(--card-bg);
     backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid var(--card-border);
     border-radius:24px;
     overflow:hidden;
     transition:.3s;
@@ -242,8 +241,8 @@ td{
 }
 
 th{
-    background:rgba(255,255,255,.06);
-    color:#94a3b8;
+    background:var(--meta-bg);
+    color:var(--muted);
     text-align:left;
     padding:12px;
     position:sticky;
@@ -253,7 +252,7 @@ th{
 
 td{
     padding:8px;
-    border-bottom:1px solid #edf2f7;
+    border-bottom:1px solid var(--meta-border);
 }
 
 tbody tr{
@@ -261,7 +260,7 @@ tbody tr{
 }
 
 tbody tr:hover{
-    background:rgba(255,255,255,.06);
+    background:var(--meta-bg);
     cursor:pointer;
 }
 
@@ -302,8 +301,8 @@ tbody tr:hover{
 }
 
 .result-empty{
-    background:rgba(255,255,255,.08);
-    color:#94a3b8;
+    background:var(--card-bg);
+    color:var(--muted);
 }
 
 .empty{
@@ -314,7 +313,7 @@ tbody tr:hover{
 input[list],
 select{
     width:100%;
-    height:46px;442
+    height:46px;
     appearance:none;
     border:1px solid rgba(255,255,255,.15);
     border-radius:14px;
