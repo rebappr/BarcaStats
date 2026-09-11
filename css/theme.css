@@ -3,6 +3,7 @@
    ========================= */
 
 :root{
+
     --barca-blue:#004D98;
     --barca-red:#A50044;
 
@@ -16,10 +17,10 @@
     --meta-border:rgba(255,255,255,.08);
 
     --muted:#94a3b8;
-    --divider:rgba(148,163,184,.35);
-   --surface:#1e293b;
-}
 
+    --divider:rgba(148,163,184,.35);
+    --surface:#1e293b;
+}
 
 /* =========================
    LIGHT THEME
@@ -28,9 +29,6 @@
 @media (prefers-color-scheme: light){
 
     :root{
-
-         --barca-blue:#004D98;
-         --barca-red:#A50044;
 
         --bg:#f8fafc;
         --text:#0f172a;
@@ -42,7 +40,8 @@
         --meta-border:#e2e8f0;
 
         --muted:#64748b;
+
         --divider:#cbd5e1;
-       --surface:#f8fafc;
+        --surface:#f8fafc;
     }
 }
