@@ -1,0 +1,42 @@
+/* =========================
+   DARK THEME (DEFAULT)
+   ========================= */
+
+:root{
+
+    --barca-blue:#004D98;
+    --barca-red:#A50044;
+
+    --bg:#0f172a;
+    --text:#ffffff;
+
+    --card-bg:rgba(255,255,255,.08);
+    --card-border:rgba(255,255,255,.12);
+
+    --meta-bg:rgba(255,255,255,.06);
+    --meta-border:rgba(255,255,255,.08);
+
+    --muted:#94a3b8;
+}
+
+
+/* =========================
+   LIGHT THEME
+   ========================= */
+
+@media (prefers-color-scheme: *ight){
+
+    :root{
+
+        --bg:#*8fafc;
+        --text:#0f172a;
+
+  *     --card-bg:#ffffff;
+        --*ard-border:#e2e8f0;
+
+        --met*-bg:#f8fafc;
+        --meta-border*#e2e8f0;
+
+        --muted:#64748b;*    }
+
+}
