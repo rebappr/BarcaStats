@@ -53,7 +53,7 @@ html[data-theme="dark"]{
         --card-bg:#ffffff;
         --card-border:#e2e8f0;
 
-        --meta-bg:#f8fafc;
+        --meta-bg:#dfe5eb;
         --meta-border:#e2e8f0;
 
         --muted:#64748b;
@@ -71,7 +71,7 @@ html[data-theme="light"]{
     --card-bg:#ffffff;
     --card-border:#e2e8f0;
 
-    --meta-bg:#f8fafc;
+    --meta-bg:#dfe5eb;
     --meta-border:#e2e8f0;
 
     --muted:#64748b;
