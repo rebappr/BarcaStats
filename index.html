@@ -427,10 +427,6 @@ select:focus{
     
         <h1>FC Barcelona</h1>
     
-        <p class="hero-subtitle">
-            Matches • Results • Statistics
-        </p>
-    
     </div>
 
     <div class="filters">
@@ -457,7 +453,7 @@ select:focus{
 
     <div class="left-panel">
     
-        <h2 class="section-title">Matches</h2>
+        <h2 class="section-title" id="seasonTitle">Season</h2>
     
         <div id="matches">
             Loading...
@@ -710,6 +706,16 @@ function createFilters(){
 
 }
 
+function updateSeasonTitle(){
+
+    const season =
+        document.getElementById("seasonFilter").value;
+
+    document.getElementById("seasonTitle").textContent =
+        `FC Barcelona ${season}`;
+
+}
+
 function applyFilters(){
 
     const seasonFilter =
@@ -775,10 +781,11 @@ function applyFilters(){
         new Date(b.Date.split(".").reverse().join("-"))
     );
 
-    saveFilters();
-    updateFilterOptions();
+saveFilters();
+updateFilterOptions();
+updateSeasonTitle();
 
-    render(filtered);
+render(filtered);
 
 }
 
