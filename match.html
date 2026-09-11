@@ -38,6 +38,28 @@ body{
     min-height:100vh;
 }
 
+.theme-toggle{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:#A50044;
+    color:white;
+
+    font-size:20px;
+    font-weight:700;
+
+    z-index:9999;
+}
+
 .container{
     max-width:1400px;
     margin:auto;
@@ -410,6 +432,10 @@ body{
 </head>
 
 <body>
+
+<button id="themeToggle" class="theme-toggle">
+    🌙
+</button>
 
 <div class="container">
 
@@ -1185,6 +1211,61 @@ window.addEventListener("resize", () => {
     }
 
 });
+
+(function(){
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+    const systemTheme =
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+
+    const theme =
+        savedTheme || systemTheme;
+
+    document.documentElement.setAttribute(
+        "data-theme",
+        theme
+    );
+
+    const button =
+        document.getElementById("themeToggle");
+
+    button.textContent =
+        theme === "dark"
+            ? "☀️"
+            : "🌙";
+
+    button.addEventListener("click", () => {
+
+        const current =
+            document.documentElement.getAttribute("data-theme");
+
+        const next =
+            current === "dark"
+                ? "light"
+                : "dark";
+
+        document.documentElement.setAttribute(
+            "data-theme",
+            next
+        );
+
+        localStorage.setItem(
+            "theme",
+            next
+        );
+
+        button.textContent =
+            next === "dark"
+                ? "☀️"
+                : "🌙";
+
+    });
+
+})();
 </script>
 
 </body>
