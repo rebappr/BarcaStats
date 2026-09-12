@@ -391,6 +391,11 @@ select:focus{
     box-shadow:0 0 0 3px rgba(59,130,246,.35);
     }
 
+.stats-table th{
+    cursor:pointer;
+    user-select:none;
+}
+
 @media(max-width:768px){
 
     .content-layout{
@@ -849,6 +854,30 @@ updateFilterOptions();
 updateSeasonTitle();
 
 render(filtered);
+
+let statsSortColumn = "squad";
+let statsSortDirection = "desc";
+
+function sortStats(column) {
+
+    if (statsSortColumn === column) {
+
+        statsSortDirection =
+            statsSortDirection === "asc"
+                ? "desc"
+                : "asc";
+
+    } else {
+
+        statsSortColumn = column;
+        statsSortDirection = "desc";
+
+    }
+
+    renderStatistics();
+
+}
+    
 renderStatistics();
 
 }
@@ -1149,25 +1178,46 @@ function renderStatistics() {
 
     });
 
-    const sortedPlayers =
-        Object.entries(players)
-            .sort(
-                (a,b) =>
-                    b[1].squad - a[1].squad
-            );
+const sortedPlayers = Object.entries(players);
+
+sortedPlayers.sort((a,b) => {
+
+    const valueA =
+        statsSortColumn === "name"
+            ? a[0]
+            : a[1][statsSortColumn];
+
+    const valueB =
+        statsSortColumn === "name"
+            ? b[0]
+            : b[1][statsSortColumn];
+
+    if (typeof valueA === "string") {
+
+        return statsSortDirection === "asc"
+            ? valueA.localeCompare(valueB)
+            : valueB.localeCompare(valueA);
+
+    }
+
+    return statsSortDirection === "asc"
+        ? valueA - valueB
+        : valueB - valueA;
+
+});
 
     let html = `
         <div class="table-scroll">
         <table class="stats-table">
             <thead>
                 <tr>
-                    <th>Player</th>
-                    <th>Squad</th>
-                    <th>XI</th>
-                    <th>G</th>
-                    <th>A</th>
-                    <th>Y</th>
-                    <th>R</th>
+                    <th onclick="sortStats('name')">Player</th>
+                    <th onclick="sortStats('squad')">Squad</th>
+                    <th onclick="sortStats('xi')">XI</th>
+                    <th onclick="sortStats('goals')">G</th>
+                    <th onclick="sortStats('assists')">A</th>
+                    <th onclick="sortStats('yellow')">Y</th>
+                    <th onclick="sortStats('red')">R</th>
                 </tr>
             </thead>
             <tbody>
