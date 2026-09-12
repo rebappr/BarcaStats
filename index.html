@@ -220,28 +220,21 @@ table{
 }
 
 .stats-table{
-    table-layout:auto;
+    width:100%;
+    table-layout:fixed;
 }
 
 .stats-table th:first-child,
 .stats-table td:first-child{
-    width:auto !important;
-    min-width:220px;
-    white-space:nowrap;
+    width:auto;
+    min-width:140px;
     text-align:left !important;
-}
-
-.stats-table th,
-.stats-table td{
-    white-space:nowrap;
-    text-align:center;
 }
 
 .stats-table th:not(:first-child),
 .stats-table td:not(:first-child){
-    width:80px;
-    min-width:80px;
-    max-width:80px;
+    width:50px;
+    text-align:center;
 }
 
 th:nth-child(1),
