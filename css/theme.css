@@ -29,6 +29,9 @@
     --result-draw-bg:rgba(250,204,21,.15);
     --result-loss-bg:rgba(239,68,68,.15);
 
+--select-bg: #22385f;
+--select-text: #ffffff;
+
 }
 
 html[data-theme="dark"]{
