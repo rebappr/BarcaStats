@@ -392,7 +392,9 @@ select:focus{
     box-shadow:0 0 0 3px rgba(59,130,246,.35);
     }
 
-.stats-table th{
+.stats-selected{
+    background:#ffd54a !important;
+    color:#000 !important;
     cursor:pointer;
     user-select:none;
 }
@@ -1211,13 +1213,13 @@ let html = `
     <table class="stats-table">
         <thead>
             <tr>
-                <th onclick="sortStats('name')">Player</th>
-                <th onclick="sortStats('squad')">Squad</th>
-                <th onclick="sortStats('xi')">XI</th>
-                <th onclick="sortStats('goals')">G</th>
-                <th onclick="sortStats('assists')">A</th>
-                <th onclick="sortStats('yellow')">Y</th>
-                <th onclick="sortStats('red')">R</th>
+                <th class="${statsSortColumn==='name'?'stats-selected':''}" onclick="sortStats('name')">Player</th>
+                <th class="${statsSortColumn==='squad'?'stats-selected':''}" onclick="sortStats('squad')">Squad</th>
+                <th class="${statsSortColumn==='xi'?'stats-selected':''}" onclick="sortStats('xi')">XI</th>
+                <th class="${statsSortColumn==='goals'?'stats-selected':''}" onclick="sortStats('goals')">G</th>
+                <th class="${statsSortColumn==='assists'?'stats-selected':''}" onclick="sortStats('assists')">A</th>
+                <th class="${statsSortColumn==='yellow'?'stats-selected':''}" onclick="sortStats('yellow')">Y</th>
+                <th class="${statsSortColumn==='red'?'stats-selected':''}" onclick="sortStats('red')">R</th>
             </tr>
         </thead>
         <tbody>
@@ -1225,17 +1227,29 @@ let html = `
 
 sortedPlayers.forEach(([name, stats]) => {
 
-    html += `
-        <tr>
-            <td>${name}</td>
-            <td>${stats.squad}</td>
-            <td>${stats.xi}</td>
-            <td>${stats.goals}</td>
-            <td>${stats.assists}</td>
-            <td>${stats.yellow}</td>
-            <td>${stats.red}</td>
-        </tr>
-    `;
+html += `
+<tr>
+    <td class="${statsSortColumn==='name'?'stats-selected':''}">${name}</td>
+    <td class="${statsSortColumn==='squad'?'stats-selected':''}">
+        ${stats.squad}
+    </td>
+    <td class="${statsSortColumn==='xi'?'stats-selected':''}">
+        ${stats.xi}
+    </td>
+    <td class="${statsSortColumn==='goals'?'stats-selected':''}">
+        ${stats.goals}
+    </td>
+    <td class="${statsSortColumn==='assists'?'stats-selected':''}">
+        ${stats.assists}
+    </td>
+    <td class="${statsSortColumn==='yellow'?'stats-selected':''}">
+        ${stats.yellow}
+    </td>
+    <td class="${statsSortColumn==='red'?'stats-selected':''}">
+        ${stats.red}
+    </td>
+</tr>
+`;
 
 });
 
