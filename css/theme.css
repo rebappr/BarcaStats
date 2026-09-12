@@ -29,8 +29,8 @@
     --result-draw-bg:rgba(250,204,21,.15);
     --result-loss-bg:rgba(239,68,68,.15);
 
---select-bg: #22385f;
---select-text: #ffffff;
+    --select-bg: #22385f;
+    --select-text: #ffffff;
 
 }
 
@@ -57,6 +57,9 @@ html[data-theme="dark"]{
     --result-win-bg:rgba(34,197,94,.15);
     --result-draw-bg:rgba(250,204,21,.15);
     --result-loss-bg:rgba(239,68,68,.15);
+
+    --select-bg: #22385f;
+    --select-text: #ffffff;
 }
 
 /* =========================
@@ -90,6 +93,9 @@ html[data-theme="dark"]{
     --result-draw-bg:#f1f5f9;
     --result-loss-bg:#fee2e2;
 
+    --select-bg: #ffffff;
+    --select-text: #0f172a;
+
 }
 
 html[data-theme="light"]{
@@ -116,4 +122,7 @@ html[data-theme="light"]{
     --result-win-bg:#dcfce7;
     --result-draw-bg:#f1f5f9;
     --result-loss-bg:#fee2e2;
+
+    --select-bg: #ffffff;
+    --select-text: #0f172a;
 }
