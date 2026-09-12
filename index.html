@@ -62,12 +62,12 @@ body{
 }
 
 .left-panel{
-    flex:0 0 40%;
+    flex:0 0 42%;
     min-width:0;
 }
 
 .right-panel{
-    flex:0 0 60%;
+    flex:0 0 58%;
     min-width:0;
 }
 
@@ -222,6 +222,11 @@ table{
 .stats-table{
     width:100%;
     table-layout:fixed;
+}
+
+.stats-table th{
+    cursor:pointer;
+    user-select:none;
 }
 
 .stats-table th:first-child,
@@ -398,7 +403,7 @@ select:focus{
     background:#004D98 !important;
     color:#fff !important;
     font-weight:700;
-    cursor:pointer;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
 }
 
 @media(max-width:768px){
