@@ -1239,7 +1239,13 @@ sortedPlayers.forEach(([name, stats]) => {
 
 });
 
-    document.getElementById("statistics").innerHTML = html;
+html += `
+        </tbody>
+    </table>
+    </div>
+`;
+
+document.getElementById("statistics").innerHTML = html;
 
 }
 
