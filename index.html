@@ -561,6 +561,25 @@ let allMatches = [];
 let statsSortColumn = "squad";
 let statsSortDirection = "desc";
 
+function saveFilters(){
+
+    localStorage.setItem(
+        "seasonFilter",
+        document.getElementById("seasonFilter").value
+    );
+
+    localStorage.setItem(
+        "competitionFilter",
+        document.getElementById("competitionFilter").value
+    );
+
+    localStorage.setItem(
+        "opponentFilter",
+        document.getElementById("opponentFilter").value
+    );
+
+}
+
 function loadFilters(){
 
     document.getElementById("seasonFilter").value =
