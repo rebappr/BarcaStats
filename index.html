@@ -835,6 +835,7 @@ updateFilterOptions();
 updateSeasonTitle();
 
 render(filtered);
+renderStatistics();
 
 }
 
@@ -1173,14 +1174,6 @@ function renderStatistics() {
     `;
 
     document.getElementById("statistics").innerHTML = html;
-
-}
-
-function renderStatistics() {
-
-    document.getElementById("statistics").innerHTML = `
-        <p>Season statistics will be displayed here.</p>
-    `;
 
 }
 
