@@ -225,9 +225,10 @@ table{
 
 .stats-table th:first-child,
 .stats-table td:first-child{
-    width:1%;
+    width:auto !important;
+    min-width:220px;
     white-space:nowrap;
-    text-align:left;
+    text-align:left !important;
 }
 
 .stats-table th,
@@ -557,6 +558,9 @@ select:focus{
 
 let allMatches = [];
 
+let statsSortColumn = "squad";
+let statsSortDirection = "desc";
+
 function saveFilters(){
 
     localStorage.setItem(
@@ -855,9 +859,6 @@ updateSeasonTitle();
 
 render(filtered);
 
-let statsSortColumn = "squad";
-let statsSortDirection = "desc";
-
 function sortStats(column) {
 
     if (statsSortColumn === column) {
@@ -875,10 +876,6 @@ function sortStats(column) {
     }
 
     renderStatistics();
-
-}
-    
-renderStatistics();
 
 }
 
@@ -1210,15 +1207,45 @@ sortedPlayers.sort((a,b) => {
         <div class="table-scroll">
         <table class="stats-table">
             <thead>
-                <tr>
-                    <th onclick="sortStats('name')">Player</th>
-                    <th onclick="sortStats('squad')">Squad</th>
-                    <th onclick="sortStats('xi')">XI</th>
-                    <th onclick="sortStats('goals')">G</th>
-                    <th onclick="sortStats('assists')">A</th>
-                    <th onclick="sortStats('yellow')">Y</th>
-                    <th onclick="sortStats('red')">R</th>
-                </tr>
+<tr>
+    <th onclick="sortStats('name')">
+        Player
+        ${statsSortColumn === "name"
+            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
+            : ""}
+    </th>
+
+    <th onclick="sortStats('squad')">
+        Squad
+        ${statsSortColumn === "squad"
+            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
+            : ""}
+    </th>
+
+    <th onclick="sortStats('xi')">
+        XI
+        ${statsSortColumn === "xi"
+            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
+            : ""}
+    </th>
+
+    <th onclick="sortStats('goals')">
+        G
+        ${statsSortColumn === "goals"
+            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
+            : ""}
+    </th>
+
+    <th onclick="sortStats('assists')">
+        A
+        ${statsSortColumn === "assists"
+            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
+            : ""}
+    </th>
+
+    <th onclick="sortStats('yellow')">
+        Y
+        ${statsSortColumn === "yellow
             </thead>
             <tbody>
     `;
