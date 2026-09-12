@@ -219,6 +219,22 @@ table{
     border-collapse:collapse;
 }
 
+.stats-table{
+    table-layout:auto;
+}
+
+.stats-table th:first-child,
+.stats-table td:first-child{
+    width:1%;
+    white-space:nowrap;
+    text-align:left;
+}
+
+.stats-table th,
+.stats-table td{
+    white-space:nowrap;
+}
+
 th:nth-child(1),
 td:nth-child(1){
     width:60px;
@@ -1142,7 +1158,7 @@ function renderStatistics() {
 
     let html = `
         <div class="table-scroll">
-        <table>
+        <table class="stats-table">
             <thead>
                 <tr>
                     <th>Player</th>
