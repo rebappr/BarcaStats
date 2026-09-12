@@ -534,6 +534,57 @@ function escapeHtml(str) {
         .replace(/'/g, "&#039;");
 }
 
+function getPlayerIcons(match, playerName, prefix = "") {
+
+    const icons = [];
+
+    // Góly
+    for (let i = 1; i <= 12; i++) {
+        if (
+            String(match[`${prefix}Goal Player ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ) {
+            icons.push("⚽");
+        }
+    }
+
+    // Asistencie
+    for (let i = 1; i <= 12; i++) {
+        if (
+            String(match[`${prefix}Assist Player ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ) {
+            icons.push("🅰️");
+        }
+    }
+
+    // Žlté karty
+    for (let i = 1; i <= 12; i++) {
+        if (
+            String(match[`${prefix}Yellow player ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ) {
+            icons.push("🟨");
+        }
+    }
+
+    // Červené karty
+    for (let i = 1; i <= 5; i++) {
+        if (
+            String(match[`${prefix}Red player ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ) {
+            icons.push("🟥");
+        }
+    }
+
+    return icons.join(" ");
+}
+
+function getPlayers(match,prefix=""){
+
+    const captain = match[`${prefix}Captain`] || "";
+
 function getPlayers(match,prefix=""){
 
     const captain = match[`${prefix}Captain`] || "";
@@ -567,8 +618,9 @@ if(player){
                     ${escapeHtml(number || "")}
                 </div>
 
-                <span class="player-name">
-    ${escapeHtml(player)}
+        <span class="player-name">
+            ${escapeHtml(player)}
+            ${getPlayerIcons(match, player, prefix)}
     ${
         String(player).trim() === String(captain).trim()
             ? ' <strong>(C)</strong>'
