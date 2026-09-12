@@ -642,17 +642,24 @@ function getTimeline(match){
 
     function sortByMinute(arr){
 
-        arr.sort((a,b) => {
-
-            const ma =
-                parseInt(String(a.minute).match(/\d+/)?.[0] || 0);
-
-            const mb =
-                parseInt(String(b.minute).match(/\d+/)?.[0] || 0);
-
-            return ma - mb;
-
-        });
+    arr.sort((a,b) => {
+    
+        const aCheck = String(a.minute).trim() === "✔";
+        const bCheck = String(b.minute).trim() === "✔";
+    
+        if (aCheck && !bCheck) return 1;
+        if (!aCheck && bCheck) return -1;
+        if (aCheck && bCheck) return 0;
+    
+        const ma =
+            parseInt(String(a.minute).match(/\d+/)?.[0] || 0);
+    
+        const mb =
+            parseInt(String(b.minute).match(/\d+/)?.[0] || 0);
+    
+        return ma - mb;
+    
+    });
 
     }
 
@@ -835,7 +842,7 @@ for(let i=1;i<=12;i++){
                 }
 
                 <div class="event-minute">
-                    ${escapeHtml(minute)}'
+                    ${escapeHtml(minute)}${String(minute).trim() === "✔" ? "" : "'"}
                 </div>
 
                 ${
