@@ -1003,11 +1003,176 @@ Object.keys(grouped)
 
 }
 
-function renderLaLigaTable() {
+function renderStatistics() {
 
-    document.getElementById("laligaTable").innerHTML = `
-        <p>La Liga table will be displayed here.</p>
+    const season =
+        document.getElementById("seasonFilter")?.value || "";
+
+    let matches = [...allMatches];
+
+    if (season) {
+        matches = matches.filter(
+            m => String(m.Season || "") === season
+        );
+    }
+
+    const players = {};
+
+    function addPlayer(name) {
+
+        if (!name || !String(name).trim()) return;
+
+        name = String(name).trim();
+
+        if (!players[name]) {
+            players[name] = {
+                squad: 0,
+                xi: 0,
+                goals: 0,
+                assists: 0,
+                yellow: 0,
+                red: 0
+            };
+        }
+
+    }
+
+    matches.forEach(match => {
+
+        // základná 11
+        for (let i = 1; i <= 11; i++) {
+
+            const player =
+                match[`Player name ${i}`];
+
+            if (player) {
+
+                addPlayer(player);
+
+                players[player].squad++;
+                players[player].xi++;
+
+            }
+
+        }
+
+        // lavička
+        for (let i = 1; i <= 12; i++) {
+
+            const player =
+                match[`On the bench name ${i}`];
+
+            if (player) {
+
+                addPlayer(player);
+
+                players[player].squad++;
+
+            }
+
+        }
+
+        // góly
+        for (let i = 1; i <= 12; i++) {
+
+            const player =
+                match[`Goal Player ${i}`];
+
+            if (player) {
+                addPlayer(player);
+                players[player].goals++;
+            }
+
+        }
+
+        // asistencie
+        for (let i = 1; i <= 12; i++) {
+
+            const player =
+                match[`Assist Player ${i}`];
+
+            if (player) {
+                addPlayer(player);
+                players[player].assists++;
+            }
+
+        }
+
+        // žlté
+        for (let i = 1; i <= 12; i++) {
+
+            const player =
+                match[`Yellow player ${i}`];
+
+            if (player) {
+                addPlayer(player);
+                players[player].yellow++;
+            }
+
+        }
+
+        // červené
+        for (let i = 1; i <= 5; i++) {
+
+            const player =
+                match[`Red player ${i}`];
+
+            if (player) {
+                addPlayer(player);
+                players[player].red++;
+            }
+
+        }
+
+    });
+
+    const sortedPlayers =
+        Object.entries(players)
+            .sort(
+                (a,b) =>
+                    b[1].squad - a[1].squad
+            );
+
+    let html = `
+        <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Squad</th>
+                    <th>XI</th>
+                    <th>G</th>
+                    <th>A</th>
+                    <th>Y</th>
+                    <th>R</th>
+                </tr>
+            </thead>
+            <tbody>
     `;
+
+    sortedPlayers.forEach(([name, stats]) => {
+
+        html += `
+            <tr>
+                <td>${name}</td>
+                <td>${stats.squad}</td>
+                <td>${stats.xi}</td>
+                <td>${stats.goals}</td>
+                <td>${stats.assists}</td>
+                <td>${stats.yellow}</td>
+                <td>${stats.red}</td>
+            </tr>
+        `;
+
+    });
+
+    html += `
+            </tbody>
+        </table>
+        </div>
+    `;
+
+    document.getElementById("statistics").innerHTML = html;
 
 }
 
