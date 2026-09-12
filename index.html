@@ -1191,67 +1191,15 @@ sortedPlayers.sort((a,b) => {
         <div class="table-scroll">
         <table class="stats-table">
             <thead>
-<tr>
-    <th onclick="sortStats('name')">
-        Player
-        ${statsSortColumn === "name"
-            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
-            : ""}
-    </th>
-
-    <th onclick="sortStats('squad')">
-        Squad
-        ${statsSortColumn === "squad"
-            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
-            : ""}
-    </th>
-
-    <th onclick="sortStats('xi')">
-        XI
-        ${statsSortColumn === "xi"
-            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
-            : ""}
-    </th>
-
-    <th onclick="sortStats('goals')">
-        G
-        ${statsSortColumn === "goals"
-            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
-            : ""}
-    </th>
-
-    <th onclick="sortStats('assists')">
-        A
-        ${statsSortColumn === "assists"
-            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
-            : ""}
-    </th>
-
-    <th onclick="sortStats('yellow')">
-        Y
-        ${statsSortColumn === "yellow"
-            ? (statsSortDirection === "asc" ? " ▲" : " ▼")
-            : ""}
-    </th>
-    `;
-
-    sortedPlayers.forEach(([name, stats]) => {
-
-        html += `
-            <tr>
-                <th onclick="sortStats('name')">Player</th>
-                <th onclick="sortStats('squad')">Squad</th>
-                <th onclick="sortStats('xi')">XI</th>
-                <th onclick="sortStats('goals')">G</th>
-                <th onclick="sortStats('assists')">A</th>
-                <th onclick="sortStats('yellow')">Y</th>
-                <th onclick="sortStats('red')">R</th>
-            </tr>
-        `;
-
-    });
-
-    html += `
+                <tr>
+                    <th onclick="sortStats('name')">Player</th>
+                    <th onclick="sortStats('squad')">Squad</th>
+                    <th onclick="sortStats('xi')">XI</th>
+                    <th onclick="sortStats('goals')">G</th>
+                    <th onclick="sortStats('assists')">A</th>
+                    <th onclick="sortStats('yellow')">Y</th>
+                    <th onclick="sortStats('red')">R</th>
+                </tr>
             </tbody>
         </table>
         </div>
