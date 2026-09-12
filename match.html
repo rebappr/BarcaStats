@@ -225,6 +225,10 @@ body{
     flex:1;
 }
 
+.player-icons{
+    margin-left:6px;
+}
+
 .sub-off{
     color:#dc2626;
     font-weight:700;
@@ -585,10 +589,6 @@ function getPlayers(match,prefix=""){
 
     const captain = match[`${prefix}Captain`] || "";
 
-function getPlayers(match,prefix=""){
-
-    const captain = match[`${prefix}Captain`] || "";
-
     const subbedOff = [];
 
     for(let i=1;i<=6;i++){
@@ -620,7 +620,9 @@ if(player){
 
         <span class="player-name">
             ${escapeHtml(player)}
-            ${getPlayerIcons(match, player, prefix)}
+            <span class="player-icons">
+                ${getPlayerIcons(match, player, prefix)}
+            </span>
     ${
         String(player).trim() === String(captain).trim()
             ? ' <strong>(C)</strong>'
