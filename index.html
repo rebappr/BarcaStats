@@ -558,28 +558,6 @@ select:focus{
 
 let allMatches = [];
 
-let statsSortColumn = "squad";
-let statsSortDirection = "desc";
-
-function saveFilters(){
-
-    localStorage.setItem(
-        "seasonFilter",
-        document.getElementById("seasonFilter").value
-    );
-
-    localStorage.setItem(
-        "competitionFilter",
-        document.getElementById("competitionFilter").value
-    );
-
-    localStorage.setItem(
-        "opponentFilter",
-        document.getElementById("opponentFilter").value
-    );
-
-}
-
 function loadFilters(){
 
     document.getElementById("seasonFilter").value =
@@ -858,6 +836,29 @@ updateFilterOptions();
 updateSeasonTitle();
 
 render(filtered);
+renderStatistics();
+
+}
+
+function sortStats(column) {
+
+    if (statsSortColumn === column) {
+
+        statsSortDirection =
+            statsSortDirection === "asc"
+                ? "desc"
+                : "asc";
+
+    } else {
+
+        statsSortColumn = column;
+        statsSortDirection = "desc";
+
+    }
+
+    renderStatistics();
+
+}
 
 function sortStats(column) {
 
