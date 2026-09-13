@@ -331,38 +331,67 @@ body{
     border-radius:12px;
 }
 
-.timeline-section{
-    margin-bottom:13px;
+.timeline-modern{
+    display:flex;
+    flex-direction:column;
 }
 
-.timeline-section .event-row:last-child{
-    margin-bottom:0;
-}
-
-.timeline-section h3{
-    font-size:16px;
-    margin-bottom:15px;
-    color:#004D98;
-}
-
-.event-row{
+.timeline-row{
     display:grid;
-    grid-template-columns:1fr 50px 1fr;
-    gap: 2px;
+    grid-template-columns:1fr 70px 1fr;
     align-items:center;
-    margin-bottom: 1px;
+    min-height:42px;
+    padding:4px 0;
 }
 
-.event-box{
-    display:inline;
-    font-size:13px;
-    font-weight:500;
+.timeline-home{
+    text-align:right;
+    padding-right:10px;
 }
 
-.event-minute{
+.timeline-away{
+    text-align:left;
+    padding-left:10px;
+}
+
+.timeline-minute{
     text-align:center;
+    font-size:14px;
     font-weight:700;
-    font-size:15px;
+    color:var(--text);
+}
+
+.timeline-event{
+    font-size:14px;
+    line-height:1.3;
+}
+
+.timeline-score{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    height:30px;
+    padding:0 12px;
+    border:2px solid #4F63FF;
+    border-radius:999px;
+    background:rgba(79,99,255,.08);
+    font-weight:800;
+}
+
+.sub-in{
+    color:#16a34a;
+    font-weight:700;
+}
+
+.sub-out{
+    color:#dc2626;
+    font-weight:700;
+}
+
+.timeline-break{
+    height:1px;
+    background:var(--divider);
+    margin:10px 0;
 }
 
 .event-home{
@@ -976,42 +1005,30 @@ for(let i=1;i<=12;i++){
 
     sortByMinute(events);
 
-    function eventRow(side, minute, content){
+function eventRow(side, minute, content){
 
-        return `
-            <div class="event-row">
+    return `
+        <div class="timeline-row">
 
-                ${
-                    side === "left"
-                    ? `
-                        <div class="event-home">
-                            <div class="event-box">
-                                ${content}
-                            </div>
-                        </div>
-                    `
-                    : `<div></div>`
-                }
-
-                <div class="event-minute">
-                    ${escapeHtml(minute)}${String(minute).trim() === "✔" ? "" : "'"}
-                </div>
-
-                ${
-                    side === "right"
-                    ? `
-                        <div class="event-away">
-                            <div class="event-box">
-                                ${content}
-                            </div>
-                        </div>
-                    `
-                    : `<div></div>`
-                }
-
+            <div class="timeline-home">
+                ${side === "left" ? content : ""}
             </div>
-        `;
-    }
+
+            <div class="timeline-minute">
+                ${
+                    String(minute).trim() === "✔"
+                        ? minute
+                        : `${minute}'`
+                }
+            </div>
+
+            <div class="timeline-away">
+                ${side === "right" ? content : ""}
+            </div>
+
+        </div>
+    `;
+}
 
 let timelineHtml = `
 <div class="card">
@@ -1019,17 +1036,35 @@ let timelineHtml = `
     <h2 class="section-title">
         Timeline
     </h2>
+
+    <div class="timeline-modern">
 `;
 
 events.forEach(event => {
 
     let content = "";
 
-    if(event.assist !== undefined){
+if(event.assist !== undefined){
 
-        content = `
-            ⚽ <strong>${escapeHtml(event.player)}</strong>
-        `;
+    content = `
+        <div class="timeline-event">
+
+            <span class="timeline-score">
+                ⚽
+            </span>
+
+            <strong>
+                ${escapeHtml(event.player)}
+            </strong>
+
+            ${
+                event.assist
+                    ? `<br><small>${escapeHtml(event.assist)}</small>`
+                    : ''
+            }
+
+        </div>
+    `;
 
         if(event.assist){
             content += `
@@ -1042,21 +1077,31 @@ events.forEach(event => {
 
     }else if(event.on){
 
-        content = `
-            🔄 <strong>${escapeHtml(event.on)}</strong>
-            <br>
-            <small>
-                for ${escapeHtml(event.off)}
-            </small>
-        `;
+    content = `
+        <div class="timeline-event">
 
-    }else if(event.icon){
+            <div>
+                <span class="sub-out">↩</span>
+                ${escapeHtml(event.off)}
+            </div>
 
-        content = `
+            <div>
+                <span class="sub-in">↪</span>
+                ${escapeHtml(event.on)}
+            </div>
+
+        </div>
+    `;
+
+}else if(event.icon){
+
+    content = `
+        <div class="timeline-event">
             ${event.icon}
             ${escapeHtml(event.player)}
-        `;
-    }
+        </div>
+    `;
+}
 
     timelineHtml += eventRow(
         event.side,
@@ -1067,6 +1112,7 @@ events.forEach(event => {
 });
 
 timelineHtml += `
+    </div>
 </div>
 `;
 
