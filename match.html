@@ -110,6 +110,38 @@ body{
     font-weight:700;
 }
 
+.match-tabs{
+    display:flex;
+    gap:8px;
+    margin:12px 0;
+}
+
+.match-tab{
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:10px;
+    font-weight:700;
+    cursor:pointer;
+    background:var(--meta-bg);
+    color:var(--text);
+    border:1px solid var(--meta-border);
+    transition:.2s;
+}
+
+.match-tab.active{
+    background:#004D98;
+    color:white;
+}
+
+.match-section{
+    display:none;
+}
+
+.match-section.active{
+    display:block;
+}
+
 .card{
     background:var(--card-bg);
     backdrop-filter:blur(20px);
@@ -172,10 +204,7 @@ body{
 }
 
 .content-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:6px;
-    align-items:start;
+    display:block;
 }
 
 .left-column,
@@ -506,6 +535,26 @@ if (!match) {
         "<div class='card'>Match not found</div>";
 
     return;
+}
+
+function showMatchSection(section){
+
+    document
+        .querySelectorAll(".match-section")
+        .forEach(el => el.classList.remove("active"));
+
+    document
+        .querySelectorAll(".match-tab")
+        .forEach(el => el.classList.remove("active"));
+
+    document
+        .getElementById(section)
+        .classList.add("active");
+
+    document
+        .querySelector(`[data-section="${section}"]`)
+        .classList.add("active");
+
 }
 
 renderMatch(match);
@@ -1193,7 +1242,34 @@ document.getElementById("app").innerHTML = `
 
 </div>
 
-<div class="meta-grid">
+<div class="match-tabs">
+
+    <button
+        class="match-tab active"
+        data-section="info-section"
+        onclick="showMatchSection('info-section')">
+        INFO
+    </button>
+
+    <button
+        class="match-tab"
+        data-section="squads-section"
+        onclick="showMatchSection('squads-section')">
+        SQUADS
+    </button>
+
+    <button
+        class="match-tab"
+        data-section="timeline-section"
+        onclick="showMatchSection('timeline-section')">
+        TIMELINE
+    </button>
+
+</div>
+
+<div id="info-section" class="match-section active">
+
+    <div class="meta-grid">
 
 <div class="meta">
 <div class="meta-label">Date</div>
@@ -1235,20 +1311,19 @@ ${escapeHtml(match["Referee"] || "-")}
 </div>
 
 </div>
-
-<div class="content-grid">
-
-    <div class="left-column">
-
-        ${squadsHtml}
-
-    </div>
-
-<div class="right-column">
-
-    ${timeline.timelineHtml}
+</div>
 
 </div>
+
+<div class="content-sections">
+
+    <div id="squads-section" class="match-section">
+        ${squadsHtml}
+    </div>
+
+    <div id="timeline-section" class="match-section">
+        ${timeline.timelineHtml}
+    </div>
 
 </div>
 
