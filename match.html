@@ -410,6 +410,23 @@ body{
     display:none;
 }
 
+@media(min-width:901px){
+
+    .match-tabs{
+        display:none;
+    }
+
+    .match-section{
+        display:block !important;
+    }
+
+    .content-sections{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+    }
+
+}
 
 @media(max-width:900px){
 
@@ -563,6 +580,10 @@ renderMatch(match);
 });
 
 function showMatchSection(section){
+
+    if(window.innerWidth > 900){
+        return;
+    }
 
     document
         .querySelectorAll(".match-section")
