@@ -1209,20 +1209,20 @@ function renderMatch(match){
 const homeMatch = isHomeMatch(match);
 
 const teamA = homeMatch
-    ? "FC Barcelona"
+    ? "Barcelona"
     : (match["Opp. Team"] || "");
 
 const teamB = homeMatch
     ? (match["Opp. Team"] || "")
-    : "FC Barcelona";
+    : "Barcelona";
 
 const barcaTitle = homeMatch
-    ? "FC Barcelona"
+    ? "Barcelona"
     : (match["Opp. Team"] || "");
 
 const oppTitle = homeMatch
     ? (match["Opp. Team"] || "")
-    : "FC Barcelona";
+    : "Barcelona";
 
 const barcaPlayers = homeMatch
     ? getPlayers(match)
