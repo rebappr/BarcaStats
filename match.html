@@ -410,20 +410,39 @@ body{
     display:none;
 }
 
+.content-sections{
+    display:block;
+}
+
 @media(min-width:901px){
 
     .match-tabs{
         display:none;
     }
 
-    .match-section{
-        display:block !important;
+    .content-sections{
+        display:grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap:10px;
+        align-items:start;
     }
 
-    .content-sections{
+    .left-column{
         display:flex;
         flex-direction:column;
         gap:8px;
+    }
+
+    .right-column{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        position:sticky;
+        top:10px;
+    }
+
+    .match-section{
+        display:block !important;
     }
 
 }
