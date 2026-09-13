@@ -1103,44 +1103,28 @@ events.forEach(event => {
 if(event.assist !== undefined){
 
     content = `
-    <div class="timeline-event">
+<span class="timeline-score">
+    ⚽ ${event.score}
+</span>
 
-        <span class="timeline-score">
-        ⚽ ${event.score}
-        </span>
-        <br>
-        <strong>${escapeHtml(event.player)}</strong>
+<strong>${escapeHtml(event.player)}</strong>
 
-        <strong>
-            ${escapeHtml(event.player)}
-        </strong>
-
-        ${
-            event.assist
-                ? `<br><small>Assist: ${escapeHtml(event.assist)}</small>`
-                : ''
-        }
-
-    </div>
+${
+    event.assist
+        ? ` <small>(🅰 ${escapeHtml(event.assist)})</small>`
+        : ""
+}
 `;
 
     }else if(event.on){
 
-    content = `
-        <div class="timeline-event">
+content = `
+<span class="sub-out">⬅</span>
+${escapeHtml(event.off)}
 
-            <div>
-                <span class="sub-out">↩</span>
-                ${escapeHtml(event.off)}
-            </div>
-
-            <div>
-                <span class="sub-in">↪</span>
-                ${escapeHtml(event.on)}
-            </div>
-
-        </div>
-    `;
+<span class="sub-in" style="margin-left:8px;">➡</span>
+${escapeHtml(event.on)}
+`;
 
 }else if(event.icon){
 
