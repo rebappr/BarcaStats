@@ -818,6 +818,9 @@ function getTimeline(match){
 
     const events = [];
 
+    let homeScore = 0;
+    let awayScore = 0;
+
     const homeMatch =
         String(match["Home/Away"] || "").trim() === "Home";
 
@@ -850,27 +853,42 @@ function getTimeline(match){
 
         if(match[`Goal Player ${i}`]){
 
+            if(homeMatch){
+                homeScore++;
+            }else{
+                awayScore++;
+            }
+
             events.push({
                 minute: match[`Goal min ${i}`],
                 side: homeMatch ? "left" : "right",
                 player: match[`Goal Player ${i}`],
                 assist: match[`Assist Player ${i}`] || "",
+                score: `${homeScore} - ${awayScore}`, 
                 penalty:
                     match[`Penalty player ${i}`] &&
                     String(match[`Penalty scored ${i}`] || "")
                         .trim()
                         .toLowerCase() !== "not in"
             });
+            });
 
         }
 
         if(match[`Opp. Goal Player ${i}`]){
 
+            if(homeMatch){
+                awayScore++;
+            }else{
+                homeScore++;
+            }
+
             events.push({
                 minute: match[`Opp. Goal min ${i}`],
                 side: homeMatch ? "right" : "left",
                 player: match[`Opp. Goal Player ${i}`],
-                assist: match[`Opp. Assist player ${i}`] || "",
+                assist: match[`Opp. Assist player ${i}`] || "",,
+                score: `${homeScore} - ${awayScore}`, 
                 penalty:
                     match[`Opp. Penalty player ${i}`] &&
                     String(match[`Opp. Penalty scored ${i}`] || "")
@@ -1047,25 +1065,24 @@ events.forEach(event => {
 if(event.assist !== undefined){
 
     content = `
-        <div class="timeline-event">
+    <div class="timeline-event">
 
-            <span class="timeline-score">
-                ⚽
-            </span>
+        <span class="timeline-score">
+            ⚽ ${event.score}
+        </span>
 
-            <strong>
-                ${escapeHtml(event.player)}
-            </strong>
+        <strong>
+            ${escapeHtml(event.player)}
+        </strong>
 
-            ${
-                event.assist
-                    ? `<br><small>${escapeHtml(event.assist)}</small>`
-                    : ''
-            }
+        ${
+            event.assist
+                ? `<br><small>${escapeHtml(event.assist)}</small>`
+                : ''
+        }
 
-        </div>
-    `;
-
+    </div>
+`;
         if(event.assist){
             content += `
                 <br>
