@@ -338,27 +338,46 @@ body{
 
 .timeline-row{
     display:grid;
-    grid-template-columns:1fr 70px 1fr;
-    align-items:center;
-    min-height:42px;
-    padding:4px 0;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+
+    padding:8px 0;
+
+    border-bottom:1px solid var(--divider);
+}
+
+.timeline-row:last-child{
+    border-bottom:none;
 }
 
 .timeline-home{
-    text-align:right;
-    padding-right:10px;
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    gap:10px;
 }
 
 .timeline-away{
-    text-align:left;
-    padding-left:10px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.timeline-event{
+    font-size:14px;
+    line-height:1.4;
+    max-width:260px;
 }
 
 .timeline-minute{
-    text-align:center;
-    font-size:14px;
     font-weight:700;
-    color:var(--text);
+    white-space:nowrap;
+    min-width:40px;
+}
+
+.timeline-away .timeline-event{
+    text-align:right;
 }
 
 .timeline-event{
@@ -1024,29 +1043,49 @@ for(let i=1;i<=12;i++){
 
 function eventRow(side, minute, content){
 
+    if(side === "left"){
+
+        return `
+            <div class="timeline-row">
+
+                <div class="timeline-home">
+
+                    <div class="timeline-minute">
+                        ${minute}'
+                    </div>
+
+                    <div class="timeline-event">
+                        ${content}
+                    </div>
+
+                </div>
+
+                <div></div>
+
+            </div>
+        `;
+    }
+
     return `
         <div class="timeline-row">
 
-            <div class="timeline-home">
-                ${side === "left" ? content : ""}
-            </div>
-
-            <div class="timeline-minute">
-                ${
-                    String(minute).trim() === "✔"
-                        ? minute
-                        : `${minute}'`
-                }
-            </div>
+            <div></div>
 
             <div class="timeline-away">
-                ${side === "right" ? content : ""}
+
+                <div class="timeline-event">
+                    ${content}
+                </div>
+
+                <div class="timeline-minute">
+                    ${minute}'
+                </div>
+
             </div>
 
         </div>
     `;
 }
-
 let timelineHtml = `
 <div class="card">
 
@@ -1067,8 +1106,10 @@ if(event.assist !== undefined){
     <div class="timeline-event">
 
         <span class="timeline-score">
-            ⚽ ${event.score}
+        ⚽ ${event.score}
         </span>
+        <br>
+        <strong>${escapeHtml(event.player)}</strong>
 
         <strong>
             ${escapeHtml(event.player)}
