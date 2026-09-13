@@ -356,7 +356,19 @@ body{
     display:flex;
     align-items:center;
     gap:10px;
+
     margin-left:auto;
+
+    text-align:right;
+    justify-content:flex-end;
+}
+
+.timeline-home{
+    flex-shrink:0;
+}
+
+.timeline-away{
+    flex-shrink:0;
 }
 
 .timeline-event{
@@ -1061,26 +1073,6 @@ function eventRow(side, minute, content){
     `;
 }
 
-    return `
-        <div class="timeline-row">
-
-            <div></div>
-
-            <div class="timeline-away">
-
-                <div class="timeline-event">
-                    ${content}
-                </div>
-
-                <div class="timeline-minute">
-                    ${minute}'
-                </div>
-
-            </div>
-
-        </div>
-    `;
-}
 let timelineHtml = `
 <div class="card">
 
