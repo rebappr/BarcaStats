@@ -338,10 +338,8 @@ body{
 
 .timeline-row{
     display:flex;
-    align-items:flex-start;
-
     width:100%;
-    position:relative;
+    margin-bottom:8px;
 }
 
 .timeline-row:last-child{
@@ -349,31 +347,22 @@ body{
 }
 
 .timeline-home{
-    display:inline-flex;
-    align-items:flex-start;
+    display:flex;
+    align-items:center;
     gap:10px;
-
-    width:max-content;
-    max-width:none;
 }
 
 .timeline-away{
-    display:inline-flex;
-    align-items:flex-start;
+    display:flex;
+    align-items:center;
     gap:10px;
-
-    width:max-content;
-    max-width:none;
-
     margin-left:auto;
 }
 
 .timeline-event{
     font-size:14px;
     line-height:1.4;
-
     max-width:none;
-    white-space:nowrap;
 }
 
 .timeline-minute{
@@ -1049,28 +1038,28 @@ for(let i=1;i<=12;i++){
 
 function eventRow(side, minute, content){
 
-    if(side === "left"){
+    return `
+        <div class="timeline-row">
 
-        return `
-            <div class="timeline-row">
-
-                <div class="timeline-home">
-
-                    <div class="timeline-minute">
-                        ${minute}'
+            ${
+                side === "left"
+                ? `
+                    <div class="timeline-home">
+                        <div class="timeline-minute">${minute}'</div>
+                        <div class="timeline-event">${content}</div>
                     </div>
-
-                    <div class="timeline-event">
-                        ${content}
+                `
+                : `
+                    <div class="timeline-away">
+                        <div class="timeline-event">${content}</div>
+                        <div class="timeline-minute">${minute}'</div>
                     </div>
+                `
+            }
 
-                </div>
-
-                <div></div>
-
-            </div>
-        `;
-    }
+        </div>
+    `;
+}
 
     return `
         <div class="timeline-row">
