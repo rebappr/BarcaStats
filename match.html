@@ -220,6 +220,8 @@ body{
     display:flex;
     flex-direction:column;
     gap:6px;
+    position:sticky;
+    top:10px;
 }
 
 .team-card{
@@ -1369,19 +1371,27 @@ document.getElementById("app").innerHTML = `
 
 <div class="content-sections">
 
-    <div id="info-section"
-         class="match-section active">
-        ${infoHtml}
+    <div class="left-column">
+
+        <div id="info-section"
+             class="match-section active">
+            ${infoHtml}
+        </div>
+
+        <div id="timeline-section"
+             class="match-section">
+            ${timeline.timelineHtml}
+        </div>
+
     </div>
 
-    <div id="squads-section"
-         class="match-section">
-        ${squadsHtml}
-    </div>
+    <div class="right-column">
 
-    <div id="timeline-section"
-         class="match-section">
-        ${timeline.timelineHtml}
+        <div id="squads-section"
+             class="match-section">
+            ${squadsHtml}
+        </div>
+
     </div>
 
 </div>
