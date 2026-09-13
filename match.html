@@ -1152,7 +1152,6 @@ const heroMatchday =
         ? `${matchday}. Matchday`
         : matchday;
 
-const squadsHtml = `
 const infoHtml = `
 <div class="card">
 
@@ -1203,6 +1202,7 @@ const infoHtml = `
 
 </div>
 `;
+const squadsHtml = `
 <div class="card">
 
     <h2 class="section-title">
@@ -1300,58 +1300,37 @@ document.getElementById("app").innerHTML = `
 
 </div>
 
-<div class="match-tabs">
+<div class="card">
 
-    <button
-        class="match-tab active"
-        data-section="info-section"
-        onclick="showMatchSection('info-section')">
-        INFO
-    </button>
+    <div class="teams">
+        ...
+    </div>
 
-    <button
-        class="match-tab"
-        data-section="squads-section"
-        onclick="showMatchSection('squads-section')">
-        SQUADS
-    </button>
-
-    <button
-        class="match-tab"
-        data-section="timeline-section"
-        onclick="showMatchSection('timeline-section')">
-        TIMELINE
-    </button>
+    <div class="match-tabs">
+        ...
+    </div>
 
 </div>
 
 <div class="content-sections">
 
-    <div
-        id="info-section"
-        class="match-section active">
-
+    <div id="info-section"
+         class="match-section active">
         ${infoHtml}
-
     </div>
 
-    <div
-        id="squads-section"
-        class="match-section">
-
+    <div id="squads-section"
+         class="match-section">
         ${squadsHtml}
-
     </div>
 
-    <div
-        id="timeline-section"
-        class="match-section">
-
+    <div id="timeline-section"
+         class="match-section">
         ${timeline.timelineHtml}
-
     </div>
 
 </div>
+
 
 `;
 
