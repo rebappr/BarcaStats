@@ -1280,22 +1280,49 @@ document.getElementById("app").innerHTML = `
 
 <div class="card">
 
-<div class="teams">
+    <div class="teams">
 
-    <div class="team-header home">
-        <div class="team-name">
-            ${escapeHtml(teamA)}
+        <div class="team-header home">
+            <div class="team-name">
+                ${escapeHtml(teamA)}
+            </div>
         </div>
+
+        <div class="score">
+            ${escapeHtml(match["Result"] || "-:-")}
+        </div>
+
+        <div class="team-header away">
+            <div class="team-name">
+                ${escapeHtml(teamB)}
+            </div>
+        </div>
+
     </div>
 
-    <div class="score">
-        ${escapeHtml(match["Result"] || "-:-")}
-    </div>
+    <div class="match-tabs">
 
-    <div class="team-header away">
-        <div class="team-name">
-            ${escapeHtml(teamB)}
-        </div>
+        <button
+            class="match-tab active"
+            data-section="info-section"
+            onclick="showMatchSection('info-section')">
+            INFO
+        </button>
+
+        <button
+            class="match-tab"
+            data-section="squads-section"
+            onclick="showMatchSection('squads-section')">
+            SQUADS
+        </button>
+
+        <button
+            class="match-tab"
+            data-section="timeline-section"
+            onclick="showMatchSection('timeline-section')">
+            TIMELINE
+        </button>
+
     </div>
 
 </div>
