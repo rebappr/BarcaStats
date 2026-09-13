@@ -1117,20 +1117,12 @@ if(event.assist !== undefined){
 
         ${
             event.assist
-                ? `<br><small>${escapeHtml(event.assist)}</small>`
+                ? `<br><small>Assist: ${escapeHtml(event.assist)}</small>`
                 : ''
         }
 
     </div>
 `;
-        if(event.assist){
-            content += `
-                <br>
-                <small>
-                    Assist: ${escapeHtml(event.assist)}
-                </small>
-            `;
-        }
 
     }else if(event.on){
 
