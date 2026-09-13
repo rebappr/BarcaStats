@@ -112,28 +112,36 @@ body{
 
 .match-tabs{
     display:flex;
-    gap:8px;
-    margin:12px 0;
+    gap:6px;
+    margin-top:8px;
 }
 
 .match-tab{
     flex:1;
-    border:none;
+    height:40px;
     border-radius:12px;
-    padding:10px;
-    font-weight:700;
-    cursor:pointer;
+    border:1px solid var(--meta-border);
     background:var(--meta-bg);
     color:var(--text);
-    border:1px solid var(--meta-border);
+    font-weight:700;
+    cursor:pointer;
     transition:.2s;
 }
 
-.match-tab.active{
+.match-tab:hover{
     background:#004D98;
-    color:white;
+    color:#fff;
 }
 
+.match-tab.active{
+    background:linear-gradient(
+        135deg,
+        #004D98,
+        #A50044
+    );
+    color:white;
+    border-color:transparent;
+}
 .match-section{
     display:none;
 }
@@ -537,6 +545,23 @@ if (!match) {
     return;
 }
 
+renderMatch(match);
+
+    })
+
+.catch(error => {
+
+    console.error(error);
+
+    document.getElementById("app").innerHTML = `
+        <div class="card">
+            Error:<br>
+            ${error.message}
+        </div>
+    `;
+
+});
+
 function showMatchSection(section){
 
     document
@@ -556,23 +581,6 @@ function showMatchSection(section){
         .classList.add("active");
 
 }
-
-renderMatch(match);
-
-    })
-
-.catch(error => {
-
-    console.error(error);
-
-    document.getElementById("app").innerHTML = `
-        <div class="card">
-            Error:<br>
-            ${error.message}
-        </div>
-    `;
-
-});
     
 function escapeHtml(str) {
 
@@ -1311,8 +1319,6 @@ ${escapeHtml(match["Referee"] || "-")}
 </div>
 
 </div>
-</div>
-
 </div>
 
 <div class="content-sections">
