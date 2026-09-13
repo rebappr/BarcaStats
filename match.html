@@ -338,10 +338,10 @@ body{
 
 .timeline-row{
     display:flex;
-    justify-content:space-between;
     align-items:flex-start;
 
-    padding:8px 0;
+    width:100%;
+    position:relative;
 }
 
 .timeline-row:last-child{
@@ -349,23 +349,31 @@ body{
 }
 
 .timeline-home{
-    display:flex;
-    justify-content:flex-start;
+    display:inline-flex;
     align-items:flex-start;
     gap:10px;
+
+    width:max-content;
+    max-width:none;
 }
 
 .timeline-away{
-    display:flex;
-    justify-content:flex-end;
+    display:inline-flex;
     align-items:flex-start;
     gap:10px;
+
+    width:max-content;
+    max-width:none;
+
+    margin-left:auto;
 }
 
 .timeline-event{
     font-size:14px;
     line-height:1.4;
-    max-width:260px;
+
+    max-width:none;
+    white-space:nowrap;
 }
 
 .timeline-minute{
