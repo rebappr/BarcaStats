@@ -1153,6 +1153,56 @@ const heroMatchday =
         : matchday;
 
 const squadsHtml = `
+const infoHtml = `
+<div class="card">
+
+    <h2 class="section-title">
+        Info
+    </h2>
+
+    <div class="meta-grid">
+
+        <div class="meta">
+            <div class="meta-label">Date</div>
+            <div class="meta-value">
+                ${escapeHtml(match["Date"] || "")}
+            </div>
+        </div>
+
+        <div class="meta">
+            <div class="meta-label">Competition</div>
+            <div class="meta-value">
+                ${escapeHtml(match["Competition"] || "")}
+            </div>
+        </div>
+
+        <div class="meta">
+            <div class="meta-label">
+                ${matchdayLabel}
+            </div>
+            <div class="meta-value">
+                ${escapeHtml(matchday)}
+            </div>
+        </div>
+
+        <div class="meta">
+            <div class="meta-label">Venue</div>
+            <div class="meta-value">
+                ${escapeHtml(match["Venue"] || "-")}
+            </div>
+        </div>
+
+        <div class="meta">
+            <div class="meta-label">Referee</div>
+            <div class="meta-value">
+                ${escapeHtml(match["Referee"] || "-")}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+`;
 <div class="card">
 
     <h2 class="section-title">
@@ -1275,60 +1325,30 @@ document.getElementById("app").innerHTML = `
 
 </div>
 
-<div id="info-section" class="match-section active">
-
-    <div class="meta-grid">
-
-<div class="meta">
-<div class="meta-label">Date</div>
-<div class="meta-value">
-${escapeHtml(match["Date"] || "")}
-</div>
-</div>
-
-<div class="meta">
-<div class="meta-label">Competition</div>
-<div class="meta-value">
-${escapeHtml(match["Competition"] || "")}
-</div>
-</div>
-
-<div class="meta">
-    <div class="meta-label">
-        ${matchdayLabel}
-    </div>
-    <div class="meta-value">
-        ${escapeHtml(matchday)}
-    </div>
-</div>
-
-<div class="meta">
-<div class="meta-label">Venue</div>
-<div class="meta-value">
-${escapeHtml(match["Venue"] || "-")}
-</div>
-</div>
-
-<div class="meta">
-<div class="meta-label">Referee</div>
-<div class="meta-value">
-${escapeHtml(match["Referee"] || "-")}
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 <div class="content-sections">
 
-    <div id="squads-section" class="match-section">
-        ${squadsHtml}
+    <div
+        id="info-section"
+        class="match-section active">
+
+        ${infoHtml}
+
     </div>
 
-    <div id="timeline-section" class="match-section">
+    <div
+        id="squads-section"
+        class="match-section">
+
+        ${squadsHtml}
+
+    </div>
+
+    <div
+        id="timeline-section"
+        class="match-section">
+
         ${timeline.timelineHtml}
+
     </div>
 
 </div>
