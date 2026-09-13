@@ -418,6 +418,18 @@ body{
 
 @media(min-width:901px){
 
+    .left-column,
+    .right-column{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .right-column{
+        position:sticky;
+        top:10px;
+    }
+
     .match-tabs{
         display:none;
     }
@@ -427,20 +439,6 @@ body{
         grid-template-columns: 1.2fr 0.8fr;
         gap:10px;
         align-items:start;
-    }
-
-    .left-column{
-        display:flex;
-        flex-direction:column;
-        gap:8px;
-    }
-
-    .right-column{
-        display:flex;
-        flex-direction:column;
-        gap:8px;
-        position:sticky;
-        top:10px;
     }
 
     .match-section{
@@ -1395,7 +1393,6 @@ document.getElementById("app").innerHTML = `
     </div>
 
 </div>
-
 
 `;
 
