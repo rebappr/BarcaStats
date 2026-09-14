@@ -1280,7 +1280,7 @@ const heroMatchday =
         : matchday;
 
 const infoHtml = `
-<div class="card sticky-top-panel">
+<div class="card">
 
     <div class="meta-grid">
 
@@ -1303,7 +1303,7 @@ const infoHtml = `
 </div>
 `;
 const squadsHtml = `
-<div class="card sticky-top-panel">
+<div class="card">
 
     <div class="lineup-tabs">
 
@@ -1363,6 +1363,7 @@ const squadsHtml = `
 
 document.getElementById("app").innerHTML = `
 
+<div class="sticky-header">
 <div class="hero">
 
     <div style="text-transform:uppercase;">
@@ -1394,6 +1395,7 @@ document.getElementById("app").innerHTML = `
             </div>
         </div>
 
+    </div>
     </div>
 
     <div class="match-tabs">
