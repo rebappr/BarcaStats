@@ -1381,9 +1381,16 @@ allMatches.forEach(match => {
 
 });
 
-Object.entries(debutants)
-.sort((a,b) => a[1].date - b[1].date)
-.forEach(([player,data]) => {
+const debutants = Object.entries(firstAppearance)
+    .filter(
+        ([name, data]) =>
+            data.season === selectedSeason
+    )
+    .sort(
+        (a, b) => a[1].date - b[1].date
+    );
+
+debutants.forEach(([player,data]) => {
 
     let ageText = "-";
 
@@ -1407,12 +1414,11 @@ Object.entries(debutants)
         const days =
             Math.floor(
                 diffDays -
-                (years * 365.25)
+                years * 365.25
             );
 
         ageText =
             `${years} years & ${days} days`;
-
     }
 
     html += `
