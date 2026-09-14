@@ -15,16 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download Sheet
+      - name: Download Sheets
         run: |
           curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/Database" -o data.json
+
+          curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/Players" -o players.json
 
       - name: Commit Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data.json
+          git add data.json players.json
 
           git diff --staged --quiet || git commit -m "Update data"
 
