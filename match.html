@@ -1172,28 +1172,25 @@ if(event.assist !== undefined){
 
 }else if(event.on){
 
-content = `
-🔄 <strong>${escapeHtml(event.on)}</strong> for ${escapeHtml(event.off)}
-`;
-
-}else if(event.icon){
-
     if(event.side === "right"){
 
         content = `
-            ${escapeHtml(event.player)}
-            <span class="event-icon">${event.icon}</span>
+            <strong>${escapeHtml(event.on)}</strong>
+            for
+            ${escapeHtml(event.off)}
+            <span class="event-icon">🔄</span>
         `;
 
     }else{
 
         content = `
-            <span class="event-icon">${event.icon}</span>
-            ${escapeHtml(event.player)}
+            <span class="event-icon">🔄</span>
+            <strong>${escapeHtml(event.on)}</strong>
+            for
+            ${escapeHtml(event.off)}
         `;
 
     }
-}
 
     timelineHtml += eventRow(
         event.side,
