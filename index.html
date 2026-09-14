@@ -702,18 +702,7 @@ Promise.all([
 ])
 .then(([matchesData, playersData]) => {
 
-        allMatches = matchesData;
-        allPlayers = playersData;
-        
-    playersData.forEach(player => {
-
-        playerBirthDates[player.Player.trim()] =
-            player["Birth date"];
-
-    });
-
-        renderLaLigaTable();
-        createFilters();
+    console.log(playersData);
 
 })
 .catch(error => {
