@@ -762,14 +762,6 @@ function getPlayerIcons(match, playerName, prefix = "") {
         }
     }
 
-    // Asistencie
-    for (let i = 1; i <= 12; i++) {
-        if (
-            String(match[`${prefix}Assist Player ${i}`] || "").trim() ===
-            String(playerName).trim()
-        ) 
-    }
-
     // Žlté karty
     for (let i = 1; i <= 12; i++) {
         if (
