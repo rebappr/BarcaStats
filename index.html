@@ -212,6 +212,23 @@ td{
     border-radius:24px;
     overflow:hidden;
     transition:.3s;
+    animation:fadeSlide .4s ease;
+}
+
+@keyframes fadeSlide{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.matches-table tbody tr{
+    opacity:0;
+    transform:translateY(10px);
 }
 
 .table-scroll{
@@ -1053,7 +1070,32 @@ Object.keys(grouped)
 
     });
 
-    document.getElementById("matches").innerHTML = html;
+document.getElementById("matches").innerHTML = html;
+
+setTimeout(() => {
+
+    document
+        .querySelectorAll(".matches-table tbody tr")
+        .forEach((row, index) => {
+
+            row.style.opacity = "0";
+            row.style.transform = "translateY(10px)";
+
+            setTimeout(() => {
+
+                row.style.transition =
+                    "opacity .25s ease, transform .25s ease";
+
+                row.style.opacity = "1";
+                row.style.transform = "translateY(0)";
+
+            }, index * 25);
+
+        });
+
+}, 0);
+
+}
 
 }
 
