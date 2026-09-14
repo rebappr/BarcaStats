@@ -1177,8 +1177,12 @@ function renderSeasonSummary(matches) {
 
     matches.forEach(match => {
 
-        const coach = match["Manager"] || "Unknown";
-
+        const coach = (match.Manager || "").trim();
+        
+        if (!coach) {
+            return;
+        }
+        
         if (!statsByCoach[coach]) {
 
             statsByCoach[coach] = {
