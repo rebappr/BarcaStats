@@ -1122,9 +1122,6 @@ function renderStatistics() {
     
         name = String(name).trim();
     
-        // ignorovať vlastné góly
-        if (name.includes("(OG)")) return;
-    
         if (!players[name]) {
             players[name] = {
                 squad: 0,
