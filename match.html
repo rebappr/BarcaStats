@@ -573,7 +573,14 @@ body{
     #lineup-barca,
     #lineup-opp{
     margin-bottom:15px;
-}
+    }
+
+    .sticky-header{
+        position:sticky;
+        top:0;
+        z-index:1000;
+        background:var(--bg);
+    }
 
 }
 
@@ -1273,7 +1280,7 @@ const heroMatchday =
         : matchday;
 
 const infoHtml = `
-<div class="card">
+<div class="card sticky-top-panel">
 
     <div class="meta-grid">
 
@@ -1296,7 +1303,7 @@ const infoHtml = `
 </div>
 `;
 const squadsHtml = `
-<div class="card">
+<div class="card sticky-top-panel">
 
     <div class="lineup-tabs">
 
