@@ -767,9 +767,7 @@ function getPlayerIcons(match, playerName, prefix = "") {
         if (
             String(match[`${prefix}Assist Player ${i}`] || "").trim() ===
             String(playerName).trim()
-        ) {
-            icons.push("");
-        }
+        ) 
     }
 
     // Žlté karty
@@ -1167,8 +1165,6 @@ if(event.assist !== undefined){
                     : ""
             }
         `;
-
-    }
 
 }
     }else if(event.on){
