@@ -19,7 +19,7 @@ jobs:
         run: |
           curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/Database" -o data.json
 
-          curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/Players" -o players.json
+          curl -L "https://opensheet.elk.sh/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/PlayersData" -o players.json
 
       - name: Commit Changes
         run: |
