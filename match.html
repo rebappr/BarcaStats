@@ -822,14 +822,14 @@ if(player){
 
         <span class="player-name">
             ${escapeHtml(player)}
+            ${
+                String(player).trim() === String(captain).trim()
+                    ? '<strong style="margin-left:2px;">(C)</strong>'
+                    : ''
+            }
             <span class="player-icons">
                 ${getPlayerIcons(match, player, prefix)}
             </span>
-    ${
-        String(player).trim() === String(captain).trim()
-            ? ' <strong>(C)</strong>'
-            : ''
-    }
     ${
         subbedOff.includes(String(player).trim())
             ? ' <strong style="color:#dc2626;">⬇</strong>'
