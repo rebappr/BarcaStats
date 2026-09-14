@@ -887,7 +887,10 @@ function updateSeasonTitle(){
 }
 
 function goHome(){
-    window.location.href = "index.html";
+    localStorage.removeItem("seasonFilter");
+    localStorage.removeItem("competitionFilter");
+    localStorage.removeItem("opponentFilter");
+    location.reload();
 }
 
 function applyFilters(){
