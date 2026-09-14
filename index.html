@@ -693,22 +693,15 @@ function loadFilters(){
 
 }
 
-fetch("data.json")
-.then(response => response.json())
-.then(data => {
+Promise.all([
+    fetch("data.json").then(response => response.json()),
+    fetch("players.json").then(response => response.json())
+])
+.then(([matchesData, playersData]) => {
 
-if (!Array.isArray(data)) {
+    allMatches = matchesData;
+    allPlayers = playersData;
 
-    document.getElementById("matches").innerHTML =
-        "<div class='empty'>Data sa nepodarilo načítať.</div>";
-
-    console.error("Namiesto poľa prišlo:", data);
-
-    return;
-}
-
-    allMatches = data;
-    
     renderLaLigaTable();
     createFilters();
 
@@ -716,9 +709,6 @@ if (!Array.isArray(data)) {
 .catch(error => {
 
     console.error(error);
-
-    document.getElementById("matches").innerHTML =
-        "<div class='empty'>Chyba pri načítaní data.json</div>";
 
 });
 
