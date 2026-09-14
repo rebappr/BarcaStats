@@ -919,19 +919,12 @@ function getTimeline(match){
     for(let i=1;i<=12;i++){
 
         if(match[`Goal Player ${i}`]){
-
-            if(homeMatch){
-                homeScore++;
-            }else{
-                awayScore++;
-            }
-
+        
             events.push({
                 minute: match[`Goal min ${i}`],
                 side: homeMatch ? "left":"right",
                 player: match[`Goal Player ${i}`],
                 assist: match[`Assist Player ${i}`] || "",
-                score: `${homeScore}:${awayScore}`, 
                 penalty:
                     match[`Penalty player ${i}`] &&
                     String(match[`Penalty scored ${i}`] || "")
@@ -942,19 +935,12 @@ function getTimeline(match){
         }
 
         if(match[`Opp. Goal Player ${i}`]){
-
-            if(homeMatch){
-                awayScore++;
-            }else{
-                homeScore++;
-            }
-
+        
             events.push({
                 minute: match[`Opp. Goal min ${i}`],
                 side: homeMatch ? "right":"left",
                 player: match[`Opp. Goal Player ${i}`],
                 assist: match[`Opp. Assist player ${i}`] || "",
-                score: `${homeScore} - ${awayScore}`, 
                 penalty:
                     match[`Opp. Penalty player ${i}`] &&
                     String(match[`Opp. Penalty scored ${i}`] || "")
@@ -1088,6 +1074,24 @@ for(let i=1;i<=12;i++){
     }
 
     sortByMinute(events);
+
+    let currentHome = 0;
+let currentAway = 0;
+
+events.forEach(event => {
+
+    if(event.assist !== undefined){
+
+        if(event.side === "left"){
+            currentHome++;
+        }else{
+            currentAway++;
+        }
+
+        event.score = `${currentHome}:${currentAway}`;
+    }
+
+});
 
 function eventRow(side, minute, content){
 
