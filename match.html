@@ -1151,11 +1151,7 @@ ${
     }else if(event.on){
 
 content = `
-<span class="sub-out">⬅</span>
-${escapeHtml(event.off)}
-
-<span class="sub-in" style="margin-left:8px;">➡</span>
-<strong>${escapeHtml(event.on)}</strong>
+<strong>${escapeHtml(event.on)}</strong> for ${escapeHtml(event.off)}
 `;
 
 }else if(event.icon){
