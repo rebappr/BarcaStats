@@ -1254,6 +1254,39 @@ function hasBench(match,prefix=""){
 
 }
 
+function hasSquads(match){
+
+    return (
+        hasStartingXI(match) ||
+        hasStartingXI(match,"Opp. ") ||
+        hasBench(match) ||
+        hasBench(match,"Opp. ")
+    );
+
+}
+
+function hasTimeline(match){
+
+    for(let i=1;i<=12;i++){
+
+        if(
+            match[`Goal Player ${i}`] ||
+            match[`Opp. Goal Player ${i}`] ||
+            match[`Yellow player ${i}`] ||
+            match[`Opp. Yellow player ${i}`] ||
+            match[`Red player ${i}`] ||
+            match[`Opp. Red player ${i}`] ||
+            match[`Sub on ${i}`] ||
+            match[`Opp. Sub on ${i}`]
+        ){
+            return true;
+        }
+
+    }
+
+    return false;
+}
+
 function showLineup(team){
 
     const barca =
@@ -1491,6 +1524,7 @@ document.getElementById("app").innerHTML = `
              class="match-section active">
             ${infoHtml}
             ${timeline.timelineHtml}
+        
         </div>
 
     </div>
