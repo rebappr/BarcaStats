@@ -524,19 +524,11 @@ select:focus{
 
 <div class="container">
 
-<div class="header">
-
-    <div class="header-row">
-
-        <h1>FC Barcelona</h1>
-
-        <span id="seasonTitle" class="season-badge">
-            Season
-        </span>
-
+    <div class="header">
+    
+        <h1 id="seasonTitle">FC Barcelona</h1>
+    
     </div>
-
-</div>
 
     <div class="filters">
 
@@ -884,7 +876,7 @@ function updateSeasonTitle(){
         document.getElementById("seasonFilter").value;
 
     document.getElementById("seasonTitle").textContent =
-        `Season ${season}`;
+        `FC Barcelona - ${season}`;
 
 }
 
