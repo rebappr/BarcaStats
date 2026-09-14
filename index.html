@@ -1293,12 +1293,30 @@ function renderStatistics() {
 
     const season =
         document.getElementById("seasonFilter")?.value || "";
-
+    
+    const competition =
+        document.getElementById("competitionFilter")?.value || "";
+    
+    const opponent =
+        document.getElementById("opponentFilter")?.value || "";
+    
     let matches = [...allMatches];
-
+    
     if (season) {
         matches = matches.filter(
             m => String(m.Season || "") === season
+        );
+    }
+    
+    if (competition) {
+        matches = matches.filter(
+            m => String(m.Competition || "") === competition
+        );
+    }
+    
+    if (opponent) {
+        matches = matches.filter(
+            m => String(m["Opp. Team"] || "") === opponent
         );
     }
 
