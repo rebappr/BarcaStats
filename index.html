@@ -684,15 +684,28 @@ function updateFilterOptions() {
 
     const seasonValue =
         document.getElementById("seasonFilter").value.trim();
-
+    
+    const competitionValue =
+        document.getElementById("competitionFilter").value.trim();
+    
     let seasonFiltered = [...allMatches];
-
+    
     if (seasonValue) {
-
+    
         seasonFiltered = seasonFiltered.filter(
             x => x["Season"] === seasonValue
         );
-
+    
+    }
+    
+    let competitionFiltered = [...seasonFiltered];
+    
+    if (competitionValue) {
+    
+        competitionFiltered = competitionFiltered.filter(
+            x => x["Competition"] === competitionValue
+        );
+    
     }
 
     const seasons = [
@@ -713,7 +726,7 @@ function updateFilterOptions() {
 
     const opponents = [
         ...new Set(
-            seasonFiltered
+            competitionFiltered
                 .map(x => x["Opp. Team"])
                 .filter(Boolean)
         )
@@ -822,11 +835,18 @@ function createFilters(){
 
     document
         .getElementById("seasonFilter")
-        .addEventListener("change", applyFilters);
+        .addEventListener("change", () => {
+            document.getElementById("competitionFilter").value = "";
+            document.getElementById("opponentFilter").value = "";
+            applyFilters();
+        });
 
     document
         .getElementById("competitionFilter")
-        .addEventListener("change", applyFilters);
+        .addEventListener("change", () => {
+            document.getElementById("opponentFilter").value = "";
+            applyFilters();
+        });
 
     document
         .getElementById("opponentFilter")
