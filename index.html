@@ -1100,11 +1100,14 @@ function renderStatistics() {
     const players = {};
 
     function addPlayer(name) {
-
+    
         if (!name || !String(name).trim()) return;
-
+    
         name = String(name).trim();
-
+    
+        // ignorovať vlastné góly
+        if (name.includes("(OG)")) return;
+    
         if (!players[name]) {
             players[name] = {
                 squad: 0,
@@ -1115,7 +1118,7 @@ function renderStatistics() {
                 red: 0
             };
         }
-
+    
     }
 
     matches.forEach(match => {
