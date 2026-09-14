@@ -1142,20 +1142,35 @@ events.forEach(event => {
 
 if(event.assist !== undefined){
 
-    content = `
-<span class="timeline-score">
-    ⚽ ${event.score}
-</span>
+    if(event.side === "right"){
 
-<strong>${escapeHtml(event.player)}</strong>
+        content = `
+            <strong>${escapeHtml(event.player)}</strong>
+            <span class="event-icon">⚽</span>
+            <span class="timeline-score">${event.score}</span>
+            ${
+                event.assist
+                    ? `<small>${escapeHtml(event.assist)}</small>`
+                    : ""
+            }
+        `;
 
-${
-    event.assist
-        ? ` <small> ${escapeHtml(event.assist)}</small>`
-        : ""
+    }else{
+
+        content = `
+            <span class="event-icon">⚽</span>
+            <strong>${escapeHtml(event.player)}</strong>
+            <span class="timeline-score">${event.score}</span>
+            ${
+                event.assist
+                    ? `<small>${escapeHtml(event.assist)}</small>`
+                    : ""
+            }
+        `;
+
+    }
+
 }
-`;
-
     }else if(event.on){
 
 content = `
