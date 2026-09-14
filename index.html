@@ -77,12 +77,12 @@ body{
 }
 
 .left-panel{
-    flex:0 0 50%;
+    flex:1.3;
     min-width:0;
 }
 
 .right-panel{
-    flex:0 0 50%;
+    flex:.7;
     min-width:0;
 }
 
@@ -229,8 +229,8 @@ td{
 }
 
 .matches-table tbody tr{
-    opacity:0;
-    transform:translateY(10px);
+    opacity:1;
+    transform:none;
 }
 
 table{
@@ -252,13 +252,16 @@ table{
 .stats-table td:first-child{
     width:auto !important;
     min-width:180px;
-    text-align:left !important;
+    text-align:left !important;2
+    font-size:13px;
+    font-weight:600;
 }
 
 .stats-table th:not(:first-child),
 .stats-table td:not(:first-child){
     width:50px;
     text-align:center;
+    font-size:11px;
 }
 
 .matches-table th:nth-child(1),
@@ -435,6 +438,13 @@ select:focus{
     .right-panel{
         width:100%;
     }
+
+    .right-panel{
+        position:sticky;
+        top:85px;
+        align-self:start;
+    }
+    
     .container{
         padding:6px;
     }
