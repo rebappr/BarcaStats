@@ -209,6 +209,10 @@ td{
     font-weight:700;
 }
 
+#seasonTitle{
+    cursor:pointer;
+}
+
 .filters{
     display:flex;
     flex-wrap:wrap;
@@ -524,11 +528,15 @@ select:focus{
 
 <div class="container">
 
-    <div class="header">
-    
-        <h1 id="seasonTitle">FC Barcelona</h1>
-    
-    </div>
+<div class="header">
+
+    <h1
+        id="seasonTitle"
+        onclick="goHome()">
+        FC Barcelona
+    </h1>
+
+</div>
 
     <div class="filters">
 
@@ -878,6 +886,10 @@ function updateSeasonTitle(){
     document.getElementById("seasonTitle").textContent =
         `FC Barcelona - ${season}`;
 
+}
+
+function goHome(){
+    window.location.href = "index.html";
 }
 
 function applyFilters(){
