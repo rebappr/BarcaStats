@@ -705,12 +705,7 @@ Promise.all([
         allMatches = matchesData;
         allPlayers = playersData;
         
-        playersData.forEach(player => {
-        
-            playerBirthDates[player.Player.trim()] =
-                player["Birth date"];
-        
-        });
+console.log(playersData);
         
         renderLaLigaTable();
         createFilters();
