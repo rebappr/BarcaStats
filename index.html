@@ -1323,58 +1323,61 @@ function renderSeasonSummary(matches) {
         <tbody>
 `;
 
-const debutants = {};
+const selectedSeason =
+    document.getElementById("seasonFilter").value;
 
-matches.forEach(match => {
+const firstAppearance = {};
+
+// prejde celú históriu
+allMatches.forEach(match => {
 
     const matchDate =
         new Date(
             match.Date.split(".").reverse().join("-")
         );
 
+    const playersInMatch = [];
+
     for(let i = 1; i <= 11; i++){
 
         const player =
             match[`Player name ${i}`];
 
-        if(!player) continue;
-
-        if(
-            !debutants[player] ||
-            matchDate < debutants[player].date
-        ){
-
-            debutants[player] = {
-                date: matchDate,
-                dateText: match.Date,
-                birthDate:
-                    match[`Player birth date ${i}`] || ""
-            };
-
+        if(player){
+            playersInMatch.push(player);
         }
 
     }
 
     for(let i = 1; i <= 12; i++){
-    
+
         const player =
             match[`On the bench name ${i}`];
-    
-        if(!player) continue;
-    
-        if(
-            !debutants[player] ||
-            matchDate < debutants[player].date
-        ){
-    
-            debutants[player] = {
-                date: matchDate,
-                dateText: match.Date
-            };
-    
+
+        if(player){
+            playersInMatch.push(player);
         }
-    
+
     }
+
+    playersInMatch.forEach(player => {
+
+        if(
+            !firstAppearance[player] ||
+            matchDate < firstAppearance[player].date
+        ){
+
+            firstAppearance[player] = {
+                season: match.Season,
+                date: matchDate,
+                dateText: match.Date,
+                birthDate:
+                    match[`Player birth date ${player}`] || ""
+            };
+
+        }
+
+    });
 
 });
 
