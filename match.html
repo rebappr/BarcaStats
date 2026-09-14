@@ -448,6 +448,11 @@ body{
     clear:both;
 }
 
+.event-icon{
+    display:inline-block;
+    margin:0 4px;
+}
+
 .back-btn{
     position:fixed;
     right:20px;
@@ -1159,12 +1164,21 @@ content = `
 
 }else if(event.icon){
 
-    content = `
-        <div class="timeline-event">
-            ${event.icon}
+    if(event.side === "right"){
+
+        content = `
             ${escapeHtml(event.player)}
-        </div>
-    `;
+            <span class="event-icon">${event.icon}</span>
+        `;
+
+    }else{
+
+        content = `
+            <span class="event-icon">${event.icon}</span>
+            ${escapeHtml(event.player)}
+        `;
+
+    }
 }
 
     timelineHtml += eventRow(
