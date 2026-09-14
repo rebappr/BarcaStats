@@ -112,35 +112,35 @@ body{
 
 .match-tabs{
     display:flex;
-    gap:6px;
+    gap:2px;
     margin-top:8px;
 }
 
 .match-tab{
     flex:1;
     height:40px;
-    border-radius:12px;
-    border:1px solid var(--meta-border);
-    background:var(--meta-bg);
-    color:var(--text);
-    font-weight:700;
+
+    border:none;
+
+    border-radius:12px 12px 0 0;
+
+    background:#d1d5db;
+    color:#374151;
+
+    font-weight:600;
     cursor:pointer;
+
     transition:.2s;
 }
 
 .match-tab:hover{
-    background:#004D98;
-    color:#fff;
+    background:#c4c9d1;
 }
 
 .match-tab.active{
-    background:linear-gradient(
-        135deg,
-        #004D98,
-        #A50044
-    );
+    background:#004D98;
     color:white;
-    border-color:transparent;
+}
 }
 .match-section{
     display:none;
