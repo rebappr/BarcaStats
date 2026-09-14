@@ -696,21 +696,31 @@ function loadFilters(){
 
 }
 
-fetch("data.json")
-    .then(response => response.json())
-    .then(matchesData => {
+Promise.all([
+    fetch("data.json").then(response => response.json()),
+    fetch("players.json").then(response => response.json())
+])
+.then(([matchesData, playersData]) => {
 
-        allMatches = matchesData;
+    allMatches = matchesData;
+    allPlayers = playersData;
 
-        renderLaLigaTable();
-        createFilters();
+    playersData.forEach(player => {
 
-    })
-    .catch(error => {
-
-        console.error(error);
+        playerBirthDates[player.Player.trim()] =
+            player["Date of Birth"];
 
     });
+
+    renderLaLigaTable();
+    createFilters();
+
+})
+.catch(error => {
+
+    console.error(error);
+
+});
 
 function updateFilterOptions() {
 
@@ -1374,7 +1384,7 @@ const debutants = Object.entries(firstAppearance)
 
 debutants.forEach(([player,data]) => {
 
-    let ageText = "Unknown";
+    let ageText = "-";
     
     if(data.birthDate){
 
