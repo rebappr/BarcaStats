@@ -932,7 +932,7 @@ function getTimeline(match){
                 side: homeMatch ? "left" : "right",
                 player: match[`Goal Player ${i}`],
                 assist: match[`Assist Player ${i}`] || "",
-                score: `${homeScore} - ${awayScore}`, 
+                score: `${homeScore}:${awayScore}`, 
                 penalty:
                     match[`Penalty player ${i}`] &&
                     String(match[`Penalty scored ${i}`] || "")
