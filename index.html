@@ -643,6 +643,8 @@ select:focus{
 })();
 
 let allMatches = [];
+let allPlayers = [];
+let playerBirthDates = {};
 
 let statsSortColumn = "goals";
 let statsSortDirection = "desc";
@@ -700,11 +702,18 @@ Promise.all([
 ])
 .then(([matchesData, playersData]) => {
 
-    allMatches = matchesData;
-    allPlayers = playersData;
-
-    renderLaLigaTable();
-    createFilters();
+        allMatches = matchesData;
+        allPlayers = playersData;
+        
+        playersData.forEach(player => {
+        
+            playerBirthDates[player.Player.trim()] =
+                player["Birth date"];
+        
+        });
+        
+        renderLaLigaTable();
+        createFilters();
 
 })
 .catch(error => {
@@ -1355,7 +1364,7 @@ allMatches.forEach(match => {
                 date: matchDate,
                 dateText: match.Date,
                 birthDate:
-                    match[`Player birth date ${player}`] || ""
+                    playerBirthDates[player.trim()] || ""
             };
 
         }
