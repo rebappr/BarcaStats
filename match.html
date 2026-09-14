@@ -1130,45 +1130,47 @@ events.forEach(event => {
 
     let content = "";
 
-    if(event.assist !== undefined){
+if(event.assist !== undefined){
 
-        if(event.side === "right"){
-
-            content = `
-                <strong>${escapeHtml(event.player)}</strong>
-                <span class="event-icon">⚽</span>
-                <span class="timeline-score">${event.score}</span>
-                ${
-                    event.assist
-                        ? `<small>${escapeHtml(event.assist)}</small>`
-                        : ""
-                }
-            `;
-
-        }else{
-
-            content = `
-                <span class="event-icon">⚽</span>
-                <strong>${escapeHtml(event.player)}</strong>
-                <span class="timeline-score">${event.score}</span>
-                ${
-                    event.assist
-                        ? `<small>${escapeHtml(event.assist)}</small>`
-                        : ""
-                }
-            `;
-
-        }
-
-    }else if(event.on){
+    if(event.side === "right"){
 
         content = `
-            🔄 <strong>${escapeHtml(event.on)}</strong>
-            for
-            ${escapeHtml(event.off)}
+            ${
+                event.assist
+                    ? `<small>${escapeHtml(event.assist)}</small>`
+                    : ""
+            }
+
+            <strong>${escapeHtml(event.player)}</strong>
+
+            <span class="timeline-score">
+                ${event.score}
+            </span>
+
+            <span class="event-icon">⚽</span>
         `;
 
-    }else if(event.icon){
+    }else{
+
+        content = `
+            <span class="event-icon">⚽</span>
+
+            <span class="timeline-score">
+                ${event.score}
+            </span>
+
+            <strong>${escapeHtml(event.player)}</strong>
+
+            ${
+                event.assist
+                    ? `<small>${escapeHtml(event.assist)}</small>`
+                    : ""
+            }
+        `;
+
+    }
+
+}else if(event.on){
 
 content = `
 🔄 <strong>${escapeHtml(event.on)}</strong> for ${escapeHtml(event.off)}
