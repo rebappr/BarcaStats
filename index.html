@@ -1286,6 +1286,111 @@ function renderSeasonSummary(matches) {
         </table>
     `;
 
+    html += `
+    <br>
+
+    <h3 style="
+        margin:10px 0;
+        font-size:14px;
+        color:var(--text);
+    ">
+        Season Debutants
+    </h3>
+
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Debut Date</th>
+                <th>Age at Debut</th>
+            </tr>
+        </thead>
+        <tbody>
+`;
+
+const debutants = {};
+
+matches.forEach(match => {
+
+    const matchDate =
+        new Date(
+            match.Date.split(".").reverse().join("-")
+        );
+
+    for(let i = 1; i <= 11; i++){
+
+        const player =
+            match[`Player name ${i}`];
+
+        if(!player) continue;
+
+        if(
+            !debutants[player] ||
+            matchDate < debutants[player].date
+        ){
+
+            debutants[player] = {
+                date: matchDate,
+                dateText: match.Date,
+                birthDate:
+                    match[`Player birth date ${i}`] || ""
+            };
+
+        }
+
+    }
+
+});
+
+Object.entries(debutants)
+.sort((a,b) => a[1].date - b[1].date)
+.forEach(([player,data]) => {
+
+    let ageText = "-";
+
+    if(data.birthDate){
+
+        const birth =
+            new Date(data.birthDate);
+
+        const debut =
+            data.date;
+
+        const diffDays =
+            Math.floor(
+                (debut - birth) /
+                (1000 * 60 * 60 * 24)
+            );
+
+        const years =
+            Math.floor(diffDays / 365.25);
+
+        const days =
+            Math.floor(
+                diffDays -
+                (years * 365.25)
+            );
+
+        ageText =
+            `${years} years & ${days} days`;
+
+    }
+
+    html += `
+        <tr>
+            <td>${player}</td>
+            <td>${data.dateText}</td>
+            <td>${ageText}</td>
+        </tr>
+    `;
+
+});
+
+html += `
+        </tbody>
+    </table>
+`;
+
     document.getElementById("seasonSummary").innerHTML = html;
 }
 
