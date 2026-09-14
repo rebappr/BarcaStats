@@ -582,22 +582,24 @@ body{
         z-index:1000;
     }
 
-    .sticky-header::before{
-        content:"";
-        position:absolute;
-    
-        top:-20px;
-        bottom:-10px;
-    
-        left:50%;
-        transform:translateX(-50%);
-    
-        width:100vw;
-    
-        background:var(--bg);
-    
-        z-index:-1;
-    }
+.sticky-header::before{
+    content:"";
+
+    position:absolute;
+
+    top:-20px;
+    left:50%;
+    right:0;
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    width:100vw;
+
+    background:var(--bg);
+
+    z-index:-1;
+}
 
 }
 
