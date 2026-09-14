@@ -1146,12 +1146,17 @@ function renderStatistics() {
             const player =
                 match[`Player name ${i}`];
 
-            if (player && addPlayer(player)) {
-            
-                players[player].squad++;
-                players[player].xi++;
-            
-            }
+                if (
+                    player &&
+                    !String(player).includes("(OG)")
+                ) {
+                
+                    addPlayer(player);
+                
+                    players[player].squad++;
+                    players[player].xi++;
+                
+                }
 
         }
 
@@ -1161,9 +1166,16 @@ function renderStatistics() {
             const player =
                 match[`On the bench name ${i}`];
 
-            if (player && addPlayer(player)) {
-                players[player].goals++;
-            }
+                if (
+                    player &&
+                    !String(player).includes("(OG)")
+                ) {
+                
+                    addPlayer(player);
+                
+                    players[player].squad++;
+                
+                }
 
         }
 
@@ -1173,7 +1185,10 @@ function renderStatistics() {
             const player =
                 match[`Goal Player ${i}`];
 
-            if (player) {
+            if (
+                player &&
+                !String(player).includes("(OG)")
+            ) {
                 addPlayer(player);
                 players[player].goals++;
             }
@@ -1186,7 +1201,10 @@ function renderStatistics() {
             const player =
                 match[`Assist Player ${i}`];
 
-            if (player) {
+            if (
+                player &&
+                !String(player).includes("(OG)")
+            ) {
                 addPlayer(player);
                 players[player].assists++;
             }
@@ -1199,7 +1217,10 @@ function renderStatistics() {
             const player =
                 match[`Yellow player ${i}`];
 
-            if (player) {
+            if (
+                player &&
+                !String(player).includes("(OG)")
+            ) {
                 addPlayer(player);
                 players[player].yellow++;
             }
@@ -1212,7 +1233,10 @@ function renderStatistics() {
             const player =
                 match[`Red player ${i}`];
 
-            if (player) {
+            if (
+                player &&
+                !String(player).includes("(OG)")
+            ) {
                 addPlayer(player);
                 players[player].red++;
             }
