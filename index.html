@@ -453,7 +453,7 @@ select:focus{
 }
 ``
 
-@media(max-width:768px){
+@media (max-width:768px){
 
     .content-layout{
         display:flex;
@@ -463,15 +463,15 @@ select:focus{
 
     .left-panel,
     .right-panel{
-        flex:none;
-        width:100%;
-        min-width:100%;
+        flex:none !important;
+        width:100% !important;
+        min-width:0;
+        max-width:100%;
     }
 
     .right-panel{
-        position:static;
+        position:static !important;
         top:auto;
-        align-self:auto;
     }
     
     .container{
