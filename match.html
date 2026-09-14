@@ -1192,6 +1192,25 @@ if(event.assist !== undefined){
 
     }
 
+}else if(event.icon){
+
+    if(event.side === "right"){
+
+        content = `
+            ${escapeHtml(event.player)}
+            <span class="event-icon">${event.icon}</span>
+        `;
+
+    }else{
+
+        content = `
+            <span class="event-icon">${event.icon}</span>
+            ${escapeHtml(event.player)}
+        `;
+
+    }
+}
+
     timelineHtml += eventRow(
         event.side,
         event.minute,
