@@ -1497,15 +1497,6 @@ document.getElementById("app").innerHTML = `
         <div id="info-section"
              class="match-section active">
             ${infoHtml}
-            ${
-                window.innerWidth <= 900
-                    ? timeline.timelineHtml
-                    : ""
-            }
-        </div>
-
-        <div id="timeline-section"
-             class="match-section">
             ${timeline.timelineHtml}
         </div>
 
