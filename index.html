@@ -1118,9 +1118,11 @@ function renderStatistics() {
 
     function addPlayer(name) {
     
-        if (!name || !String(name).trim()) return;
+        if (!name || !String(name).trim()) return false;
     
         name = String(name).trim();
+    
+        if (name.includes("(OG)")) return false;
     
         if (!players[name]) {
             players[name] = {
@@ -1133,6 +1135,7 @@ function renderStatistics() {
             };
         }
     
+        return true;
     }
 
     matches.forEach(match => {
@@ -1143,13 +1146,11 @@ function renderStatistics() {
             const player =
                 match[`Player name ${i}`];
 
-            if (player) {
-
-                addPlayer(player);
-
+            if (player && addPlayer(player)) {
+            
                 players[player].squad++;
                 players[player].xi++;
-
+            
             }
 
         }
@@ -1160,12 +1161,8 @@ function renderStatistics() {
             const player =
                 match[`On the bench name ${i}`];
 
-            if (player) {
-
-                addPlayer(player);
-
-                players[player].squad++;
-
+            if (player && addPlayer(player)) {
+                players[player].goals++;
             }
 
         }
