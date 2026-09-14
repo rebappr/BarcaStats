@@ -438,6 +438,21 @@ select:focus{
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
 }
 
+.debutants-table{
+    table-layout:auto;
+}
+
+.debutants-table th:nth-child(2),
+.debutants-table td:nth-child(2){
+    width:120px;
+}
+
+.debutants-table th:nth-child(3),
+.debutants-table td:nth-child(3){
+    width:180px;
+}
+``
+
 @media(max-width:768px){
 
 
@@ -1297,7 +1312,7 @@ function renderSeasonSummary(matches) {
         Season Debutants
     </h3>
 
-    <table class="stats-table">
+    <table class="stats-table debutants-table">
         <thead>
             <tr>
                 <th>Player</th>
