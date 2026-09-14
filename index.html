@@ -455,21 +455,23 @@ select:focus{
 
 @media(max-width:768px){
 
-
-
     .content-layout{
+        display:flex;
         flex-direction:column;
+        gap:10px;
     }
 
     .left-panel,
     .right-panel{
+        flex:none;
         width:100%;
+        min-width:100%;
     }
 
     .right-panel{
-        position:sticky;
-        top:85px;
-        align-self:start;
+        position:static;
+        top:auto;
+        align-self:auto;
     }
     
     .container{
