@@ -557,6 +557,16 @@ select:focus{
 <div class="content-layout">
 
     <div class="left-panel">
+
+        <div class="competition-title">
+            Season Summary
+        </div>
+        
+        <div class="widget-card">
+            <div id="seasonSummary">
+                Loading...
+            </div>
+        </div>
     
         <div id="matches">
             Loading...
@@ -962,6 +972,7 @@ updateSeasonTitle();
 
 render(filtered);
 renderStatistics();
+renderSeasonSummary(filtered);
 
 animateContent();
 
@@ -1158,6 +1169,92 @@ function renderLaLigaTable() {
         <p>La Liga table will be displayed here.</p>
     `;
 
+}
+
+function renderSeasonSummary(matches) {
+
+    const statsByCoach = {};
+
+    matches.forEach(match => {
+
+        const coach = match["Manager"] || "Unknown";
+
+        if (!statsByCoach[coach]) {
+
+            statsByCoach[coach] = {
+                matches: 0,
+                wins: 0,
+                draws: 0,
+                losses: 0,
+                goalsFor: 0,
+                goalsAgainst: 0
+            };
+
+        }
+
+        statsByCoach[coach].matches++;
+
+        if (match["Result type"] === "W") {
+            statsByCoach[coach].wins++;
+        }
+
+        if (match["Result type"] === "D") {
+            statsByCoach[coach].draws++;
+        }
+
+        if (match["Result type"] === "L") {
+            statsByCoach[coach].losses++;
+        }
+
+        if (match.Result && match.Result.includes(":")) {
+
+            const parts = match.Result.split(":");
+
+            const gf = parseInt(parts[0]) || 0;
+            const ga = parseInt(parts[1]) || 0;
+
+            statsByCoach[coach].goalsFor += gf;
+            statsByCoach[coach].goalsAgainst += ga;
+        }
+
+    });
+
+    let html = `
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Coach</th>
+                    <th>M</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>Goals</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    Object.entries(statsByCoach).forEach(([coach, stats]) => {
+
+        html += `
+            <tr>
+                <td>${coach}</td>
+                <td>${stats.matches}</td>
+                <td>${stats.wins}</td>
+                <td>${stats.draws}</td>
+                <td>${stats.losses}</td>
+                <td>${stats.goalsFor}:${stats.goalsAgainst}</td>
+            </tr>
+        `;
+
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    document.getElementById("seasonSummary").innerHTML = html;
 }
 
 function renderStatistics() {
