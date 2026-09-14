@@ -590,6 +590,21 @@ let allMatches = [];
 let statsSortColumn = "goals";
 let statsSortDirection = "desc";
 
+function animateContent(){
+
+    const layout =
+        document.querySelector(".content-layout");
+
+    if(!layout) return;
+
+    layout.classList.remove("animate");
+
+    void layout.offsetWidth;
+
+    layout.classList.add("animate");
+
+}
+
 function saveFilters(){
 
     localStorage.setItem(
@@ -888,6 +903,8 @@ updateSeasonTitle();
 
 render(filtered);
 renderStatistics();
+
+animateContent();
 
 }
 
