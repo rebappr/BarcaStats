@@ -61,6 +61,21 @@ body{
     align-items:flex-start;
 }
 
+.content-layout.animate{
+    animation:pageRefresh .4s ease;
+}
+
+@keyframes pageRefresh{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
 .left-panel{
     flex:0 0 50%;
     min-width:0;
@@ -211,27 +226,11 @@ td{
     border:1px solid var(--card-border);
     border-radius:24px;
     overflow:hidden;
-    transition:.3s;
-    animation:fadeSlide .4s ease;
-}
-
-@keyframes fadeSlide{
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
 .matches-table tbody tr{
     opacity:0;
     transform:translateY(10px);
-    transition:
-        opacity .25s ease,
-        transform .25s ease;
 }
 
 table{
@@ -885,6 +884,8 @@ updateSeasonTitle();
 render(filtered);
 renderStatistics();
 
+animateContent();
+
 }
 
     function sortStats(column) {
@@ -1069,29 +1070,6 @@ Object.keys(grouped)
     });
 
 document.getElementById("matches").innerHTML = html;
-
-setTimeout(() => {
-
-    document
-        .querySelectorAll(".matches-table tbody tr")
-        .forEach((row, index) => {
-
-            row.style.opacity = "0";
-            row.style.transform = "translateY(10px)";
-
-            setTimeout(() => {
-
-                row.style.transition =
-                    "opacity .25s ease, transform .25s ease";
-
-                row.style.opacity = "1";
-                row.style.transform = "translateY(0)";
-
-            }, index * 25);
-
-        });
-
-}, 0);
 
 }
 
