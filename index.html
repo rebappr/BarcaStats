@@ -1211,14 +1211,24 @@ function renderSeasonSummary(matches) {
         }
 
         if (match.Result && match.Result.includes(":")) {
-
+        
             const parts = match.Result.split(":");
-
-            const gf = parseInt(parts[0]) || 0;
-            const ga = parseInt(parts[1]) || 0;
-
-            statsByCoach[coach].goalsFor += gf;
-            statsByCoach[coach].goalsAgainst += ga;
+        
+            const homeGoals = parseInt(parts[0]) || 0;
+            const awayGoals = parseInt(parts[1]) || 0;
+        
+            if (match["Home/Away"] === "Home") {
+        
+                statsByCoach[coach].goalsFor += homeGoals;
+                statsByCoach[coach].goalsAgainst += awayGoals;
+        
+            } else {
+        
+                statsByCoach[coach].goalsFor += awayGoals;
+                statsByCoach[coach].goalsAgainst += homeGoals;
+        
+            }
+        
         }
 
     });
