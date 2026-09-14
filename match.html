@@ -929,7 +929,7 @@ function getTimeline(match){
 
             events.push({
                 minute: match[`Goal min ${i}`],
-                side: homeMatch ? "left" : "right",
+                side: homeMatch ? "left":"right",
                 player: match[`Goal Player ${i}`],
                 assist: match[`Assist Player ${i}`] || "",
                 score: `${homeScore}:${awayScore}`, 
@@ -952,7 +952,7 @@ function getTimeline(match){
 
             events.push({
                 minute: match[`Opp. Goal min ${i}`],
-                side: homeMatch ? "right" : "left",
+                side: homeMatch ? "right":"left",
                 player: match[`Opp. Goal Player ${i}`],
                 assist: match[`Opp. Assist player ${i}`] || "",
                 score: `${homeScore} - ${awayScore}`, 
@@ -980,7 +980,7 @@ for(let i=1;i<=12;i++){
 
         events.push({
             minute: match[`Penalty min ${i}`],
-            side: homeMatch ? "left" : "right",
+            side: homeMatch ? "left":"right",
             player: match[`Penalty player ${i}`],
             missedPenalty: true
         });
@@ -996,7 +996,7 @@ for(let i=1;i<=12;i++){
 
         events.push({
             minute: match[`Opp. Penalty min ${i}`],
-            side: homeMatch ? "right" : "left",
+            side: homeMatch ? "right":"left",
             player: match[`Opp. Penalty player ${i}`],
             missedPenalty: true
         });
@@ -1012,7 +1012,7 @@ for(let i=1;i<=12;i++){
 
             events.push({
                 minute: match[`Sub min ${i}`],
-                side: homeMatch ? "left" : "right",
+                side: homeMatch ? "left":"right",
                 on: match[`Sub on ${i}`],
                 off: match[`Sub off ${i}`]
             });
@@ -1023,7 +1023,7 @@ for(let i=1;i<=12;i++){
 
             events.push({
                 minute: match[`Opp. Sub min ${i}`],
-                side: homeMatch ? "right" : "left",
+                side: homeMatch ? "right":"left",
                 on: match[`Opp. Sub on ${i}`],
                 off: match[`Opp. Sub off ${i}`]
             });
@@ -1040,7 +1040,7 @@ for(let i=1;i<=12;i++){
 
             events.push({
                 minute: match[`Yellow min ${i}`],
-                side: homeMatch ? "left" : "right",
+                side: homeMatch ? "left":"right",
                 icon: "🟨",
                 player: match[`Yellow player ${i}`]
             });
@@ -1051,7 +1051,7 @@ for(let i=1;i<=12;i++){
 
             events.push({
                 minute: match[`Opp. Yellow min ${i}`],
-                side: homeMatch ? "right" : "left",
+                side: homeMatch ? "right":"left",
                 icon: "🟨",
                 player: match[`Opp. Yellow player ${i}`]
             });
@@ -1068,7 +1068,7 @@ for(let i=1;i<=12;i++){
 
             events.push({
                 minute: match[`Red min ${i}`],
-                side: homeMatch ? "left" : "right",
+                side: homeMatch ? "left":"right",
                 icon: "🟥",
                 player: match[`Red player ${i}`]
             });
@@ -1079,7 +1079,7 @@ for(let i=1;i<=12;i++){
 
             events.push({
                 minute: match[`Opp. Red min ${i}`],
-                side: homeMatch ? "right" : "left",
+                side: homeMatch ? "right":"left",
                 icon: "🟥",
                 player: match[`Opp. Red player ${i}`]
             });
