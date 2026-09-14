@@ -1130,36 +1130,45 @@ events.forEach(event => {
 
     let content = "";
 
-if(event.assist !== undefined){
+    if(event.assist !== undefined){
 
-    if(event.side === "right"){
+        if(event.side === "right"){
 
-        content = `
-            <strong>${escapeHtml(event.player)}</strong>
-            <span class="event-icon">⚽</span>
-            <span class="timeline-score">${event.score}</span>
-            ${
-                event.assist
-                    ? `<small>${escapeHtml(event.assist)}</small>`
-                    : ""
-            }
-        `;
+            content = `
+                <strong>${escapeHtml(event.player)}</strong>
+                <span class="event-icon">⚽</span>
+                <span class="timeline-score">${event.score}</span>
+                ${
+                    event.assist
+                        ? `<small>${escapeHtml(event.assist)}</small>`
+                        : ""
+                }
+            `;
 
-    }else{
+        }else{
 
-        content = `
-            <span class="event-icon">⚽</span>
-            <strong>${escapeHtml(event.player)}</strong>
-            <span class="timeline-score">${event.score}</span>
-            ${
-                event.assist
-                    ? `<small>${escapeHtml(event.assist)}</small>`
-                    : ""
-            }
-        `;
+            content = `
+                <span class="event-icon">⚽</span>
+                <strong>${escapeHtml(event.player)}</strong>
+                <span class="timeline-score">${event.score}</span>
+                ${
+                    event.assist
+                        ? `<small>${escapeHtml(event.assist)}</small>`
+                        : ""
+                }
+            `;
 
-}
+        }
+
     }else if(event.on){
+
+        content = `
+            🔄 <strong>${escapeHtml(event.on)}</strong>
+            for
+            ${escapeHtml(event.off)}
+        `;
+
+    }else if(event.icon){
 
 content = `
 🔄 <strong>${escapeHtml(event.on)}</strong> for ${escapeHtml(event.off)}
