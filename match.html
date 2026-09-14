@@ -580,9 +580,23 @@ body{
         position:sticky;
         top:0;
         z-index:1000;
+    }
+
+    .sticky-header::before{
+        content:"";
+        position:absolute;
     
-        background:var(--card-bg);
-        backdrop-filter:blur(20px);
+        top:-20px;
+        bottom:-10px;
+    
+        left:50%;
+        transform:translateX(-50%);
+    
+        width:100vw;
+    
+        background:var(--bg);
+    
+        z-index:-1;
     }
 
 }
