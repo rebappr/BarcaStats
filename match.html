@@ -143,10 +143,24 @@ body{
 
 .match-section{
     display:none;
+    opacity:0;
+    transform:translateX(15px);
 }
 
 .match-section.active{
     display:block;
+    animation:slideContent .25s ease;
+}
+
+@keyframes slideContent{
+    from{
+        opacity:0;
+        transform:translateX(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
 }
 
 .card{
