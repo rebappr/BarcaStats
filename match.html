@@ -1602,48 +1602,54 @@ document.getElementById("app").innerHTML = `
 
 </div>
 
-<div class="left-column">
+<div class="content-sections">
 
-    <div id="info-section"
-         class="match-section active">
-        ${infoHtml}
-        ${showTimeline ? timeline.timelineHtml : ""}
+    <div class="left-column">
+
+        <div id="info-section"
+             class="match-section active">
+            ${infoHtml}
+            ${showTimeline ? timeline.timelineHtml : ""}
+        </div>
+
+        <div id="stats-section"
+             class="match-section">
+            <div class="card">
+                <div class="section-title">
+                    Statistics
+                </div>
+
+                STATISTICS CONTENT
+            </div>
+        </div>
+
     </div>
 
-    <div id="stats-section"
-         class="match-section">
-        <div class="card">
-            <div class="section-title">
-                Statistics
-            </div>
+    <div class="right-column">
 
-            STATISTICS CONTENT
+        ${showSquads ? `
+        <div id="squads-section"
+             class="match-section">
+            ${squadsHtml}
         </div>
+        ` : ""}
+
+        <div id="h2h-section"
+             class="match-section">
+            <div class="card">
+                <div class="section-title">
+                    Head-to-Head
+                </div>
+
+                H2H CONTENT
+            </div>
+        </div>
+
     </div>
 
 </div>
 
-<div class="right-column">
-
-    ${showSquads ? `
-    <div id="squads-section"
-         class="match-section">
-        ${squadsHtml}
-    </div>
-    ` : ""}
-
-    <div id="h2h-section"
-         class="match-section">
-        <div class="card">
-            <div class="section-title">
-                Head-to-Head
-            </div>
-
-            H2H CONTENT
-        </div>
-    </div>
-
-</div>
+`;
 
 if(window.innerWidth <= 900){
 
