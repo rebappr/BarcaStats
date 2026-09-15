@@ -177,16 +177,22 @@ text-align:center;
 
 .matches-table th:nth-child(2),
 .matches-table td:nth-child(2){
-width:1%;
+width:auto;
 }
 
 .matches-table th:nth-child(3),
 .matches-table td:nth-child(3){
-width:auto;
+width:1%;
 }
 
 .matches-table th:nth-child(4),
 .matches-table td:nth-child(4){
+width:1%;
+text-align:center;
+}
+
+.matches-table th:nth-child(5),
+.matches-table td:nth-child(5){
 width:1%;
 text-align:center;
 }
@@ -1500,28 +1506,58 @@ function getH2H(match, allMatches){
     const opponent =
         String(match["Opp. Team"] || "").trim();
 
-    const h2hMatches = allMatches
-        .filter(row =>
-            String(row["Opp. Team"] || "").trim() === opponent
-        )
-        .sort((a,b) =>
-            new Date(b.Date.split(".").reverse().join("-")) -
-            new Date(a.Date.split(".").reverse().join("-"))
-        )
-        .slice(0,10);
+const currentMatchDate =
+    new Date(
+        match.Date.split(".").reverse().join("-")
+    );
+
+const h2hMatches = allMatches
+    .filter(row => {
+
+        const sameOpponent =
+            String(row["Opp. Team"] || "").trim() === opponent;
+
+        const notCurrentMatch =
+            String(row.ID) !== String(match.ID);
+
+        const playedMatch =
+            String(row.Result || "").trim() !== "-:-";
+
+        const matchDate =
+            new Date(
+                row.Date.split(".").reverse().join("-")
+            );
+
+        const olderMatch =
+            matchDate < currentMatchDate;
+
+        return (
+            sameOpponent &&
+            notCurrentMatch &&
+            playedMatch &&
+            olderMatch
+        );
+
+    })
+    .sort((a,b) =>
+        new Date(b.Date.split(".").reverse().join("-")) -
+        new Date(a.Date.split(".").reverse().join("-"))
+    )
+    .slice(0,10);
 
     let html = `
         <div class="card">
 
             <table class="matches-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Venue</th>
-                        <th>Opponent</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Competition</th>
+                            <th>MD</th>
+                            <th>V</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
                 <tbody>
     `;
 
@@ -1544,39 +1580,41 @@ function getH2H(match, allMatches){
                 break;
         }
 
-        html += `
-            <tr onclick="location.href='match.html?id=${row.ID}'">
-
-                <td>${escapeHtml(row.Date || "")}</td>
-
-                <td>
-                    ${
-                        row["Home/Away"] === "Home"
-                            ? "H"
-                            : "A"
-                    }
-                </td>
-
-                <td>
-                    ${escapeHtml(row["Opp. Team"] || "")}
-                </td>
-
-                <td>
-                    <span class="result-badge ${resultClass}">
-                        ${escapeHtml(row.Result || "-:-")}
-                    </span>
-                </td>
-
-            </tr>
-        `;
+                html += `
+                <tr onclick="location.href='match.html?id=${row.ID}'">
+                
+                    <td>
+                        ${row.Date || ""}
+                    </td>
+                
+                    <td>
+                        ${row.Competition || ""}
+                    </td>
+                
+                    <td>
+                        ${row.Matchday || ""}
+                    </td>
+                
+                    <td>
+                        ${row["Home/Away"] === "Home" ? "H" : "A"}
+                    </td>
+                
+                    <td>
+                        <span class="result-badge ${resultClass}">
+                            ${row.Result || "-:-"}
+                        </span>
+                    </td>
+                
+                </tr>
+                `;
     });
 
-    html += `
-                </tbody>
-            </table>
-
-        </div>
-    `;
+                html += `
+                            </tbody>
+                        </table>
+            
+                    </div>
+                `;
 
     return html;
 }
