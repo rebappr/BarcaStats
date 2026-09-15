@@ -31,6 +31,9 @@
 
     --select-bg: #22385f;
     --select-text: #ffffff;
+   
+    --tabs-text: #22385f;
+    --tabs-active: #ffffff;
 
 }
 
@@ -60,6 +63,9 @@ html[data-theme="dark"]{
 
     --select-bg: #22385f;
     --select-text: #ffffff;
+   
+    --tabs-text: #22385f;
+    --tabs-active: #ffffff;
 }
 
 /* =========================
@@ -95,6 +101,9 @@ html[data-theme="dark"]{
 
     --select-bg: #ffffff;
     --select-text: #0f172a;
+   
+    --tabs-text: #22385f;
+    --tabs-active: #ffffff;
 
 }
 
@@ -125,4 +134,7 @@ html[data-theme="light"]{
 
     --select-bg: #ffffff;
     --select-text: #0f172a;
+   
+    --tabs-text: #22385f;
+    --tabs-active: #ffffff;
 }
