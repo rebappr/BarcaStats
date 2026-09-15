@@ -122,6 +122,7 @@ body{
     }
 
     .match-tab{
+        position:relative;
         flex:none;
         width:auto;
         height:auto;
@@ -148,6 +149,10 @@ body{
     }
 
 .match-tab.active::after{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
     content:"";
     display:block;
     height:2px;
