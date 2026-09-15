@@ -1841,33 +1841,45 @@ document.getElementById("app").innerHTML = `
 
     <div class="left-column">
 
-        <div id="info-section"
+            <div id="info-section"
              class="match-section active">
+        
+            <div class="section-header">
+                Match Details
+            </div>
+        
             ${infoHtml}
             ${showTimeline ? timeline.timelineHtml : ""}
+        
         </div>
 
         <div id="stats-section"
              class="match-section">
-            <div class="card">
-                <div class="section-title">
-                    Statistics
-                </div>
-
-                STATISTICS CONTENT
+        
+            <div class="section-title">
+                Statistics
             </div>
+        
+            ${statsHtml}
+        
         </div>
 
     </div>
 
     <div class="right-column">
 
-        ${showSquads ? `
-        <div id="squads-section"
-             class="match-section">
-            ${squadsHtml}
-        </div>
-        ` : ""}
+            ${showSquads ? `
+            <div id="squads-section"
+                 class="match-section">
+            
+                <div class="section-header">
+                    Line-ups
+                </div>
+            
+                ${squadsHtml}
+            
+            </div>
+            ` : ""}
 
         <div id="h2h-section"
              class="match-section">
