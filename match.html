@@ -198,13 +198,13 @@ box-shadow:
 
 .matches-table th:nth-child(2),
 .matches-table td:nth-child(2){
-    width:auto; /* Competition */
+    width:60px; /* Matchday */
+    text-align:center;
 }
 
 .matches-table th:nth-child(3),
 .matches-table td:nth-child(3){
-    width:60px; /* Matchday */
-    text-align:center;
+    width:auto; /* Competition */
 }
 
 .matches-table th:nth-child(4),
@@ -1630,11 +1630,11 @@ const h2hMatches = allMatches
                     </td>
                 
                     <td>
-                        ${row.Competition || ""}
+                        ${row.Matchday || ""}
                     </td>
                 
                     <td>
-                        ${row.Matchday || ""}
+                        ${row.Competition || ""}
                     </td>
                 
                     <td>
