@@ -147,22 +147,23 @@ box-shadow:
         opacity:0;
         transform:translateX(20px);
     }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
 
-@keyframes slideLeft{
-    from{
-        opacity:0;
-        transform:translateX(-20px);
-    }
     to{
         opacity:1;
         transform:translateX(0);
     }
 }
 
+@keyframes slideLeft{
+    from{
+        opacity:0;
+        transform:translateX(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
 }
 
 .matches-table{
@@ -1844,7 +1845,7 @@ document.getElementById("app").innerHTML = `
             <div id="info-section"
              class="match-section active">
         
-            <div class="section-header">
+            <div class="section-title">
                 Match Details
             </div>
         
@@ -1853,14 +1854,15 @@ document.getElementById("app").innerHTML = `
         
         </div>
 
-        <div id="stats-section"
-             class="match-section">
+        <div id="stats-section" class="match-section">
         
             <div class="section-title">
                 Statistics
             </div>
         
-            ${statsHtml}
+            <div class="card">
+                Statistics content
+            </div>
         
         </div>
 
@@ -1872,7 +1874,7 @@ document.getElementById("app").innerHTML = `
             <div id="squads-section"
                  class="match-section">
             
-                <div class="section-header">
+                <div class="section-title">
                     Line-ups
                 </div>
             
