@@ -143,21 +143,20 @@ body{
 
 .match-section{
     display:none;
-    opacity:0;
-    transform:translateX(15px);
 }
 
 .match-section.active{
     display:block;
-    animation:slideContent .25s ease;
+    animation:slideContent .3s ease;
 }
 
 @keyframes slideContent{
-    from{
+    0%{
         opacity:0;
-        transform:translateX(15px);
+        transform:translateX(20px);
     }
-    to{
+
+    100%{
         opacity:1;
         transform:translateX(0);
     }
