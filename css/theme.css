@@ -65,7 +65,7 @@ html[data-theme="dark"]{
     --select-text: #ffffff;
    
     --tabs-text: #a3a3a3;
-    --tabs-active: #ffffff;
+    --tabs-active: #004D98;
 }
 
 /* =========================
@@ -102,7 +102,7 @@ html[data-theme="dark"]{
     --select-bg: #ffffff;
     --select-text: #0f172a;
    
-    --tabs-text: #22385f;
+    --tabs-text: #9ca3af;
     --tabs-active: #ffffff;
 
 }
@@ -135,6 +135,6 @@ html[data-theme="light"]{
     --select-bg: #ffffff;
     --select-text: #0f172a;
    
-    --tabs-text: #22385f;
-    --tabs-active: #ffffff;
+    --tabs-text: #9ca3af;
+    --tabs-active: #004D98;
 }
