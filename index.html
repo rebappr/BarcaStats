@@ -268,7 +268,7 @@ font-size:12px;
     font-weight:400;
 }
 
-.stats-table thead th,
+.stats-table thead th
 {
 position:sticky;
 top:0;
@@ -1145,25 +1145,24 @@ return a.localeCompare(b);
 })
 .forEach(competition => {
 
-html += `
-       <div class="competition-title">
-           ${competition}
-       </div>
-       `;
-
-      <div class="widget-card">
-          <table class="matches-table">
-              <thead>
-                  <tr>
-                      <th>Matchday</th>
-                      <th>Date</th>
-                      <th>Venue</th>
-                      <th>Opponent</th>
-                      <th>Result</th>
-                  </tr>
-              </thead>
-              <tbody>
-      `;
+   html += `
+   <div class="competition-title">
+       ${competition}
+   </div>
+   
+   <div class="widget-card">
+       <table class="matches-table">
+           <thead>
+               <tr>
+                   <th>Matchday</th>
+                   <th>Date</th>
+                   <th>Venue</th>
+                   <th>Opponent</th>
+                   <th>Result</th>
+               </tr>
+           </thead>
+           <tbody>
+   `;
 
 grouped[competition].forEach(match => {
 
