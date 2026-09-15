@@ -276,6 +276,30 @@ font-size:12px;
     font-weight:400;
 }
 
+.stats-table thead th,
+.matches-table thead th{
+position:sticky;
+top:0;
+z-index:10;
+background:var(--meta-bg);
+color:var(--muted);
+padding:12px;
+}
+
+.table-scroll{
+overflow-y:auto;
+overflow-x:hidden;
+}
+
+.matches-table thead th{
+position:sticky;
+top:0;
+z-index:10;
+
+background:var(--meta-bg);
+color:var(--muted);
+}
+
 .matches-table th:nth-child(1),
 .matches-table td:nth-child(1){
 width:60px;
