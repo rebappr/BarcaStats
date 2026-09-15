@@ -110,7 +110,12 @@ body{
     font-weight:700;
 }
 
+    @media(max-width:900px){
+
     .match-tabs{
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
         display:flex;
         gap:10px;
         margin:10px 0;
@@ -120,14 +125,15 @@ body{
         flex:none;
         width:auto;
         height:auto;
-        padding:4px 8px;
+        padding:6px 10px;
+
 
         background:transparent;
         border:none;
         border-radius:0;
 
         color:var(--tabs-text);
-        font-size:13px;
+        font-size:12px;
         font-weight:700;
     }
 
@@ -1611,6 +1617,32 @@ document.getElementById("app").innerHTML = `
         </div>
         ` : ""}
 
+    </div>
+
+</div>
+
+<div id="h2h-section"
+     class="match-section">
+
+    <div class="card">
+        <div class="section-title">
+            Head-to-Head
+        </div>
+
+        H2H CONTENT
+    </div>
+
+</div>
+
+<div id="stats-section"
+     class="match-section">
+
+    <div class="card">
+        <div class="section-title">
+            Statistics
+        </div>
+
+        STATISTICS CONTENT
     </div>
 
 </div>
