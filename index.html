@@ -231,14 +231,6 @@ font-weight:700;
 font-size:12px;
 }
 
-.table-wrapper{
-background:var(--card-bg);
-backdrop-filter:blur(20px);
-border:1px solid var(--card-border);
-border-radius:24px;
-overflow:hidden;
-}
-
 .matches-table tbody tr{
 opacity:1;
 transform:none;
@@ -277,7 +269,7 @@ font-size:12px;
 }
 
 .stats-table thead th,
-.matches-table thead th{
+{
 position:sticky;
 top:0;
 z-index:10;
@@ -286,9 +278,8 @@ color:var(--muted);
 padding:12px;
 }
 
-.table-scroll{
-overflow-y:auto;
-overflow-x:hidden;
+.matches-table{
+    width:100%;
 }
 
 .matches-table thead th{
@@ -1161,18 +1152,23 @@ html += `
        `;
 
 html += `
-               <table class="matches-table">
-                   <thead>
-                       <tr>
-                          <th>Matchday</th>
-                           <th>Date</th>
-                           <th>Venue</th>
-                           <th>Opponent</th>
-                           <th>Result</th>
-                       </tr>
-                   </thead>
-                   <tbody>
-       `
+      <div class="competition-title">
+          ${competition}
+      </div>
+      
+      <div class="widget-card">
+          <table class="matches-table">
+              <thead>
+                  <tr>
+                      <th>Matchday</th>
+                      <th>Date</th>
+                      <th>Venue</th>
+                      <th>Opponent</th>
+                      <th>Result</th>
+                  </tr>
+              </thead>
+              <tbody>
+      `;
 
 grouped[competition].forEach(match => {
 
@@ -1207,9 +1203,10 @@ html += `
 });
 
 html += `
-                   </tbody>
-               </table>
-       `;
+                 </tbody>
+             </table>
+         </div>
+         `;
 
 });
 
