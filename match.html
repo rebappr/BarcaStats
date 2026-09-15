@@ -1099,6 +1099,11 @@ events.forEach(event => {
 
 function eventRow(side, minute, content){
 
+    const minuteLabel =
+        /^\d+(\+\d+)?$/.test(String(minute).trim())
+            ? `${minute}'`
+            : escapeHtml(minute);
+
     return `
         <div class="timeline-row">
 
@@ -1106,14 +1111,14 @@ function eventRow(side, minute, content){
                 side === "left"
                 ? `
                     <div class="timeline-home">
-                        <div class="timeline-minute">${minute}'</div>
+                        <div class="timeline-minute">${minuteLabel}</div>
                         <div class="timeline-event">${content}</div>
                     </div>
                 `
                 : `
                     <div class="timeline-away">
                         <div class="timeline-event">${content}</div>
-                        <div class="timeline-minute">${minute}'</div>
+                        <div class="timeline-minute">${minuteLabel}</div>
                     </div>
                 `
             }
