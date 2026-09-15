@@ -444,7 +444,7 @@ input[list]:focus,
 select:focus{
 outline:none;
 outline:none;
-box-shadow:0 0 0 3px rgba(59,130,246,.35);
+box-shadow:0 0 0 3px rgba(59,1305);
 }
 
 .stats-selected{
@@ -634,29 +634,6 @@ Loading...
 <script>
 
 (function(){
-
-if(!localStorage.getItem("theme")){
-
-const systemTheme =
-window.matchMedia("(prefers-color-scheme: dark)").matches
-? "dark"
-: "light";
-
-document.documentElement.setAttribute(
-"data-theme",
-systemTheme
-);
-
-}else{
-
-document.documentElement.setAttribute(
-"data-theme",
-localStorage.getItem("theme")
-);
-
-}
-
-})();
 
 let allMatches = [];
 let allPlayers = [];
