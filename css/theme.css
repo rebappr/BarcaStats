@@ -32,7 +32,7 @@
     --select-bg: #a3a3a3;
     --select-text: #ffffff;
    
-    --tabs-text: #22385f;
+    --tabs-text: #a7a7a8;
     --tabs-active: #ffffff;
 
 }
@@ -64,7 +64,7 @@ html[data-theme="dark"]{
     --select-bg: #22385f;
     --select-text: #ffffff;
    
-    --tabs-text: #22385f;
+    --tabs-text: #a7a7a8;
     --tabs-active: #ffffff;
 }
 
