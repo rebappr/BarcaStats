@@ -197,6 +197,87 @@ width:1%;
 text-align:center;
 }
 
+th:first-child,
+td:first-child{
+padding-left:16px;
+}
+
+th:last-child,
+td:last-child{
+padding-right:16px;
+}
+
+th,
+td{
+padding:5px;
+}
+
+th{
+background:var(--meta-bg);
+color:var(--muted);
+text-align:left;
+padding:12px;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+td{
+padding:8px;
+border-bottom:1px solid var(--meta-border);
+}
+
+tbody tr{
+transition:.25s;
+}
+
+.matches-table tbody tr:hover{
+background:var(--meta-bg);
+cursor:pointer;
+}
+
+.badge{
+display:inline-block;
+padding:4px 8px;
+border-radius:999px;
+background:#dbeafe;
+color:#1e40af;
+font-weight:600;
+}
+
+.result-badge{
+display:inline-block;
+min-width:52px;
+text-align:center;
+border-radius:999px;
+padding:4px 10px;
+font-weight:700;
+}
+
+.result-win{
+background:var(--result-win-bg);
+border:1px solid var(--result-win);
+color:var(--result-win);
+}
+
+.result-draw{
+background:var(--result-draw-bg);
+border:1px solid var(--result-draw);
+color:var(--result-draw);
+}
+
+.result-loss{
+background:var(--result-loss-bg);
+border:1px solid var(--result-loss);
+color:var(--result-loss);
+}
+
+
+.result-empty{
+background:var(--card-bg);
+color:var(--muted);
+}
+
 .card{
     background:var(--card-bg);
     backdrop-filter:blur(20px);
