@@ -29,7 +29,7 @@
     --result-draw-bg:rgba(250,204,21,.15);
     --result-loss-bg:rgba(239,68,68,.15);
 
-    --select-bg: #22385f;
+    --select-bg: #a3a3a3;
     --select-text: #ffffff;
    
     --tabs-text: #22385f;
@@ -64,7 +64,7 @@ html[data-theme="dark"]{
     --select-bg: #22385f;
     --select-text: #ffffff;
    
-    --tabs-text: #22385f;
+    --tabs-text: #a3a3a3;
     --tabs-active: #ffffff;
 }
 
