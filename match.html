@@ -1971,15 +1971,18 @@ document.getElementById("app").innerHTML = `
             DETAILS
         </button>
     
+        ${showSquads ? `
         <button
             class="match-tab"
             data-section="squads-section"
             onclick="showMatchSection('squads-section')">
             LINEUPS
         </button>
+        ` : ""}
+        `
     
         <button
-            class="match-tab"
+            class="match-tab" style="display:none;"
             data-section="stats-section"
             onclick="showMatchSection('stats-section')">
             STATISTICS
@@ -2012,7 +2015,7 @@ document.getElementById("app").innerHTML = `
         
         </div>
 
-        <div id="stats-section" class="match-section">
+        <div id="stats-section" class="match-section" style="display:none;">
         
             <div class="section-title">
                 Statistics
