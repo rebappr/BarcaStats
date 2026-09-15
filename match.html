@@ -10,7 +10,48 @@
     <linkicon-16x16.png
     <linkle-touch-icon.png
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" .lineup-tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.lineup-tab{
+    position:relative;
+
+    flex:none;
+    width:auto;
+
+    padding:6px 10px;
+
+    background:transparent;
+    border:none;
+    border-radius:0;
+
+    color:var(--tabs-text);
+    font-size:13px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.lineup-tab.active{
+    color:var(--tabs-active);
+}
+
+.lineup-tab.active::after{
+    content:"";
+
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:2px;
+
+    background:var(--tabs-active);
+    border-radius:999px;
+}matchcrossorigin>
 <link href="s.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link
@@ -111,55 +152,6 @@ body{
 }
 
     @media(max-width:900px){
-
-    .match-tabs{
-        display:flex;
-        flex-wrap:wrap;
-        display:flex;
-        gap:10px;
-        margin:10px 0;
-    }
-
-    .match-tab{
-        position:relative;
-        flex:none;
-        width:auto;
-        height:auto;
-        padding:6px 10px;
-
-
-        background:transparent;
-        border:none;
-        border-radius:0;
-
-        color:var(--tabs-text);
-        font-size:13px;
-        font-weight:700;
-    }
-
-    .match-tab:hover{
-        background:transparent;
-        cursor:pointer;
-    }
-
-    .match-tab.active{
-        background:transparent;
-        color:var(--tabs-active);
-    }
-
-.match-tab.active::after{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    content:"";
-    display:block;
-    height:2px;
-    margin-top:4px;
-    margin-bottom:0;
-    background:var(--tabs-active);
-    border-radius:999px;
-}
 
 .match-section{
     display:none;
@@ -558,45 +550,57 @@ body{
         display:none;
     }
 
+    .match-tabs,
     .lineup-tabs{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
+        display:flex;
+        flex-wrap:wrap;
+        display:flex;
+        gap:10px;
+        margin:10px 0;
     }
-    
+
+    .match-tab,
     .lineup-tab{
         position:relative;
-    
         flex:none;
         width:auto;
-    
+        height:auto;
         padding:6px 10px;
-    
+
+
         background:transparent;
         border:none;
         border-radius:0;
-    
+
         color:var(--tabs-text);
         font-size:13px;
         font-weight:700;
-    
+    }
+
+    .match-tab:hover,
+    .lineup-tab:hover{
+        background:transparent;
         cursor:pointer;
     }
-    
-    .lineup-tab.active{
+
+    .match-tab.active, 
+     .lineup-tab.active{
+        background:transparent;
         color:var(--tabs-active);
     }
-    
-    .lineup-tab.active::after{
-        content:"";
-    
+
+    .match-tab.active::after,
+    .lineup-tab.active::after
+        {
         position:absolute;
         left:0;
         right:0;
         bottom:0;
-    
+        content:"";
+        display:block;
         height:2px;
-    
+        margin-top:4px;
+        margin-bottom:0;
         background:var(--tabs-active);
         border-radius:999px;
     }
