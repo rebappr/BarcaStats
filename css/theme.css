@@ -16,7 +16,7 @@
     --meta-bg:rgba(255,255,255,.06);
     --meta-border:rgba(255,255,255,.08);
 
-    --muted:#94a3b8;
+    --muted:#e1e4e8;
 
     --divider:rgba(148,163,184,.35);
     --surface:#1e293b;
@@ -45,7 +45,7 @@ html[data-theme="dark"]{
     --meta-bg:rgba(255,255,255,.06);
     --meta-border:rgba(255,255,255,.08);
 
-    --muted:#94a3b8;
+    --muted:#e1e4e8;
 
     --divider:rgba(148,163,184,.35);
     --surface:#1e293b;
