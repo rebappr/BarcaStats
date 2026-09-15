@@ -1975,14 +1975,6 @@ document.getElementById("app").innerHTML = `
         </button>
         ` : ""}
         `
-    
-        <button
-            class="match-tab" style="display:none;"
-            data-section="stats-section"
-            onclick="showMatchSection('stats-section')">
-            STATISTICS
-        </button>
-    
         <button
             class="match-tab"
             data-section="h2h-section"
@@ -2007,18 +1999,6 @@ document.getElementById("app").innerHTML = `
         
             ${infoHtml}
             ${showTimeline ? timeline.timelineHtml : ""}
-        
-        </div>
-
-        <div id="stats-section" class="match-section" style="display:none;">
-        
-            <div class="section-title">
-                Statistics
-            </div>
-        
-            <div class="card">
-                Statistics content
-            </div>
         
         </div>
 
