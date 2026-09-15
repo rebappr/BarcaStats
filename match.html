@@ -150,13 +150,31 @@ body{
     animation:slideContent .3s ease;
 }
 
-@keyframes slideContent{
-    0%{
+.slide-right{
+    animation:slideRight .25s ease;
+}
+
+.slide-left{
+    animation:slideLeft .25s ease;
+}
+
+@keyframes slideRight{
+    from{
         opacity:0;
         transform:translateX(20px);
     }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
 
-    100%{
+@keyframes slideLeft{
+    from{
+        opacity:0;
+        transform:translateX(-20px);
+    }
+    to{
         opacity:1;
         transform:translateX(0);
     }
@@ -725,22 +743,31 @@ function showMatchSection(section){
         return;
     }
 
-    document
-        .querySelectorAll(".match-section")
-        .forEach(el => el.classList.remove("active"));
+    const current =
+        document.querySelector(".match-section.active");
+
+    const next =
+        document.getElementById(section);
+
+    const isLineups =
+        section === "squads-section";
+
+    current?.classList.remove("active");
+
+    next.classList.remove("slide-left","slide-right");
+    next.classList.add(
+        isLineups ? "slide-right" : "slide-left"
+    );
+
+    next.classList.add("active");
 
     document
         .querySelectorAll(".match-tab")
         .forEach(el => el.classList.remove("active"));
 
     document
-        .getElementById(section)
-        .classList.add("active");
-
-    document
         .querySelector(`[data-section="${section}"]`)
         .classList.add("active");
-
 }
     
 function escapeHtml(str) {
