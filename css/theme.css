@@ -103,7 +103,7 @@ html[data-theme="dark"]{
     --select-text: #0f172a;
    
     --tabs-text: #9ca3af;
-    --tabs-active: #004D98;
+    --tabs-active: #192236;
 
 }
 
@@ -136,5 +136,5 @@ html[data-theme="light"]{
     --select-text: #0f172a;
    
     --tabs-text: #9ca3af;
-    --tabs-active: #004D98;
+    --tabs-active: #192236;
 }
