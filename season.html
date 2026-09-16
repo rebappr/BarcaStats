@@ -765,6 +765,20 @@ function render(matches){
 
     }
 
+   matches.sort((a, b) => {
+   
+       const dateA = new Date(
+           a.Date.split(".").reverse().join("-")
+       );
+   
+       const dateB = new Date(
+           b.Date.split(".").reverse().join("-")
+       );
+   
+       return dateA - dateB; // najstarší -> najnovší
+   
+   });
+
     const grouped = {};
 
     matches.forEach(match => {
