@@ -169,6 +169,22 @@ font-weight:600;
 color:white;
 }
 
+.season-selector{
+    margin-top:12px;
+    max-width:220px;
+}
+
+.season-selector select{
+    background:rgba(255,255,255,.15);
+    color:white;
+    border:1px solid rgba(255,255,255,.25);
+}
+
+.season-selector select option{
+    background:#0f2d6b;
+    color:white;
+}
+
 .header{
 position:relative;
 overflow:hidden;
@@ -1297,6 +1313,33 @@ document.getElementById("statistics").innerHTML = html;
 
 }
 
+function renderSeasonDropdown(){
+
+    const seasons = [
+        ...new Set(
+            allMatches.map(x => x.Season)
+        )
+    ].sort().reverse();
+
+    const select =
+    document.getElementById("seasonSelect");
+
+    select.innerHTML = seasons.map(s => `
+        <option value="${s}"
+            ${s === season ? "selected" : ""}>
+            ${s}
+        </option>
+    `).join("");
+
+    select.addEventListener("change", e => {
+
+        location.href =
+        `season.html?season=${encodeURIComponent(e.target.value)}`;
+
+    });
+
+}
+
 Promise.all([
     fetch("data.json").then(r => r.json()),
     fetch("players.json").then(r => r.json())
@@ -1314,6 +1357,7 @@ Promise.all([
 
     });
 
+    renderSeasonDropdown();
     renderSeason();
 
 })
@@ -1322,6 +1366,8 @@ Promise.all([
     console.error(error);
 
 });
+
+
 
 (function(){
 
