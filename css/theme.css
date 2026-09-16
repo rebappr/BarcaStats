@@ -36,7 +36,7 @@
     --tabs-active: #ffffff;
 
     --number:#ffffff;
-    --number-bg:rgba(0,77,152,.12);
+    --number-bg:rgba(255,255,255,.08);
 
 }
 
@@ -71,7 +71,7 @@ html[data-theme="dark"]{
     --tabs-active: #ffffff;
 
     --number:#ffffff;
-    --number-bg:rgba(0,77,152,.12);
+    --number-bg:rgba(255,255,255,.08);
 }
 
 /* =========================
