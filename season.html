@@ -697,20 +697,25 @@ function renderSeason(){
         return;
     }
 
-    const wins =
-    seasonMatches.filter(
-        x => x["Result type"] === "W"
-    ).length;
+      const playedMatches = seasonMatches.filter(
+          x => x.Result &&
+               x.Result !== "-:-"
+      );
 
-    const draws =
-    seasonMatches.filter(
-        x => x["Result type"] === "D"
-    ).length;
-
-    const losses =
-    seasonMatches.filter(
-        x => x["Result type"] === "L"
-    ).length;
+      const wins =
+      playedMatches.filter(
+          x => x["Result type"] === "W"
+      ).length;
+      
+      const draws =
+      playedMatches.filter(
+          x => x["Result type"] === "D"
+      ).length;
+      
+      const losses =
+      playedMatches.filter(
+          x => x["Result type"] === "L"
+      ).length;
 
    document.getElementById(
     "seasonOverview"
@@ -719,7 +724,7 @@ function renderSeason(){
 <div class="summary-grid">
 
     <div class="summary-box">
-        <b>${seasonMatches.length}</b>
+        <b>${playedMatches.length}</b>
         Matches
     </div>
 
