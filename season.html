@@ -553,15 +553,19 @@ font-size:12px;
 
 <div class="header">
 
-<h1 id="seasonTitle">
-FC Barcelona
-</h1>
+    <h1 id="seasonTitle">
+        FC Barcelona
+    </h1>
 
-<div class="navbar">
-    <a href="index.html">Home</a>
-    <a href="matches.html">Matches</a>
-    <a href="players.html">Players</a>
-</div>
+    <div id="seasonRecord" class="hero-subtitle">
+        Loading...
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="matches.html">Matches</a>
+        <a href="players.html">Players</a>
+    </div>
 
 </div>
 
@@ -716,6 +720,73 @@ function getResultClass(match){
         default:
             return "result-badge";
     }
+
+}
+
+function render(matches){
+
+    if(matches.length === 0){
+
+        document.getElementById("matches").innerHTML =
+        "<div class='empty'>Žiadne zápasy</div>";
+
+        return;
+
+    }
+
+    let html = `
+    <div class="widget-card">
+        <table class="matches-table">
+            <thead>
+                <tr>
+                    <th>MD</th>
+                    <th>Date</th>
+                    <th>Venue</th>
+                    <th>Opponent</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    matches.forEach(match => {
+
+        html += `
+        <tr onclick="location.href='match.html?id=${match.ID}'">
+
+            <td>${match.Matchday || ""}</td>
+
+            <td>${match.Date || ""}</td>
+
+            <td>
+                ${match["Home/Away"] === "Home"
+                ? "Home"
+                : "Away"}
+            </td>
+
+            <td>
+                ${match["Opp. Team"] || ""}
+            </td>
+
+            <td>
+                <span class="${getResultClass(match)}">
+                    ${match.Result || "-:-"}
+                </span>
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    html += `
+            </tbody>
+        </table>
+    </div>
+    `;
+
+    document.getElementById("matches").innerHTML =
+    html;
 
 }
 
@@ -948,6 +1019,26 @@ html += `
 `;
 
 document.getElementById("seasonSummary").innerHTML = html;
+}
+
+function sortStats(column){
+
+    if(statsSortColumn === column){
+
+        statsSortDirection =
+        statsSortDirection === "asc"
+        ? "desc"
+        : "asc";
+
+    }else{
+
+        statsSortColumn = column;
+        statsSortDirection = "desc";
+
+    }
+
+    renderSeason();
+
 }
 
 function renderStatistics(matches) {
