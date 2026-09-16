@@ -235,6 +235,27 @@ transition:.25s;
 background:rgba(255,255,255,.25);
 }
 
+.summary-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-bottom:10px;
+}
+
+.summary-box{
+background:var(--card-bg);
+border:1px solid var(--card-border);
+border-radius:20px;
+padding:14px;
+text-align:center;
+}
+
+.summary-box b{
+display:block;
+font-size:22px;
+margin-bottom:4px;
+}
+
 .header h1{
 margin:0;
 font-size:16px;
@@ -611,6 +632,8 @@ Loading...
 </div>
 </div>
 
+<div id="seasonOverview"></div>
+
 <div id="matches">
 Loading...
 </div>
@@ -760,7 +783,35 @@ function render(matches){
 
     let html = `
     <div class="widget-card">
+const grouped = {};
+
+matches.forEach(match => {
+
+    const competition =
+    match.Competition || "Other";
+
+    if(!grouped[competition]){
+        grouped[competition] = [];
+    }
+
+    grouped[competition].push(match);
+
+});
+
+let html = "";
+
+Object.keys(grouped).forEach(competition => {
+
+    html += `
+
+    <div class="competition-title">
+        ${competition}
+    </div>
+
+    <div class="widget-card">
+
         <table class="matches-table">
+
             <thead>
                 <tr>
                     <th>MD</th>
@@ -770,12 +821,15 @@ function render(matches){
                     <th>Result</th>
                 </tr>
             </thead>
+
             <tbody>
+
     `;
 
-    matches.forEach(match => {
+    grouped[competition].forEach(match => {
 
         html += `
+
         <tr onclick="location.href='match.html?id=${match.ID}'">
 
             <td>${match.Matchday || ""}</td>
@@ -799,18 +853,25 @@ function render(matches){
             </td>
 
         </tr>
+
         `;
 
     });
 
     html += `
+
             </tbody>
+
         </table>
+
     </div>
+
     `;
 
-    document.getElementById("matches").innerHTML =
-    html;
+});
+
+document.getElementById("matches").innerHTML =
+html;
 
 }
 
