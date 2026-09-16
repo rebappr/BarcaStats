@@ -670,7 +670,7 @@ let allMatches = [];
 let allPlayers = [];
 let playerBirthDates = {};
 
-const season =
+let season =
 new URLSearchParams(
 location.search
 ).get("season");
@@ -1344,6 +1344,13 @@ Promise.all([
 .then(([matchesData, playersData]) => {
 
     allMatches = matchesData;
+
+   if(!season){
+    season = [...new Set(
+        matchesData.map(x => x.Season)
+    )].sort().reverse()[0];
+}
+   
     allPlayers = playersData;
 
     playersData.forEach(player => {
