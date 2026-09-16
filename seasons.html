@@ -460,6 +460,58 @@ width:120px;
 width:180px;
 }
 
+.season-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fill,minmax(220px,1fr));
+    gap:12px;
+}
+
+.season-card{
+
+    background:var(--card-bg);
+
+    backdrop-filter:blur(20px);
+
+    border:
+    1px solid var(--card-border);
+
+    border-radius:24px;
+
+    padding:30px 20px;
+
+    cursor:pointer;
+
+    text-align:center;
+
+    transition:.25s;
+
+    font-size:24px;
+    font-weight:800;
+}
+
+.season-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.2);
+
+}
+
+.season-card small{
+
+    display:block;
+
+    margin-top:10px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    font-weight:500;
+}
+
 @media (max-width:900px){
 
 .content-layout{
@@ -551,77 +603,25 @@ font-size:12px;
 
 <div class="container">
 
-<div class="header" onclick="goHome()">
+<div class="header">
 
-<h1 id="seasonTitle">
-FC Barcelona
+<h1>
+FC Barcelona Seasons
 </h1>
 
+<div class="hero-subtitle">
+Browse all club seasons
 </div>
 
-<div class="filters">
-
-<div class="filter-group">
-<label for="seasonFilter">Season</label>
-<select id="seasonFilter"></select>
-</div>
-
-<div class="filter-group">
-<label for="competitionFilter">Competition</label>
-<select id="competitionFilter"></select>
-</div>
-
-<div class="filter-group">
-<label for="opponentFilter">Opponent</label>
-<select id="opponentFilter"></select>
-</div>
-
-
-</div>
-
-<div class="content-layout">
-
-<div class="left-panel">
-
-<div class="competition-title">
-Season Summary
-</div>
-
-<div class="widget-card">
-<div id="seasonSummary">
-Loading...
-</div>
-</div>
-
-<div id="matches">
-Loading...
-</div>
-
-</div>
-
-<div class="right-panel">
-
-<div class="competition-title">
-La Liga Table
-</div>
-
-<div class="widget-card">
-<div id="laligaTable">
-Loading...
-</div>
 </div>
 
 <div class="competition-title">
-Statistics
+    Seasons
 </div>
 
-<div class="widget-card">
-<div id="statistics">
-Loading...
-</div>
-</div>
+<div id="seasonGrid" class="season-grid">
 
-</div>
+    Loading...
 
 </div>
 
