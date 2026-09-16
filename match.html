@@ -1701,43 +1701,43 @@ function getH2H(match, allMatches){
         .slice(0,10);
 
     let html = `
-        <div class="card">
+<div class="card">
 
-            <div class="h2h-summary">
+    <div class="h2h-last10">
+        Overall Head-to-Head Record
+    </div>
 
-                <div class="h2h-last10">
-                    Overall Match Record
+                <div class="h2h-summary">
+            
+                    <div class="h2h-stat">
+                        <div class="h2h-circle h2h-win">
+                            ${wins}
+                        </div>
+                        <div class="h2h-label">
+                            Wins
+                        </div>
+                    </div>
+            
+                    <div class="h2h-stat">
+                        <div class="h2h-circle h2h-draw">
+                            ${draws}
+                        </div>
+                        <div class="h2h-label">
+                            Draws
+                        </div>
+                    </div>
+            
+                    <div class="h2h-stat">
+                        <div class="h2h-circle h2h-loss">
+                            ${losses}
+                        </div>
+                        <div class="h2h-label">
+                            Losses
+                        </div>
+                    </div>
+            
                 </div>
-
-                <div class="h2h-stat">
-                    <div class="h2h-circle h2h-win">
-                        ${wins}
-                    </div>
-                    <div class="h2h-label">
-                        Wins
-                    </div>
-                </div>
-
-                <div class="h2h-stat">
-                    <div class="h2h-circle h2h-draw">
-                        ${draws}
-                    </div>
-                    <div class="h2h-label">
-                        Draws
-                    </div>
-                </div>
-
-                <div class="h2h-stat">
-                    <div class="h2h-circle h2h-loss">
-                        ${losses}
-                    </div>
-                    <div class="h2h-label">
-                        Losses
-                    </div>
-                </div>
-
-            </div>
-
+                
                 <div class="h2h-last10">
                     Last 10 Matches
                 </div>
