@@ -1858,6 +1858,14 @@ const oppBench = homeMatch
     ? getBench(match,"Opp. ")
     : getBench(match);
 
+const barcaManager = homeMatch
+    ? (match["Manager"] || "-")
+    : (match["Opp. Manager"] || "-");
+
+const oppManager = homeMatch
+    ? (match["Opp. Manager"] || "-")
+    : (match["Manager"] || "-");
+
 const timeline = getTimeline(match);
 
 const competition = String(match["Competition"] || "").trim();
@@ -1928,11 +1936,15 @@ const squadsHtml = `
             class="team-card">
 
             <h3>${escapeHtml(barcaTitle)}</h3>
-
+            
             <h4>Manager</h4>
-
+            
+            <div class="player">
+            ${escapeHtml(barcaManager)}
+            </div>
+            
             <h4>Starting XI</h4>
-
+            
             ${barcaPlayers}
 
             <h4>Bench</h4>
@@ -1946,9 +1958,17 @@ const squadsHtml = `
             class="team-card">
 
             <h3>${escapeHtml(oppTitle)}</h3>
-
+            
+            <h4>Manager</h4>
+            
+            <div class="player">
+                👔 ${escapeHtml(oppManager)}
+            </div>
+            
+            <h4>Starting XI</h4>
+            
             ${oppPlayers}
-
+            
             <h4>Bench</h4>
 
             ${oppBench}
