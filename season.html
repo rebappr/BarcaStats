@@ -214,7 +214,7 @@ color:rgba(255,255,255,.85);
 
 .summary-grid{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(5,1fr);
 gap:10px;
 margin-bottom:10px;
 }
@@ -717,31 +717,60 @@ function renderSeason(){
           x => x["Result type"] === "L"
       ).length;
 
+   let goalsFor = 0;
+let goalsAgainst = 0;
+
+playedMatches.forEach(match => {
+
+    if(!match.Result || !match.Result.includes(":")) return;
+
+    const [homeGoals, awayGoals] =
+    match.Result.split(":").map(Number);
+
+    if(match["Home/Away"] === "Home"){
+
+        goalsFor += homeGoals;
+        goalsAgainst += awayGoals;
+
+    }else{
+
+        goalsFor += awayGoals;
+        goalsAgainst += homeGoals;
+
+    }
+
+});
+
    document.getElementById(
     "seasonOverview"
 ).innerHTML = `
 
 <div class="summary-grid">
 
-      <div class="summary-box matches">
-          <b>${playedMatches.length}</b>
-          Matches
-      </div>
-      
-      <div class="summary-box wins">
-          <b>${wins}</b>
-          Wins
-      </div>
-      
-      <div class="summary-box draws">
-          <b>${draws}</b>
-          Draws
-      </div>
-      
-      <div class="summary-box losses">
-          <b>${losses}</b>
-          Losses
-      </div>
+    <div class="summary-box matches">
+        <b>${playedMatches.length}</b>
+        Matches
+    </div>
+
+    <div class="summary-box wins">
+        <b>${wins}</b>
+        Wins
+    </div>
+
+    <div class="summary-box draws">
+        <b>${draws}</b>
+        Draws
+    </div>
+
+    <div class="summary-box losses">
+        <b>${losses}</b>
+        Losses
+    </div>
+
+    <div class="summary-box goals">
+        <b>${goalsFor}:${goalsAgainst}</b>
+        Goals
+    </div>
 
 </div>
 
