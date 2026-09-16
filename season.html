@@ -614,10 +614,6 @@ font-size:12px;
 
 </div>
 
-<div id="seasonRecord" class="hero-subtitle">
-Loading...
-</div>
-
 <div class="content-layout">
 
 <div class="left-panel">
@@ -719,6 +715,36 @@ function renderSeason(){
         x => x["Result type"] === "L"
     ).length;
 
+   document.getElementById(
+    "seasonOverview"
+).innerHTML = `
+
+<div class="summary-grid">
+
+    <div class="summary-box">
+        <b>${seasonMatches.length}</b>
+        Matches
+    </div>
+
+    <div class="summary-box">
+        <b>${wins}</b>
+        Wins
+    </div>
+
+    <div class="summary-box">
+        <b>${draws}</b>
+        Draws
+    </div>
+
+    <div class="summary-box">
+        <b>${losses}</b>
+        Losses
+    </div>
+
+</div>
+
+`;
+
     document.getElementById(
         "seasonTitle"
     ).textContent =
@@ -781,97 +807,95 @@ function render(matches){
 
     }
 
-    let html = `
-    <div class="widget-card">
-const grouped = {};
+    const grouped = {};
 
-matches.forEach(match => {
+    matches.forEach(match => {
 
-    const competition =
-    match.Competition || "Other";
+        const competition =
+        match.Competition || "Other";
 
-    if(!grouped[competition]){
-        grouped[competition] = [];
-    }
+        if(!grouped[competition]){
+            grouped[competition] = [];
+        }
 
-    grouped[competition].push(match);
+        grouped[competition].push(match);
 
-});
+    });
 
-let html = "";
+    let html = "";
 
-Object.keys(grouped).forEach(competition => {
-
-    html += `
-
-    <div class="competition-title">
-        ${competition}
-    </div>
-
-    <div class="widget-card">
-
-        <table class="matches-table">
-
-            <thead>
-                <tr>
-                    <th>MD</th>
-                    <th>Date</th>
-                    <th>Venue</th>
-                    <th>Opponent</th>
-                    <th>Result</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-    `;
-
-    grouped[competition].forEach(match => {
+    Object.keys(grouped).forEach(competition => {
 
         html += `
 
-        <tr onclick="location.href='match.html?id=${match.ID}'">
+        <div class="competition-title">
+            ${competition}
+        </div>
 
-            <td>${match.Matchday || ""}</td>
+        <div class="widget-card">
 
-            <td>${match.Date || ""}</td>
+            <table class="matches-table">
 
-            <td>
-                ${match["Home/Away"] === "Home"
-                ? "Home"
-                : "Away"}
-            </td>
+                <thead>
+                    <tr>
+                        <th>MD</th>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Opponent</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
 
-            <td>
-                ${match["Opp. Team"] || ""}
-            </td>
+                <tbody>
 
-            <td>
-                <span class="${getResultClass(match)}">
-                    ${match.Result || "-:-"}
-                </span>
-            </td>
+        `;
 
-        </tr>
+        grouped[competition].forEach(match => {
+
+            html += `
+
+            <tr onclick="location.href='match.html?id=${match.ID}'">
+
+                <td>${match.Matchday || ""}</td>
+
+                <td>${match.Date || ""}</td>
+
+                <td>
+                    ${match["Home/Away"] === "Home"
+                    ? "Home"
+                    : "Away"}
+                </td>
+
+                <td>
+                    ${match["Opp. Team"] || ""}
+                </td>
+
+                <td>
+                    <span class="${getResultClass(match)}">
+                        ${match.Result || "-:-"}
+                    </span>
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+        html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
 
         `;
 
     });
 
-    html += `
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    `;
-
-});
-
-document.getElementById("matches").innerHTML =
-html;
+    document.getElementById("matches").innerHTML =
+    html;
 
 }
 
