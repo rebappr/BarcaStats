@@ -35,7 +35,7 @@
     --tabs-text: #a7a7a8;
     --tabs-active: #ffffff;
 
-    --number:#004D98;
+    --number:#ffffff;
     --number-bg:rgba(0,77,152,.12);
 
 }
@@ -70,7 +70,7 @@ html[data-theme="dark"]{
     --tabs-text: #a7a7a8;
     --tabs-active: #ffffff;
 
-    --number:#004D98;
+    --number:#ffffff;
     --number-bg:rgba(0,77,152,.12);
 }
 
@@ -111,8 +111,8 @@ html[data-theme="dark"]{
     --tabs-text: #9ca3af;
     --tabs-active: #192236;
 
-    --number-text: #ffffff;
-    --number-background:rgba(0,77,152,.12);
+    --number:#004D98;
+    --number-bg:rgba(0,77,152,.12);
 
 }
 
@@ -147,6 +147,6 @@ html[data-theme="light"]{
     --tabs-text: #9ca3af;
     --tabs-active: #192236;
 
-    --number:#ffffff;
+    --number:#004D98;
     --number-bg:rgba(0,77,152,.12);
 }
