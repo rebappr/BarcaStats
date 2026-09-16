@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FC Barcelona Matches</title>
+
+<link rel="icon.png
+   <linkicon-16x16.png
+   <linkle-touch-icon.png
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapismily=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at top left,#004D98 0%,transparent 35%),
+radial-gradient(circle at top right,#A50044 0%,transparent 35%),
+var(--bg);
+color:var(--text);
+font-size:12px;
+min-height:100vh;
+}
+
+.theme-toggle{
+position:fixed;
+left:20px;
+bottom:20px;
+
+width:52px;
+height:52px;
+
+border:none;
+border-radius:50%;
+
+cursor:pointer;
+
+background:#A50044;
+color:white;
+
+font-size:20px;
+font-weight:700;
+
+z-index:9999;
+}
+
+.content-layout{
+display:flex;
+gap:6px;
+align-items:flex-start;
+}
+
+.content-layout.animate{
+animation:pageRefresh .4s ease;
+}
+
+@keyframes pageRefresh{
+from{
+opacity:0;
+transform:translateY(20px) scale(.98);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+.left-panel{
+flex:1.1;
+min-width:0;
+}
+
+.right-panel{
+flex:.9;
+min-width:0;
+}
+
+.section-title{
+margin:0 0 6px;
+padding:10px 14px;
+backdrop-filter:blur(20px);
+border-radius:24px;
+background:var(--card-bg);
+border:1px solid var(--card-border);
+color:var(--text);
+font-size:18px;
+}
+
+.competition-title{
+margin:8px 0 6px;
+padding:8px 14px;
+background:
+linear-gradient(
+135deg,
+rgba(0,77,152,.95),
+rgba(165,0,68,.95)
+);
+color:white;
+font-size:14px;
+font-weight:700;
+border-radius:18px;
+letter-spacing:.5px;
+box-shadow:
+0 10px 25px rgba(0,0,0,.25);
+}
+
+.widget-card{
+background:var(--card-bg);
+backdrop-filter:blur(20px);
+border:1px solid var(--card-border);
+border-radius:24px;
+padding:14px;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.widget-card h2{
+margin-top:0;
+font-size:18px;
+color:var(--text);
+}
+
+th{
+font-size:12px;
+}
+
+td{
+font-size:12px;
+}
+
+.stats-table th{
+    font-weight:800;
+}
+
+.matches-table th{
+    font-weight:800;
+}
+
+.container{
+max-width:1500px;
+margin:auto;
+padding:20px;
+}
+
+.header-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.season-badge{
+padding:4px 10px;
+border-radius:999px;
+background:rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,.3);
+font-size:13px;
+font-weight:600;
+color:white;
+}
+
+.header{
+position:relative;
+overflow:hidden;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,77,152,.95),
+rgba(165,0,68,.95)
+);
+
+color:white;
+
+padding:16px;
+
+border-radius:28px;
+
+margin-bottom:14px;
+cursor:pointer;
+box-shadow:
+0 20px 50px rgba(0,0,0,.35);
+}
+
+.header::before{
+content:"";
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(
+circle at top right,
+rgba(255,255,255,.25),
+transparent 40%
+);
+}
+
+.hero-subtitle{
+margin-top:10px;
+opacity:.85;
+font-size:14px;
+}
+
+.header h1{
+margin:0;
+font-size:16px;
+font-weight:700;
+}
+
+.filters{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+background:var(--card-bg);
+backdrop-filter:blur(20px);
+border:1px solid var(--card-border);
+padding:12px;
+border-radius:24px;
+margin-bottom:10px;
+}
+
+.filter-group{
+flex:1 1 0;
+min-width:200px;
+}
+
+.filter-group label{
+font-weight:700;
+font-size:12px;
+}
+
+.matches-table tbody tr{
+opacity:1;
+transform:none;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+.stats-table{
+width:100%;
+table-layout:fixed;
+}
+
+.stats-table th{
+cursor:pointer;
+user-select:none;
+font-weight:700;
+}
+
+.stats-table th:first-child,
+.stats-table td:first-child{
+width:auto !important;
+min-width:180px;
+text-align:left !important;
+font-size:12px;
+}
+
+.stats-table th:not(:first-child),
+.stats-table td:not(:first-child){
+width:50px;
+text-align:center;
+font-size:12px;
+}
+
+.stats-table thead th
+{
+position:sticky;
+top:0;
+z-index:10;
+background:var(--meta-bg);
+color:var(--muted);
+padding:12px;
+}
+
+.matches-table{
+    width:100%;
+}
+
+.matches-table thead th{
+position:sticky;
+top:0;
+z-index:10;
+font-weight:700;
+background:var(--meta-bg);
+color:var(--muted);
+}
+
+.matches-table th:nth-child(1),
+.matches-table td:nth-child(1){
+width:1%;
+text-align:center;
+}
+
+.matches-table th:nth-child(2),
+.matches-table td:nth-child(2){
+width:1%;
+}
+
+.matches-table th:nth-child(3),
+.matches-table td:nth-child(3){
+width:1%;
+text-align:center;
+}
+
+.matches-table th:nth-child(4),
+.matches-table td:nth-child(4){
+width:auto;
+}
+
+.matches-table th:nth-child(5),
+.matches-table td:nth-child(5){
+width:1%;
+text-align:center;
+}
+
+th{
+background:var(--meta-bg);
+color:var(--muted);
+text-align:left;
+padding:12px;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+td{
+padding:8px;
+border-bottom:1px solid var(--meta-border);
+}
+
+tbody tr{
+transition:.25s;
+}
+
+.matches-table tbody tr:hover{
+background:var(--meta-bg);
+cursor:pointer;
+}
+
+.badge{
+display:inline-block;
+padding:4px 8px;
+border-radius:999px;
+background:#dbeafe;
+color:#1e40af;
+font-weight:600;
+}
+
+.result-badge{
+display:inline-block;
+min-width:52px;
+text-align:center;
+border-radius:999px;
+padding:4px 10px;
+font-weight:700;
+}
+
+.result-win{
+background:var(--result-win-bg);
+border:1px solid var(--result-win);
+color:var(--result-win);
+}
+
+.result-draw{
+background:var(--result-draw-bg);
+border:1px solid var(--result-draw);
+color:var(--result-draw);
+}
+
+.result-loss{
+background:var(--result-loss-bg);
+border:1px solid var(--result-loss);
+color:var(--result-loss);
+}
+
+
+.result-empty{
+background:var(--card-bg);
+color:var(--muted);
+}
+
+.empty{
+padding:40px;
+text-align:center;
+}
+
+input[list],
+select{
+width:100%;
+height:46px;
+appearance:none;
+border:1px solid var(--border-dark);
+border-radius:14px;
+background:#ffffff;
+color:#0f2d6b;
+padding:0 14px;
+transition:.25s;
+font-size:13px;
+}
+
+input:hover,
+select:hover{
+background:rgba(255,255,255,.15);
+color:var(--surface);
+}
+
+input:focus,
+select:focus{
+outline:none;
+border-color:#3b82f6;
+box-shadow:
+0 0 0 3px rgba(59,130,246,.25);
+color:#0f2d6b;
+}
+
+select option{
+outline:none;
+background-color: var(--select-bg);
+color: var(--select-text);
+}
+
+input[list]:focus,
+select:focus{
+outline:none;
+outline:none;
+box-shadow:0 0 0 3px rgba(59,130,246,.35);
+}
+
+.stats-selected{
+background:#004D98 !important;
+color:#fff !important;
+font-weight:700;
+box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+.debutants-table{
+table-layout:auto;
+}
+
+.debutants-table th:nth-child(2),
+.debutants-table td:nth-child(2){
+width:120px;
+}
+
+.debutants-table th:nth-child(3),
+.debutants-table td:nth-child(3){
+width:180px;
+}
+
+@media (max-width:900px){
+
+.content-layout{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.left-panel,
+.right-panel{
+flex:none !important;
+width:100% !important;
+min-width:0;
+max-width:100%;
+}
+
+.right-panel{
+position:static !important;
+top:auto;
+}
+
+.container{
+padding:6px;
+}
+
+.filters{
+flex-direction:column;
+gap:8px;
+padding:12px;
+}
+
+.filter-group{
+width:100%;
+min-width:0;
+}
+
+input[list],
+select,
+.toggle-btn{
+width:100%;
+}
+
+.matches-table th,
+.matches-table td, 
+.stats-table th,
+.stats-table td{{
+padding:6px 4px;
+font-size:12px;
+}
+
+th:first-child,
+td:first-child{
+padding-left:12px;
+}
+
+.result-badge{
+min-width:44px;
+padding:3px 8px;
+}
+
+.header h1{
+font-size:14px;
+}
+
+
+table{
+min-width:0;
+}
+
+.stats-table th:first-child,
+.stats-table td:first-child{
+font-size:12px;
+}
+
+.stats-table th:not(:first-child),
+.stats-table td:not(:first-child){
+font-size:12px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<button id="themeToggle" class="theme-toggle">
+🌙
+</button>
+
+<div class="container">
+
+<div class="header" onclick="goHome()">
+
+<h1 id="seasonTitle">
+FC Barcelona
+</h1>
+
+</div>
+
+<div class="filters">
+
+<div class="filter-group">
+<label for="seasonFilter">Season</label>
+<select id="seasonFilter"></select>
+</div>
+
+<div class="filter-group">
+<label for="competitionFilter">Competition</label>
+<select id="competitionFilter"></select>
+</div>
+
+<div class="filter-group">
+<label for="opponentFilter">Opponent</label>
+<select id="opponentFilter"></select>
+</div>
+
+
+</div>
+
+<div class="content-layout">
+
+<div class="left-panel">
+
+<div class="competition-title">
+Season Summary
+</div>
+
+<div class="widget-card">
+<div id="seasonSummary">
+Loading...
+</div>
+</div>
+
+<div id="matches">
+Loading...
+</div>
+
+</div>
+
+<div class="right-panel">
+
+<div class="competition-title">
+La Liga Table
+</div>
+
+<div class="widget-card">
+<div id="laligaTable">
+Loading...
+</div>
+</div>
+
+<div class="competition-title">
+Statistics
+</div>
+
+<div class="widget-card">
+<div id="statistics">
+Loading...
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let allMatches = [];
+let allPlayers = [];
+let playerBirthDates = {};
+
+let statsSortColumn = "goals";
+let statsSortDirection = "desc";
+
+function animateContent(){
+
+const layout =
+document.querySelector(".content-layout");
+
+if(!layout) return;
+
+layout.classList.remove("animate");
+
+void layout.offsetWidth;
+
+layout.classList.add("animate");
+
+}
+
+function saveFilters(){
+
+localStorage.setItem(
+"seasonFilter",
+document.getElementById("seasonFilter").value
+);
+
+localStorage.setItem(
+"competitionFilter",
+document.getElementById("competitionFilter").value
+);
+
+localStorage.setItem(
+"opponentFilter",
+document.getElementById("opponentFilter").value
+);
+
+}
+
+function loadFilters(){
+
+document.getElementById("seasonFilter").value =
+localStorage.getItem("seasonFilter") || "";
+
+document.getElementById("competitionFilter").value =
+localStorage.getItem("competitionFilter") || "";
+
+document.getElementById("opponentFilter").value =
+localStorage.getItem("opponentFilter") || "";
+
+}
+
+Promise.all([
+fetch("data.json").then(response => response.json()),
+fetch("players.json").then(response => response.json())
+])
+.then(([matchesData, playersData]) => {
+
+allMatches = matchesData;
+allPlayers = playersData;
+
+playersData.forEach(player => {
+
+playerBirthDates[player.Player.trim()] =
+player["Date of Birth"];
+
+});
+
+renderLaLigaTable();
+createFilters();
+
+})
+.catch(error => {
+
+console.error(error);
+
+});
+
+function updateFilterOptions() {
+
+const seasonValue =
+document.getElementById("seasonFilter").value.trim();
+
+const competitionValue =
+document.getElementById("competitionFilter").value.trim();
+
+let seasonFiltered = [...allMatches];
+
+if (seasonValue) {
+
+seasonFiltered = seasonFiltered.filter(
+x => x["Season"] === seasonValue
+);
+
+}
+
+let competitionFiltered = [...seasonFiltered];
+
+if (competitionValue) {
+
+competitionFiltered = competitionFiltered.filter(
+x => x["Competition"] === competitionValue
+);
+
+}
+
+const seasons = [
+...new Set(
+allMatches
+.map(x => x["Season"])
+.filter(Boolean)
+)
+].sort().reverse();
+
+const competitions = [
+...new Set(
+seasonFiltered
+.map(x => x["Competition"])
+.filter(Boolean)
+)
+].sort();
+
+const opponents = [
+...new Set(
+competitionFiltered
+.map(x => x["Opp. Team"])
+.filter(Boolean)
+)
+].sort();
+
+// Season
+const seasonSelect =
+document.getElementById("seasonFilter");
+
+const currentSeason =
+seasonSelect.value;
+
+seasonSelect.innerHTML = "";
+
+seasons.forEach(season => {
+
+const option =
+document.createElement("option");
+
+option.value = season;
+option.textContent = season;
+
+seasonSelect.appendChild(option);
+
+});
+
+if (seasons.includes(currentSeason)) {
+seasonSelect.value = currentSeason;
+}
+
+// Competition
+const competitionSelect =
+document.getElementById("competitionFilter");
+
+const currentCompetition =
+competitionSelect.value;
+
+competitionSelect.innerHTML =
+'<option value="">All competitions</option>';
+
+competitions.forEach(value => {
+
+const option =
+document.createElement("option");
+
+option.value = value;
+option.textContent = value;
+
+competitionSelect.appendChild(option);
+
+});
+
+if (competitions.includes(currentCompetition)) {
+competitionSelect.value = currentCompetition;
+}
+
+// Opponent
+const opponentSelect =
+document.getElementById("opponentFilter");
+
+const currentOpponent =
+opponentSelect.value;
+
+opponentSelect.innerHTML =
+'<option value="">All opponents</option>';
+
+opponents.forEach(value => {
+
+const option =
+document.createElement("option");
+
+option.value = value;
+option.textContent = value;
+
+opponentSelect.appendChild(option);
+
+});
+
+if (opponents.includes(currentOpponent)) {
+opponentSelect.value = currentOpponent;
+}
+
+}
+
+function createFilters(){
+
+loadFilters();
+
+updateFilterOptions();
+
+const savedSeason =
+localStorage.getItem("seasonFilter");
+
+const seasonSelect =
+document.getElementById("seasonFilter");
+
+if(
+savedSeason &&
+[...seasonSelect.options]
+.some(o => o.value === savedSeason)
+){
+
+seasonSelect.value = savedSeason;
+
+}
+
+document
+.getElementById("seasonFilter")
+.addEventListener("change", () => {
+document.getElementById("competitionFilter").value = "";
+document.getElementById("opponentFilter").value = "";
+applyFilters();
+});
+
+document
+.getElementById("competitionFilter")
+.addEventListener("change", () => {
+document.getElementById("opponentFilter").value = "";
+applyFilters();
+});
+
+document
+.getElementById("opponentFilter")
+.addEventListener("change", applyFilters);
+
+applyFilters();
+
+}
+
+function updateSeasonTitle(){
+
+const season =
+document.getElementById("seasonFilter").value;
+
+const competition =
+document.getElementById("competitionFilter").value;
+
+const opponent =
+document.getElementById("opponentFilter").value;
+
+let title = "FC Barcelona";
+
+if (season) {
+title += ` | ${season}`;
+}
+
+if (competition) {
+title += ` | ${competition}`;
+}
+
+if (opponent) {
+title += ` | ${opponent}`;
+}
+
+document.getElementById("seasonTitle").textContent = title;
+
+}
+
+function goHome(){
+localStorage.removeItem("seasonFilter");
+localStorage.removeItem("competitionFilter");
+localStorage.removeItem("opponentFilter");
+location.reload();
+}
+
+function applyFilters(){
+
+const seasonFilter =
+document.getElementById("seasonFilter");
+
+if(!seasonFilter.value){
+
+seasonFilter.value = [...new Set(
+allMatches
+.map(x => x["Season"])
+.filter(Boolean)
+)]
+.sort()
+.reverse()[0];
+}
+
+let filtered = [...allMatches];
+
+const season =
+document
+.getElementById("seasonFilter")
+.value
+.trim();
+
+const competition =
+document
+.getElementById("competitionFilter")
+.value
+.trim();
+
+const opponent =
+document
+.getElementById("opponentFilter")
+.value
+.trim();
+
+if(season){
+
+filtered = filtered.filter(
+x => x["Season"] === season
+);
+
+}
+
+if(competition){
+
+filtered = filtered.filter(
+x => x["Competition"] === competition
+);
+
+}
+
+if(opponent){
+
+filtered = filtered.filter(
+x => x["Opp. Team"] === opponent
+);
+
+}
+
+filtered.sort((a, b) =>
+new Date(a.Date.split(".").reverse().join("-")) -
+new Date(b.Date.split(".").reverse().join("-"))
+);
+
+saveFilters();
+updateFilterOptions();
+updateSeasonTitle();
+
+render(filtered);
+renderStatistics();
+renderSeasonSummary(filtered);
+
+animateContent();
+
+}
+
+function sortStats(column) {
+
+if (statsSortColumn === column) {
+
+statsSortDirection =
+statsSortDirection === "asc"
+? "desc"
+: "asc";
+
+} else {
+
+statsSortColumn = column;
+statsSortDirection = "desc";
+
+}
+
+renderStatistics();
+
+}
+
+function getResultClass(match){
+
+if(match.Result === "-:-"){
+return "result-badge result-empty";
+}
+
+switch(match["Result type"]){
+
+case "W":
+return "result-badge result-win";
+
+case "D":
+return "result-badge result-draw";
+
+case "L":
+return "result-badge result-loss";
+
+default:
+return "result-badge";
+}
+
+}
+
+function render(matches){
+
+if(matches.length === 0){
+
+document.getElementById("matches").innerHTML =
+"<div class='empty'>Žiadne zápasy</div>";
+
+return;
+
+}
+
+const grouped = {};
+
+matches.forEach(match => {
+
+const competition =
+match.Competition || "Unknown";
+
+if(!grouped[competition]){
+grouped[competition] = [];
+}
+
+grouped[competition].push(match);
+
+});
+
+let html = "";
+
+Object.keys(grouped).forEach(competition => {
+
+if (competition === "La Liga") {
+
+grouped[competition].sort((a, b) =>
+Number(a.Matchday || 0) -
+Number(b.Matchday || 0)
+);
+
+} else {
+
+grouped[competition].sort((a, b) =>
+new Date(a.Date.split(".").reverse().join("-")) -
+new Date(b.Date.split(".").reverse().join("-"))
+);
+
+}
+
+});
+
+const competitionOrder = [
+"La Liga",
+"UEFA Champions League"
+];
+
+Object.keys(grouped)
+.sort((a, b) => {
+
+const aIndex = competitionOrder.indexOf(a);
+const bIndex = competitionOrder.indexOf(b);
+
+if (aIndex !== -1 && bIndex !== -1) {
+return aIndex - bIndex;
+}
+
+if (aIndex !== -1) {
+return -1;
+}
+
+if (bIndex !== -1) {
+return 1;
+}
+
+return a.localeCompare(b);
+})
+.forEach(competition => {
+
+   html += `
+   <div class="competition-title">
+       ${competition}
+   </div>
+   
+   <div class="widget-card">
+       <table class="matches-table">
+           <thead>
+               <tr>
+                   <th>MD</th>
+                   <th>Date</th>
+                   <th>Venue</th>
+                   <th>Opponent</th>
+                   <th>Result</th>
+               </tr>
+           </thead>
+           <tbody>
+   `;
+
+grouped[competition].forEach(match => {
+
+html += `
+           <tr onclick="window.location.href='match.html?id=${match.ID}'">
+
+               <td class="matchday-cell">
+                   ${match.Matchday || ""}
+               </td>
+               
+               <td>
+                   ${match.Date || ""}
+               </td>
+               
+               <td>
+                   ${match["Home/Away"] === "Home" ? "Home" : "Away"}
+               </td>
+               
+               <td>
+                   ${match["Opp. Team"] || ""}
+               </td>
+               
+               <td>
+                   <span class="${getResultClass(match)}">
+                       ${match.Result || "-:-"}
+                   </span>
+               </td>
+
+           </tr>
+           `;
+
+});
+
+html += `
+                 </tbody>
+             </table>
+         </div>
+         `;
+
+});
+
+document.getElementById("matches").innerHTML = html;
+
+}
+
+function renderLaLigaTable() {
+
+document.getElementById("laligaTable").innerHTML = `
+       <p>La Liga table will be displayed here.</p>
+   `;
+
+}
+
+function renderSeasonSummary(matches) {
+
+const statsByCoach = {};
+
+matches.forEach(match => {
+
+const coach = (match.Manager || "").trim();
+
+if (!coach) {
+return;
+}
+
+if (!statsByCoach[coach]) {
+
+statsByCoach[coach] = {
+matches: 0,
+wins: 0,
+draws: 0,
+losses: 0,
+goalsFor: 0,
+goalsAgainst: 0
+};
+
+}
+
+statsByCoach[coach].matches++;
+
+if (match["Result type"] === "W") {
+statsByCoach[coach].wins++;
+}
+
+if (match["Result type"] === "D") {
+statsByCoach[coach].draws++;
+}
+
+if (match["Result type"] === "L") {
+statsByCoach[coach].losses++;
+}
+
+if (match.Result && match.Result.includes(":")) {
+
+const parts = match.Result.split(":");
+
+const homeGoals = parseInt(parts[0]) || 0;
+const awayGoals = parseInt(parts[1]) || 0;
+
+if (match["Home/Away"] === "Home") {
+
+statsByCoach[coach].goalsFor += homeGoals;
+statsByCoach[coach].goalsAgainst += awayGoals;
+
+} else {
+
+statsByCoach[coach].goalsFor += awayGoals;
+statsByCoach[coach].goalsAgainst += homeGoals;
+
+}
+
+}
+
+});
+
+let html = `
+       <table class="stats-table">
+           <thead>
+               <tr>
+                   <th>Coach</th>
+                   <th>M</th>
+                   <th>W</th>
+                   <th>D</th>
+                   <th>L</th>
+                   <th>Goals</th>
+               </tr>
+           </thead>
+           <tbody>
+   `;
+
+Object.entries(statsByCoach).forEach(([coach, stats]) => {
+
+html += `
+           <tr>
+               <td>${coach}</td>
+               <td>${stats.matches}</td>
+               <td>${stats.wins}</td>
+               <td>${stats.draws}</td>
+               <td>${stats.losses}</td>
+               <td>${stats.goalsFor}:${stats.goalsAgainst}</td>
+           </tr>
+       `;
+
+});
+
+html += `
+           </tbody>
+       </table>
+   `;
+
+html += `
+   <br>
+
+   <table class="stats-table debutants-table">
+       <thead>
+           <tr>
+               <th>Season Debutants</th>
+               <th>Debut Date</th>
+               <th>Age at Debut</th>
+           </tr>
+       </thead>
+       <tbody>
+`;
+
+const selectedSeason =
+document.getElementById("seasonFilter").value;
+
+const firstAppearance = {};
+
+// prejde celú históriu
+allMatches.forEach(match => {
+
+const matchDate =
+new Date(
+match.Date.split(".").reverse().join("-")
+);
+
+const playersInMatch = [];
+
+for(let i = 1; i <= 11; i++){
+
+const player =
+match[`Player name ${i}`];
+
+if(player){
+playersInMatch.push(player);
+}
+
+}
+
+for(let i = 1; i <= 12; i++){
+
+const player =
+match[`Sub on ${i}`];
+
+if(player){
+playersInMatch.push(player);
+}
+
+}
+
+playersInMatch.forEach(player => {
+
+if(
+!firstAppearance[player] ||
+matchDate < firstAppearance[player].date
+){
+
+firstAppearance[player] = {
+season: match.Season,
+date: matchDate,
+dateText: match.Date,
+birthDate:
+playerBirthDates[player.trim()] || ""
+};
+
+}
+
+});
+
+});
+
+const debutants = Object.entries(firstAppearance)
+.filter(
+([name, data]) =>
+data.season === selectedSeason
+)
+.sort(
+(a, b) => a[1].date - b[1].date
+);
+
+debutants.forEach(([player,data]) => {
+
+let ageText = "-";
+
+if(data.birthDate){
+
+const birth =
+new Date(
+data.birthDate
+.split(".")
+.reverse()
+.join("-")
+);
+
+const debut =
+data.date;
+
+const diffDays =
+Math.floor(
+(debut - birth) /
+(1000 * 60 * 60 * 24)
+);
+
+const years =
+Math.floor(diffDays / 365.25);
+
+const days =
+Math.floor(
+diffDays -
+years * 365.25
+);
+
+ageText =
+`${years} years & ${days} days`;
+}
+
+html += `
+       <tr>
+           <td>${player}</td>
+           <td>${data.dateText}</td>
+           <td>${ageText}</td>
+       </tr>
+   `;
+
+});
+
+html += `
+       </tbody>
+   </table>
+`;
+
+document.getElementById("seasonSummary").innerHTML = html;
+}
+
+function renderStatistics() {
+
+const season =
+document.getElementById("seasonFilter")?.value || "";
+
+const competition =
+document.getElementById("competitionFilter")?.value || "";
+
+const opponent =
+document.getElementById("opponentFilter")?.value || "";
+
+let matches = [...allMatches];
+
+if (season) {
+matches = matches.filter(
+m => String(m.Season || "") === season
+);
+}
+
+if (competition) {
+matches = matches.filter(
+m => String(m.Competition || "") === competition
+);
+}
+
+if (opponent) {
+matches = matches.filter(
+m => String(m["Opp. Team"] || "") === opponent
+);
+}
+
+const players = {};
+
+function addPlayer(name) {
+
+if (!name || !String(name).trim()) return false;
+
+name = String(name).trim();
+
+if (name.includes("(OG)")) return false;
+
+if (!players[name]) {
+players[name] = {
+squad: 0,
+xi: 0,
+goals: 0,
+assists: 0,
+yellow: 0,
+red: 0
+};
+}
+
+return true;
+}
+
+matches.forEach(match => {
+
+// základná 11
+for (let i = 1; i <= 11; i++) {
+
+const player =
+match[`Player name ${i}`];
+
+if (
+player &&
+!String(player).includes("(OG)")
+) {
+
+addPlayer(player);
+
+players[player].squad++;
+players[player].xi++;
+
+}
+
+}
+
+// lavička
+for (let i = 1; i <= 12; i++) {
+
+const player =
+match[`On the bench name ${i}`];
+
+if (
+player &&
+!String(player).includes("(OG)")
+) {
+
+addPlayer(player);
+
+players[player].squad++;
+
+}
+
+}
+
+// góly
+for (let i = 1; i <= 12; i++) {
+
+const player =
+match[`Goal Player ${i}`];
+
+if (
+player &&
+!String(player).includes("(OG)")
+) {
+addPlayer(player);
+players[player].goals++;
+}
+
+}
+
+// asistencie
+for (let i = 1; i <= 12; i++) {
+
+const player =
+match[`Assist Player ${i}`];
+
+if (
+player &&
+!String(player).includes("(OG)")
+) {
+addPlayer(player);
+players[player].assists++;
+}
+
+}
+
+// žlté
+for (let i = 1; i <= 12; i++) {
+
+const player =
+match[`Yellow player ${i}`];
+
+if (
+player &&
+!String(player).includes("(OG)")
+) {
+addPlayer(player);
+players[player].yellow++;
+}
+
+}
+
+// červené
+for (let i = 1; i <= 5; i++) {
+
+const player =
+match[`Red player ${i}`];
+
+if (
+player &&
+!String(player).includes("(OG)")
+) {
+addPlayer(player);
+players[player].red++;
+}
+
+}
+
+});
+
+const sortedPlayers = Object.entries(players);
+
+sortedPlayers.sort((a,b) => {
+
+const valueA =
+statsSortColumn === "name"
+? a[0]
+: a[1][statsSortColumn];
+
+const valueB =
+statsSortColumn === "name"
+? b[0]
+: b[1][statsSortColumn];
+
+if (typeof valueA === "string") {
+
+return statsSortDirection === "asc"
+? valueA.localeCompare(valueB)
+: valueB.localeCompare(valueA);
+
+}
+
+return statsSortDirection === "asc"
+? valueA - valueB
+: valueB - valueA;
+
+});
+
+let html = `
+   <div class="table-scroll">
+   <table class="stats-table">
+       <thead>
+           <tr>
+               <th class="${statsSortColumn==='name'?'stats-selected':''}" onclick="sortStats('name')">Player</th>
+               <th class="${statsSortColumn==='squad'?'stats-selected':''}" onclick="sortStats('squad')">Sq</th>
+               <th class="${statsSortColumn==='xi'?'stats-selected':''}" onclick="sortStats('xi')">XI</th>
+               <th class="${statsSortColumn==='goals'?'stats-selected':''}" onclick="sortStats('goals')">G</th>
+               <th class="${statsSortColumn==='assists'?'stats-selected':''}" onclick="sortStats('assists')">A</th>
+               <th class="${statsSortColumn==='yellow'?'stats-selected':''}" onclick="sortStats('yellow')">Y</th>
+               <th class="${statsSortColumn==='red'?'stats-selected':''}" onclick="sortStats('red')">R</th>
+           </tr>
+       </thead>
+       <tbody>
+`; 
+
+sortedPlayers.forEach(([name, stats]) => {
+
+html += `
+<tr>
+   <td class="${statsSortColumn==='name'?'stats-selected':''}">${name}</td>
+   <td class="${statsSortColumn==='squad'?'stats-selected':''}">
+       ${stats.squad}
+   </td>
+   <td class="${statsSortColumn==='xi'?'stats-selected':''}">
+       ${stats.xi}
+   </td>
+   <td class="${statsSortColumn==='goals'?'stats-selected':''}">
+       ${stats.goals}
+   </td>
+   <td class="${statsSortColumn==='assists'?'stats-selected':''}">
+       ${stats.assists}
+   </td>
+   <td class="${statsSortColumn==='yellow'?'stats-selected':''}">
+       ${stats.yellow}
+   </td>
+   <td class="${statsSortColumn==='red'?'stats-selected':''}">
+       ${stats.red}
+   </td>
+</tr>
+`;
+
+});
+
+html += `
+       </tbody>
+   </table>
+   </div>
+`;
+
+document.getElementById("statistics").innerHTML = html;
+
+}
+
+(function(){
+
+const savedTheme =
+localStorage.getItem("theme");
+
+const systemTheme =
+window.matchMedia("(prefers-color-scheme: dark)").matches
+? "dark"
+: "light";
+
+const theme =
+savedTheme || systemTheme;
+
+document.documentElement.setAttribute(
+"data-theme",
+theme
+);
+
+const button =
+document.getElementById("themeToggle");
+
+button.textContent =
+theme === "dark"
+? "☀️"
+: "🌙";
+
+button.addEventListener("click", () => {
+
+const current =
+document.documentElement.getAttribute("data-theme");
+
+const next =
+current === "dark"
+? "light"
+: "dark";
+
+document.documentElement.setAttribute(
+"data-theme",
+next
+);
+
+localStorage.setItem(
+"theme",
+next
+);
+
+button.textContent =
+next === "dark"
+? "☀️"
+: "🌙";
+
+});
+
+})();
+</script>
+
+</body>
+</html>
