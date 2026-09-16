@@ -720,18 +720,6 @@ function renderSeason(){
     ).textContent =
     `FC Barcelona ${season}`;
 
-    const subtitle =
-    document.getElementById(
-        "seasonRecord"
-    );
-
-    if(subtitle){
-
-        subtitle.textContent =
-        `${seasonMatches.length} Matches | ${wins}W ${draws}D ${losses}L`;
-
-    }
-
     render(seasonMatches);
 
     renderSeasonSummary(
