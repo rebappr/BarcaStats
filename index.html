@@ -114,21 +114,52 @@ color:rgba(255,255,255,.85);
 
 .summary-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
 }
 
 .summary-box{
+    border-radius:20px;
+    padding:10px;
     text-align:center;
-    border-radius:18px;
-    padding:15px;
-    background:var(--meta-bg);
+    border:1px solid var(--card-border);
+    background:var(--card-bg);
 }
 
 .summary-box b{
     display:block;
     font-size:22px;
-    margin-bottom:6px;
+    margin-bottom:4px;
+}
+
+.summary-box.wins{
+    background:var(--result-win-bg);
+    border:1px solid var(--result-win);
+    color:var(--result-win);
+}
+
+.summary-box.draws{
+    background:var(--result-draw-bg);
+    border:1px solid var(--result-draw);
+    color:var(--result-draw);
+}
+
+.summary-box.losses{
+    background:var(--result-loss-bg);
+    border:1px solid var(--result-loss);
+    color:var(--result-loss);
+}
+
+.summary-box.matches{
+    background:color-mix(in srgb,#004D98 15%,transparent);
+    border:1px solid #004D98;
+    color:#ffffff;
+}
+
+.summary-box.goals{
+    background:color-mix(in srgb,#004D98 15%,transparent);
+    border:1px solid #004D98;
+    color:#ffffff;
 }
 
 .stats-table{
@@ -460,45 +491,81 @@ function renderCurrentSeason(){
         m=>m.Season===season
     );
 
-    const wins=
+    const playedMatches =
     seasonMatches.filter(
-        m=>m["Result type"]==="W"
+        m => m.Result &&
+             m.Result !== "-:-"
+    );
+
+    const wins =
+    playedMatches.filter(
+        m => m["Result type"] === "W"
     ).length;
 
-    const draws=
-    seasonMatches.filter(
-        m=>m["Result type"]==="D"
+    const draws =
+    playedMatches.filter(
+        m => m["Result type"] === "D"
     ).length;
 
-    const losses=
-    seasonMatches.filter(
-        m=>m["Result type"]==="L"
+    const losses =
+    playedMatches.filter(
+        m => m["Result type"] === "L"
     ).length;
 
-    document.getElementById("seasonSummary").innerHTML=`
+    let goalsFor = 0;
+    let goalsAgainst = 0;
+
+    playedMatches.forEach(match => {
+
+        const homeGoals =
+            Number(match["Goals home team"]) || 0;
+
+        const awayGoals =
+            Number(match["Goals away team"]) || 0;
+
+        if(match["Home/Away"] === "Home"){
+
+            goalsFor += homeGoals;
+            goalsAgainst += awayGoals;
+
+        }else{
+
+            goalsFor += awayGoals;
+            goalsAgainst += homeGoals;
+
+        }
+
+    });
+
+    document.getElementById("seasonSummary").innerHTML = `
 
         <h3>${season}</h3>
 
         <div class="summary-grid">
 
-            <div class="summary-box">
-                <b>${seasonMatches.length}</b>
+            <div class="summary-box matches">
+                <b>${playedMatches.length}</b>
                 Matches
             </div>
 
-            <div class="summary-box">
+            <div class="summary-box wins">
                 <b>${wins}</b>
                 Wins
             </div>
 
-            <div class="summary-box">
+            <div class="summary-box draws">
                 <b>${draws}</b>
                 Draws
             </div>
 
-            <div class="summary-box">
+            <div class="summary-box losses">
                 <b>${losses}</b>
                 Losses
+            </div>
+
+            <div class="summary-box goals">
+                <b>${goalsFor}:${goalsAgainst}</b>
+                Goals
             </div>
 
         </div>
@@ -509,7 +576,6 @@ function renderCurrentSeason(){
         >
             View Season
         </a>
-
     `;
 }
 
