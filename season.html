@@ -1190,14 +1190,11 @@ function setMatchFilter(filter){
 
     matchFilter = filter;
 
-    const seasonMatches =
-    allMatches.filter(
-        x => x.Season === season
-    );
-
-    render(seasonMatches);
+    renderSeason();
 
 }
+
+window.setMatchFilter = setMatchFilter;
 
 function renderStatistics(matches) {
 
