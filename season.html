@@ -55,6 +55,33 @@ font-weight:700;
 z-index:9999;
 }
 
+.back-btn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #004D98,
+            #A50044
+        );
+
+    color:white;
+    text-decoration:none;
+
+    padding:14px 22px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
+
+    z-index:9999;
+}
+
 .content-layout{
 display:flex;
 gap:6px;
@@ -594,6 +621,16 @@ font-size:12px;
 .stats-table th:not(:first-child),
 .stats-table td:not(:first-child){
 font-size:12px;
+}
+
+.back-btn{
+    right:10px;
+    bottom:10px;
+
+    padding:10px 14px;
+
+    font-size:12px;
+    font-weight:600;
 }
 
 }
@@ -1484,6 +1521,10 @@ next === "dark"
 
 })();
 </script>
+
+<a href="index.html" class="back-btn">
+    ← Home
+</a>
 
 </body>
 </html>
