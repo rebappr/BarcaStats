@@ -623,23 +623,7 @@ function renderLastMatch(){
     `;
 }
 
-function renderNextMatch(){
-
-    const next=allMatches
-    .filter(m => parseDate(m.Date) > new Date())
-    .sort((a,b) =>
-        parseDate(a.Date)-parseDate(b.Date)
-    )[0];
-
-    if(!next){
-
-        document.getElementById("nextMatch").innerHTML =
-        "No upcoming matches";
-
-        return;
-    }
-
-    document.getElementById("nextMatch").innerHTML = `
+document.getElementById("nextMatch").innerHTML = `
 
     <a href="match.html?id=${match.ID}" class="fixture-link">
 
@@ -666,9 +650,8 @@ function renderNextMatch(){
         </div>
 
     </a>
-    
-    `;
-}
+
+`;
 
 function renderSeasonOverview(matches){
 
