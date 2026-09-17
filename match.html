@@ -1224,11 +1224,6 @@ html += `
            <span class="player-icons">
                ${getPlayerIcons(match, player, prefix)}
            </span>
-   ${
-       subbedOff.includes(String(player).trim())
-           ? ' <strong style="color:#dc2626;">⬇</strong>'
-           : ''
-   }
 </span>
            </div>
            `;
@@ -1277,12 +1272,6 @@ function getBench(match, prefix="") {
                     <span class="player-icons">
                         ${getPlayerIcons(match, player, prefix)}
                     </span>
-
-                    ${
-                        subbedOn.includes(String(player).trim())
-                            ? ' <strong style="color:#16a34a;">⬆</strong>'
-                            : ''
-                    }
 
                 </span>
 
