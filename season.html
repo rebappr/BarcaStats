@@ -635,8 +635,6 @@ font-size:12px;
 
 <div class="right-panel">
 
-
-
 <div class="competition-title">
 Statistics
 </div>
@@ -719,15 +717,16 @@ function renderSeason(){
           x => x["Result type"] === "L"
       ).length;
 
-   let goalsFor = 0;
+let goalsFor = 0;
 let goalsAgainst = 0;
 
 playedMatches.forEach(match => {
 
-    if(!match.Result || !match.Result.includes(":")) return;
+    const homeGoals =
+        Number(match["Goals home team"]) || 0;
 
-    const [homeGoals, awayGoals] =
-    match.Result.split(":").map(Number);
+    const awayGoals =
+        Number(match["Goals away team"]) || 0;
 
     if(match["Home/Away"] === "Home"){
 
