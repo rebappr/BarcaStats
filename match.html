@@ -973,8 +973,6 @@ font-weight:600;
 
     margin-left:calc(50% - 50vw);
     margin-right:calc(50% - 50vw);
-
-    box-shadow:0 4px 15px rgba(0,0,0,.15);
 }
 
 .sticky-header{
@@ -2121,6 +2119,7 @@ getH2H(match, allMatches);
 document.getElementById("app").innerHTML = `
 <div class="sticky-shell">
 
+<div class="sticky-header">
 <div class="hero">
    <div style="text-transform:uppercase;">
        ${escapeHtml(match["Date"] || "")}
@@ -2130,7 +2129,6 @@ document.getElementById("app").innerHTML = `
    </div>
 </div>
 
-<div class="sticky-header">
 <div class="card">
 
    <div class="teams">
