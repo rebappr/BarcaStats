@@ -613,6 +613,16 @@ function renderLastMatch(){
 
     if(!match) return;
 
+    const homeTeam =
+        match["Home/Away"] === "Home"
+        ? "FC Barcelona"
+        : match["Opp. Team"];
+
+    const awayTeam =
+        match["Home/Away"] === "Home"
+        ? match["Opp. Team"]
+        : "FC Barcelona";
+
     document.getElementById("lastMatch").innerHTML = `
     
     <a href="match.html?id=${match.ID}" class="fixture-link">
@@ -620,7 +630,7 @@ function renderLastMatch(){
         <div class="fixture-card">
     
             <div class="fixture-team">
-                FC Barcelona
+                ${homeTeam}
             </div>
     
             <div class="fixture-center">
@@ -630,7 +640,7 @@ function renderLastMatch(){
             </div>
     
             <div class="fixture-team">
-                ${match["Opp. Team"]}
+                ${awayTeam}
             </div>
     
         </div>
@@ -660,6 +670,16 @@ function renderNextMatch(){
         return;
     }
 
+    const homeTeam =
+        next["Home/Away"] === "Home"
+        ? "FC Barcelona"
+        : next["Opp. Team"];
+
+    const awayTeam =
+        next["Home/Away"] === "Home"
+        ? next["Opp. Team"]
+        : "FC Barcelona";
+
     document.getElementById("nextMatch").innerHTML = `
 
         <a href="match.html?id=${next.ID}" class="fixture-link">
@@ -667,7 +687,7 @@ function renderNextMatch(){
             <div class="fixture-card">
 
                 <div class="fixture-team">
-                    FC Barcelona
+                    ${homeTeam}
                 </div>
 
                 <div class="fixture-center">
@@ -677,7 +697,7 @@ function renderNextMatch(){
                 </div>
 
                 <div class="fixture-team">
-                    ${next["Opp. Team"]}
+                    ${awayTeam}
                 </div>
 
             </div>
