@@ -78,15 +78,6 @@ color:rgba(255,255,255,.85);
     gap:14px;
 }
 
-.widget{
-    margin:0 0 8px 6px;
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    backdrop-filter:blur(15px);
-    border-radius:24px;
-    padding:16px;
-}
-
 .widget-title{
 margin:8px 0 6px;
 padding:8px 14px;
@@ -103,6 +94,22 @@ border-radius:18px;
 letter-spacing:.5px;
 box-shadow:
 0 10px 25px rgba(0,0,0,.25);
+}
+
+.widget-card{
+background:var(--card-bg);
+backdrop-filter:blur(20px);
+border:1px solid var(--card-border);
+border-radius:24px;
+padding:14px;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.widget-card h2{
+margin-top:0;
+font-size:18px;
+color:var(--text);
 }
 
 .match-card{
@@ -328,7 +335,7 @@ box-shadow:
                 Last Match
             </div>
 
-            <div class="widget">
+            <div class="widget-card">
                 <div id="lastMatch">
                     Loading...
                 </div>
@@ -338,7 +345,7 @@ box-shadow:
                 Upcoming Match
             </div>
 
-            <div class="widget">
+            <div class="widget-card">
                 <div id="nextMatch">
                     Loading...
                 </div>
@@ -348,7 +355,7 @@ box-shadow:
                 Current Season
             </div>
 
-            <div class="widget">
+            <div class="widget-card">
                 <div id="seasonSummary">
                     Loading...
                 </div>
@@ -363,7 +370,7 @@ box-shadow:
                 Recent Form
             </div>
 
-            <div class="widget">
+            <div class="widget-card">
                 <div id="recentForm">
                     Loading...
                 </div>
@@ -373,7 +380,7 @@ box-shadow:
                 Top Scorers
             </div>
 
-            <div class="widget">
+            <div class="widget-card">
                 <div id="topScorers">
                     Loading...
                 </div>
@@ -383,7 +390,7 @@ box-shadow:
                 Top Assists
             </div>
 
-            <div class="widget">
+            <div class="widget-card">
                 <div id="topAssists">
                     Loading...
                 </div>
