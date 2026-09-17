@@ -980,7 +980,7 @@ font-weight:600;
 
 <div class="container">
 
-<div class="header"  class="sticky-header">
+<div class="header">
    <h1 id="seasonTitle">FC Barcelona</h1>
 
    <div class="hero-subtitle">
@@ -2099,9 +2099,8 @@ getH2H(match, allMatches);
 
 document.getElementById("app").innerHTML = `
 
-<div class="sticky-header">
-<div class="hero">
 
+<div class="hero">
    <div style="text-transform:uppercase;">
        ${escapeHtml(match["Date"] || "")}
        |
@@ -2109,12 +2108,10 @@ document.getElementById("app").innerHTML = `
        ${heroMatchday ? `| ${heroMatchday}` : ""}
    </div>
 
-</div>
-
 <div class="card">
 
+<div class="sticky-header">
    <div class="teams">
-
        <div class="team-header home">
            <div class="team-name">
                ${escapeHtml(teamA)}
@@ -2131,6 +2128,7 @@ document.getElementById("app").innerHTML = `
            </div>
        </div>
 
+   </div>
    </div>
    </div>
 
