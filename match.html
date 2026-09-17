@@ -1171,7 +1171,7 @@ function getPlayerIcons(match, playerName, prefix="") {
         ){
             events.push({
                 minute: match[`${prefix}Sub min ${i}`],
-                icon: "⬆"
+                icon: '<span style="color:#16a34a;font-weight:700;">⬆</span>'
             });
         }
     }
@@ -1184,7 +1184,7 @@ function getPlayerIcons(match, playerName, prefix="") {
         ){
             events.push({
                 minute: match[`${prefix}Sub min ${i}`],
-                icon: "⬇"
+                icon: '<span style="color:#dc2626;font-weight:700;">⬇</span>'
             });
         }
     }
