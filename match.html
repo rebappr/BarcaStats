@@ -898,7 +898,7 @@ text-align:center;
 display:flex;
 align-items:center;
 justify-content:center;
-padding: 10 0;
+padding: 10px 0;
 gap:12px;
 }
 
@@ -964,37 +964,29 @@ font-weight:600;
     font-weight:600;
 }
 
-    .sticky-shell{
-        position:sticky;
-        top:0;
+.sticky-shell{
+    position:sticky;
+    top:0;
+    z-index:999999;
 
-        z-index:999999;
+    background:var(--bg);
 
-        margin-left:calc(50% - 50vw);
-        margin-right:calc(50% - 50vw);
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
 
-        background:var(--bg);
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
 
-        box-shadow:0 4px 15px rgba(0,0,0,.15);
-    }
+.sticky-header{
+    max-width:1500px;
+    margin:auto;
+    padding:10px;
+}
 
-    .sticky-header{
-        max-width:1500px;
-        margin:auto;
-
-        padding:10px;
-        background:var(--bg);
-    }
-
-    .match-tabs{
-        position:relative;
-        z-index:2;
-
-        background:var(--bg);
-
-        margin:0;
-        padding-top:8px;
-    }
+.match-tabs{
+    background:var(--bg);
+    margin:0;
+}
 
     .hero{
         margin-bottom:8px;
@@ -1013,19 +1005,17 @@ font-weight:600;
 
 <div class="container">
 
-<div class="sticky-shell">
+    <div class="header">
+        <h1 id="seasonTitle">FC Barcelona</h1>
 
-<div class="header">
-   <h1 id="seasonTitle">FC Barcelona</h1>
+        <div class="hero-subtitle">
+            Statistics & Historical Database
+        </div>
+    </div>
 
-   <div class="hero-subtitle">
-       Statistics & Historical Database
-   </div>
-</div>
-
-<div id="app">
-Loading...
-</div>
+    <div id="app">
+        Loading...
+    </div>
 
 </div>
 
@@ -2129,7 +2119,7 @@ const h2hHtml =
 getH2H(match, allMatches);
 
 document.getElementById("app").innerHTML = `
-
+<div class="sticky-shell">
 
 <div class="hero">
    <div style="text-transform:uppercase;">
@@ -2190,8 +2180,6 @@ document.getElementById("app").innerHTML = `
        </button>
    
    </div>
-
-</div>
 
 </div>
 
