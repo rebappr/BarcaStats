@@ -154,6 +154,57 @@ color:var(--text);
     font-size:13px;
 }
 
+.next-match-card{
+    text-align:center;
+    padding:8px;
+}
+
+.next-match-title{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.next-match-vs{
+    font-size:16px;
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.next-match-date{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.season-card{
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:24px;
+    padding:14px;
+}
+
+.season-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.season-name{
+    font-size:18px;
+    font-weight:800;
+}
+
+.season-goals{
+    padding:6px 12px;
+    border-radius:999px;
+    background:rgba(0,77,152,.15);
+    border:1px solid #004D98;
+    font-weight:700;
+}
+``
+
 .summary-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
@@ -529,28 +580,35 @@ function renderLastMatch(){
 function renderNextMatch(){
 
     const next=allMatches
-    .filter(m=>parseDate(m.Date)>new Date())
-    .sort((a,b)=>
+    .filter(m => parseDate(m.Date) > new Date())
+    .sort((a,b) =>
         parseDate(a.Date)-parseDate(b.Date)
     )[0];
 
     if(!next){
 
-        document.getElementById("nextMatch").innerHTML=
+        document.getElementById("nextMatch").innerHTML =
         "No upcoming matches";
 
         return;
     }
 
-    document.getElementById("nextMatch").innerHTML=`
+    document.getElementById("nextMatch").innerHTML = `
 
-        <h3>
-            FC Barcelona vs
-            ${next["Opp. Team"]}
-        </h3>
+        <div class="next-match-card">
 
-        <div class="match-meta">
-            ${next.Date} • ${next.Competition}
+            <div class="next-match-title">
+                Upcoming Match
+            </div>
+
+            <div class="next-match-vs">
+                FC Barcelona vs ${next["Opp. Team"]}
+            </div>
+
+            <div class="next-match-date">
+                ${next.Date} • ${next.Competition}
+            </div>
+
         </div>
 
     `;
@@ -604,9 +662,23 @@ function renderSeasonOverview(matches){
 
     });
 
-    document.getElementById(
-        "seasonOverview"
-    ).innerHTML = `
+document.getElementById(
+    "seasonOverview"
+).innerHTML = `
+
+<div class="widget-card season-card">
+
+    <div class="season-header">
+
+        <div class="season-name">
+            ${[...new Set(matches.map(m => m.Season))][0]}
+        </div>
+
+        <div class="season-goals">
+            ${goalsFor}:${goalsAgainst}
+        </div>
+
+    </div>
 
     <div class="summary-grid">
 
@@ -631,12 +703,14 @@ function renderSeasonOverview(matches){
         </div>
 
         <div class="summary-box goals">
-            <b>${goalsFor}:${goalsAgainst}</b>
-            Goals
+            <b>${goalsFor}</b>
+            Goals For
         </div>
 
     </div>
-    `;
+
+</div>
+`;
 }
 
 function renderTopScorers(){
