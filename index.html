@@ -65,7 +65,7 @@ font-weight:500;
 color:rgba(255,255,255,.85);
 }
 
-.dashboard{
+.header-btn{
     display:inline-block;
     margin-top:10px;
     padding:8px 14px;
@@ -80,7 +80,7 @@ color:rgba(255,255,255,.85);
     transition:.2s;
 }
 
-.header .dashboard{
+.header .header-btn{
     margin-top:5px;
 }
 
@@ -310,10 +310,6 @@ color:var(--text);
         font-size:16px;
     }
 
-.dashboard{
-    grid-template-columns:1fr;
-}
-
 .header h1{
     font-size:24px;
 }
@@ -338,13 +334,13 @@ color:var(--text);
         Statistics & Historical Database
     </div>
 
-    <a href="season.html" class="dashboard">
+    <a href="season.html" class="header-btn">
         Seasons Overview
     </a>
 
 </div>
 
-    <div class="dashboard">
+    <div class="header-btn">
 
         <div class="left-column">
 
@@ -440,7 +436,7 @@ function renderHome(){
     .sort()
     .reverse()[0];
 
-    document.querySelector(".dashboard").href =
+    document.querySelector(".header-btn").href =
         `season.html?season=${season}`;
 
     const seasonMatches =
