@@ -921,16 +921,18 @@ margin-bottom:15px;
 
 .sticky-header::before{
     content:"";
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
+    position:absolute;
+
+    top:-100vh;      /* natiahne pozadie vysoko nad header */
     bottom:0;
 
+    left:50%;
+    transform:translateX(-50%);
+
+    width:100vw;
     background:var(--bg);
 
     z-index:-1;
-    pointer-events:none;
 }
 
 
