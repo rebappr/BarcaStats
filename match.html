@@ -919,21 +919,6 @@ display:block;
 margin-bottom:15px;
 }
 
-.sticky-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    margin-left:calc(50% - 50vw);
-    margin-right:calc(50% - 50vw);
-
-    padding-left:calc(50vw - 50%);
-    padding-right:calc(50vw - 50%);
-   
-   padding-top:10px;   
-
-}
-
 .h2h-summary{
 gap:8px;
 }
@@ -979,6 +964,42 @@ font-weight:600;
     font-weight:600;
 }
 
+    .sticky-shell{
+        position:sticky;
+        top:0;
+
+        z-index:999999;
+
+        margin-left:calc(50% - 50vw);
+        margin-right:calc(50% - 50vw);
+
+        background:var(--bg);
+
+        box-shadow:0 4px 15px rgba(0,0,0,.15);
+    }
+
+    .sticky-header{
+        max-width:1500px;
+        margin:auto;
+
+        padding:10px;
+        background:var(--bg);
+    }
+
+    .match-tabs{
+        position:relative;
+        z-index:2;
+
+        background:var(--bg);
+
+        margin:0;
+        padding-top:8px;
+    }
+
+    .hero{
+        margin-bottom:8px;
+    }
+
 }
 
 </style>
@@ -991,6 +1012,8 @@ font-weight:600;
 </button>
 
 <div class="container">
+
+<div class="sticky-shell">
 
 <div class="header">
    <h1 id="seasonTitle">FC Barcelona</h1>
@@ -2167,6 +2190,8 @@ document.getElementById("app").innerHTML = `
        </button>
    
    </div>
+
+</div>
 
 </div>
 
