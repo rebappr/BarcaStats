@@ -623,36 +623,52 @@ function renderLastMatch(){
     `;
 }
 
-document.getElementById("nextMatch").innerHTML = `
+function renderNextMatch(){
 
-    <a href="match.html?id=${match.ID}" class="fixture-link">
+    const next = allMatches
+    .filter(m => parseDate(m.Date) > new Date())
+    .sort((a,b) =>
+        parseDate(a.Date) - parseDate(b.Date)
+    )[0];
 
-        <div class="fixture-card">
+    if(!next){
 
-            <div class="fixture-team">
-                FC Barcelona
-            </div>
+        document.getElementById("nextMatch").innerHTML =
+        "No upcoming matches";
 
-            <div class="fixture-center">
-                <div class="fixture-vs">
-                    VS
+        return;
+    }
+
+    document.getElementById("nextMatch").innerHTML = `
+
+        <a href="match.html?id=${match.ID}" class="fixture-link">
+        
+            <div class="fixture-card">
+
+                <div class="fixture-team">
+                    FC Barcelona
                 </div>
+
+                <div class="fixture-center">
+                    <div class="fixture-vs">
+                        VS
+                    </div>
+                </div>
+
+                <div class="fixture-team">
+                    ${next["Opp. Team"]}
+                </div>
+
             </div>
 
-            <div class="fixture-team">
-                ${next["Opp. Team"]}
+            <div class="fixture-meta">
+                ${next.Date} • ${next.Competition}
             </div>
 
-        </div>
+        </a>
 
-        <div class="fixture-meta">
-            ${next.Date} • ${next.Competition}
-        </div>
-
-    </a>
-
-`;
-
+    `;
+}
 function renderSeasonOverview(matches){
 
     const playedMatches =
