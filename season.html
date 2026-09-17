@@ -304,6 +304,29 @@ font-weight:700;
 font-size:12px;
 }
 
+.match-filter{
+    display:flex;
+    gap:8px;
+    margin-bottom:10px;
+}
+
+.match-filter button{
+    padding:8px 14px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+    background:var(--card-bg);
+    color:var(--text);
+    border:1px solid var(--card-border);
+}
+
+.match-filter button.active{
+    background:#004D98;
+    color:white;
+}
+
 .matches-table tbody tr{
 opacity:1;
 transform:none;
@@ -634,6 +657,8 @@ let allMatches = [];
 let allPlayers = [];
 let playerBirthDates = {};
 
+let matchFilter = "played"; 
+
 let season =
 new URLSearchParams(
 location.search
@@ -789,6 +814,30 @@ function getResultClass(match){
 
 function render(matches){
 
+    let filteredMatches = [...matches];
+
+    if(matchFilter === "played"){
+        filteredMatches = filteredMatches.filter(
+            x => x.Result && x.Result !== "-:-"
+        );
+    }
+
+    if(matchFilter === "unplayed"){
+        filteredMatches = filteredMatches.filter(
+            x => !x.Result || x.Result === "-:-"
+        );
+    }
+
+    if(filteredMatches.length === 0){
+
+        document.getElementById("matches").innerHTML =
+        "<div class='empty'>Žiadne zápasy</div>";
+
+        return;
+    }
+
+    matches = filteredMatches;
+
     if(matches.length === 0){
 
         document.getElementById("matches").innerHTML =
@@ -827,7 +876,27 @@ function render(matches){
 
     });
 
-    let html = "";
+   let html = `
+<div class="match-filter">
+    <button
+        class="${matchFilter === "played" ? "active" : ""}"
+        onclick="setMatchFilter('played')">
+        Odohrané
+    </button>
+
+    <button
+        class="${matchFilter === "unplayed" ? "active" : ""}"
+        onclick="setMatchFilter('unplayed')">
+        Neodohrané
+    </button>
+
+    <button
+        class="${matchFilter === "all" ? "active" : ""}"
+        onclick="setMatchFilter('all')">
+        Všetky
+    </button>
+</div>
+`;
 
     Object.keys(grouped).forEach(competition => {
 
@@ -1055,6 +1124,19 @@ function sortStats(column){
     }
 
     renderSeason();
+
+}
+
+function setMatchFilter(filter){
+
+    matchFilter = filter;
+
+    const seasonMatches =
+    allMatches.filter(
+        x => x.Season === season
+    );
+
+    render(seasonMatches);
 
 }
 
