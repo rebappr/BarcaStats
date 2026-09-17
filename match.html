@@ -1179,49 +1179,60 @@ html += `
 return html;
 }
 
-function getBench(match,prefix=""){
+function getBench(match, prefix="") {
 
-const subbedOn = [];
+    const subbedOn = [];
 
-for(let i=1;i<=6;i++){
+    for(let i=1; i<=6; i++){
 
-const player = match[`${prefix}Sub on ${i}`];
+        const player = match[`${prefix}Sub on ${i}`];
 
-if(player){
-subbedOn.push(String(player).trim());
-}
-}
+        if(player){
+            subbedOn.push(String(player).trim());
+        }
+    }
 
-let html="";
+    let html = "";
 
-for(let i=1;i<=12;i++){
+    for(let i=1; i<=12; i++){
 
-const player =
-match[`${prefix}On the bench name ${i}`];
+        const player =
+            match[`${prefix}On the bench name ${i}`];
 
-const number =
-match[`${prefix}On the bench number ${i}`];
+        const number =
+            match[`${prefix}On the bench number ${i}`];
 
-if(player && String(player).trim()){
+        if(player && String(player).trim()){
 
-html += `
-           <div class="player">
-               <div class="number">
-                   ${number || ""}
-               </div>
+            html += `
+            <div class="player">
 
-               ${escapeHtml(player)}
-${
-   subbedOn.includes(String(player).trim())
-       ? ' <strong style="color:#16a34a;">⬆</strong>'
-       : ''
-}
-           </div>
-           `;
-}
-}
+                <div class="number">
+                    ${escapeHtml(number || "")}
+                </div>
 
-return html;
+                <span class="player-name">
+
+                    ${escapeHtml(player)}
+
+                    <span class="player-icons">
+                        ${getPlayerIcons(match, player, prefix)}
+                    </span>
+
+                    ${
+                        subbedOn.includes(String(player).trim())
+                            ? ' <strong style="color:#16a34a;">⬆</strong>'
+                            : ''
+                    }
+
+                </span>
+
+            </div>
+            `;
+        }
+    }
+
+    return html;
 }
 
 function getTimeline(match){
