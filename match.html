@@ -2022,98 +2022,106 @@ function escapeHtml(str) {
         .replace(/'/g, "&#039;");
 }
 
-function getPlayerIcons(match, playerName, prefix = "") {
+function getPlayerIcons(match, playerName, prefix="") {
 
-    const icons = [];
+    const events = [];
 
     // Góly
-    for (let i = 1; i <= 12; i++) {
-        if (
+    for(let i=1; i<=12; i++){
+
+        if(
             String(match[`${prefix}Goal Player ${i}`] || "").trim() ===
             String(playerName).trim()
-        ) {
-            icons.push("⚽");
+        ){
+            events.push({
+                minute: match[`${prefix}Goal min ${i}`],
+                icon: "⚽"
+            });
         }
     }
 
-    // Žlté karty
-    for (let i = 1; i <= 12; i++) {
-        if (
+    // Asistencie
+    for(let i=1; i<=12; i++){
+
+        if(
+            String(match[`${prefix}Assist Player ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ){
+            events.push({
+                minute: match[`${prefix}Goal min ${i}`],
+                icon: "🅰️"
+            });
+        }
+    }
+
+    // Žlté
+    for(let i=1; i<=12; i++){
+
+        if(
             String(match[`${prefix}Yellow player ${i}`] || "").trim() ===
             String(playerName).trim()
-        ) {
-            icons.push("🟨");
+        ){
+            events.push({
+                minute: match[`${prefix}Yellow min ${i}`],
+                icon: "🟨"
+            });
         }
     }
 
-    // Červené karty
-    for (let i = 1; i <= 5; i++) {
-        if (
+    // Červené
+    for(let i=1; i<=5; i++){
+
+        if(
             String(match[`${prefix}Red player ${i}`] || "").trim() ===
             String(playerName).trim()
-        ) {
-            icons.push("🟥");
+        ){
+            events.push({
+                minute: match[`${prefix}Red min ${i}`],
+                icon: "🟥"
+            });
         }
     }
 
-    return icons.join(" ");
-}
+    // Striedanie IN
+    for(let i=1; i<=6; i++){
 
-function getPlayers(match,prefix=""){
-
-    const captain = match[`${prefix}Captain`] || "";
-
-    const subbedOff = [];
-
-    for(let i=1;i<=6;i++){
-
-        const player = match[`${prefix}Sub off ${i}`];
-
-if(player){
-    subbedOff.push(String(player).trim());
-    }
-}
-
-    let html="";
-
-    for(let i=1;i<=11;i++){
-
-        const player =
-            match[`${prefix}Player name ${i}`];
-
-        const number =
-            match[`${prefix}Player number ${i}`];
-
-        if(player && String(player).trim()){
-
-            html += `
-            <div class="player">
-                <div class="number">
-                    ${escapeHtml(number || "")}
-                </div>
-
-        <span class="player-name">
-            ${escapeHtml(player)}
-            ${
-                String(player).trim() === String(captain).trim()
-                    ? '<strong style="margin-left:2px;">(C)</strong>'
-                    : ''
-            }
-            <span class="player-icons">
-                ${getPlayerIcons(match, player, prefix)}
-            </span>
-    ${
-        subbedOff.includes(String(player).trim())
-            ? ' <strong style="color:#dc2626;">⬇</strong>'
-            : ''
-    }
-</span>
-            </div>
-            `;
+        if(
+            String(match[`${prefix}Sub on ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ){
+            events.push({
+                minute: match[`${prefix}Sub min ${i}`],
+                icon: "⬆"
+            });
         }
     }
 
-    return html;
+    // Striedanie OUT
+    for(let i=1; i<=6; i++){
+
+        if(
+            String(match[`${prefix}Sub off ${i}`] || "").trim() ===
+            String(playerName).trim()
+        ){
+            events.push({
+                minute: match[`${prefix}Sub min ${i}`],
+                icon: "⬇"
+            });
+        }
+    }
+
+    events.sort((a,b)=>{
+
+        const ma =
+            parseInt(String(a.minute).match(/\d+/)?.[0] || 0);
+
+        const mb =
+            parseInt(String(b.minute).match(/\d+/)?.[0] || 0);
+
+        return ma - mb;
+    });
+
+    return events.map(e => e.icon).join(" ");
 }
 
 function getBench(match,prefix=""){
