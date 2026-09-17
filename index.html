@@ -440,6 +440,9 @@ function renderHome(){
     .sort()
     .reverse()[0];
 
+    document.querySelector(".header-btn").href =
+        `season.html?season=${season}`;
+
     const seasonMatches =
     allMatches.filter(
         m => m.Season === season
@@ -450,7 +453,6 @@ function renderHome(){
     renderTopScorers();
     renderTopAssists();
     renderRecentForm();
-
 }
 
 function parseDate(date){
