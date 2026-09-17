@@ -302,7 +302,30 @@ color:var(--text);
     z-index:9999;
 }
 
-@media(max-width:900px){
+@media (max-width:900px){
+
+.content-layout{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.left-panel,
+.right-panel{
+flex:none !important;
+width:100% !important;
+min-width:0;
+max-width:100%;
+}
+
+.right-panel{
+position:static !important;
+top:auto;
+}
+
+.container{
+padding:6px;
+}
 
     .summary-grid{
         grid-template-columns:repeat(5,1fr);
