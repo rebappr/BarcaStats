@@ -594,7 +594,7 @@ function renderLastMatch(){
 
     document.getElementById("lastMatch").innerHTML = `
     
-    match.html?id=${match.ID}
+    <a href="match.html?id=${match.ID}" class="fixture-link">
     
         <div class="fixture-card">
     
@@ -641,6 +641,8 @@ function renderNextMatch(){
 
     document.getElementById("nextMatch").innerHTML = `
 
+    <a href="match.html?id=${match.ID}" class="fixture-link">
+
         <div class="fixture-card">
 
             <div class="fixture-team">
@@ -663,6 +665,8 @@ function renderNextMatch(){
             ${next.Date} • ${next.Competition}
         </div>
 
+    </a>
+    
     `;
 }
 
