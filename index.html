@@ -356,10 +356,7 @@ color:var(--text);
             </div>
 
             <div class="widget-card">
-                <div id="seasonSummary">
-                    Loading...
-                </div>
-
+               <div id="seasonOverview"></div>
             </div>
 
         </div>
@@ -421,7 +418,20 @@ function renderHome(){
 
     renderLastMatch();
     renderNextMatch();
-    renderCurrentSeason();
+
+    const season = [...new Set(
+        allMatches.map(m => m.Season)
+    )]
+    .sort()
+    .reverse()[0];
+
+    const seasonMatches =
+    allMatches.filter(
+        m => m.Season === season
+    );
+
+    renderSeasonOverview(seasonMatches);
+
     renderTopScorers();
     renderTopAssists();
     renderRecentForm();
@@ -505,21 +515,10 @@ function renderNextMatch(){
     `;
 }
 
-function renderCurrentSeason(){
-
-    const season=[...new Set(
-        allMatches.map(m=>m.Season)
-    )]
-    .sort()
-    .reverse()[0];
-
-    const seasonMatches=
-    allMatches.filter(
-        m=>m.Season===season
-    );
+function renderSeasonOverview(matches){
 
     const playedMatches =
-    seasonMatches.filter(
+    matches.filter(
         m => m.Result &&
              m.Result !== "-:-"
     );
@@ -545,10 +544,10 @@ function renderCurrentSeason(){
     playedMatches.forEach(match => {
 
         const homeGoals =
-            Number(match["Goals home team"]) || 0;
+        Number(match["Goals home team"]) || 0;
 
         const awayGoals =
-            Number(match["Goals away team"]) || 0;
+        Number(match["Goals away team"]) || 0;
 
         if(match["Home/Away"] === "Home"){
 
@@ -564,45 +563,38 @@ function renderCurrentSeason(){
 
     });
 
-    document.getElementById("seasonSummary").innerHTML = `
+    document.getElementById(
+        "seasonOverview"
+    ).innerHTML = `
 
-        <h3>${season}</h3>
+    <div class="summary-grid">
 
-        <div class="summary-grid">
-
-            <div class="summary-box matches">
-                <b>${playedMatches.length}</b>
-                Matches
-            </div>
-
-            <div class="summary-box wins">
-                <b>${wins}</b>
-                Wins
-            </div>
-
-            <div class="summary-box draws">
-                <b>${draws}</b>
-                Draws
-            </div>
-
-            <div class="summary-box losses">
-                <b>${losses}</b>
-                Losses
-            </div>
-
-            <div class="summary-box goals">
-                <b>${goalsFor}:${goalsAgainst}</b>
-                Goals
-            </div>
-
+        <div class="summary-box matches">
+            <b>${playedMatches.length}</b>
+            Matches
         </div>
 
-        <a
-            href="season.html?season=${season}"
-            class="btn"
-        >
-            View Season
-        </a>
+        <div class="summary-box wins">
+            <b>${wins}</b>
+            Wins
+        </div>
+
+        <div class="summary-box draws">
+            <b>${draws}</b>
+            Draws
+        </div>
+
+        <div class="summary-box losses">
+            <b>${losses}</b>
+            Losses
+        </div>
+
+        <div class="summary-box goals">
+            <b>${goalsFor}:${goalsAgainst}</b>
+            Goals
+        </div>
+
+    </div>
     `;
 }
 
