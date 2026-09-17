@@ -666,50 +666,35 @@ document.getElementById(
     "seasonOverview"
 ).innerHTML = `
 
-<div class="widget-card season-card">
+<div class="summary-grid">
 
-    <div class="season-header">
-
-        <div class="season-name">
-            ${[...new Set(matches.map(m => m.Season))][0]}
-        </div>
-
-        <div class="season-goals">
-            ${goalsFor}:${goalsAgainst}
-        </div>
-
+    <div class="summary-box matches">
+        <b>${playedMatches.length}</b>
+        Matches
     </div>
 
-    <div class="summary-grid">
+    <div class="summary-box wins">
+        <b>${wins}</b>
+        Wins
+    </div>
 
-        <div class="summary-box matches">
-            <b>${playedMatches.length}</b>
-            Matches
-        </div>
+    <div class="summary-box draws">
+        <b>${draws}</b>
+        Draws
+    </div>
 
-        <div class="summary-box wins">
-            <b>${wins}</b>
-            Wins
-        </div>
+    <div class="summary-box losses">
+        <b>${losses}</b>
+        Losses
+    </div>
 
-        <div class="summary-box draws">
-            <b>${draws}</b>
-            Draws
-        </div>
-
-        <div class="summary-box losses">
-            <b>${losses}</b>
-            Losses
-        </div>
-
-        <div class="summary-box goals">
-            <b>${goalsFor}</b>
-            Goals For
-        </div>
-
+    <div class="summary-box goals">
+        <b>${goalsFor}:${goalsAgainst}</b>
+        Goals
     </div>
 
 </div>
+
 `;
 }
 
