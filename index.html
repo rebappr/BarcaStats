@@ -542,34 +542,34 @@ function parseDate(date){
 
 function renderLastMatch(){
 
-    const played=allMatches
-    .filter(m=>parseDate(m.Date)<=new Date())
-    .sort((a,b)=>
-        parseDate(b.Date)-parseDate(a.Date)
+    const played = allMatches
+    .filter(m => parseDate(m.Date) <= new Date())
+    .sort((a,b) =>
+        parseDate(b.Date) - parseDate(a.Date)
     );
 
-    const match=played[0];
+    const match = played[0];
 
-    if(!match)return;
+    if(!match) return;
 
-    document.getElementById("lastMatch").innerHTML=`
+    document.getElementById("lastMatch").innerHTML = `
 
-        <div class="match-card">
+        <div class="next-match-card">
 
-            <div class="match-main">
+            <div class="next-match-title">
+                Last Match
+            </div>
 
-                <h3>
-                    FC Barcelona ${match.Result}
-                </h3>
+            <div class="next-match-vs">
+                FC Barcelona ${match.Result}
+            </div>
 
-                <div>
-                    vs ${match["Opp. Team"]}
-                </div>
+            <div class="next-match-vs">
+                vs ${match["Opp. Team"]}
+            </div>
 
-                <div class="match-meta">
-                    ${match.Date} • ${match.Competition}
-                </div>
-
+            <div class="next-match-date">
+                ${match.Date} • ${match.Competition}
             </div>
 
         </div>
