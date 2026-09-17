@@ -923,27 +923,39 @@ function render(matches){
 
     });
 
-   let html = `
-<div class="match-filter">
-    <button
-        class="${matchFilter === "played" ? "active" : ""}"
-        onclick="setMatchFilter('played')">
-        Played
-    </button>
+const latestSeason =
+    [...new Set(allMatches.map(x => x.Season))]
+    .sort()
+    .reverse()[0];
 
-    <button
-        class="${matchFilter === "unplayed" ? "active" : ""}"
-        onclick="setMatchFilter('unplayed')">
-        Upcoming
-    </button>
+let html = "";
 
-    <button
-        class="${matchFilter === "all" ? "active" : ""}"
-        onclick="setMatchFilter('all')">
-        All
-    </button>
-</div>
-`;
+if(season === latestSeason){
+
+    html += `
+    <div class="match-filter">
+
+        <button
+            class="${matchFilter === "played" ? "active" : ""}"
+            onclick="setMatchFilter('played')">
+            Played
+        </button>
+
+        <button
+            class="${matchFilter === "unplayed" ? "active" : ""}"
+            onclick="setMatchFilter('unplayed')">
+            Upcoming
+        </button>
+
+        <button
+            class="${matchFilter === "all" ? "active" : ""}"
+            onclick="setMatchFilter('all')">
+            All
+        </button>
+
+    </div>
+    `;
+}
 
     Object.keys(grouped).forEach(competition => {
 
