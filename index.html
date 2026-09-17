@@ -201,6 +201,17 @@ color:var(--text);
     font-size:13px;
 }
 
+.fixture-link{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    cursor:pointer;
+}
+
+.fixture-link:hover{
+    opacity:.9;
+}
+
 .season-card{
     background:var(--card-bg);
     border:1px solid var(--card-border);
@@ -579,29 +590,33 @@ function renderLastMatch(){
     if(!match) return;
 
     document.getElementById("lastMatch").innerHTML = `
-
+    
+    <a hreftml?id=${match.ID}
+    
         <div class="fixture-card">
-
+    
             <div class="fixture-team">
                 FC Barcelona
             </div>
-
+    
             <div class="fixture-center">
                 <div class="fixture-score">
                     ${match.Result}
                 </div>
             </div>
-
+    
             <div class="fixture-team">
                 ${match["Opp. Team"]}
             </div>
-
+    
         </div>
-
+    
         <div class="fixture-meta">
             ${match.Date} • ${match.Competition}
         </div>
-
+    
+    </a>
+    
     `;
 }
 
