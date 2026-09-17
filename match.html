@@ -2117,9 +2117,7 @@ const h2hHtml =
 getH2H(match, allMatches);
 
 document.getElementById("app").innerHTML = `
-<div class="sticky-shell">
 
-<div class="sticky-header">
 <div class="hero">
    <div style="text-transform:uppercase;">
        ${escapeHtml(match["Date"] || "")}
@@ -2129,6 +2127,8 @@ document.getElementById("app").innerHTML = `
    </div>
 </div>
 
+<div class="sticky-shell">
+<div class="sticky-header">
 <div class="card">
 
    <div class="teams">
