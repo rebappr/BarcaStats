@@ -177,6 +177,60 @@ color:var(--text);
     font-size:13px;
 }
 
+.fixture-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    text-align:center;
+}
+
+.fixture-team{
+    flex:1;
+    font-size:18px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.fixture-center{
+    min-width:120px;
+}
+
+.fixture-score{
+    font-size:34px;
+    font-weight:800;
+    padding:8px 20px;
+    border-radius:16px;
+    color:white;
+    background:
+    linear-gradient(
+        135deg,
+        #004D98,
+        #1e3a8a
+    );
+}
+
+.fixture-vs{
+    font-size:22px;
+    font-weight:800;
+    padding:8px 20px;
+    border-radius:16px;
+    color:white;
+    background:
+    linear-gradient(
+        135deg,
+        #004D98,
+        #1e3a8a
+    );
+}
+
+.fixture-meta{
+    margin-top:10px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
 .season-card{
     background:var(--card-bg);
     border:1px solid var(--card-border);
@@ -556,24 +610,26 @@ function renderLastMatch(){
 
     document.getElementById("lastMatch").innerHTML = `
 
-        <div class="next-match-card">
+        <div class="fixture-card">
 
-            <div class="next-match-vs">
+            <div class="fixture-team">
                 FC Barcelona
             </div>
 
-            <div class="next-match-title">
-                ${match.Result}
+            <div class="fixture-center">
+                <div class="fixture-score">
+                    ${match.Result}
+                </div>
             </div>
 
-            <div class="next-match-vs">
+            <div class="fixture-team">
                 ${match["Opp. Team"]}
             </div>
 
-            <div class="next-match-date">
-                ${match.Date} • ${match.Competition}
-            </div>
+        </div>
 
+        <div class="fixture-meta">
+            ${match.Date} • ${match.Competition}
         </div>
 
     `;
@@ -597,20 +653,26 @@ function renderNextMatch(){
 
     document.getElementById("nextMatch").innerHTML = `
 
-        <div class="next-match-card">
+        <div class="fixture-card">
 
-            <div class="next-match-title">
-                Upcoming Match
+            <div class="fixture-team">
+                FC Barcelona
             </div>
 
-            <div class="next-match-vs">
-                FC Barcelona vs ${next["Opp. Team"]}
+            <div class="fixture-center">
+                <div class="fixture-vs">
+                    VS
+                </div>
             </div>
 
-            <div class="next-match-date">
-                ${next.Date} • ${next.Competition}
+            <div class="fixture-team">
+                ${next["Opp. Team"]}
             </div>
 
+        </div>
+
+        <div class="fixture-meta">
+            ${next.Date} • ${next.Competition}
         </div>
 
     `;
