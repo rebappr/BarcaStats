@@ -276,6 +276,18 @@ border:1px solid var(--result-loss);
 color:var(--result-loss);
 }
 
+.summary-box.matches{
+    background:color-mix(in srgb, #004D98 15%, transparent);
+    border:1px solid #004D98;
+    color:var(--text);
+}
+
+.summary-box.goals{
+    background:color-mix(in srgb, #A50044 15%, transparent);
+    border:1px solid #A50044;
+    color:var(--text);
+}
+
 .header h1{
 margin:0;
 font-size:16px;
@@ -748,7 +760,7 @@ playedMatches.forEach(match => {
 
 <div class="summary-grid">
 
-    <div class="summary-box">
+    <div class="summary-box matches">
         <b>${playedMatches.length}</b>
         Matches
     </div>
@@ -768,7 +780,7 @@ playedMatches.forEach(match => {
         Losses
     </div>
 
-    <div class="summary-box">
+    <div class="summary-box goals">
         <b>${goalsFor}:${goalsAgainst}</b>
         Goals
     </div>
