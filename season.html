@@ -1044,44 +1044,46 @@ function renderLaLigaTable() {
 
             html += `
             <tr class="${rowClass}">
-                <td class="${posClass}">
-                    ${row[1]}
+                <td>
+                    <div class="position-circle ${posBadgeClass}">
+                        ${position}
+                    </div>
                 </td>
-
+            
                 <td>
                     ${row[2]}
                 </td>
-
+            
                 <td>
                     ${row[3]}
                 </td>
-
+            
                 <td>
                     ${row[4]}
                 </td>
-
+            
                 <td>
                     ${row[5]}
                 </td>
-
+            
                 <td>
                     ${row[6]}
                 </td>
-
+            
                 <td>
                     ${row[7]}
                 </td>
-
+            
                 <td>
                     ${row[8]}
                 </td>
-
+            
                 <td class="points">
                     ${row[9]}
                 </td>
             </tr>
             `;
-        });
+});
 
         html += `
             </tbody>
