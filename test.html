@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>La Liga</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Tabuľka La Ligy</h1>
+
+<div id="table-container"></div>
+
+<script>
+fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/export?format=csv&gid=443901137")
+  .then(response => response.text())
+  .then(csv => {
+      const rows = csv.trim().split("\n").map(row => row.split(","));
+
+      let html = "<table>";
+
+      rows.forEach((row, index) => {
+          html += "<tr>";
+
+          row.forEach(cell => {
+              if (index === 0) {
+                  html += `<th>${cell}</th>`;
+              } else {
+                  html += `<td>${cell}</td>`;
+              }
+          });
+
+          html += "</tr>";
+      });
+
+      html += "</table>";
+
+      document.getElementById("table-container").innerHTML = html;
+  })
+  .catch(error => console.error(error));
+</script>
+
+</body>
+</html>
