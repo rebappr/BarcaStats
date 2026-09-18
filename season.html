@@ -1022,23 +1022,19 @@ function renderLaLigaTable() {
             parseInt(row[1]);
 
             let rowClass = "";
-            let posClass = "";
-
+            let posBadgeClass = "";
+            
             if(position === 1){
-
-                posClass = "position-1";
-
-            }else if(position <= 4){
-
-                posClass = "position-top4";
-
-            }else if(position <= 7){
-
-                posClass = "position-europe";
-
-            }else if(position >= 18){
-
-                posClass = "position-relegation";
+                posBadgeClass = "leader";
+            }
+            else if(position <= 4){
+                posBadgeClass = "top4";
+            }
+            else if(position <= 7){
+                posBadgeClass = "europe";
+            }
+            else if(position >= 18){
+                posBadgeClass = "relegation";
             }
 
             if(row[2].trim() === "Barcelona"){
