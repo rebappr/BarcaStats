@@ -348,11 +348,28 @@ color:var(--result-loss);
 }
 
 .barca-row{
-    background:rgba(0,77,152,.12);
+    background:
+    linear-gradient(
+        90deg,
+        rgba(0,77,152,.20),
+        rgba(165,0,68,.20)
+    ) !important;
+
 }
 
 .barca-row td{
     font-weight:700;
+}
+
+.barca-row:hover{
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(0,77,152,.30),
+        rgba(165,0,68,.30)
+    ) !important;
+
 }
 
 .position-1{
