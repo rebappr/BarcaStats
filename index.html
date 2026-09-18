@@ -613,13 +613,13 @@ const match = played[0];
 if(!match) return;
 
 const homeTeam =
-    next["Home/Away"] === "Home"
+    match["Home/Away"] === "Home"
         ? "Barcelona"
-        : next["Opp. Team"];
+        : match["Opp. Team"];
 
 const awayTeam =
-    next["Home/Away"] === "Home"
-        ? next["Opp. Team"]
+    match["Home/Away"] === "Home"
+        ? match["Opp. Team"]
         : "Barcelona";
 
 document.getElementById("lastMatch").innerHTML = `
@@ -670,15 +670,13 @@ return;
 }
 
 const homeTeam =
-next["Home/Away"] === "Home"
-        ? "FC Barcelona"
+    next["Home/Away"] === "Home"
         ? "Barcelona"
-: next["Opp. Team"];
+        : next["Opp. Team"];
 
 const awayTeam =
-next["Home/Away"] === "Home"
-? next["Opp. Team"]
-        : "FC Barcelona";
+    next["Home/Away"] === "Home"
+        ? next["Opp. Team"]
         : "Barcelona";
 
 document.getElementById("nextMatch").innerHTML = `
