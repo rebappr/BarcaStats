@@ -614,14 +614,14 @@ const match = played[0];
 if(!match) return;
 
 const homeTeam =
-match["Home/Away"] === "Home"
-? "Barcelona"
-: match["Opp. Team"];
+    next["Home/Away"] === "Home"
+        ? "Barcelona"
+        : next["Opp. Team"];
 
 const awayTeam =
-match["Home/Away"] === "Home"
-? match["Opp. Team"]
-: "Barcelona";
+    next["Home/Away"] === "Home"
+        ? next["Opp. Team"]
+        : "Barcelona";
 
 document.getElementById("lastMatch").innerHTML = `
    
