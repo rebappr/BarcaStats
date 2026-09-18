@@ -4,80 +4,53 @@
     <meta charset="UTF-8">
     <title>La Liga</title>
     <style>
-.laliga-table-wrapper{
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
+body{
+    margin:0;
+    padding:20px;
+    font-family:Inter,sans-serif;
+    background:#0f172a;
+    color:white;
+}
+
+.widget-title{
+    margin-bottom:12px;
+    padding:10px 16px;
+    border-radius:18px;
+    font-weight:700;
+    background:linear-gradient(135deg,#004D98,#A50044);
+}
+
+.widget-card{
+    background:#1e293b;
     border-radius:24px;
     padding:14px;
+}
+
+.laliga-table-wrapper{
     overflow-x:auto;
 }
 
 .laliga-table{
     width:100%;
     border-collapse:collapse;
-    color:var(--text);
 }
 
-.laliga-table thead th{
-    background:
-    linear-gradient(
-        135deg,
-        #004D98,
-        #A50044
-    );
-
+.laliga-table th{
+    background:linear-gradient(135deg,#004D98,#A50044);
     color:white;
     padding:12px;
-    font-size:13px;
-    font-weight:800;
-    text-transform:uppercase;
-}
-
-.laliga-table thead th:first-child{
-    border-radius:14px 0 0 14px;
-}
-
-.laliga-table thead th:last-child{
-    border-radius:0 14px 14px 0;
-}
-
-.laliga-table tbody tr{
-    transition:.2s;
-}
-
-.laliga-table tbody tr:hover{
-    background:rgba(0,77,152,.12);
 }
 
 .laliga-table td{
     padding:10px;
-    border-bottom:1px solid var(--meta-border);
-    font-size:14px;
+    border-bottom:1px solid #334155;
     text-align:center;
 }
 
-.laliga-table td:first-child{
-    font-weight:800;
-    color:#A50044;
+.laliga-table tr:hover{
+    background:rgba(255,255,255,.05);
 }
-
-.laliga-table td:nth-child(2){
-    text-align:left;
-    font-weight:700;
-}
-
-.position-top4{
-    background:rgba(34,197,94,.15);
-}
-
-.position-europe{
-    background:rgba(59,130,246,.15);
-}
-
-.position-relegation{
-    background:rgba(239,68,68,.15);
-}
-    </style>
+</style>
 </head>
 <body>
 
@@ -102,7 +75,7 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
         .map(row => row.split(","));
 
     let html = `
-    <div class="laliga-table-wrapper">
+        <div class="laliga-table-wrapper">
         <table class="laliga-table">
     `;
 
@@ -112,25 +85,26 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
 
         row.forEach(cell=>{
 
-            if(index===0){
+            if(index === 0){
                 html += `<th>${cell}</th>`;
-            }else{
+            } else {
                 html += `<td>${cell}</td>`;
             }
 
         });
 
         html += "</tr>";
-
     });
 
-    html += `
-        </table>
-    </div>
-    `;
+    html += "</table></div>";
 
     document.getElementById("laligaTable").innerHTML = html;
 
+})
+.catch(error => {
+    document.getElementById("laligaTable").innerHTML =
+        "Nepodarilo sa načítať dáta.";
+    console.error(error);
 });
 </script>
 
