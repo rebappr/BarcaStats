@@ -297,6 +297,85 @@ color:var(--result-loss);
     color:#ffffff;
 }
 
+.laliga-table{
+    width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
+}
+
+.laliga-table thead th{
+    background:var(--meta-bg);
+    color:var(--muted);
+    padding:12px;
+    font-size:12px;
+    font-weight:700;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.laliga-table td{
+    padding:8px;
+    border-bottom:1px solid var(--meta-border);
+    font-size:12px;
+    text-align:center;
+}
+
+.laliga-table tbody tr{
+    transition:.25s;
+}
+
+.laliga-table tbody tr:hover{
+    background:var(--meta-bg);
+}
+
+.laliga-table th:nth-child(1),
+.laliga-table td:nth-child(1){
+    width:40px;
+    font-weight:700;
+}
+
+.laliga-table th:nth-child(2),
+.laliga-table td:nth-child(2){
+    width:auto;
+    text-align:left;
+    font-weight:700;
+}
+
+.laliga-table th:not(:nth-child(2)),
+.laliga-table td:not(:nth-child(2)){
+    width:50px;
+}
+
+.barca-row{
+    background:rgba(0,77,152,.12);
+}
+
+.barca-row td{
+    font-weight:700;
+}
+
+.position-1{
+    color:#22c55e;
+    font-weight:800;
+}
+
+.position-top4{
+    color:#22c55e;
+}
+
+.position-europe{
+    color:#3b82f6;
+}
+
+.position-relegation{
+    color:#ef4444;
+}
+
+.points{
+    font-weight:800;
+}
+
 .header h1{
    margin:0;
    font-size:16px;
@@ -826,122 +905,159 @@ playedMatches.forEach(match => {
 
 `;
 
-    render(seasonMatches);
+render(seasonMatches);
 
-    renderSeasonSummary(
-        seasonMatches
-    );
+renderSeasonSummary(
+    seasonMatches
+);
 
-    renderStatistics(
-        seasonMatches
-    );
+renderStatistics(
+    seasonMatches
+);
+
+renderLaLigaTable();
 }
 
 function renderLaLigaTable() {
 
-fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/export?format=csv&gid=443901137")
-.then(response => response.text())
-.then(csv => {
+    fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/export?format=csv&gid=443901137")
+    .then(response => response.text())
+    .then(csv => {
 
-    const rows = csv
-        .trim()
-        .split("\n")
-        .map(row => row.split(","));
+        const rows = csv
+            .trim()
+            .split("\n")
+            .map(row => row.split(","));
 
-    const data = rows.slice(1);
+        const data = rows.slice(1);
 
-    const seasonRows = data.filter(
-        row => row[0].trim() === season
-    );
+        const seasonRows = data.filter(
+            row => row[0].trim() === season
+        );
 
-    const widget =
-    document.getElementById("laligaWidget");
+        const widget =
+        document.getElementById("laligaWidget");
 
-    if(seasonRows.length === 0){
+        if(seasonRows.length === 0){
 
-        widget.style.display = "none";
+            widget.style.display = "none";
 
-        return;
-    }
-
-    widget.style.display = "block";
-
-    let html = `
-    <table class="laliga-table">
-
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Club</th>
-                <th>M</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>Goals</th>
-                <th>+/-</th>
-                <th>Pts</th>
-            </tr>
-        </thead>
-
-        <tbody>
-    `;
-
-    seasonRows.forEach(row => {
-
-        const position =
-        parseInt(row[1]);
-
-        let rowClass = "";
-
-        if(position <= 4){
-
-            rowClass = "top4";
-
-        }else if(position <= 7){
-
-            rowClass = "europe";
-
-        }else if(position >= 18){
-
-            rowClass = "relegation";
-
+            return;
         }
 
-        html += `
-        <tr class="${rowClass}">
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${row[4]}</td>
-            <td>${row[5]}</td>
-            <td>${row[6]}</td>
-            <td>${row[7]}</td>
-            <td>${row[8]}</td>
-            <td>${row[9]}</td>
-        </tr>
+        widget.style.display = "block";
+
+        let html = `
+        <table class="laliga-table">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Club</th>
+                    <th>M</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>Goals</th>
+                    <th>+/-</th>
+                    <th>Pts</th>
+                </tr>
+            </thead>
+
+            <tbody>
         `;
+
+        seasonRows.forEach(row => {
+
+            const position =
+            parseInt(row[1]);
+
+            let rowClass = "";
+            let posClass = "";
+
+            if(position === 1){
+
+                posClass = "position-1";
+
+            }else if(position <= 4){
+
+                posClass = "position-top4";
+
+            }else if(position <= 7){
+
+                posClass = "position-europe";
+
+            }else if(position >= 18){
+
+                posClass = "position-relegation";
+            }
+
+            if(row[2].trim() === "Barcelona"){
+
+                rowClass = "barca-row";
+            }
+
+            html += `
+            <tr class="${rowClass}">
+                <td class="${posClass}">
+                    ${row[1]}
+                </td>
+
+                <td>
+                    ${row[2]}
+                </td>
+
+                <td>
+                    ${row[3]}
+                </td>
+
+                <td>
+                    ${row[4]}
+                </td>
+
+                <td>
+                    ${row[5]}
+                </td>
+
+                <td>
+                    ${row[6]}
+                </td>
+
+                <td>
+                    ${row[7]}
+                </td>
+
+                <td>
+                    ${row[8]}
+                </td>
+
+                <td class="points">
+                    ${row[9]}
+                </td>
+            </tr>
+            `;
+        });
+
+        html += `
+            </tbody>
+        </table>
+        `;
+
+        document.getElementById(
+            "laligaTable"
+        ).innerHTML = html;
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById(
+            "laligaWidget"
+        ).style.display = "none";
     });
 
-    html += `
-        </tbody>
-    </table>
-    `;
-
-    document.getElementById(
-        "laligaTable"
-    ).innerHTML = html;
-
-})
-.catch(error => {
-
-    console.error(error);
-
-    document.getElementById(
-        "laligaWidget"
-    ).style.display = "none";
-
-});
 }
+
 
 function getResultClass(match){
 
