@@ -406,18 +406,6 @@ color:var(--result-loss);
     border:1px solid var(--meta-border);
 }
 
-.position-circle.top4{
-    background:#22c55e;
-    color:white;
-    border:none;
-}
-
-.position-circle.europe{
-    background:#3b82f6;
-    color:white;
-    border:none;
-}
-
 .position-circle.relegation{
     background:#ef4444;
     color:white;
@@ -1035,12 +1023,6 @@ function renderLaLigaTable() {
             
             if(position === 1){
                 posBadgeClass = "leader";
-            }
-            else if(position <= 4){
-                posBadgeClass = "top4";
-            }
-            else if(position <= 7){
-                posBadgeClass = "europe";
             }
             else if(position >= 18){
                 posBadgeClass = "relegation";
