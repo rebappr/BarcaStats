@@ -660,6 +660,20 @@ font-size:12px;
 
 <div class="right-panel">
 
+<div id="laligaWidget">
+
+    <div class="widget-title">
+        La Liga Table
+    </div>
+
+    <div class="widget-card">
+        <div id="laligaTable">
+            Loading...
+        </div>
+    </div>
+
+</div>
+
 <div class="widget-title">
     Season Debutants
 </div>
@@ -821,6 +835,112 @@ playedMatches.forEach(match => {
     renderStatistics(
         seasonMatches
     );
+}
+
+function renderLaLigaTable() {
+
+fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/export?format=csv&gid=443901137")
+.then(response => response.text())
+.then(csv => {
+
+    const rows = csv
+        .trim()
+        .split("\n")
+        .map(row => row.split(","));
+
+    const data = rows.slice(1);
+
+    const seasonRows = data.filter(
+        row => row[0].trim() === season
+    );
+
+    const widget =
+    document.getElementById("laligaWidget");
+
+    if(seasonRows.length === 0){
+
+        widget.style.display = "none";
+
+        return;
+    }
+
+    widget.style.display = "block";
+
+    let html = `
+    <table class="laliga-table">
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Club</th>
+                <th>M</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>Goals</th>
+                <th>+/-</th>
+                <th>Pts</th>
+            </tr>
+        </thead>
+
+        <tbody>
+    `;
+
+    seasonRows.forEach(row => {
+
+        const position =
+        parseInt(row[1]);
+
+        let rowClass = "";
+
+        if(position <= 4){
+
+            rowClass = "top4";
+
+        }else if(position <= 7){
+
+            rowClass = "europe";
+
+        }else if(position >= 18){
+
+            rowClass = "relegation";
+
+        }
+
+        html += `
+        <tr class="${rowClass}">
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[4]}</td>
+            <td>${row[5]}</td>
+            <td>${row[6]}</td>
+            <td>${row[7]}</td>
+            <td>${row[8]}</td>
+            <td>${row[9]}</td>
+        </tr>
+        `;
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById(
+        "laligaTable"
+    ).innerHTML = html;
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    document.getElementById(
+        "laligaWidget"
+    ).style.display = "none";
+
+});
 }
 
 function getResultClass(match){
