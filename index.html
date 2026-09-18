@@ -484,18 +484,10 @@ padding:6px;
     
         <div class="left-column">
 
-            <div class="widget-title">
-                Last Match
-            </div>
-
             <div class="widget-card">
                 <div id="lastMatch">
                     Loading...
                 </div>
-            </div>
-            
-            <div class="widget-title">
-                Upcoming Match
             </div>
 
             <div class="widget-card">
@@ -689,6 +681,10 @@ function renderNextMatch(){
         <a href="match.html?id=${next.ID}" class="fixture-link">
         
             <div class="fixture-card">
+    
+                <div class="fixture-meta">
+                    Upcoming match
+                </div>
 
                 <div class="fixture-team">
                     ${homeTeam}
