@@ -161,6 +161,23 @@ gap:8px;
 text-align:center;
 }
 
+.fixture-title{
+text-align:center;
+font-size:13px;
+font-weight:700;
+margin-bottom:12px;
+padding:8px;
+border-radius:12px;
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#004D98,
+#A50044
+);
+}
+
 .fixture-team{
 flex:1;
 text-align:center;
@@ -623,34 +640,36 @@ const awayTeam =
         : "Barcelona";
 
 document.getElementById("lastMatch").innerHTML = `
-   
-   <a href="match.html?id=${match.ID}" class="fixture-link">
-   
-       <div class="fixture-card">
-   
-           <div class="fixture-team">
-               ${homeTeam}
-           </div>
-   
-           <div class="fixture-center">
-               <div class="fixture-score">
-                   ${match.Result}
-               </div>
-           </div>
-   
-           <div class="fixture-team">
-               ${awayTeam}
-           </div>
-   
-       </div>
-   
-       <div class="fixture-meta">
-           ${match.Date} • ${match.Competition}
-       </div>
-   
-   </a>
-   
-   `;
+<a href="match.html?id=${match.ID}" class="fixture-link">
+
+    <div class="fixture-title">
+        LAST MATCH
+    </div>
+
+    <div class="fixture-card">
+
+        <div class="fixture-team">
+            ${homeTeam}
+        </div>
+
+        <div class="fixture-center">
+            <div class="fixture-score">
+                ${match.Result}
+            </div>
+        </div>
+
+        <div class="fixture-team">
+            ${awayTeam}
+        </div>
+
+    </div>
+
+    <div class="fixture-meta">
+        ${match.Date} • ${match.Competition}
+    </div>
+
+</a>
+`;
 }
 
 function renderNextMatch(){
@@ -680,34 +699,36 @@ const awayTeam =
         : "Barcelona";
 
 document.getElementById("nextMatch").innerHTML = `
+<a href="match.html?id=${next.ID}" class="fixture-link">
 
-       <a href="match.html?id=${next.ID}" class="fixture-link">
-       
-           <div class="fixture-card">
+    <div class="fixture-title">
+        UPCOMING MATCH
+    </div>
 
-               <div class="fixture-team">
-                   ${homeTeam}
-               </div>
+    <div class="fixture-card">
 
-               <div class="fixture-center">
-                   <div class="fixture-vs">
-                       VS
-                   </div>
-               </div>
+        <div class="fixture-team">
+            ${homeTeam}
+        </div>
 
-               <div class="fixture-team">
-                   ${awayTeam}
-               </div>
+        <div class="fixture-center">
+            <div class="fixture-vs">
+                VS
+            </div>
+        </div>
 
-           </div>
+        <div class="fixture-team">
+            ${awayTeam}
+        </div>
 
-           <div class="fixture-meta">
-               ${next.Date} • ${next.Competition}
-           </div>
+    </div>
 
-       </a>
+    <div class="fixture-meta">
+        ${next.Date} • ${next.Competition}
+    </div>
 
-   `;
+</a>
+`;
 }
 function renderSeasonOverview(matches){
 
