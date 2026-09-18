@@ -22,7 +22,7 @@ body{
 
     background:
     radial-gradient(circle at top left,#004D98 0%,transparent 35%),
-    radial-gradient(circle at top right,#A50044 0%,transparent 35%),
+    radial-gradient(cimercle at top right,#A50044 0%,transparent 35%),
     var(--bg);
 
     color:var(--text);
@@ -148,7 +148,7 @@ color:var(--text);
 .match-main h3{
     margin:0 0 5px;
 }
-
+    
 .match-meta{
     color:var(--muted);
     font-size:13px;
@@ -193,6 +193,14 @@ color:var(--text);
     font-weight:800;
     padding:8px 20px;
     border-radius:16px;
+}
+
+.fixture-meta-title{
+    margin-top:10px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    width:100%;
 }
 
 .fixture-meta{
@@ -621,7 +629,7 @@ function renderLastMatch(){
     
         <div class="fixture-card">
     
-            <div class="fixture-meta">
+            <div class="fixture-meta-title">
                 Last match
             </div>
     
@@ -682,7 +690,7 @@ function renderNextMatch(){
         
             <div class="fixture-card">
     
-                <div class="fixture-meta">
+                <div class="fixture-meta-title">
                     Upcoming match
                 </div>
 
