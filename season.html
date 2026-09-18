@@ -373,23 +373,54 @@ color:var(--result-loss);
 
 }
 
-.position-1{
-    color:#22c55e;
+.position-circle{
+    width:28px;
+    height:28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:auto;
+
+    border-radius:50%;
+
     font-weight:800;
+    font-size:11px;
+
+    background:var(--meta-bg);
+    border:1px solid var(--meta-border);
 }
 
-.position-top4{
-    color:#22c55e;
+.position-circle.top4{
+    background:#22c55e;
+    color:white;
+    border:none;
 }
 
-.position-europe{
-    color:#3b82f6;
+.position-circle.europe{
+    background:#3b82f6;
+    color:white;
+    border:none;
 }
 
-.position-relegation{
-    color:#ef4444;
+.position-circle.relegation{
+    background:#ef4444;
+    color:white;
+    border:none;
 }
 
+.position-circle.leader{
+    background:
+    linear-gradient(
+        135deg,
+        #FFD700,
+        #F59E0B
+    );
+
+    color:white;
+    border:none;
+}
 .points{
     font-weight:800;
 }
