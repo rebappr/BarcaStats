@@ -9,53 +9,53 @@
 <link href="s.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
-    
+
 <style>
 
 *{
-    box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    font-family:'Inter',sans-serif;
+margin:0;
+font-family:'Inter',sans-serif;
 
-    background:
-    radial-gradient(circle at top left,#004D98 0%,transparent 35%),
-    radial-gradient(cimercle at top right,#A50044 0%,transparent 35%),
-    var(--bg);
+background:
+radial-gradient(circle at top left,#004D98 0%,transparent 35%),
+radial-gradient(circle at top right,#A50044 0%,transparent 35%),
+var(--bg);
 
-    color:var(--text);
-    min-height:100vh;
+color:var(--text);
+min-height:100vh;
 }
 
 .container{
-    max-width:1500px;
-    margin:auto;
-    padding:20px;
+max-width:1500px;
+margin:auto;
+padding:20px;
 }
 
 .header{
-    background:
-    linear-gradient(
-        135deg,
-        rgba(0,77,152,.95),
-        rgba(165,0,68,.95)
-    );
+background:
+linear-gradient(
+135deg,
+rgba(0,77,152,.95),
+rgba(165,0,68,.95)
+);
 
-    padding:24px;
-    border-radius:28px;
-    color:white;
-    margin-bottom:4px;
+padding:24px;
+border-radius:28px;
+color:white;
+margin-bottom:4px;
 
-    box-shadow:
-    0 20px 50px rgba(0,0,0,.25);
+box-shadow:
+0 20px 50px rgba(0,0,0,.25);
 }
 
 .header h1{
-    margin:0;
-    font-size:16px;
-    font-weight:700;
+margin:0;
+font-size:16px;
+font-weight:700;
 }
 
 .hero-subtitle{
@@ -66,38 +66,38 @@ color:rgba(255,255,255,.85);
 }
 
 .dashboard{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:14px;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:14px;
 }
 
 .header-btn{
-    display:inline-block;
-    padding:8px 14px;
-    background:rgba(255,255,255,.15);
-    border:1px solid rgba(255,255,255,.25);
-    border-radius:20px;
-    color:white;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:700;
-    backdrop-filter:blur(10px);
-    transition:.2s;
+display:inline-block;
+padding:8px 14px;
+background:rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.25);
+border-radius:20px;
+color:white;
+text-decoration:none;
+font-size:12px;
+font-weight:700;
+backdrop-filter:blur(10px);
+transition:.2s;
 }
 
 .header .header-btn{
-    margin-top:10px;
+margin-top:10px;
 }
 
 .header-btn:hover{
-    background:rgba(255,255,255,.25);
+background:rgba(255,255,255,.25);
 }
 
 .left-column,
 .right-column{
-    display:flex;
-    flex-direction:column;
-    gap:0px;
+display:flex;
+flex-direction:column;
+gap:0px;
 }
 
 .widget-title{
@@ -135,117 +135,109 @@ color:var(--text);
 }
 
 .match-card{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
 }
 
 .match-main{
-    flex:1;
+flex:1;
 }
 
 .match-main h3{
-    margin:0 0 5px;
+margin:0 0 5px;
 }
-    
+
 .match-meta{
-    color:var(--muted);
-    font-size:13px;
+color:var(--muted);
+font-size:13px;
 }
 
 .fixture-card{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    text-align:center;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+text-align:center;
 }
 
 .fixture-team{
-    flex:1;
-    text-align:center;
-    font-size:18px;
-    font-weight:800;
-    text-transform:uppercase;
+flex:1;
+text-align:center;
+font-size:18px;
+font-weight:800;
+text-transform:uppercase;
 }
 
 .fixture-center{
-    min-width:120px;
+min-width:120px;
 }
 
 .fixture-score{
-    font-size:34px;
-    font-weight:800;
-    padding:8px 20px;
-    border-radius:16px;
-    color:white;
-    background:
-    linear-gradient(
-        135deg,
-        #004D98,
-        #1e3a8a
-    );
+font-size:34px;
+font-weight:800;
+padding:8px 20px;
+border-radius:16px;
+color:white;
+background:
+linear-gradient(
+135deg,
+#004D98,
+#1e3a8a
+);
 }
 
 .fixture-vs{
-    font-size:22px;
-    font-weight:800;
-    padding:8px 20px;
-    border-radius:16px;
-}
-
-.fixture-meta-title{
-    margin-top:10px;
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-    width:100%;
+font-size:22px;
+font-weight:800;
+padding:8px 20px;
+border-radius:16px;
 }
 
 .fixture-meta{
-    margin-top:10px;
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
+margin-top:10px;
+text-align:center;
+color:var(--muted);
+font-size:13px;
 }
 
 .fixture-link{
-    display:block;
-    text-decoration:none;
-    color:inherit;
-    cursor:pointer;
+display:block;
+text-decoration:none;
+color:inherit;
+cursor:pointer;
 }
 
 .fixture-link:hover{
-    opacity:.9;
+opacity:.9;
 }
 
 .season-card{
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
-    border-radius:24px;
-    padding:14px;
+background:var(--card-bg);
+border:1px solid var(--card-border);
+border-radius:24px;
+padding:14px;
 }
 
 .season-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
 }
 
 .season-name{
-    font-size:18px;
-    font-weight:800;
+font-size:18px;
+font-weight:800;
 }
 
 .season-goals{
-    padding:6px 12px;
-    border-radius:999px;
-    background:rgba(0,77,152,.15);
-    border:1px solid #004D98;
-    font-weight:700;
+padding:6px 12px;
+border-radius:999px;
+background:rgba(0,77,152,.15);
+border:1px solid #004D98;
+font-weight:700;
 }
 
 .summary-grid{
@@ -292,113 +284,113 @@ color:var(--result-loss);
 }
 
 .summary-box.matches{
-    background:color-mix(in srgb, #004D98 15%, transparent);
-    border:1px solid #004D98;
-    color:#ffffff;
+background:color-mix(in srgb, #004D98 15%, transparent);
+border:1px solid #004D98;
+color:#ffffff;
 }
 
 .summary-box.goals{
-    background:color-mix(in srgb, #004D98 15%, transparent);
-    border:1px solid #004D98;
-    color:#ffffff;
+background:color-mix(in srgb, #004D98 15%, transparent);
+border:1px solid #004D98;
+color:#ffffff;
 }
 
 .stats-table{
-    width:100%;
-    border-collapse:collapse;
+width:100%;
+border-collapse:collapse;
 }
 
 .stats-table th{
-    padding:10px;
-    padding:8px 4px;
-    font-size:14px;
-    text-align:left;
+padding:10px;
+padding:8px 4px;
+font-size:14px;
+text-align:left;
 }
 
 .stats-table td{
-    padding:8px 4px;
-    font-size:12px;
-    border-bottom:1px solid var(--meta-border);
+padding:8px 4px;
+font-size:12px;
+border-bottom:1px solid var(--meta-border);
 }
 
 .stats-table td:last-child{
-    width:40px;
-    text-align:right;
-    font-weight:700;
+width:40px;
+text-align:right;
+font-weight:700;
 }
 
 .form-list{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    justify-content:center;
-    align-items:center;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+justify-content:center;
+align-items:center;
 }
 
 .form-win,
 .form-draw,
 .form-loss{
-    width:35px;
-    height:35px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    font-weight:700;
+width:35px;
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-weight:700;
 }
 
 .form-win{
-    background:#22c55e;
-    color:white;
+background:#22c55e;
+color:white;
 }
 
 .form-draw{
-    background:#f59e0b;
-    color:white;
+background:#f59e0b;
+color:white;
 }
 
 .form-loss{
-    background:#ef4444;
-    color:white;
+background:#ef4444;
+color:white;
 }
 
 .btn{
-    display:inline-block;
+display:inline-block;
 
-    background:
-    linear-gradient(
-        135deg,
-        #004D98,
-        #A50044
-    );
+background:
+linear-gradient(
+135deg,
+#004D98,
+#A50044
+);
 
-    color:white;
-    text-decoration:none;
+color:white;
+text-decoration:none;
 
-    padding:10px 16px;
-    border-radius:16px;
-    margin-top:10px;
+padding:10px 16px;
+border-radius:16px;
+margin-top:10px;
 }
 
 .theme-toggle{
-    position:fixed;
-    bottom:20px;
-    left:20px;
+position:fixed;
+bottom:20px;
+left:20px;
 
-    width:52px;
-    height:52px;
+width:52px;
+height:52px;
 
-    border:none;
-    border-radius:50%;
+border:none;
+border-radius:50%;
 
-    cursor:pointer;
+cursor:pointer;
 
-    background:#A50044;
-    color:white;
+background:#A50044;
+color:white;
 
-    font-size:20px;
+font-size:20px;
 
-    z-index:9999;
+z-index:9999;
 }
 
 @media (max-width:900px){
@@ -426,41 +418,41 @@ top:auto;
 padding:6px;
 }
 
-    .summary-grid{
-        grid-template-columns:repeat(5,1fr);
-        gap:4px;
-    }
-
-    .summary-box{
-        padding:8px 4px;
-    }
-
-    .summary-box b{
-        font-size:16px;
-    }
-
-.dashboard{
-    grid-template-columns:1fr;
+.summary-grid{
+grid-template-columns:repeat(5,1fr);
+gap:4px;
 }
 
-    .fixture-team{
-        font-size:14px;
-    }
+.summary-box{
+padding:8px 4px;
+}
 
-    .fixture-center{
-        min-width:80px;
-    }
+.summary-box b{
+font-size:16px;
+}
 
-    .fixture-score{
-        font-size:24px;
-        padding:6px 14px;
-        border-radius:12px;
-    }
+.dashboard{
+grid-template-columns:1fr;
+}
 
-    .fixture-vs{
-        font-size:16px;
-        padding:6px 14px;
-    }
+.fixture-team{
+font-size:14px;
+}
+
+.fixture-center{
+min-width:80px;
+}
+
+.fixture-score{
+font-size:24px;
+padding:6px 14px;
+border-radius:12px;
+}
+
+.fixture-vs{
+font-size:16px;
+padding:6px 14px;
+}
 
 }
 
@@ -476,78 +468,86 @@ padding:6px;
 
 <div class="header">
 
-    <h1>FC Barcelona</h1>
+<h1>FC Barcelona</h1>
 
-    <div class="hero-subtitle">
-        Statistics & Historical Database
-    </div>
+<div class="hero-subtitle">
+Statistics & Historical Database
+</div>
 
-    <a href="season.html" class="header-btn">
-        Seasons Overview
-    </a>
+<a href="season.html" class="header-btn">
+Seasons Overview
+</a>
 
 </div>
 
-    <div class="dashboard">
-    
-        <div class="left-column">
+<div class="dashboard">
 
-            <div class="widget-card">
-                <div id="lastMatch">
-                    Loading...
-                </div>
-            </div>
+<div class="left-column">
 
-            <div class="widget-card">
-                <div id="nextMatch">
-                    Loading...
-                </div>
-            </div>
+<div class="widget-title">
+Last Match
+</div>
 
-            <div class="widget-title">
-                Current Season
-            </div>
+<div class="widget-card">
+<div id="lastMatch">
+Loading...
+</div>
+</div>
 
-               <div id="seasonOverview"></div>
-            
-        </div>
+<div class="widget-title">
+Upcoming Match
+</div>
 
-        <div class="right-column">
+<div class="widget-card">
+<div id="nextMatch">
+Loading...
+</div>
+</div>
 
-            <div class="widget-title">
-                Recent Form
-            </div>
+<div class="widget-title">
+Current Season
+</div>
 
-            <div class="widget-card">
-                <div id="recentForm">
-                    Loading...
-                </div>
-            </div>
+<div id="seasonOverview"></div>
 
-            <div class="widget-title">
-                Top Scorers
-            </div>
+</div>
 
-            <div class="widget-card">
-                <div id="topScorers">
-                    Loading...
-                </div>
-            </div>
+<div class="right-column">
 
-            <div class="widget-title">
-                Top Assists
-            </div>
+<div class="widget-title">
+Recent Form
+</div>
 
-            <div class="widget-card">
-                <div id="topAssists">
-                    Loading...
-                </div>
+<div class="widget-card">
+<div id="recentForm">
+Loading...
+</div>
+</div>
 
-            </div>
+<div class="widget-title">
+Top Scorers
+</div>
 
-        </div>
+<div class="widget-card">
+<div id="topScorers">
+Loading...
+</div>
+</div>
 
-    </div>
+<div class="widget-title">
+Top Assists
+</div>
+
+<div class="widget-card">
+<div id="topAssists">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -559,235 +559,237 @@ fetch("data.json")
 .then(r=>r.json())
 .then(data=>{
 
-    allMatches=data;
+allMatches=data;
 
-    renderHome();
+renderHome();
 
 });
 
 function renderHome(){
 
-    renderLastMatch();
-    renderNextMatch();
+renderLastMatch();
+renderNextMatch();
 
-    const season = [...new Set(
-        allMatches.map(m => m.Season)
-    )]
-    .sort()
-    .reverse()[0];
+const season = [...new Set(
+allMatches.map(m => m.Season)
+)]
+.sort()
+.reverse()[0];
 
-    document.querySelector(".header-btn").href =
-        `season.html?season=${season}`;
+document.querySelector(".header-btn").href =
+`season.html?season=${season}`;
 
-    const seasonMatches =
-    allMatches.filter(
-        m => m.Season === season
-    );
+const seasonMatches =
+allMatches.filter(
+m => m.Season === season
+);
 
-    renderSeasonOverview(seasonMatches);
+renderSeasonOverview(seasonMatches);
 
-    renderTopScorers();
-    renderTopAssists();
-    renderRecentForm();
+renderTopScorers();
+renderTopAssists();
+renderRecentForm();
 }
 
 function parseDate(date){
 
-    return new Date(
-        date.split(".")
-        .reverse()
-        .join("-")
-    );
+return new Date(
+date.split(".")
+.reverse()
+.join("-")
+);
 
 }
 
 function renderLastMatch(){
 
-    const played = allMatches
-    .filter(m => parseDate(m.Date) <= new Date())
-    .sort((a,b) =>
-        parseDate(b.Date) - parseDate(a.Date)
-    );
+const played = allMatches
+.filter(m => parseDate(m.Date) <= new Date())
+.sort((a,b) =>
+parseDate(b.Date) - parseDate(a.Date)
+);
 
-    const match = played[0];
+const match = played[0];
 
-    if(!match) return;
+if(!match) return;
 
-    const homeTeam =
-        match["Home/Away"] === "Home"
-        ? "Barcelona"
-        : match["Opp. Team"];
+const homeTeam =
+match["Home/Away"] === "Home"
+? "Barcelona"
+: match["Opp. Team"];
 
-    const awayTeam =
-        match["Home/Away"] === "Home"
-        ? match["Opp. Team"]
-        : "Barcelona";
+const awayTeam =
+match["Home/Away"] === "Home"
+? match["Opp. Team"]
+: "Barcelona";
 
-    document.getElementById("lastMatch").innerHTML = `
-    
-    <a href="match.html?id=${match.ID}" class="fixture-link">
-    
-        <div class="fixture-card">
-    
-            <div class="fixture-team">
-                ${homeTeam}
-            </div>
-    
-            <div class="fixture-center">
-                <div class="fixture-score">
-                    ${match.Result}
-                </div>
-            </div>
-    
-            <div class="fixture-team">
-                ${awayTeam}
-            </div>
-    
-        </div>
-    
-        <div class="fixture-meta">
-            ${match.Date} • ${match.Competition}
-        </div>
-    
-    </a>
-    
-    `;
+document.getElementById("lastMatch").innerHTML = `
+   
+   <a href="match.html?id=${match.ID}" class="fixture-link">
+   
+       <div class="fixture-card">
+   
+           <div class="fixture-team">
+               ${homeTeam}
+           </div>
+   
+           <div class="fixture-center">
+               <div class="fixture-score">
+                   ${match.Result}
+               </div>
+           </div>
+   
+           <div class="fixture-team">
+               ${awayTeam}
+           </div>
+   
+       </div>
+   
+       <div class="fixture-meta">
+           ${match.Date} • ${match.Competition}
+       </div>
+   
+   </a>
+   
+   `;
 }
 
 function renderNextMatch(){
 
-    const next = allMatches
-    .filter(m => parseDate(m.Date) > new Date())
-    .sort((a,b) =>
-        parseDate(a.Date) - parseDate(b.Date)
-    )[0];
+const next = allMatches
+.filter(m => parseDate(m.Date) > new Date())
+.sort((a,b) =>
+parseDate(a.Date) - parseDate(b.Date)
+)[0];
 
-    if(!next){
+if(!next){
 
-        document.getElementById("nextMatch").innerHTML =
-        "No upcoming matches";
+document.getElementById("nextMatch").innerHTML =
+"No upcoming matches";
 
-        return;
-    }
+return;
+}
 
-    const homeTeam =
-        next["Home/Away"] === "Home"
+const homeTeam =
+next["Home/Away"] === "Home"
+        ? "FC Barcelona"
         ? "Barcelona"
-        : next["Opp. Team"];
+: next["Opp. Team"];
 
-    const awayTeam =
-        next["Home/Away"] === "Home"
-        ? next["Opp. Team"]
+const awayTeam =
+next["Home/Away"] === "Home"
+? next["Opp. Team"]
+        : "FC Barcelona";
         : "Barcelona";
 
-    document.getElementById("nextMatch").innerHTML = `
+document.getElementById("nextMatch").innerHTML = `
 
-        <a href="match.html?id=${next.ID}" class="fixture-link">
-        
-            <div class="fixture-card">
-    
-                <div class="fixture-team">
-                    ${homeTeam}
-                </div>
+       <a href="match.html?id=${next.ID}" class="fixture-link">
+       
+           <div class="fixture-card">
 
-                <div class="fixture-center">
-                    <div class="fixture-vs">
-                        VS
-                    </div>
-                </div>
+               <div class="fixture-team">
+                   ${homeTeam}
+               </div>
 
-                <div class="fixture-team">
-                    ${awayTeam}
-                </div>
+               <div class="fixture-center">
+                   <div class="fixture-vs">
+                       VS
+                   </div>
+               </div>
 
-            </div>
+               <div class="fixture-team">
+                   ${awayTeam}
+               </div>
 
-            <div class="fixture-meta">
-                ${next.Date} • ${next.Competition}
-            </div>
+           </div>
 
-        </a>
+           <div class="fixture-meta">
+               ${next.Date} • ${next.Competition}
+           </div>
 
-    `;
+       </a>
+
+   `;
 }
 function renderSeasonOverview(matches){
 
-    const playedMatches =
-    matches.filter(
-        m => m.Result &&
-             m.Result !== "-:-"
-    );
+const playedMatches =
+matches.filter(
+m => m.Result &&
+m.Result !== "-:-"
+);
 
-    const wins =
-    playedMatches.filter(
-        m => m["Result type"] === "W"
-    ).length;
+const wins =
+playedMatches.filter(
+m => m["Result type"] === "W"
+).length;
 
-    const draws =
-    playedMatches.filter(
-        m => m["Result type"] === "D"
-    ).length;
+const draws =
+playedMatches.filter(
+m => m["Result type"] === "D"
+).length;
 
-    const losses =
-    playedMatches.filter(
-        m => m["Result type"] === "L"
-    ).length;
+const losses =
+playedMatches.filter(
+m => m["Result type"] === "L"
+).length;
 
-    let goalsFor = 0;
-    let goalsAgainst = 0;
+let goalsFor = 0;
+let goalsAgainst = 0;
 
-    playedMatches.forEach(match => {
+playedMatches.forEach(match => {
 
-        const homeGoals =
-        Number(match["Goals home team"]) || 0;
+const homeGoals =
+Number(match["Goals home team"]) || 0;
 
-        const awayGoals =
-        Number(match["Goals away team"]) || 0;
+const awayGoals =
+Number(match["Goals away team"]) || 0;
 
-        if(match["Home/Away"] === "Home"){
+if(match["Home/Away"] === "Home"){
 
-            goalsFor += homeGoals;
-            goalsAgainst += awayGoals;
+goalsFor += homeGoals;
+goalsAgainst += awayGoals;
 
-        }else{
+}else{
 
-            goalsFor += awayGoals;
-            goalsAgainst += homeGoals;
+goalsFor += awayGoals;
+goalsAgainst += homeGoals;
 
-        }
+}
 
-    });
+});
 
 document.getElementById(
-    "seasonOverview"
+"seasonOverview"
 ).innerHTML = `
 
 <div class="summary-grid">
 
-    <div class="summary-box matches">
-        <b>${playedMatches.length}</b>
-        Matches
-    </div>
+   <div class="summary-box matches">
+       <b>${playedMatches.length}</b>
+       Matches
+   </div>
 
-    <div class="summary-box wins">
-        <b>${wins}</b>
-        Wins
-    </div>
+   <div class="summary-box wins">
+       <b>${wins}</b>
+       Wins
+   </div>
 
-    <div class="summary-box draws">
-        <b>${draws}</b>
-        Draws
-    </div>
+   <div class="summary-box draws">
+       <b>${draws}</b>
+       Draws
+   </div>
 
-    <div class="summary-box losses">
-        <b>${losses}</b>
-        Losses
-    </div>
+   <div class="summary-box losses">
+       <b>${losses}</b>
+       Losses
+   </div>
 
-    <div class="summary-box goals">
-        <b>${goalsFor}:${goalsAgainst}</b>
-        Goals
-    </div>
+   <div class="summary-box goals">
+       <b>${goalsFor}:${goalsAgainst}</b>
+       Goals
+   </div>
 
 </div>
 
@@ -796,121 +798,121 @@ document.getElementById(
 
 function renderTopScorers(){
 
-    const stats={};
+const stats={};
 
-    allMatches.forEach(match=>{
+allMatches.forEach(match=>{
 
-        for(let i=1;i<=12;i++){
+for(let i=1;i<=12;i++){
 
-            const player=
-            match[`Goal Player ${i}`];
+const player=
+match[`Goal Player ${i}`];
 
-            if(!player) continue;
-            if(player.includes("(OG)")) continue;
+if(!player) continue;
+if(player.includes("(OG)")) continue;
 
-            stats[player]=(stats[player]||0)+1;
-        }
+stats[player]=(stats[player]||0)+1;
+}
 
-    });
+});
 
-    const top=
-    Object.entries(stats)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,10);
+const top=
+Object.entries(stats)
+.sort((a,b)=>b[1]-a[1])
+.slice(0,10);
 
-    let html="<table class='stats-table'>";
+let html="<table class='stats-table'>";
 
-    top.forEach(row=>{
+top.forEach(row=>{
 
-        html+=`
-        <tr>
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-        </tr>
-        `;
-    });
+html+=`
+       <tr>
+           <td>${row[0]}</td>
+           <td>${row[1]}</td>
+       </tr>
+       `;
+});
 
-    html+="</table>";
+html+="</table>";
 
-    document.getElementById(
-        "topScorers"
-    ).innerHTML=html;
+document.getElementById(
+"topScorers"
+).innerHTML=html;
 }
 
 function renderTopAssists(){
 
-    const stats={};
+const stats={};
 
-    allMatches.forEach(match=>{
+allMatches.forEach(match=>{
 
-        for(let i=1;i<=12;i++){
+for(let i=1;i<=12;i++){
 
-            const player=
-            match[`Assist Player ${i}`];
+const player=
+match[`Assist Player ${i}`];
 
-            if(!player) continue;
+if(!player) continue;
 
-            stats[player]=(stats[player]||0)+1;
-        }
+stats[player]=(stats[player]||0)+1;
+}
 
-    });
+});
 
-    const top=
-    Object.entries(stats)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,10);
+const top=
+Object.entries(stats)
+.sort((a,b)=>b[1]-a[1])
+.slice(0,10);
 
-    let html="<table class='stats-table'>";
+let html="<table class='stats-table'>";
 
-    top.forEach(row=>{
+top.forEach(row=>{
 
-        html+=`
-        <tr>
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-        </tr>
-        `;
-    });
+html+=`
+       <tr>
+           <td>${row[0]}</td>
+           <td>${row[1]}</td>
+       </tr>
+       `;
+});
 
-    html+="</table>";
+html+="</table>";
 
-    document.getElementById(
-        "topAssists"
-    ).innerHTML=html;
+document.getElementById(
+"topAssists"
+).innerHTML=html;
 }
 
 function renderRecentForm(){
 
-    const matches=allMatches
-    .filter(m=>m["Result type"])
-    .sort((a,b)=>
-        parseDate(b.Date)-parseDate(a.Date)
-    )
-    .slice(0,8);
+const matches=allMatches
+.filter(m=>m["Result type"])
+.sort((a,b)=>
+parseDate(b.Date)-parseDate(a.Date)
+)
+.slice(0,8);
 
-    let html="<div class='form-list'>";
+let html="<div class='form-list'>";
 
-    matches.forEach(match=>{
+matches.forEach(match=>{
 
-        if(match["Result type"]==="W"){
-            html+=`<div class="form-win">W</div>`;
-        }
+if(match["Result type"]==="W"){
+html+=`<div class="form-win">W</div>`;
+}
 
-        if(match["Result type"]==="D"){
-            html+=`<div class="form-draw">D</div>`;
-        }
+if(match["Result type"]==="D"){
+html+=`<div class="form-draw">D</div>`;
+}
 
-        if(match["Result type"]==="L"){
-            html+=`<div class="form-loss">L</div>`;
-        }
+if(match["Result type"]==="L"){
+html+=`<div class="form-loss">L</div>`;
+}
 
-    });
+});
 
-    html+="</div>";
+html+="</div>";
 
-    document.getElementById(
-        "recentForm"
-    ).innerHTML=html;
+document.getElementById(
+"recentForm"
+).innerHTML=html;
 }
 
 (function(){
