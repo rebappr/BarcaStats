@@ -464,12 +464,14 @@ width:100%;
 border-collapse:collapse;
 }
 
-.stats-table{
+.stats-table,
+.debutants-table{
 width:100%;
 table-layout:fixed;
 }
 
-.stats-table th{
+.stats-table th,
+.debutants-table th{
 cursor:pointer;
 user-select:none;
 font-weight:700;
@@ -490,7 +492,8 @@ text-align:center;
 font-size:12px;
 }
 
-.stats-table thead th
+.stats-table thead th,
+.debutants-table thead th
 {
 position:sticky;
 top:0;
@@ -1325,7 +1328,7 @@ if(season === latestSeason){
 function renderSeasonSummary(matches) {
 
 let html = `
-   <table class="stats-table debutants-table">
+   <table class="debutants-table">
        <thead>
            <tr>
                <th>Player</th>
