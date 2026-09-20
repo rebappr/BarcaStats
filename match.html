@@ -2188,50 +2188,48 @@ document.getElementById("app").innerHTML = `
 <div class="content-sections">
 
    <div class="left-column">
-
-           <div id="info-section"
+   
+       <div id="info-section"
             class="match-section active">
-       
+   
            <div class="section-title">
                Match Details
            </div>
-       
+   
            ${infoHtml}
            ${showTimeline ? timeline.timelineHtml : ""}
-       
+   
        </div>
-
-   </div>
-
-   <div class="right-column">
-
-           ${showSquads ? `
-           <div id="squads-section"
-                class="match-section">
-           
-               <div class="section-title">
-                   Line-ups
-               </div>
-           
-               ${squadsHtml}
-           
-           </div>
-           ` : ""}
-
+   
        <div id="h2h-section"
             class="match-section">
-       
+   
            <div class="section-title">
                Head-to-Head
            </div>
-       
+   
            ${h2hHtml}
-       
+   
        </div>
-
+   
    </div>
-
-</div>
+   
+   <div class="right-column">
+   
+       ${showSquads ? `
+       <div id="squads-section"
+            class="match-section">
+   
+           <div class="section-title">
+               Line-ups
+           </div>
+   
+           ${squadsHtml}
+   
+       </div>
+       ` : ""}
+   
+   </div>
 
 `;
 
