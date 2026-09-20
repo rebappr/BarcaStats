@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Player</title>
+<link rel="stylesheet" href="theme.css">
+</head>
+
+<body>
+
+<div id="player"></div>
+
+<script>
+
+const playerName =
+new URLSearchParams(location.search).get("player");
+
+Promise.all([
+    fetch("players.json").then(r=>r.json()),
+    fetch("data.json").then(r=>r.json())
+]).then(([players,matches])=>{
+
+    const player =
+    players.find(p => p.Player === playerName);
+
+    if(!player){
+        document.getElementById("player").innerHTML =
+        "<h1>Player not found</h1>";
+        return;
+    }
+
+    const playerMatches = matches.filter(match=>{
+
+        for(let i=1;i<=11;i++){
+            if(match[`Player name ${i}`]===playerName){
+                return true;
+            }
+        }
+
+        for(let i=1;i<=6;i++){
+            if(match[`Sub on ${i}`]===playerName){
+                return true;
+            }
+        }
+
+        return false;
+    });
+
+    let goals = 0;
+    let assists = 0;
+
+    playerMatches.forEach(match=>{
+
+        for(let i=1;i<=12;i++){
+
+            if(match[`Goal Player ${i}`]===playerName){
+                goals++;
+            }
+
+            if(match[`Assist Player ${i}`]===playerName){
+                assists++;
+            }
+
+        }
+
+    });
+
+    document.getElementById("player").innerHTML = `
+
+        <h1>${player.Player}</h1>
+
+        <p>${player.Position || "-"}</p>
+
+        <p>${player["Nationality 1"] || "-"}</p>
+
+        <p>${player["Date of Birth"] || "-"}</p>
+
+        <hr>
+
+        <h2>Career Stats</h2>
+
+        <p>Matches: ${playerMatches.length}</p>
+        <p>Goals: ${goals}</p>
+        <p>Assists: ${assists}</p>
+
+    `;
+
+});
+
+</script>
+
+</body>
+</html>
