@@ -1597,7 +1597,7 @@ if(event.side === "right"){
 content = `
            ${
                event.assist
-                   ? `<small>${escapeHtml(event.assist)}</small>`
+                   ? `<span style="color:#d3d3d3;">${escapeHtml(event.assist)}</span>`
                    : ""
            }
 
@@ -1623,7 +1623,7 @@ content = `
 
            ${
                event.assist
-                   ? `<small>${escapeHtml(event.assist)}</small>`
+                   ? `<span style="color:#d3d3d3;">${escapeHtml(event.assist)}</span>`
                    : ""
            }
        `;
