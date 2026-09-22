@@ -810,10 +810,14 @@ ${nationality}
 
 ` : ""}
 
+${playerInfo?.Position ? `
+
 <div>
 <b>Main Position:</b>
-${playerInfo?.Position || "-"}
+${playerInfo.Position}
 </div>
+
+` : ""}
 
 ${debut ? `
 <div>
