@@ -765,6 +765,15 @@ ${nationality}
 ${playerInfo?.Position || "-"}
 </div>
 
+${playerClub ? `
+
+<div>
+<b>Club:</b>
+${playerClub}
+</div>
+
+` : ""}
+
 ${debut ? `
 <div>
     <b>Debut:</b>
