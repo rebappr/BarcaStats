@@ -710,12 +710,6 @@ if(appeared){
     return;
 }
 
-}
-
-if(!appeared){
-    return;
-}
-
 for(let i=1;i<=12;i++){
 
 if(match[`Goal Player ${i}`]===player){
@@ -732,6 +726,8 @@ if(match[`Yellow player ${i}`]===player){
 
 if(match[`Red player ${i}`]===player){
     clubStats[club].red++;
+}
+
 }
 
 for(let i=1;i<=12;i++){
