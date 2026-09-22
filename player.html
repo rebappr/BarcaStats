@@ -369,11 +369,9 @@ flex-shrink:0;
 .player-match{
 grid-template-columns:
 80px
+110px
 1fr
-90px
-90px;
-
-row-gap:8px;
+70px;
 }
 
 .matches-header div:nth-child(6),
@@ -383,6 +381,14 @@ row-gap:8px;
 .matches-header div:nth-child(10),
 .matches-header div:nth-child(11){
     display:none;
+}
+
+.matches-header{
+grid-template-columns:
+80px
+110px
+1fr
+70px;
 }
 
 .mobile-match-stats{
@@ -442,14 +448,6 @@ grid-template-columns:repeat(4,1fr);
 
 .summary-box{
 font-size:11px;
-}
-
-.matches-header{
-grid-template-columns:
-80px
-1fr
-70px
-90px;
 }
 
 .matches-header div:nth-child(3),
