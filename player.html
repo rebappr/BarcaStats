@@ -321,55 +321,73 @@ grid-template-columns:
 70px;
 }
 
-.col-matches::after{
+.stats-table th,
+.stats-table td{
+padding:4px 2px;
+font-size:11px;
+text-align:center;
+}
+
+.stats-table th:first-child,
+.stats-table td:first-child{
+text-align:left;
+width:70px;
+}
+
+.col-matches{
+font-size:0;
+}
+.col-matches::before{
 content:"M";
+font-size:11px;
 }
 
-.col-goals::after{
+.col-goals{
+font-size:0;
+}
+.col-goals::before{
 content:"G";
+font-size:11px;
 }
 
-.col-pg::after{
-content:"PG";
+.col-assists{
+font-size:0;
 }
-
-.col-mp::after{
-content:"MP";
-}
-
-.col-assists::after{
+.col-assists::before{
 content:"A";
+font-size:11px;
 }
 
-.col-yellow::after{
+.col-pg{
+font-size:0;
+}
+.col-pg::before{
+content:"PG";
+font-size:11px;
+}
+
+.col-mp{
+font-size:0;
+}
+.col-mp::before{
+content:"MP";
+font-size:11px;
+}
+
+.col-yellow{
+font-size:0;
+}
+.col-yellow::before{
 content:"YC";
+font-size:11px;
 }
 
-.col-red::after{
-content:"RC";
-}
-
-/* skry pôvodný text */
-
-.col-matches,
-.col-goals,
-.col-pg,
-.col-mp,
-.col-assists,
-.col-yellow,
 .col-red{
 font-size:0;
 }
-
-.col-matches::after,
-.col-goals::after,
-.col-pg::after,
-.col-mp::after,
-.col-assists::after,
-.col-yellow::after,
-.col-red::after{
-font-size:12px;
-font-weight:700;
+.col-red::before{
+content:"RC";
+font-size:11px;
 }
     
 .matches-header div:nth-child(3),
