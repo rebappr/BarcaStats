@@ -805,7 +805,7 @@ ${game.date}
 
 <div class="competition-cell">
 <img
-src="logos/${competitionLogos[game.competition]}"
+src="logos/${competitionLogos[game.competition] || 'default.png'}"
 class="competition-logo"
 alt="${game.competition}">
 
