@@ -582,10 +582,14 @@ let appeared = false;
 for(let i=1;i<=11;i++){
 
 if(
-match[`Player name ${i}`]===player ||
-match[`Opp. Player name ${i}`]===player
-){
-appeared = true;
+if(match[`Player name ${i}`]===player){
+    appeared=true;
+    forBarca=true;
+}
+
+if(match[`Opp. Player name ${i}`]===player){
+    appeared=true;
+    forOpponent=true;
 }
 
 }
@@ -678,6 +682,8 @@ appeared=true;
 }
 
 }
+
+let club = "FC Barcelona";
 
 if(appeared){
 
@@ -780,7 +786,6 @@ const playerClub =
     clubs.size
         ? [...clubs].join(", ")
         : "";
-}
     
 document.getElementById("playerProfile").innerHTML=`
 
@@ -998,15 +1003,9 @@ if(match[`Opp. Player name ${i}`]===player){
 
 for(let i=1;i<=6;i++){
 
-if(match[`Sub on ${i}`]===player){
-    appeared=true;
-    forBarca=true;
-}
-
-if(match[`Opp. Sub on ${i}`]===player){
-    appeared=true;
-    forOpponent=true;
-}
+club = forOpponent
+    ? match["Opp. Team"]
+    : "FC Barcelona";
 
 }
 
