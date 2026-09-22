@@ -1175,7 +1175,9 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
     <div class="competition-cell">
         <img
         src="logos/${competitionLogos[game.competition] || 'default.png'}"
-        class="competition-logo">
+        class="competition-logo"
+        alt="${game.competition}"
+        title="${game.competition}">
     </div>
 
     <div>${game.date}</div>
