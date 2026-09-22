@@ -1162,9 +1162,13 @@ ${game.date}
 
 <div class="competition-cell">
     <img
-    src="logos/${competitionLogos[game.competition] || 'default.png'}"
-    class="competition-logo"
-    alt="{game.venue}
+    src="logos/${competitionLogosion] || 'default.png'}
+
+    <span>${game.competition}</span>
+</div>
+
+<div>
+${game.venue}
 </div>
 
 <div>
@@ -1183,10 +1187,15 @@ ${game.opponent}
 </div>
 
 <div>${game.goals}</div>
+
 <div>${game.assists}</div>
+
 <div>${game.penaltyGoals}</div>
+
 <div>${game.missedPenalties}</div>
+
 <div>${game.yellow}</div>
+
 <div>${game.red}</div>
 
 <div class="mobile-match-stats">
@@ -1212,6 +1221,7 @@ ${game.opponent}
 </div>
 
 </div>
+
 </a>
 
 `).join("")}
