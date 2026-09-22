@@ -317,8 +317,57 @@ grid-template-columns:
 70px;
 }
 
-/* Venue */
+.col-matches::after{
+content:"M";
+}
 
+.col-goals::after{
+content:"G";
+}
+
+.col-pg::after{
+content:"PG";
+}
+
+.col-mp::after{
+content:"MP";
+}
+
+.col-assists::after{
+content:"A";
+}
+
+.col-yellow::after{
+content:"YC";
+}
+
+.col-red::after{
+content:"RC";
+}
+
+/* skry pôvodný text */
+
+.col-matches,
+.col-goals,
+.col-pg,
+.col-mp,
+.col-assists,
+.col-yellow,
+.col-red{
+font-size:0;
+}
+
+.col-matches::after,
+.col-goals::after,
+.col-pg::after,
+.col-mp::after,
+.col-assists::after,
+.col-yellow::after,
+.col-red::after{
+font-size:12px;
+font-weight:700;
+}
+    
 .matches-header div:nth-child(3),
 .player-match div:nth-child(3){
 display:none;
@@ -532,13 +581,13 @@ Season Breakdown
 <thead>
 <tr>
 <th>Season</th>
-<th>Matches</th>
-<th>Goals</th>
-<th>Assists</th>
-<th>Pen. Goals</th>
-<th>Miss. Penalties</th>
-<th>Yellow</th>
-<th>Red</th>
+<th class="col-matches">Matches</th>
+<th class="col-goals">Goals</th>
+<th class="col-pg">Penalty Goal</th>
+<th class="col-mp">Missed Penalties</th>
+<th class="col-assists">Assists</th>
+<th class="col-yellow">Yellow Card</th>
+<th class="col-red">Red Card</th>
 </tr>
 </thead>
 
