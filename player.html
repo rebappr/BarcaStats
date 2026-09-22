@@ -263,6 +263,21 @@ color:#f59e0b;
 margin-left:6px;
 }
 
+.result-win{
+color:#22c55e;
+font-weight:700;
+}
+
+.result-draw{
+color:#f59e0b;
+font-weight:700;
+}
+
+.result-loss{
+color:#ef4444;
+font-weight:700;
+}
+
 @media(max-width:900px){
 
 .player-card{
@@ -280,6 +295,10 @@ grid-template-columns:repeat(3,1fr);
 </head>
 
 <body>
+
+<button id="themeToggle" class="theme-toggle">
+🌙
+</button>
 
 <div class="container">
 
@@ -519,7 +538,9 @@ games:[]
 
 }
 
-stats[season].matches++;
+if(started){
+    stats[season].matches++;
+}
 
 for(let i=1;i<=12;i++){
 
@@ -591,6 +612,18 @@ class="matches-list">
 
 </div>
 
+stats[season].games.sort((a,b)=>{
+
+const da =
+new Date(a.date.split(".").reverse().join("-"));
+
+const db =
+new Date(b.date.split(".").reverse().join("-"));
+
+return db-da;
+
+});
+
 ${stats[season].games.map(game=>`
 
 <a
@@ -641,7 +674,7 @@ ${!game.started
 
 </tr>
 
-`;
+});
 
 document.getElementById("seasonRows").innerHTML=
 html;
