@@ -619,6 +619,9 @@ let seasons=new Set();
 
 data.forEach(match=>{
 
+let forBarca = false;
+let forOpponent = false;
+
 let appeared=false;
 
 // základná zostava
@@ -864,11 +867,14 @@ let bench=false;
 
 for(let i=1;i<=11;i++){
 
-if(
-match[`Player name ${i}`]===player ||
-match[`Opp. Player name ${i}`]===player
-){
-started=true;
+if(match[`Player name ${i}`]===player){
+    appeared=true;
+    forBarca=true;
+}
+
+if(match[`Opp. Player name ${i}`]===player){
+    appeared=true;
+    forOpponent=true;
 }
 
 }
@@ -877,11 +883,14 @@ let played = started;
 
 for(let i=1;i<=6;i++){
 
-if(
-match[`Sub on ${i}`]===player ||
-match[`Opp. Sub on ${i}`]===player
-){
-played=true;
+if(match[`Sub on ${i}`]===player){
+    appeared=true;
+    forBarca=true;
+}
+
+if(match[`Opp. Sub on ${i}`]===player){
+    appeared=true;
+    forOpponent=true;
 }
 
 }
@@ -924,31 +933,46 @@ if(played){
 
 for(let i=1;i<=12;i++){
 
-if(match[`Goal Player ${i}`]===player){
-stats[season].goals++;
+if(
+forBarca &&
+match[`Goal Player ${i}`]===player
+){
+goals++;
 }
 
-if(match[`Assist Player ${i}`]===player){
-stats[season].assists++;
+if(
+forBarca &&
+match[`Assist Player ${i}`]===player
+){
+assists++;
 }
 
-if(match[`Yellow player ${i}`]===player){
-stats[season].yellow++;
+if(
+forBarca &&
+match[`Yellow player ${i}`]===player
+){
+yellow++;
 }
 
-if(match[`Red player ${i}`]===player){
-stats[season].red++;
+if(
+forBarca &&
+match[`Red player ${i}`]===player
+){
+red++;
 }
 
-if(match[`Penalty player ${i}`]===player){
+if(
+    forBarca &&
+    match[`Penalty player ${i}`] === player
+){
 
-if(match[`Penalty scored ${i}`]==="in"){
-stats[season].penaltyGoals++;
-}
+    if(match[`Penalty scored ${i}`] === "in"){
+        penaltyGoals++;
+    }
 
-if(match[`Penalty scored ${i}`]==="not in"){
-stats[season].missedPenalties++;
-}
+    if(match[`Penalty scored ${i}`] === "not in"){
+        missedPenalties++;
+    }
 
 }
 
