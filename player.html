@@ -640,13 +640,7 @@ playerInfo["Nationality 2"];
 
 }
 
-let matches=0;
-let goals=0;
-let assists=0;
-let penaltyGoals=0;
-let missedPenalties=0;
-let yellow=0;
-let red=0;
+const clubStats = {};
 
 let seasons=new Set();
 
@@ -685,27 +679,57 @@ appeared=true;
 
 if(appeared){
 
-matches++;
-seasons.add(match.Season);
+    seasons.add(match.Season);
+
+    const club =
+        match["Opp. Player name 1"] === player ||
+        match["Opp. Player name 2"] === player ||
+        match["Opp. Player name 3"] === player ||
+        match["Opp. Player name 4"] === player ||
+        match["Opp. Player name 5"] === player ||
+        match["Opp. Player name 6"] === player ||
+        match["Opp. Player name 7"] === player ||
+        match["Opp. Player name 8"] === player ||
+        match["Opp. Player name 9"] === player ||
+        match["Opp. Player name 10"] === player ||
+        match["Opp. Player name 11"] === player
+            ? match["Opp. Team"]
+            : "FC Barcelona";
+
+    if(!clubStats[club]){
+
+        clubStats[club] = {
+            matches:0,
+            goals:0,
+            assists:0,
+            penaltyGoals:0,
+            missedPenalties:0,
+            yellow:0,
+            red:0
+        };
+
+    }
+
+    clubStats[club].matches++;
 
 }
 
 for(let i=1;i<=12;i++){
 
 if(match[`Goal Player ${i}`]===player){
-    goals++;
+    clubStats[club].goals++;
 }
 
 if(match[`Assist Player ${i}`]===player){
-    assists++;
+    clubStats[club].assists++;
 }
 
 if(match[`Yellow player ${i}`]===player){
-yellow++;
+    yellow++;
 }
 
 if(match[`Red player ${i}`]===player){
-red++;
+    clubStats[club].red++;
 }
 
 }
@@ -715,11 +739,11 @@ for(let i=1;i<=12;i++){
     if(match[`Penalty player ${i}`]===player){
 
         if(match[`Penalty scored ${i}`]==="in"){
-            penaltyGoals++;
+            clubStats[club].penaltyGoals++;
         }
 
         if(match[`Penalty scored ${i}`]==="not in"){
-            missedPenalties++;
+            clubStats[club].missedPenalties++;
         }
 
     }
@@ -850,49 +874,57 @@ ${lastMatch ? `
 Career Statistics
 </div>
 
+${Object.entries(clubStats).map(([club,s]) => `
+
+<div class="widget-title">
+${club}
+</div>
+
 <div class="summary-grid">
 
-<div class="summary-box">
-<b>${seasons.size}</b>
-Seasons
+    <div class="summary-box">
+        <b>${club === "FC Barcelona" ? seasons.size : "-"}</b>
+        Seasons
+    </div>
+
+    <div class="summary-box">
+        <b>${s.matches}</b>
+        Matches
+    </div>
+
+    <div class="summary-box">
+        <b>${s.goals}</b>
+        Goals
+    </div>
+
+    <div class="summary-box">
+        <b>${s.assists}</b>
+        Assists
+    </div>
+
+    <div class="summary-box">
+        <b>${s.penaltyGoals}</b>
+        Penalty Goals
+    </div>
+
+    <div class="summary-box">
+        <b>${s.missedPenalties}</b>
+        Missed Penalties
+    </div>
+
+    <div class="summary-box">
+        <b>${s.yellow}</b>
+        Yellow
+    </div>
+
+    <div class="summary-box">
+        <b>${s.red}</b>
+        Red
+    </div>
+
 </div>
 
-<div class="summary-box">
-<b>${matches}</b>
-Matches
-</div>
-
-<div class="summary-box">
-<b>${goals}</b>
-Goals
-</div>
-
-<div class="summary-box">
-<b>${assists}</b>
-Assists
-</div>
-
-<div class="summary-box">
-<b>${penaltyGoals}</b>
-Penalty Goals
-</div>
-
-<div class="summary-box">
-<b>${missedPenalties}</b>
-Missed Penalties
-</div>
-
-<div class="summary-box">
-<b>${yellow}</b>
-Yellow
-</div>
-
-<div class="summary-box">
-<b>${red}</b>
-Red
-</div>
-
-</div>
+`).join("")}
 
 <div class="widget-title">
 Season Breakdown
