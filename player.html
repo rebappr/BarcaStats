@@ -581,16 +581,13 @@ let appeared = false;
 
 for(let i=1;i<=11;i++){
 
-if(
-if(match[`Player name ${i}`]===player){
-    appeared=true;
-    forBarca=true;
-}
+    if(match[`Player name ${i}`]===player){
+        appeared = true;
+    }
 
-if(match[`Opp. Player name ${i}`]===player){
-    appeared=true;
-    forOpponent=true;
-}
+    if(match[`Opp. Player name ${i}`]===player){
+        appeared = true;
+    }
 
 }
 
@@ -689,20 +686,9 @@ if(appeared){
 
     seasons.add(match.Season);
 
-    club =
-        match["Opp. Player name 1"] === player ||
-        match["Opp. Player name 2"] === player ||
-        match["Opp. Player name 3"] === player ||
-        match["Opp. Player name 4"] === player ||
-        match["Opp. Player name 5"] === player ||
-        match["Opp. Player name 6"] === player ||
-        match["Opp. Player name 7"] === player ||
-        match["Opp. Player name 8"] === player ||
-        match["Opp. Player name 9"] === player ||
-        match["Opp. Player name 10"] === player ||
-        match["Opp. Player name 11"] === player
-            ? match["Opp. Team"]
-            : "FC Barcelona";
+    club = forOpponent
+        ? match["Opp. Team"]
+        : "FC Barcelona";
 
     if(!clubStats[club]){
 
@@ -1003,9 +989,15 @@ if(match[`Opp. Player name ${i}`]===player){
 
 for(let i=1;i<=6;i++){
 
-club = forOpponent
-    ? match["Opp. Team"]
-    : "FC Barcelona";
+    if(match[`Sub on ${i}`]===player){
+        appeared=true;
+        forBarca=true;
+    }
+
+    if(match[`Opp. Sub on ${i}`]===player){
+        appeared=true;
+        forOpponent=true;
+    }
 
 }
 
