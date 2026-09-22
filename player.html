@@ -349,30 +349,44 @@ display:none;
 
 @media(max-width:900px){
 
-.mobile-stats{
-    display:flex;
-    grid-column:1 / -1;
-
-    justify-content:space-between;
-
-    margin-top:6px;
-    padding-top:6px;
-
-    border-top:1px solid var(--meta-border);
-
-    font-size:11px;
-    font-weight:600;
-}
-
 .player-match div:nth-child(6),
 .player-match div:nth-child(7),
 .player-match div:nth-child(8),
 .player-match div:nth-child(9),
 .player-match div:nth-child(10),
 .player-match div:nth-child(11){
-display:none;
+    display:none;
 }
 
+.mobile-match-stats{
+    display:block;
+    grid-column:1 / -1;
+
+    margin-top:6px;
+    padding-top:6px;
+
+    border-top:1px solid var(--meta-border);
+}
+
+.mobile-stats-header,
+.mobile-stats-values{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+
+    text-align:center;
+}
+
+.mobile-stats-header{
+    font-size:10px;
+    font-weight:700;
+    opacity:.7;
+    margin-bottom:4px;
+}
+
+.mobile-stats-values{
+    font-size:12px;
+    font-weight:600;
+}
 .competition-cell span{
 display:none;
 }
@@ -1129,13 +1143,26 @@ ${game.result}
 
 <div>${game.red}</div>
 
-<div class="mobile-stats">
-    <span>G ${game.goals}</span>
-    <span>A ${game.assists}</span>
-    <span>PG ${game.penaltyGoals}</span>
-    <span>MP ${game.missedPenalties}</span>
-    <span>YC ${game.yellow}</span>
-    <span>RC ${game.red}</span>
+<div class="mobile-match-stats">
+
+    <div class="mobile-stats-header">
+        <span>G</span>
+        <span>A</span>
+        <span>PG</span>
+        <span>MP</span>
+        <span>YC</span>
+        <span>RC</span>
+    </div>
+
+    <div class="mobile-stats-values">
+        <span>${game.goals}</span>
+        <span>${game.assists}</span>
+        <span>${game.penaltyGoals}</span>
+        <span>${game.missedPenalties}</span>
+        <span>${game.yellow}</span>
+        <span>${game.red}</span>
+    </div>
+
 </div>
 
 </div>
