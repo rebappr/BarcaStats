@@ -1153,15 +1153,15 @@ color:inherit;
 <div
 class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 
-<div>
-${game.date}
-</div>
-
 <div class="competition-cell">
 <img
 src="logos/${competitionLogos[game.competition] || 'default.png'}"
 class="competition-logo"
 alt="${game.competition}">
+
+<div>
+${game.date}
+</div>
 
 <span>${game.competition}</span>
 </div>
