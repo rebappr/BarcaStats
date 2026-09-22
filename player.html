@@ -601,6 +601,8 @@ appeared = true;
 
 }
 
+let club = null;
+
 if(appeared){
 playerMatches.push(match);
 }
@@ -681,7 +683,7 @@ if(appeared){
 
     seasons.add(match.Season);
 
-    const club =
+    club =
         match["Opp. Player name 1"] === player ||
         match["Opp. Player name 2"] === player ||
         match["Opp. Player name 3"] === player ||
@@ -725,7 +727,7 @@ if(match[`Assist Player ${i}`]===player){
 }
 
 if(match[`Yellow player ${i}`]===player){
-    yellow++;
+    clubStats[club].yellow++;
 }
 
 if(match[`Red player ${i}`]===player){
@@ -752,34 +754,34 @@ for(let i=1;i<=12;i++){
     
 });
 
-let playerClub = "";
+const clubs = new Set();
 
 for (const match of data) {
 
     for(let i=1;i<=11;i++){
 
         if(match[`Opp. Player name ${i}`] === player){
-            playerClub = match["Opp. Team"];
-            break;
+            clubs.add(match["Opp. Team"]);
         }
 
     }
-
-    if(playerClub) break;
 
     for(let i=1;i<=6;i++){
 
         if(match[`Opp. Sub on ${i}`] === player){
-            playerClub = match["Opp. Team"];
-            break;
+            clubs.add(match["Opp. Team"]);
         }
 
     }
 
-    if(playerClub) break;
-
 }
 
+const playerClub =
+    clubs.size
+        ? [...clubs].join(", ")
+        : "";
+}
+    
 document.getElementById("playerProfile").innerHTML=`
 
 <div class="player-card">
@@ -792,16 +794,13 @@ class="player-photo">
 
 <h1>${player}</h1>
 
-<div class="player-meta">
-
 ${playerClub ? `
-
-<div>
-<b>Club:</b>
-${playerClub}
+<div class="player-club">
+    ${playerClub}
 </div>
-
 ` : ""}
+
+<div class="player-meta">
 
 ${playerInfo?.["Date of Birth"] ? `
 
