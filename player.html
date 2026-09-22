@@ -104,9 +104,27 @@ font-size:28px;
 }
 
 .player-meta{
-margin-top:10px;
+margin-top:12px;
+display:flex;
+flex-wrap:wrap;
+gap:8px 18px;
+
 font-size:14px;
 color:var(--muted);
+}
+
+.player-meta div{
+white-space:nowrap;
+}
+
+.player-meta a{
+color:#004D98;
+font-weight:600;
+text-decoration:none;
+}
+
+.player-meta a:hover{
+text-decoration:underline;
 }
 
 .widget-title{
@@ -427,15 +445,119 @@ const competitionLogos = {
     "Supercopa de España": "supercopa.png"
 };
 
-fetch("data.json")
-.then(r=>r.json())
-.then(data=>{
+Promise.all([
+fetch("data.json").then(r=>r.json()),
+fetch("players.json").then(r=>r.json())
+])
+.then(([data,players])=>{
 
-renderPlayer(playerName,data);
+renderPlayer(playerName,data,players);
 
 });
 
-function renderPlayer(player,data){
+function calculateAge(birthDate, deathDate=""){
+
+if(!birthDate) return "";
+
+const [d,m,y] = birthDate.split(".");
+const birth = new Date(y,m-1,d);
+
+let end;
+
+if(deathDate){
+const [dd,mm,yy] = deathDate.split(".");
+end = new Date(yy,mm-1,dd);
+}else{
+end = new Date();
+}
+
+let age =
+end.getFullYear() - birth.getFullYear();
+
+const monthDiff =
+end.getMonth() - birth.getMonth();
+
+if(
+monthDiff < 0 ||
+(monthDiff === 0 && end.getDate() < birth.getDate())
+){
+age--;
+}
+
+return age;
+}
+
+function renderPlayer(player,data,players){
+
+const playerInfo =
+players.find(p => p.Player === player);
+
+const playerMatches = [];
+
+data.forEach(match=>{
+
+let appeared = false;
+
+for(let i=1;i<=11;i++){
+
+if(
+match[`Player name ${i}`]===player ||
+match[`Opp. Player name ${i}`]===player
+){
+appeared = true;
+}
+
+}
+
+for(let i=1;i<=6;i++){
+
+if(
+match[`Sub on ${i}`]===player ||
+match[`Opp. Sub on ${i}`]===player
+){
+appeared = true;
+}
+
+}
+
+if(appeared){
+playerMatches.push(match);
+}
+
+});
+
+playerMatches.sort((a,b)=>{
+
+const da =
+new Date(a.Date.split(".").reverse().join("-"));
+
+const db =
+new Date(b.Date.split(".").reverse().join("-"));
+
+return da-db;
+
+});
+
+const debut =
+playerMatches.length
+? playerMatches[0]
+: null;
+
+const lastMatch =
+playerMatches.length
+? playerMatches[playerMatches.length-1]
+: null;
+
+let nationality =
+playerInfo?.["Nationality 1"] || "";
+
+if(playerInfo?.["Nationality 2"]){
+
+nationality +=
+" / " +
+playerInfo["Nationality 2"];
+
+}
 
 let matches=0;
 let goals=0;
@@ -535,7 +657,58 @@ class="player-photo">
 <h1>${player}</h1>
 
 <div class="player-meta">
-FC Barcelona
+
+<div>
+<b>Born:</b>
+${playerInfo?.["Date of Birth"] || "-"}
+${playerInfo?.["Date of Birth"]
+? `(${calculateAge(
+playerInfo["Date of Birth"],
+playerInfo["Death Date"]
+)})`
+: ""}
+</div>
+
+${playerInfo?.["Death Date"] ? `
+
+<div>
+<b>Died:</b>
+${playerInfo["Death Date"]}
+</div>
+
+` : ""}
+
+<div>
+<b>Nationality:</b>
+${nationality}
+</div>
+
+<div>
+<b>Main Position:</b>
+${playerInfo?.Position || "-"}
+</div>
+
+${debut ? `
+
+<div>
+<b>Debut:</b>
+<a href="match.html?id=${debut.ID.Date} vs ${debut["Opp. Team"]} (${debut.Result})
+</a>
+</div>
+
+` : ""}
+
+${lastMatch ? `
+
+<div>
+<b>Last Match:</b>
+<a href="match.html?id=${.ID}
+${lastMatch.Date} vs ${lastMatch["Opp. Team"]} (${lastMatch.Result})
+</a>
+</div>
+
+` : ""}
+
 </div>
 
 </div>
