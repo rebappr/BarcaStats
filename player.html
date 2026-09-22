@@ -373,51 +373,63 @@ const stats={};
 
 data.forEach(match=>{
 
-const season=match.Season;
+    let appeared = false;
 
-if(!stats[season]){
+    // základná zostava
+    for(let i=1;i<=11;i++){
 
-stats[season]={
-matches:0,
-goals:0,
-assists:0
-};
+        if(
+            match[`Player name ${i}`] === player ||
+            match[`Opp. Player name ${i}`] === player
+        ){
+            appeared = true;
+        }
 
-}
+    }
 
-let appeared=false;
+    // lavička
+    for(let i=1;i<=12;i++){
 
-for(let i=1;i<=11;i++){
+        if(
+            match[`On the bench name ${i}`] === player ||
+            match[`Opp. On the bench name ${i}`] === player
+        ){
+            appeared = true;
+        }
 
-if(match[`Player name ${i}`]===player){
+    }
 
-appeared=true;
+    // ak sa v zápase vôbec nevyskytuje,
+    // nepočítaj ho do sezóny
+    if(!appeared){
+        return;
+    }
 
-}
+    const season = match.Season;
 
-}
+    if(!stats[season]){
 
-if(appeared){
+        stats[season]={
+            matches:0,
+            goals:0,
+            assists:0
+        };
 
-stats[season].matches++;
+    }
 
-}
+    stats[season].matches++;
 
-for(let i=1;i<=12;i++){
+    for(let i=1;i<=12;i++){
 
-if(match[`Goal Player ${i}`]===player){
+        if(match[`Goal Player ${i}`]===player){
+            stats[season].goals++;
+        }
 
-stats[season].goals++;
+        if(match[`Assist Player ${i}`]===player){
+            stats[season].assists++;
+        }
 
-}
-
-if(match[`Assist Player ${i}`]===player){
-
-stats[season].assists++;
-
-}
-
-}
+    }
 
 });
 
@@ -430,17 +442,16 @@ Object.keys(stats)
 
 html+=`
 <tr>
-<td>${season}</td>
-<td>${stats[season].matches}</td>
-<td>${stats[season].goals}</td>
-<td>${stats[season].assists}</td>
+    <td>${season}</td>
+    <td>${stats[season].matches}</td>
+    <td>${stats[season].goals}</td>
+    <td>${stats[season].assists}</td>
 </tr>
 `;
 
 });
 
-document.getElementById("seasonRows").innerHTML=
-html;
+document.getElementById("seasonRows").innerHTML = html;
 
 }
 
