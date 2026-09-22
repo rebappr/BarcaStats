@@ -358,6 +358,15 @@ flex-shrink:0;
     display:none;
 }
 
+.matches-header div:nth-child(6),
+.matches-header div:nth-child(7),
+.matches-header div:nth-child(8),
+.matches-header div:nth-child(9),
+.matches-header div:nth-child(10),
+.matches-header div:nth-child(11){
+    display:none;
+}
+
 .mobile-match-stats{
     display:block;
     grid-column:1 / -1;
@@ -429,7 +438,6 @@ grid-template-columns:
 grid-template-columns:
 80px
 1fr
-70px
 90px;
 
 row-gap:8px;
@@ -437,7 +445,7 @@ row-gap:8px;
 
 .matches-header div:nth-child(3),
 .player-match div:nth-child(3){
-display:none;
+    display:none;
 }
 
 }
@@ -667,14 +675,12 @@ red++;
 
 for(let i=1;i<=12;i++){
 
-if(match[`Penalty player ${i}`]===player){
-
-if(match[`Penalty scored ${i}`]==="in"){
-penaltyGoals++;
+if(match[`Penalty scored ${i}`] === "in"){
+    stats[season].penaltyGoals++;
 }
 
-if(match[`Penalty scored ${i}`]==="not in"){
-missedPenalties++;
+if(match[`Penalty scored ${i}`] === "not in"){
+    stats[season].missedPenalties++;
 }
 
 }
@@ -985,8 +991,11 @@ let gameRed = 0;
 
 for(let i=1;i<=12;i++){
 
-if(match[`Goal Player ${i}`]===player){
-gameGoals++;
+if(
+    forBarca &&
+    match[`Goal Player ${i}`]===player
+){
+    gameGoals++;
 }
 
 if(match[`Assist Player ${i}`]===player){
