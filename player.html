@@ -520,6 +520,19 @@ started=true;
 
 }
 
+let played = started;
+
+for(let i=1;i<=6;i++){
+
+if(
+match[`Sub on ${i}`]===player ||
+match[`Opp. Sub on ${i}`]===player
+){
+played=true;
+}
+
+}
+
 for(let i=1;i<=12;i++){
 
 if(
@@ -548,7 +561,7 @@ games:[]
 
 }
 
-if(started){
+if(played){
     stats[season].matches++;
 }
 
@@ -572,7 +585,7 @@ venue:match["Home/Away"],
 opponent:match["Opp. Team"],
 result:match.Result,
 resultType: match["Result type"],
-started:started
+started: played
 });
 
 });
