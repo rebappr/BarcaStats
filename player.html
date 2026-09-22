@@ -1156,69 +1156,66 @@ color:inherit;
 <div
 class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 
-<div>
-${game.date}
-</div>
-
-<div class="competition-cell">
-    <img
-    src="logos/${competitionLogosion] || 'default.png'}
-
-    <span>${game.competition}</span>
-</div>
-
-<div>
-${game.venue}
-</div>
-
-<div>
-${game.opponent}
-</div>
-
-<div>
-    <span class="result-badge ${
-        game.resultType === "W" ? "result-win" :
-        game.resultType === "D" ? "result-draw" :
-        game.resultType === "L" ? "result-loss" :
-        ""
-    }">
-        ${game.result}
-    </span>
-</div>
-
-<div>${game.goals}</div>
-
-<div>${game.assists}</div>
-
-<div>${game.penaltyGoals}</div>
-
-<div>${game.missedPenalties}</div>
-
-<div>${game.yellow}</div>
-
-<div>${game.red}</div>
-
-<div class="mobile-match-stats">
-
-    <div class="mobile-stats-header">
-        <span>G</span>
-        <span>A</span>
-        <span>PG</span>
-        <span>MP</span>
-        <span>YC</span>
-        <span>RC</span>
+    <div>
+        ${game.date}
     </div>
 
-    <div class="mobile-stats-values">
-        <span>${game.goals}</span>
-        <span>${game.assists}</span>
-        <span>${game.penaltyGoals}</span>
-        <span>${game.missedPenalties}</span>
-        <span>${game.yellow}</span>
-        <span>${game.red}</span>
+    <div class="competition-cell">
+        <img
+        src="logos/${competitionLogos[game.competition] || 'default.png'}"
+        class="competition-logo"
+        alt="${game.competition}">
+
+    div>
+
+    <div>
+        ${game.opponent}
     </div>
 
-</div>
+    <div>
+        <span class="result-badge ${
+            game.resultType === "W" ? "result-win" :
+            game.resultType === "D" ? "result-draw" :
+            game.resultType === "L" ? "result-loss" :
+            ""
+        }">
+            ${game.result}
+        </span>
+    </div>
+
+    <div>${game.goals}</div>
+
+    <div>${game.assists}</div>
+
+    <div>${game.penaltyGoals}</div>
+
+    <div>${game.missedPenalties}</div>
+
+    <div>${game.yellow}</div>
+
+    <div>${game.red}</div>
+
+    <div class="mobile-match-stats">
+
+        <div class="mobile-stats-header">
+            <span>G</span>
+            <span>A</span>
+            <span>PG</span>
+            <span>MP</span>
+            <span>YC</span>
+            <span>RC</span>
+        </div>
+
+        <div class="mobile-stats-values">
+            <span>${game.goals}</span>
+            <span>${game.assists}</span>
+            <span>${game.penaltyGoals}</span>
+            <span>${game.missedPenalties}</span>
+            <span>${game.yellow}</span>
+            <span>${game.red}</span>
+        </div>
+
+    </div>
 
 </div>
 
