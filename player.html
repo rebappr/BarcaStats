@@ -544,7 +544,7 @@ bench=true;
 
 }
 
-if(!started && !bench){
+if(!played && !bench){
 return;
 }
 
@@ -585,7 +585,7 @@ venue:match["Home/Away"],
 opponent:match["Opp. Team"],
 result:match.Result,
 resultType: match["Result type"],
-started: played
+played: played
 });
 
 });
@@ -598,6 +598,18 @@ Object.keys(stats)
 .forEach((season,index)=>{
 
 const seasonId=`season_${index}`;
+
+stats[season].games.sort((a,b)=>{
+
+const da =
+new Date(a.date.split(".").reverse().join("-"));
+
+const db =
+new Date(b.date.split(".").reverse().join("-"));
+
+return db - da;
+
+});
 
 html+=`
 
@@ -658,7 +670,7 @@ color:inherit;
 ">
 
 <div
-class="player-match ${game.started ? 'player-started' : 'player-bench'}">
+class="player-match ${game.played ? 'player-started' : 'player-bench'}"
 
 <div>
 ${game.date}
@@ -687,7 +699,7 @@ game.resultType === "L" ? "result-loss" :
 ${game.result}
 </strong>
 
-${!game.started
+${!game.played
 ? '<span class="bench-label">UNUSED SUBSTITUTE</span>'
 : ''}
 
