@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Player Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+css/theme.css
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+
+background:
+radial-gradient(circle at top left,#004D98 0%,transparent 35%),
+radial-gradient(circle at top right,#A50044 0%,transparent 35%),
+var(--bg);
+
+color:var(--text);
+min-height:100vh;
+}
+
+.container{
+max-width:1500px;
+margin:auto;
+padding:10px;
+}
+
+.header{
+background:linear-gradient(
+135deg,
+rgba(0,77,152,.95),
+rgba(165,0,68,.95)
+);
+
+padding:24px;
+border-radius:28px;
+color:white;
+margin-bottom:10px;
+}
+
+.hero-subtitle{
+font-size:13px;
+opacity:.85;
+margin-top:6px;
+}
+
+.player-card{
+background:var(--card-bg);
+border:1px solid var(--card-border);
+border-radius:24px;
+padding:20px;
+display:flex;
+align-items:center;
+gap:20px;
+margin-bottom:10px;
+}
+
+.player-photo{
+width:130px;
+height:130px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #004D98;
+}
+
+.player-info h1{
+margin:0;
+font-size:28px;
+}
+
+.player-meta{
+margin-top:10px;
+font-size:14px;
+color:var(--muted);
+}
+
+.widget-title{
+margin:8px 0 6px;
+padding:8px 14px;
+background:linear-gradient(
+135deg,
+rgba(0,77,152,.95),
+rgba(165,0,68,.95)
+);
+
+color:white;
+font-size:14px;
+font-weight:700;
+border-radius:18px;
+}
+
+.summary-grid{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:8px;
+}
+
+.summary-box{
+background:var(--card-bg);
+border:1px solid var(--card-border);
+border-radius:18px;
+padding:12px;
+text-align:center;
+}
+
+.summary-box b{
+display:block;
+font-size:26px;
+margin-bottom:4px;
+}
+
+.widget-card{
+background:var(--card-bg);
+border:1px solid var(--card-border);
+border-radius:24px;
+padding:14px;
+}
+
+.stats-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.stats-table th,
+.stats-table td{
+padding:8px;
+border-bottom:1px solid var(--meta-border);
+font-size:13px;
+}
+
+.stats-table th{
+text-align:left;
+}
+
+@media(max-width:900px){
+
+.player-card{
+flex-direction:column;
+text-align:center;
+}
+
+.summary-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>FC Barcelona</h1>
+<div class="hero-subtitle">
+Player Profile
+</div>
+</div>
+
+<div id="playerProfile">
+Loading...
+</div>
+
+</div>
+
+<script>
+
+const params =
+new URLSearchParams(location.search);
+
+const playerName =
+params.get("name");
+
+fetch("data.json")
+.then(r=>r.json())
+.then(data=>{
+
+renderPlayer(playerName,data);
+
+});
+
+function renderPlayer(player,data){
+
+let matches=0;
+let goals=0;
+let assists=0;
+let yellow=0;
+let red=0;
+
+let seasons=new Set();
+
+data.forEach(match=>{
+
+let appeared=false;
+
+for(let i=1;i<=11;i++){
+
+if(match[`Player name ${i}`]===player){
+
+appeared=true;
+
+}
+
+if(match[`Opp. Player name ${i}`]===player){
+
+appeared=true;
+
+}
+
+}
+
+if(appeared){
+
+matches++;
+seasons.add(match.Season);
+
+}
+
+for(let i=1;i<=12;i++){
+
+if(match[`Goal Player ${i}`]===player){
+goals++;
+}
+
+if(match[`Assist Player ${i}`]===player){
+assists++;
+}
+
+if(match[`Yellow player ${i}`]===player){
+yellow++;
+}
+
+}
+
+for(let i=1;i<=5;i++){
+
+if(match[`Red player ${i}`]===player){
+red++;
+}
+
+}
+
+});
+
+document.getElementById("playerProfile").innerHTML=`
+
+<div class="player-card">
+
+<img
+src="images/players/default.png"
+class="player-photo">
+
+<div class="player-info">
+
+<h1>${player}</h1>
+
+<div class="player-meta">
+FC Barcelona
+</div>
+
+</div>
+
+</div>
+
+<div class="widget-title">
+Career Statistics
+</div>
+
+<div class="summary-grid">
+
+<div class="summary-box">
+<b>${matches}</b>
+Matches
+</div>
+
+<div class="summary-box">
+<b>${goals}</b>
+Goals
+</div>
+
+<div class="summary-box">
+<b>${assists}</b>
+Assists
+</div>
+
+<div class="summary-box">
+<b>${yellow}</b>
+Yellow
+</div>
+
+<div class="summary-box">
+<b>${red}</b>
+Red
+</div>
+
+<div class="summary-box">
+<b>${seasons.size}</b>
+Seasons
+</div>
+
+</div>
+
+<div class="widget-title">
+Season Breakdown
+</div>
+
+<div class="widget-card">
+
+<table class="stats-table">
+
+<thead>
+<tr>
+<th>Season</th>
+<th>Matches</th>
+<th>Goals</th>
+<th>Assists</th>
+</tr>
+</thead>
+
+<tbody id="seasonRows">
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+renderSeasonStats(player,data);
+
+}
+
+function renderSeasonStats(player,data){
+
+const stats={};
+
+data.forEach(match=>{
+
+const season=match.Season;
+
+if(!stats[season]){
+
+stats[season]={
+matches:0,
+goals:0,
+assists:0
+};
+
+}
+
+let appeared=false;
+
+for(let i=1;i<=11;i++){
+
+if(match[`Player name ${i}`]===player){
+
+appeared=true;
+
+}
+
+}
+
+if(appeared){
+
+stats[season].matches++;
+
+}
+
+for(let i=1;i<=12;i++){
+
+if(match[`Goal Player ${i}`]===player){
+
+stats[season].goals++;
+
+}
+
+if(match[`Assist Player ${i}`]===player){
+
+stats[season].assists++;
+
+}
+
+}
+
+});
+
+let html="";
+
+Object.keys(stats)
+.sort()
+.reverse()
+.forEach(season=>{
+
+html+=`
+<tr>
+<td>${season}</td>
+<td>${stats[season].matches}</td>
+<td>${stats[season].goals}</td>
+<td>${stats[season].assists}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("seasonRows").innerHTML=
+html;
+
+}
+
+</script>
+
+</body>
+</html>
