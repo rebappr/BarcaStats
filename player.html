@@ -232,8 +232,8 @@ display:block;
 .matches-header{
 display:grid;
 grid-template-columns:
-90px
 150px
+90px
 80px
 1fr
 90px
@@ -259,8 +259,8 @@ opacity:.7;
 .player-match{
 display:grid;
 grid-template-columns:
-90px
 150px
+90px
 80px
 1fr
 90px
@@ -1130,8 +1130,8 @@ class="matches-list">
 
 <div class="matches-header">
 
-<div>Date</div>
 <div>Competition</div>
+<div>Date</div>
 <div>Venue</div>
 <div>Opponent</div>
 <div>Result</div>
@@ -1156,13 +1156,13 @@ color:inherit;
 <div
 class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 
-    <div>${game.date}</div>
-
     <div class="competition-cell">
         <img
         src="logos/${competitionLogos[game.competition] || 'default.png'}"
         class="competition-logo">
     </div>
+
+    <div>${game.date}</div>
         
     <div>${game.venue}</div>
 
