@@ -235,7 +235,7 @@ grid-template-columns:
 90px
 150px
 80px
-auto
+1fr
 90px
 40px
 40px
@@ -262,7 +262,7 @@ grid-template-columns:
 90px
 150px
 80px
-auto
+1fr
 90px
 40px
 40px
@@ -366,14 +366,6 @@ flex-shrink:0;
     display:none;
 }
 
-.player-match{
-grid-template-columns:
-35px
-90px
-1fr
-70px;
-}
-
 .matches-header div:nth-child(6),
 .matches-header div:nth-child(7),
 .matches-header div:nth-child(8),
@@ -385,13 +377,23 @@ grid-template-columns:
 
 .matches-header{
 grid-template-columns:
-35px
+30px
 90px
 1fr
 70px;
 }
 
-.matches-header div:nth-child(1){
+.player-match{
+grid-template-columns:
+30px
+90px
+1fr
+70px;
+
+row-gap:8px;
+}
+
+.matches-header div:nth-child(2){
     visibility:hidden;
 }
 
