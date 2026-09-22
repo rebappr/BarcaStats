@@ -654,7 +654,14 @@ ${game.opponent}
 
 <div>
 
-<strong>${game.result}</strong>
+<strong class="${
+game.result.startsWith("W") ? "result-win" :
+game.result.startsWith("D") ? "result-draw" :
+game.result.startsWith("L") ? "result-loss" :
+""
+}">
+${game.result}
+</strong>
 
 ${!game.started
 ? '<span class="bench-label">UNUSED SUBSTITUTE</span>'
