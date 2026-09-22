@@ -1153,38 +1153,27 @@ color:inherit;
 <div
 class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 
+<div>
+    ${game.date}
+</div>
+
 <div class="competition-cell">
-<img
-src="logos/${competitionLogos[game.competition] || 'default.png'}"
-class="competition-logo"
-alt="${game.competition}">
+    <img
+    src="logos/${competitionLogos[game.competition] || 'default.png'}"
+    class="competition-logo"
+    alt="${game.competition}">
 
-<div>
-${game.date}
+    <span>${game.competition}</span>
 </div>
 
-<span>${game.competition}</span>
-</div>
-
-<div>
-${game.venue}
-</div>
-
-<div>
-${game.opponent}
-</div>
-
-<div>
-
-<span class="result-badge ${
-game.resultType === "W" ? "result-win" :
-game.resultType === "D" ? "result-draw" :
-game.resultType === "L" ? "result-loss" :
-""
-}">
-${game.result}
-</span>
-
+  <span class="result-badge ${
+        game.resultType === "W" ? "result-win" :
+        game.resultType === "D" ? "result-draw" :
+        game.resultType === "L" ? "result-loss" :
+        ""
+    }">
+        ${game.result}
+    </span>
 </div>
 
 <div>${game.goals}</div>
