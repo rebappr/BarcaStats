@@ -547,28 +547,39 @@ const seasonId=`season_${index}`;
 
 html+=`
 
-<tr>
+<tr
+class="season-row"
+onclick="toggleSeason('${seasonId}')"
+style="cursor:pointer;">
 
 <td>
+<strong>${season}</strong>
+</td>
 
-<span
-class="season-link"
-onclick="toggleSeason('${seasonId}')">
+<td>${stats[season].matches}</td>
 
-${season}
+<td>${stats[season].goals}</td>
 
-</span>
+<td>${stats[season].assists}</td>
+
+</tr>
+
+<tr>
+
+<td colspan="4" style="padding:0;border:none;">
 
 <div
 id="${seasonId}"
 class="matches-list">
 
 <div class="matches-header">
+
 <div>Date</div>
 <div>Competition</div>
 <div>Venue</div>
 <div>Opponent</div>
 <div>Result</div>
+
 </div>
 
 ${stats[season].games.map(game=>`
@@ -619,15 +630,9 @@ ${!game.started
 
 </td>
 
-<td>${stats[season].matches}</td>
-<td>${stats[season].goals}</td>
-<td>${stats[season].assists}</td>
-
 </tr>
 
 `;
-
-});
 
 document.getElementById("seasonRows").innerHTML=
 html;
