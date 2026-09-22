@@ -343,7 +343,35 @@ object-fit:contain;
 flex-shrink:0;
 }
 
+.mobile-stats{
+display:none;
+}
+
 @media(max-width:900px){
+
+.mobile-stats{
+    display:flex;
+    grid-column:1 / -1;
+
+    justify-content:space-between;
+
+    margin-top:6px;
+    padding-top:6px;
+
+    border-top:1px solid var(--meta-border);
+
+    font-size:11px;
+    font-weight:600;
+}
+
+.player-match div:nth-child(6),
+.player-match div:nth-child(7),
+.player-match div:nth-child(8),
+.player-match div:nth-child(9),
+.player-match div:nth-child(10),
+.player-match div:nth-child(11){
+display:none;
+}
 
 .competition-cell span{
 display:none;
@@ -1100,6 +1128,15 @@ ${game.result}
 <div>${game.yellow}</div>
 
 <div>${game.red}</div>
+
+<div class="mobile-stats">
+    <span>G ${game.goals}</span>
+    <span>A ${game.assists}</span>
+    <span>PG ${game.penaltyGoals}</span>
+    <span>MP ${game.missedPenalties}</span>
+    <span>YC ${game.yellow}</span>
+    <span>RC ${game.red}</span>
+</div>
 
 </div>
 </a>
