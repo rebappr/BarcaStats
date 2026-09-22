@@ -779,16 +779,18 @@ ${playerClub}
 
 ` : ""}
 
+${playerInfo?.["Date of Birth"] ? `
+
 <div>
 <b>Born:</b>
-${playerInfo?.["Date of Birth"] || "-"}
-${playerInfo?.["Date of Birth"]
-? `(${calculateAge(
-playerInfo["Date of Birth"],
-playerInfo["Death Date"]
-)})`
-: ""}
+${playerInfo["Date of Birth"]}
+(${calculateAge(
+    playerInfo["Date of Birth"],
+    playerInfo["Death Date"]
+)})
 </div>
+
+` : ""}
 
 ${playerInfo?.["Death Date"] ? `
 
@@ -799,10 +801,14 @@ ${playerInfo["Death Date"]}
 
 ` : ""}
 
+${nationality ? `
+
 <div>
 <b>Nationality:</b>
 ${nationality}
 </div>
+
+` : ""}
 
 <div>
 <b>Main Position:</b>
