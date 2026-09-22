@@ -393,10 +393,6 @@ grid-template-columns:
 row-gap:8px;
 }
 
-.matches-header div:nth-child(2){
-    visibility:hidden;
-}
-
 .mobile-match-stats{
     display:block;
     grid-column:1 / -1;
@@ -426,9 +422,6 @@ row-gap:8px;
     font-size:12px;
     font-weight:600;
 }
-.competition-cell span{
-display:none;
-}
 
 .competition-logo{
 width:18px;
@@ -454,6 +447,14 @@ grid-template-columns:repeat(4,1fr);
 
 .summary-box{
 font-size:11px;
+}
+
+.matches-header div:nth-child(2){
+    visibility:hidden;
+}
+
+.competition-cell span{
+    display:none;
 }
 
 .matches-header div:nth-child(3),
@@ -1129,8 +1130,8 @@ class="matches-list">
 
 <div class="matches-header">
 
-<div>Competition</div>
 <div>Date</div>
+<div>Competition</div>
 <div>Venue</div>
 <div>Opponent</div>
 <div>Result</div>
@@ -1156,7 +1157,7 @@ color:inherit;
 class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 
 <div>
-    ${game.date}
+${game.date}
 </div>
 
 <div class="competition-cell">
@@ -1165,10 +1166,11 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
     class="competition-logo"
     alt="${game.competition}">
 
-    <span>${game.competition}</span>
+    <span>${pponent}
 </div>
 
-  <span class="result-badge ${
+<div>
+    <span class="result-badge ${
         game.resultType === "W" ? "result-win" :
         game.resultType === "D" ? "result-draw" :
         game.resultType === "L" ? "result-loss" :
@@ -1179,15 +1181,10 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 </div>
 
 <div>${game.goals}</div>
-
 <div>${game.assists}</div>
-
 <div>${game.penaltyGoals}</div>
-
 <div>${game.missedPenalties}</div>
-
 <div>${game.yellow}</div>
-
 <div>${game.red}</div>
 
 <div class="mobile-match-stats">
