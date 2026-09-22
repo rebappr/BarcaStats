@@ -205,7 +205,13 @@ grid-template-columns:
 1fr
 70px
 140px
-70px;
+70px
+35px
+35px
+35px
+35px
+35px
+35px;
 
 gap:10px;
 
@@ -707,6 +713,45 @@ stats[season].missedPenalties++;
 
 }
 
+let gameGoals = 0;
+let gameAssists = 0;
+let gamePenaltyGoals = 0;
+let gameMissedPenalties = 0;
+let gameYellow = 0;
+let gameRed = 0;
+
+for(let i=1;i<=12;i++){
+
+if(match[`Goal Player ${i}`]===player){
+gameGoals++;
+}
+
+if(match[`Assist Player ${i}`]===player){
+gameAssists++;
+}
+
+if(match[`Yellow player ${i}`]===player){
+gameYellow++;
+}
+
+if(match[`Red player ${i}`]===player){
+gameRed++;
+}
+
+if(match[`Penalty player ${i}`]===player){
+
+if(match[`Penalty scored ${i}`]==="in"){
+gamePenaltyGoals++;
+}
+
+if(match[`Penalty scored ${i}`]==="not in"){
+gameMissedPenalties++;
+}
+
+}
+
+}
+
 stats[season].games.push({
 id:match.ID,
 date:match.Date,
@@ -715,7 +760,14 @@ venue:match["Home/Away"],
 opponent:match["Opp. Team"],
 result:match.Result,
 resultType: match["Result type"],
-played: played
+played: played,
+
+goals: gameGoals,
+assists: gameAssists,
+penaltyGoals: gamePenaltyGoals,
+missedPenalties: gameMissedPenalties,
+yellow: gameYellow,
+red: gameRed
 });
 
 });
@@ -783,6 +835,12 @@ class="matches-list">
 <div>Venue</div>
 <div>Opponent</div>
 <div>Result</div>
+<div>G</div>
+<div>A</div>
+<div>PG</div>
+<div>MP</div>
+<div>YC</div>
+<div>RC</div>
 
 </div>
 
@@ -831,6 +889,18 @@ ${game.result}
 </span>
 
 </div>
+
+<div>${game.goals}</div>
+
+<div>${game.assists}</div>
+
+<div>${game.penaltyGoals}</div>
+
+<div>${game.missedPenalties}</div>
+
+<div>${game.yellow}</div>
+
+<div>${game.red}</div>
 
 </div>
 </a>
