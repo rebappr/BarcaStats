@@ -294,7 +294,29 @@ color:var(--result-loss);
 display:none;
 }
 
+.competition-cell{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.competition-logo{
+width:20px;
+height:20px;
+object-fit:contain;
+flex-shrink:0;
+}
+
 @media(max-width:900px){
+
+.competition-cell span{
+display:none;
+}
+
+.competition-logo{
+width:22px;
+height:22px;
+}
 
 .desktop{
 display:none;
@@ -373,6 +395,13 @@ new URLSearchParams(location.search);
 
 const playerName =
 params.get("name");
+
+const competitionLogos = {
+    "La Liga": "laliga.png",
+    "UEFA Champions League": "ucl.png",
+    "Copa del Rey": "copa.png",
+    "Supercopa de España": "supercopa.png"
+};
 
 fetch("data.json")
 .then(r=>r.json())
@@ -775,9 +804,13 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 ${game.date}
 </div>
 
-<div>
-${game.competition}
-</div>
+<div class="competition-cell">
+<img
+src="images/competitions/${game.competition}.png"
+class="competition-logo"
+alt="${game.competition}">
+
+<span>${game.competition}</span
 
 <div>
 ${game.venue}
