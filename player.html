@@ -422,14 +422,7 @@ grid-template-columns:
 80px
 1fr
 70px
-140px
-70px
-35px
-35px
-35px
-35px
-35px
-35px;
+90px;
 }
 
 .player-match{
@@ -437,14 +430,9 @@ grid-template-columns:
 80px
 1fr
 70px
-140px
-70px
-35px
-35px
-35px
-35px
-35px
-35px;
+90px;
+
+row-gap:8px;
 }
 
 .matches-header div:nth-child(3),
@@ -865,15 +853,21 @@ data.forEach(match=>{
 let started=false;
 let bench=false;
 
+let appeared=false;
+let forBarca=false;
+let forOpponent=false;
+
 for(let i=1;i<=11;i++){
 
 if(match[`Player name ${i}`]===player){
     appeared=true;
+    started=true;
     forBarca=true;
 }
 
 if(match[`Opp. Player name ${i}`]===player){
     appeared=true;
+    started=true;
     forOpponent=true;
 }
 
@@ -893,6 +887,10 @@ if(match[`Opp. Sub on ${i}`]===player){
     forOpponent=true;
 }
 
+}
+
+if(!forBarca){
+    return;
 }
 
 for(let i=1;i<=12;i++){
@@ -937,28 +935,28 @@ if(
 forBarca &&
 match[`Goal Player ${i}`]===player
 ){
-goals++;
+stats[season].goals++;
 }
 
 if(
 forBarca &&
 match[`Assist Player ${i}`]===player
 ){
-assists++;
+stats[season].assists++;
 }
 
 if(
 forBarca &&
 match[`Yellow player ${i}`]===player
 ){
-yellow++;
+stats[season].yellow++;
 }
 
 if(
 forBarca &&
 match[`Red player ${i}`]===player
 ){
-red++;
+stats[season].red++;
 }
 
 if(
