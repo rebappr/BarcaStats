@@ -675,17 +675,17 @@ red++;
 
 for(let i=1;i<=12;i++){
 
-if(match[`Penalty scored ${i}`] === "in"){
-    stats[season].penaltyGoals++;
-}
+    if(match[`Penalty player ${i}`]===player){
 
-if(match[`Penalty scored ${i}`] === "not in"){
-    stats[season].missedPenalties++;
-}
+        if(match[`Penalty scored ${i}`]==="in"){
+            penaltyGoals++;
+        }
 
-}
+        if(match[`Penalty scored ${i}`]==="not in"){
+            missedPenalties++;
+        }
 
-}
+    }
 
 });
 
@@ -971,14 +971,12 @@ if(
 ){
 
     if(match[`Penalty scored ${i}`] === "in"){
-        penaltyGoals++;
+        stats[season].penaltyGoals++;
     }
 
     if(match[`Penalty scored ${i}`] === "not in"){
-        missedPenalties++;
+        stats[season].missedPenalties++;
     }
-
-}
 
 }
 
@@ -998,29 +996,39 @@ if(
     gameGoals++;
 }
 
-if(match[`Assist Player ${i}`]===player){
-gameAssists++;
+if(
+    forBarca &&
+    match[`Assist Player ${i}`]===player
+){
+    gameAssists++;
 }
 
-if(match[`Yellow player ${i}`]===player){
-gameYellow++;
+if(
+    forBarca &&
+    match[`Yellow player ${i}`]===player
+){
+    gameYellow++;
 }
 
-if(match[`Red player ${i}`]===player){
-gameRed++;
+if(
+    forBarca &&
+    match[`Red player ${i}`]===player
+){
+    gameRed++;
 }
 
-if(match[`Penalty player ${i}`]===player){
+if(
+    forBarca &&
+    match[`Penalty player ${i}`]===player
+){
 
-if(match[`Penalty scored ${i}`]==="in"){
-gamePenaltyGoals++;
-}
+    if(match[`Penalty scored ${i}`]==="in"){
+        gamePenaltyGoals++;
+    }
 
-if(match[`Penalty scored ${i}`]==="not in"){
-gameMissedPenalties++;
-}
-
-}
+    if(match[`Penalty scored ${i}`]==="not in"){
+        gameMissedPenalties++;
+    }
 
 }
 
