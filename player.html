@@ -948,8 +948,6 @@ if(match[`Opp. Player name ${i}`]===player){
 
 }
 
-let played = appeared;
-
 for(let i=1;i<=6;i++){
 
 if(match[`Sub on ${i}`]===player){
@@ -963,6 +961,8 @@ if(match[`Opp. Sub on ${i}`]===player){
 }
 
 }
+
+let played = appeared;
 
 for(let i=1;i<=12;i++){
 
@@ -1047,19 +1047,19 @@ let gameRed = 0;
 for(let i=1;i<=12;i++){
 
 if(match[`Goal Player ${i}`]===player){
-    goals++;
+    gameGoals++;
 }
 
 if(match[`Assist Player ${i}`]===player){
-    assists++;
+    gameAssists++;
 }
 
 if(match[`Yellow player ${i}`]===player){
-    yellow++;
+    gameYellow++;
 }
 
 if(match[`Red player ${i}`]===player){
-    red++;
+    gameRed++;
 }
 
 if(match[`Penalty player ${i}`] === player){
