@@ -686,11 +686,11 @@ seasons.add(match.Season);
 for(let i=1;i<=12;i++){
 
 if(match[`Goal Player ${i}`]===player){
-goals++;
+    stats[season].goals++;
 }
 
 if(match[`Assist Player ${i}`]===player){
-assists++;
+    stats[season].assists++;
 }
 
 if(match[`Yellow player ${i}`]===player){
@@ -936,10 +936,6 @@ if(match[`Opp. Sub on ${i}`]===player){
 
 }
 
-if(!forBarca){
-    return;
-}
-
 for(let i=1;i<=12;i++){
 
 if(
@@ -978,38 +974,28 @@ if(played){
 
 for(let i=1;i<=12;i++){
 
-if(
-forBarca &&
-match[`Goal Player ${i}`]===player
-){
+if(match[`Goal Player ${i}`]===player)
+{
 stats[season].goals++;
 }
 
-if(
-forBarca &&
-match[`Assist Player ${i}`]===player
-){
+if(match[`Assist Player ${i}`]===player)
+{
 stats[season].assists++;
 }
 
-if(
-forBarca &&
-match[`Yellow player ${i}`]===player
-){
+if(match[`Yellow player ${i}`]===player)
+{
 stats[season].yellow++;
 }
 
-if(
-forBarca &&
-match[`Red player ${i}`]===player
-){
+if(match[`Red player ${i}`]===player)
+{
 stats[season].red++;
 }
 
-if(
-    forBarca &&
-    match[`Penalty player ${i}`] === player
-){
+if(match[`Penalty player ${i}`] === player)
+{
 
     if(match[`Penalty scored ${i}`] === "in"){
         stats[season].penaltyGoals++;
@@ -1032,38 +1018,23 @@ let gameRed = 0;
 
 for(let i=1;i<=12;i++){
 
-if(
-    forBarca &&
-    match[`Goal Player ${i}`]===player
-){
-    gameGoals++;
+if(match[`Goal Player ${i}`]===player){
+    stats[season].goals++;
 }
 
-if(
-    forBarca &&
-    match[`Assist Player ${i}`]===player
-){
-    gameAssists++;
+if(match[`Assist Player ${i}`]===player){
+    stats[season].assists++;
 }
 
-if(
-    forBarca &&
-    match[`Yellow player ${i}`]===player
-){
-    gameYellow++;
+if(match[`Yellow player ${i}`]===player){
+    stats[season].yellow++;
 }
 
-if(
-    forBarca &&
-    match[`Red player ${i}`]===player
-){
-    gameRed++;
+if(match[`Red player ${i}`]===player){
+    stats[season].red++;
 }
 
-if(
-    forBarca &&
-    match[`Penalty player ${i}`]===player
-){
+if(match[`Penalty player ${i}`] === player){
 
     if(match[`Penalty scored ${i}`]==="in"){
         gamePenaltyGoals++;
