@@ -167,6 +167,55 @@ font-size:13px;
 text-align:left;
 }
 
+.season-link{
+cursor:pointer;
+font-weight:700;
+color:#004D98;
+}
+
+.season-link:hover{
+text-decoration:underline;
+}
+
+.matches-list{
+display:none;
+margin-top:8px;
+padding:8px;
+background:var(--meta-bg);
+border-radius:12px;
+}
+
+.matches-list.active{
+display:block;
+}
+
+.player-match{
+padding:8px;
+border-bottom:1px solid var(--meta-border);
+font-size:12px;
+}
+
+.player-match:last-child{
+border-bottom:none;
+}
+
+.player-started{
+border-left:4px solid #22c55e;
+padding-left:10px;
+}
+
+.player-bench{
+border-left:4px solid #f59e0b;
+padding-left:10px;
+}
+
+.bench-label{
+font-size:11px;
+font-weight:700;
+color:#f59e0b;
+margin-left:6px;
+}
+
 @media(max-width:900px){
 
 .player-card{
@@ -367,69 +416,84 @@ renderSeasonStats(player,data);
 
 }
 
+function toggleSeason(id){
+
+document
+.querySelector(`#${id}`)
+.classList.toggle("active");
+
+}
+
 function renderSeasonStats(player,data){
 
 const stats={};
 
 data.forEach(match=>{
 
-    let appeared = false;
+let started=false;
+let bench=false;
 
-    // základná zostava
-    for(let i=1;i<=11;i++){
+for(let i=1;i<=11;i++){
 
-        if(
-            match[`Player name ${i}`] === player ||
-            match[`Opp. Player name ${i}`] === player
-        ){
-            appeared = true;
-        }
+if(
+match[`Player name ${i}`]===player ||
+match[`Opp. Player name ${i}`]===player
+){
+started=true;
+}
 
-    }
+}
 
-    // lavička
-    for(let i=1;i<=12;i++){
+for(let i=1;i<=12;i++){
 
-        if(
-            match[`On the bench name ${i}`] === player ||
-            match[`Opp. On the bench name ${i}`] === player
-        ){
-            appeared = true;
-        }
+if(
+match[`On the bench name ${i}`]===player ||
+match[`Opp. On the bench name ${i}`]===player
+){
+bench=true;
+}
 
-    }
+}
 
-    // ak sa v zápase vôbec nevyskytuje,
-    // nepočítaj ho do sezóny
-    if(!appeared){
-        return;
-    }
+if(!started && !bench){
+return;
+}
 
-    const season = match.Season;
+const season=match.Season;
 
-    if(!stats[season]){
+if(!stats[season]){
 
-        stats[season]={
-            matches:0,
-            goals:0,
-            assists:0
-        };
+stats[season]={
+matches:0,
+goals:0,
+assists:0,
+games:[]
+};
 
-    }
+}
 
-    stats[season].matches++;
+stats[season].matches++;
 
-    for(let i=1;i<=12;i++){
+for(let i=1;i<=12;i++){
 
-        if(match[`Goal Player ${i}`]===player){
-            stats[season].goals++;
-        }
+if(match[`Goal Player ${i}`]===player){
+stats[season].goals++;
+}
 
-        if(match[`Assist Player ${i}`]===player){
-            stats[season].assists++;
-        }
+if(match[`Assist Player ${i}`]===player){
+stats[season].assists++;
+}
 
-    }
+}
+
+stats[season].games.push({
+id:match.ID,
+date:match.Date,
+competition:match.Competition,
+opponent:match["Opp. Team"],
+result:match.Result,
+started:started
+});
 
 });
 
@@ -438,20 +502,68 @@ let html="";
 Object.keys(stats)
 .sort()
 .reverse()
-.forEach(season=>{
+.forEach((season,index)=>{
+
+const seasonId=`season_${index}`;
 
 html+=`
+
 <tr>
-    <td>${season}</td>
-    <td>${stats[season].matches}</td>
-    <td>${stats[season].goals}</td>
-    <td>${stats[season].assists}</td>
+
+<td>
+
+<span
+class="season-link"
+onclick="toggleSeason('${seasonId}')">
+
+${season}
+
+</span>
+
+<div
+id="${seasonId}"
+class="matches-list">
+
+${stats[season].games.map(game=>`
+
+<div
+class="player-match ${game.started ? 'player-started' : 'player-bench'}">
+
+<a
+href="match.html?id=${game.id}"
+style="color:inherit;text-decoration:none;">
+
+<ame.result}
+
+•
+${game.competition}
+
+${!game.started
+? '<span class="bench-label">UNUSED SUBSTITUTE</span>'
+: ''}
+
+</a>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</td>
+
+<td>${stats[season].matches}</td>
+<td>${stats[season].goals}</td>
+<td>${stats[season].assists}</td>
+
 </tr>
+
 `;
 
 });
 
-document.getElementById("seasonRows").innerHTML = html;
+document.getElementById("seasonRows").innerHTML=
+html;
 
 }
 
