@@ -32,6 +32,28 @@ color:var(--text);
 min-height:100vh;
 }
 
+.theme-toggle{
+position:fixed;
+bottom:20px;
+left:20px;
+
+width:52px;
+height:52px;
+
+border:none;
+border-radius:50%;
+
+cursor:pointer;
+
+background:#A50044;
+color:white;
+
+font-size:20px;
+font-weight:700;
+
+z-index:9999;
+}
+
 .container{
 max-width:1500px;
 margin:auto;
@@ -421,6 +443,61 @@ document.getElementById("seasonRows").innerHTML=
 html;
 
 }
+
+(function(){
+
+const savedTheme =
+localStorage.getItem("theme");
+
+const systemTheme =
+window.matchMedia("(prefers-color-scheme: dark)").matches
+? "dark"
+: "light";
+
+const theme =
+savedTheme || systemTheme;
+
+document.documentElement.setAttribute(
+"data-theme",
+theme
+);
+
+const button =
+document.getElementById("themeToggle");
+
+button.textContent =
+theme === "dark"
+? "☀️"
+: "🌙";
+
+button.addEventListener("click",()=>{
+
+const current =
+document.documentElement.getAttribute("data-theme");
+
+const next =
+current === "dark"
+? "light"
+: "dark";
+
+document.documentElement.setAttribute(
+"data-theme",
+next
+);
+
+localStorage.setItem(
+"theme",
+next
+);
+
+button.textContent =
+next === "dark"
+? "☀️"
+: "🌙";
+
+});
+
+})();
 
 </script>
 
