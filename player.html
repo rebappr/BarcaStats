@@ -224,12 +224,13 @@ align-items:center;
 
 padding:8px;
 font-size:12px;
+
+border-bottom:1px solid var(--meta-border);
+transition:.2s;
 }
 
-.player-match{
-padding:8px;
-border-bottom:1px solid var(--meta-border);
-font-size:12px;
+.player-match:hover{
+background:var(--card-bg);
 }
 
 .player-match:last-child{
@@ -580,7 +581,13 @@ color:inherit;
 ">
 
 <div
-class="player-match ${game.started ? 'player<div>
+class="player-match ${game.started ? 'player-started' : 'player-bench'}">
+
+<div>
+${game.date}
+</div>
+
+<div>
 ${game.competition}
 </div>
 
@@ -597,7 +604,7 @@ ${game.opponent}
 <strong>${game.result}</strong>
 
 ${!game.started
-? ' <span class="bench-label">UNUSED SUBSTITUTE</span>'
+? '<span class="bench-label">UNUSED SUBSTITUTE</span>'
 : ''}
 
 </div>
