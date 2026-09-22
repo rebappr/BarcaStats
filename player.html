@@ -763,6 +763,15 @@ class="player-photo">
 
 <div class="player-meta">
 
+${playerClub ? `
+
+<div>
+<b>Club:</b>
+${playerClub}
+</div>
+
+` : ""}
+
 <div>
 <b>Born:</b>
 ${playerInfo?.["Date of Birth"] || "-"}
@@ -792,15 +801,6 @@ ${nationality}
 <b>Main Position:</b>
 ${playerInfo?.Position || "-"}
 </div>
-
-${playerClub ? `
-
-<div>
-<b>Club:</b>
-${playerClub}
-</div>
-
-` : ""}
 
 ${debut ? `
 <div>
