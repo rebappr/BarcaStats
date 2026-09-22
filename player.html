@@ -1164,9 +1164,11 @@ ${game.date}
     <img
     src="logos/${competitionLogos[game.competition] || 'default.png'}"
     class="competition-logo"
-    alt="${game.competition}">
+    alt="{game.venue}
+</div>
 
-    <{game.opponent}
+<div>
+${game.opponent}
 </div>
 
 <div>
@@ -1181,15 +1183,10 @@ ${game.date}
 </div>
 
 <div>${game.goals}</div>
-
 <div>${game.assists}</div>
-
 <div>${game.penaltyGoals}</div>
-
 <div>${game.missedPenalties}</div>
-
 <div>${game.yellow}</div>
-
 <div>${game.red}</div>
 
 <div class="mobile-match-stats">
