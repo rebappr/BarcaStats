@@ -189,6 +189,43 @@ border-radius:12px;
 display:block;
 }
 
+.matches-header{
+display:grid;
+grid-template-columns:
+80px
+1fr
+70px
+140px
+70px;
+
+gap:10px;
+
+font-size:11px;
+font-weight:700;
+text-transform:uppercase;
+
+padding:8px;
+margin-bottom:6px;
+
+opacity:.7;
+}
+
+.player-match{
+display:grid;
+grid-template-columns:
+80px
+1fr
+70px
+140px
+70px;
+
+gap:10px;
+align-items:center;
+
+padding:8px;
+font-size:12px;
+}
+
 .player-match{
 padding:8px;
 border-bottom:1px solid var(--meta-border);
@@ -490,6 +527,7 @@ stats[season].games.push({
 id:match.ID,
 date:match.Date,
 competition:match.Competition,
+venue:match["Home/Away"],
 opponent:match["Opp. Team"],
 result:match.Result,
 started:started
@@ -524,27 +562,49 @@ ${season}
 id="${seasonId}"
 class="matches-list">
 
-${stats[season].games.map(game=>`
+<div class="matches-header">
+<div>Date</div>
+<div>Competition</div>
+<div>Venue</div>
+<div>Opponent</div>
+<div>Result</div>
+</div>
 
-<div
-class="player-match ${game.started ? 'player-started' : 'player-bench'}">
+${stats[season].games.map(game=>`
 
 <a
 href="match.html?id=${game.id}"
-style="color:inherit;text-decoration:none;">
+style="
+text-decoration:none;
+color:inherit;
+">
 
-<ame.result}
-
-•
+<div
+class="player-match ${game.started ? 'player<div>
 ${game.competition}
+</div>
+
+<div>
+${game.venue}
+</div>
+
+<div>
+${game.opponent}
+</div>
+
+<div>
+
+<strong>${game.result}</strong>
 
 ${!game.started
-? '<span class="bench-label">UNUSED SUBSTITUTE</span>'
+? ' <span class="bench-label">UNUSED SUBSTITUTE</span>'
 : ''}
 
-</a>
+</div>
 
 </div>
+
+</a>
 
 `).join("")}
 
