@@ -177,6 +177,15 @@ color:#004D98;
 text-decoration:underline;
 }
 
+.season-row{
+transition:.2s;
+}
+
+.season-row:hover{
+background:var(--meta-bg);
+}
+
+
 .matches-list{
 display:none;
 margin-top:8px;
@@ -457,7 +466,7 @@ renderSeasonStats(player,data);
 function toggleSeason(id){
 
 document
-.querySelector(`#${id}`)
+.getElementById(id)
 .classList.toggle("active");
 
 }
