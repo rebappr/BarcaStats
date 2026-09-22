@@ -202,7 +202,6 @@ display:block;
 display:grid;
 grid-template-columns:
 80px
-26px
 1fr
 70px
 140px
@@ -224,7 +223,6 @@ opacity:.7;
 display:grid;
 grid-template-columns:
 80px
-26px
 1fr
 70px
 140px
@@ -298,8 +296,9 @@ display:none;
 
 .competition-cell{
 display:flex;
-align-items:center;
-gap:8px;
+flex-direction:column;
+align-items:flex-start;
+gap:4px;
 }
 
 .competition-logo{
@@ -344,7 +343,6 @@ font-size:11px;
 .matches-header{
 grid-template-columns:
 80px
-26px
 1fr
 140px
 70px;
@@ -353,7 +351,6 @@ grid-template-columns:
 .player-match{
 grid-template-columns:
 80px
-26px
 1fr
 140px
 70px;
