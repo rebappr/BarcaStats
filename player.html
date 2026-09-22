@@ -126,7 +126,7 @@ border-radius:18px;
 
 .summary-grid{
 display:grid;
-grid-template-columns:repeat(6,1fr);
+grid-template-columns:repeat(8,1fr);
 gap:8px;
 }
 
@@ -286,7 +286,7 @@ text-align:center;
 }
 
 .summary-grid{
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(4,1fr);
 }
 
 }
@@ -336,6 +336,8 @@ function renderPlayer(player,data){
 let matches=0;
 let goals=0;
 let assists=0;
+let penaltyGoals=0;
+let missedPenalties=0;
 let yellow=0;
 let red=0;
 
@@ -388,16 +390,26 @@ if(match[`Assist Player ${i}`]===player){
 assists++;
 }
 
-if(match[`Yellow player ${i}`]===player){
-yellow++;
-}
-
-}
-
 for(let i=1;i<=5;i++){
+
+if(match[`Penalty player ${i}`]===player){
+
+if(match[`Penalty scored ${i}`]==="in"){
+penaltyGoals++;
+}
+
+if(match[`Penalty scored ${i}`]==="not in"){
+missedPenalties++;
+}
+
+}
+
+for(let i=1;i<=12;i++){
 
 if(match[`Red player ${i}`]===player){
 red++;
+}
+
 }
 
 }
@@ -448,6 +460,16 @@ Goals
 <div class="summary-box">
 <b>${assists}</b>
 Assists
+</div>
+
+<div class="summary-box">
+<b>${penaltyGoals}</b>
+Penalty Goals
+</div>
+
+<div class="summary-box">
+<b>${missedPenalties}</b>
+Missed Penalties
 </div>
 
 <div class="summary-box">
