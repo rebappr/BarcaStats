@@ -290,7 +290,19 @@ border:1px solid var(--result-loss);
 color:var(--result-loss);
 }
 
+.mobile{
+display:none;
+}
+
 @media(max-width:900px){
+
+.desktop{
+display:none;
+}
+
+.mobile{
+display:inline;
+}
 
 .player-card{
 flex-direction:column;
@@ -321,74 +333,7 @@ grid-template-columns:
 70px;
 }
 
-.stats-table th,
-.stats-table td{
-padding:4px 2px;
-font-size:11px;
-text-align:center;
-}
 
-.stats-table th:first-child,
-.stats-table td:first-child{
-text-align:left;
-width:70px;
-}
-
-.col-matches{
-font-size:0;
-}
-.col-matches::before{
-content:"M";
-font-size:11px;
-}
-
-.col-goals{
-font-size:0;
-}
-.col-goals::before{
-content:"G";
-font-size:11px;
-}
-
-.col-assists{
-font-size:0;
-}
-.col-assists::before{
-content:"A";
-font-size:11px;
-}
-
-.col-pg{
-font-size:0;
-}
-.col-pg::before{
-content:"PG";
-font-size:11px;
-}
-
-.col-mp{
-font-size:0;
-}
-.col-mp::before{
-content:"MP";
-font-size:11px;
-}
-
-.col-yellow{
-font-size:0;
-}
-.col-yellow::before{
-content:"YC";
-font-size:11px;
-}
-
-.col-red{
-font-size:0;
-}
-.col-red::before{
-content:"RC";
-font-size:11px;
-}
     
 .matches-header div:nth-child(3),
 .player-match div:nth-child(3){
@@ -603,13 +548,13 @@ Season Breakdown
 <thead>
 <tr>
 <th>Season</th>
-<th class="col-matches">Matches</th>
-<th class="col-goals">Goals</th>
-<th class="col-assists">Assists</th>
-<th class="col-pg">Penalty Goal</th>
-<th class="col-mp">Missed Penalties</th>
-<th class="col-yellow">Yellow Card</th>
-<th class="col-red">Red Card</th>
+<th><span class="desktop">Matches</span><span class="mobile">M</span></th>
+<th><span class="desktop">Goals</span><span class="mobile">G</span></th>
+<th><span class="desktop">Assists</span><span class="mobile">A</span></th>
+<th><span class="desktop">Penalty Goal</span><span class="mobile">PG</span></th>
+<th><span class="desktop">Missed Penalties</span><span class="mobile">MP</span></th>
+<th><span class="desktop">Yellow Card</span><span class="mobile">YC</span></th>
+<th><span class="desktop">Red Card</span><span class="mobile">RC</span></th>
 </tr>
 </thead>
 
