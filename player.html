@@ -281,6 +281,16 @@ border-bottom:1px solid var(--meta-border);
 transition:.2s;
 }
 
+.stats-table th:first-child,
+.stats-table td:first-child{
+    text-align:left;
+}
+
+.stats-table th:not(:first-child),
+.stats-table td:not(:first-child){
+    text-align:center;
+}
+
 .player-match:hover{
 background:var(--card-bg);
 }
