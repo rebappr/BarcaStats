@@ -263,19 +263,31 @@ color:#f59e0b;
 margin-left:6px;
 }
 
-.result-win{
-color:#22c55e;
+.result-badge{
+display:inline-block;
+min-width:52px;
+text-align:center;
+border-radius:999px;
+padding:4px 10px;
 font-weight:700;
+}
+
+.result-win{
+background:var(--result-win-bg);
+border:1px solid var(--result-win);
+color:var(--result-win);
 }
 
 .result-draw{
-color:#f59e0b;
-font-weight:700;
+background:var(--result-draw-bg);
+border:1px solid var(--result-draw);
+color:var(--result-draw);
 }
 
 .result-loss{
-color:#ef4444;
-font-weight:700;
+background:var(--result-loss-bg);
+border:1px solid var(--result-loss);
+color:var(--result-loss);
 }
 
 @media(max-width:900px){
@@ -700,14 +712,14 @@ ${game.opponent}
 
 <div>
 
-<strong class="${
-game.result.startsWith("W") ? "result-win" :
-game.result.startsWith("D") ? "result-draw" :
-game.result.startsWith("L") ? "result-loss" :
+<span class="result-badge ${
+game.resultType === "W" ? "result-win" :
+game.resultType === "D" ? "result-draw" :
+game.resultType === "L" ? "result-loss" :
 ""
 }">
 ${game.result}
-</strong>
+</span>
 
 </div>
 
