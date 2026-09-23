@@ -902,26 +902,26 @@ html += `
 
         <div class="competition-cell">
             <img
-            src="logos/${competitionLogos[game.competition] || 'default.png'}"
+            src="logos/${competitionLogos[match.competition] || 'default.png'}"
             class="competition-logo"
-            alt="${game.competition}"
-            title="${game.competition}">
+            alt="${match.competition}"
+            title="${match.competition}">
         </div>
     
-        <div>${game.date}</div>
+        <div>${match.date}</div>
             
-        <div>${game.venue}</div>
+        <div>${match.venue}</div>
     
-        <div>${game.opponent}</div>
+        <div>${match.opponent}</div>
     
         <div>
             <span class="result-badge ${
-                game.resultType === "W" ? "result-win" :
-                game.resultType === "D" ? "result-draw" :
-                game.resultType === "L" ? "result-loss" :
+               match.resultType === "W" ? "result-win" :
+               match.resultType === "D" ? "result-draw" :
+               match.resultType === "L" ? "result-loss" :
                 ""
             }">
-                ${game.result}
+                ${match.result}
             </span>
         </div>
 
