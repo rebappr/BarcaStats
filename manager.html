@@ -415,6 +415,59 @@ flex-shrink:0;
     margin-top:6px;
 }
 
+.matches-list{
+    display:block;
+    margin-top:8px;
+    padding:8px;
+    background:var(--meta-bg);
+    border-radius:12px;
+}
+
+.matches-header{
+    display:grid;
+    grid-template-columns:
+        35px
+        90px
+        auto
+        90px;
+
+    gap:10px;
+
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+
+    padding:8px;
+    margin-bottom:6px;
+
+    opacity:.7;
+}
+
+.manager-match{
+    display:grid;
+    grid-template-columns:
+        35px
+        90px
+        auto
+        90px;
+
+    gap:10px;
+    align-items:center;
+
+    padding:8px;
+
+    border-bottom:1px solid var(--meta-border);
+    transition:.2s;
+}
+
+.manager-match:hover{
+    background:var(--card-bg);
+}
+
+.manager-match:last-child{
+    border-bottom:none;
+}
+
 @media(max-width:900px){
 
 .manager-match div:nth-child(6),
@@ -794,10 +847,18 @@ function buildSeasonMatches(manager, season, data){
 
     });
 
-    let html = `
-        <table class="stats-table">
-            <tbody>
-    `;
+        let html = `
+            <div class="matches-list">
+        
+                <div class="matches-header">
+        
+                    <div></div>
+                    <div>Date</div>
+                    <div>Opponent</div>
+                    <div>Result</div>
+        
+                </div>
+        `;
 
     matches.forEach(match => {
 
@@ -821,29 +882,36 @@ function buildSeasonMatches(manager, season, data){
         if(resultType === "L") resultClass = "result-loss";
 
         html += `
-            <tr
-                onclick="location.href='match.html?id=${match.ID}'"
-                style="cursor:pointer">
-
-                <td>${match.Date}</td>
-
-                <td>${match.Competition}</td>
-
-                <td>${match["Opp. Team"]}</td>
-
-                <td>
+        
+        <a
+            href="match.html?id=${match.ID}"
+            style="
+                text-decoration:none;
+                color:inherit;
+            ">
+        
+            <div class="manager-match">
+        
+                <div>
+                    <img
+                        src="logos/${competitionLogos[match.Competition] || '${match["Opp. Team"]}
+                </div>
+        
+                <div>
                     <span class="result-badge ${resultClass}">
                         ${match.Result}
                     </span>
-                </td>
-
-            </tr>
+                </div>
+        
+            </div>
+        
+        </a>
+        
         `;
     });
 
     html += `
-            </tbody>
-        </table>
+        </div>
     `;
 
     return html;
