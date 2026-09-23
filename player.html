@@ -140,6 +140,13 @@ color:var(--link-color);
 text-decoration:underline;
 }
 
+.player-fullname{
+    margin-top:4px;
+    font-size:15px;
+    color:var(--muted);
+    font-style:italic;
+}
+
 .widget-title{
 margin:8px 0 6px;
 padding:8px 14px;
@@ -884,6 +891,12 @@ ${playerClub ? `
 ` : ""}
 
 <div class="player-meta">
+
+${playerInfo?.["Full Name"] ? `
+<div class="player-fullname">
+${playerInfo["Full Name"]}
+</div>
+` : ""}
 
 ${playerInfo?.["Date of Birth"] ? `
 
