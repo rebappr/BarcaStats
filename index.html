@@ -473,6 +473,37 @@ color:#A50044;
     font-weight:600;
 }
 
+.search-hero{
+    margin:12px 0 14px;
+}
+
+.search-hero .player-search-input{
+    height:58px;
+    padding:0 20px;
+
+    font-size:16px;
+
+    border-radius:20px;
+
+    background:var(--card-bg);
+
+    border:2px solid var(--card-border);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+
+    transition:.2s;
+}
+
+.search-hero .player-search-input:focus{
+    outline:none;
+    border-color:#3b82f6;
+
+    box-shadow:
+        0 0 0 4px rgba(59,130,246,.15);
+}
+`
+
 @media (max-width:750px){
 
 .content-layout{
@@ -560,14 +591,14 @@ Seasons Overview
 
 </div>
 
-<div class="widget-card">
+<div class="search-hero">
 
     <input
         type="text"
         id="personSearch"
-        placeholder="Search player or manager..."
+        placeholder="Search player, manager or opponent..."
         class="player-search-input">
-    
+
     <div id="personSearchResults"></div>
 
 </div>
