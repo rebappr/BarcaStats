@@ -216,6 +216,13 @@ transition:.2s;
 background:var(--meta-bg);
 }
 
+.opponent-season{
+    background:#fff8c4;
+}
+
+[data-theme="dark"] .opponent-season{
+    background:#5b5420;
+}
 
 .matches-list{
 display:none;
@@ -697,7 +704,6 @@ data.forEach(match=>{
     }
     
     clubStats[club].seasons.add(match.Season);
-
     clubStats[club].matches++;
 
     for(let i=1;i<=12;i++){
@@ -1040,9 +1046,14 @@ missedPenalties:0,
 assists:0,
 yellow:0,
 red:0,
+opponentClub:false,
 games:[]
 };
 
+}
+
+if(forOpponent){
+    stats[season].opponentClub = true;
 }
 
 if(played){
@@ -1169,7 +1180,7 @@ return db - da;
 html+=`
 
 <tr
-class="season-row"
+class="season-row ${stats[season].opponentClub ? 'opponent-season' : ''}"
 onclick="toggleSeason('${seasonId}')"
 style="cursor:pointer;">
 
