@@ -157,7 +157,7 @@ border-radius:18px;
 
 .summary-grid{
 display:grid;
-grid-template-columns:repeat(6,1fr);
+grid-template-columns:repeat(8,1fr);
 gap:8px;
 }
 
@@ -495,7 +495,7 @@ flex-direction:column;
 }
 
 .summary-grid{
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(4,1fr);
 }
 
 .summary-box{
@@ -661,7 +661,9 @@ managerMatches.forEach(match=>{
             matches:0,
             wins:0,
             draws:0,
-            losses:0
+            losses:0,
+            yellowCards:0,
+            redCards:0
         };
 
     }
@@ -687,6 +689,32 @@ managerMatches.forEach(match=>{
     if(resultType === "W") clubStats[club].wins++;
     if(resultType === "D") clubStats[club].draws++;
     if(resultType === "L") clubStats[club].losses++;
+
+    for(let i=1;i<=20;i++){
+    
+        if(match.Manager === manager){
+    
+            if(match[`Yellow staff name ${i}`] === manager){
+                clubStats[club].yellowCards++;
+            }
+    
+            if(match[`Red staff name ${i}`] === manager){
+                clubStats[club].redCards++;
+            }
+    
+        }else{
+    
+            if(match[`Opp. Yellow staff name ${i}`] === manager){
+                clubStats[club].yellowCards++;
+            }
+    
+            if(match[`Opp. Red staff name ${i}`] === manager){
+                clubStats[club].redCards++;
+            }
+    
+        }
+    
+    }
 
 });
 
@@ -746,6 +774,16 @@ const careerHtml = Object.keys(clubStats)
             <div class="summary-box">
                 <b>${winRate}%</b>
                 Win %
+            </div>
+
+            <div class="summary-box">
+                <b>${s.yellowCards}</b>
+                Yellow
+            </div>
+            
+            <div class="summary-box">
+                <b>${s.redCards}</b>
+                Red
             </div>
 
         </div>
