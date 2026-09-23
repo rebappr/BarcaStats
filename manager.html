@@ -403,7 +403,8 @@ flex-shrink:0;
     grid-template-columns:
         35px
         90px
-        auto
+        70px
+        1fr
         90px;
 
     gap:10px;
@@ -421,16 +422,15 @@ flex-shrink:0;
 .manager-match{
     display:grid;
     grid-template-columns:
-    35px
-    100px
-    1fr
-    90px;
+        35px
+        100px
+        70px
+        1fr
+        90px;
 
     gap:10px;
     align-items:center;
-
     padding:8px;
-
     border-bottom:1px solid var(--meta-border);
     transition:.2s;
 }
@@ -833,14 +833,15 @@ function buildSeasonMatches(manager, season, data){
         let html = `
             <div class="matches-list">
         
-                <div class="matches-header">
-        
-                    <div></div>
-                    <div>Date</div>
-                    <div>Opponent</div>
-                    <div>Result</div>
-        
-                </div>
+            <div class="matches-header">
+            
+                <div></div>
+                <div>Date</div>
+                <div>Venue</div>
+                <div>Opponent</div>
+                <div>Result</div>
+            
+            </div>
         `;
 
     matches.forEach(match => {
@@ -882,21 +883,22 @@ html += `
             alt="${match.competition}"
             title="${match.competition}">
         </div>
-    
-        <div>${match.date}</div>
-            
-        <div>${match.venue}</div>
-    
-        <div>${match.opponent}</div>
-    
+        
         <div>
-            <span class="result-badge ${
-               match.resultType === "W" ? "result-win" :
-               match.resultType === "D" ? "result-draw" :
-               match.resultType === "L" ? "result-loss" :
-                ""
-            }">
-                ${match.result}
+            ${match.Date}
+        </div>
+        
+        <div>
+            ${match.Venue || ""}
+        </div>
+        
+        <div>
+            ${match["Opp. Team"]}
+        </div>
+        
+        <div>
+            <span class="result-badge ${resultClass}">
+                ${resultType}
             </span>
         </div>
 
