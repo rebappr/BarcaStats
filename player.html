@@ -1067,38 +1067,53 @@ if(played){
 
 for(let i=1;i<=12;i++){
 
-if(match[`Goal Player ${i}`]===player)
-{
-stats[season].goals++;
-}
+for(let i=1;i<=12;i++){
 
-if(match[`Assist Player ${i}`]===player)
-{
-stats[season].assists++;
-}
+    if(
+        match[`Goal Player ${i}`]===player ||
+        match[`Opp. Goal Player ${i}`]===player
+    ){
+        stats[season].goals++;
+    }
 
-if(match[`Yellow player ${i}`]===player)
-{
-stats[season].yellow++;
-}
+    if(
+        match[`Assist Player ${i}`]===player ||
+        match[`Opp. Assist Player ${i}`]===player
+    ){
+        stats[season].assists++;
+    }
 
-if(match[`Red player ${i}`]===player)
-{
-stats[season].red++;
-}
+    if(
+        match[`Yellow player ${i}`]===player ||
+        match[`Opp. Yellow player ${i}`]===player
+    ){
+        stats[season].yellow++;
+    }
 
-if(match[`Penalty player ${i}`] === player)
-{
+    if(
+        match[`Red player ${i}`]===player ||
+        match[`Opp. Red player ${i}`]===player
+    ){
+        stats[season].red++;
+    }
 
-    if(match[`Penalty scored ${i}`] === "in"){
+    let scored = null;
+
+    if(match[`Penalty player ${i}`]===player){
+        scored = match[`Penalty scored ${i}`];
+    }
+
+    if(match[`Opp. Penalty player ${i}`]===player){
+        scored = match[`Opp. Penalty scored ${i}`];
+    }
+
+    if(scored==="in"){
         stats[season].penaltyGoals++;
     }
 
-    if(match[`Penalty scored ${i}`] === "not in"){
+    if(scored==="not in"){
         stats[season].missedPenalties++;
     }
-
-}
 
 }
 
