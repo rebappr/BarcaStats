@@ -1140,9 +1140,9 @@ function initPersonSearch(){
                     ? `manager.html?name=${encodeURIComponent(item.name)}`
                     : `player.html?name=${encodeURIComponent(item.name)}`
                 }">
-
+            ${item.name}
             <span class="search-type ${item.type.toLowerCase()}">
-            ${item.type}
+               ${item.type}
             </span>
             </a>
             `).join("")}
