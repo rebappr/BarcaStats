@@ -537,6 +537,11 @@ managerMatches.length
 ? managerMatches[managerMatches.length - 1]
 : null;
 
+const coachedBarcelona =
+managerMatches.some(
+    match => match.Manager === manager
+);
+
 const career = {
 
     seasons:new Set(),
@@ -594,31 +599,31 @@ document.getElementById("managerProfile").innerHTML=`
 
         <div class="manager-meta">
 
-            ${debut ? `
-            <div>
-                <b>Debut:</b>
-
-                <a href="match.html?id=${debut.ID}">
-                    ${debut.Date}
-                    vs
-                    ${debut["Opp. Team"]}
-                </a>
-
-            </div>
-            ` : ""}
-
-            ${lastMatch ? `
-            <div>
-                <b>Last Match:</b>
-
-                <a href="match.html?id=${lastMatch.ID}">
-                    ${lastMatch.Date}
-                    vs
-                    ${lastMatch["Opp. Team"]}
-                </a>
-
-            </div>
-            ` : ""}
+        ${coachedBarcelona && debut ? `
+        <div>
+            <b>Debut:</b>
+        
+            <a href="match.html?id=${debut.ID}">
+                ${debut.Date}
+                vs
+                ${debut["Opp. Team"]}
+            </a>
+        
+        </div>
+        ` : ""}
+        
+        ${coachedBarcelona && lastMatch ? `
+        <div>
+            <b>Last Match:</b>
+        
+            <a href="match.html?id=${lastMatch.ID}">
+                ${lastMatch.Date}
+                vs
+                ${lastMatch["Opp. Team"]}
+            </a>
+        
+        </div>
+        ` : ""}
 
         </div>
 
