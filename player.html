@@ -702,14 +702,36 @@ return da-db;
 
 });
 
+const barcaMatches = playerMatches.filter(match => {
+
+    for(let i=1;i<=11;i++){
+
+        if(match[`Player name ${i}`] === player){
+            return true;
+        }
+
+    }
+
+    for(let i=1;i<=6;i++){
+
+        if(match[`Sub on ${i}`] === player){
+            return true;
+        }
+
+    }
+
+    return false;
+
+});
+
 const debut =
-playerMatches.length
-? playerMatches[0]
+barcaMatches.length
+? barcaMatches[0]
 : null;
 
 const lastMatch =
-playerMatches.length
-? playerMatches[playerMatches.length-1]
+barcaMatches.length
+? barcaMatches[barcaMatches.length - 1]
 : null;
 
 let nationality =
