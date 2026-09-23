@@ -899,25 +899,25 @@ function buildSeasonMatches(manager, season, data){
             let yellowCards = 0;
             let redCards = 0;
             
-            for(let i=1;i<=12;i++){
+            for(let i=1;i<=20;i++){
             
                 if(match.Manager === manager){
             
-                    if(match[`Yellow card player ${i}`] === manager){
+                    if(match[`Yellow staff name ${i}`] === manager){
                         yellowCards++;
                     }
             
-                    if(match[`Red card player ${i}`] === manager){
+                    if(match[`Red staff name ${i}`] === manager){
                         redCards++;
                     }
             
                 }else{
             
-                    if(match[`Opp. Yellow card player ${i}`] === manager){
+                    if(match[`Opp. Yellow staff name ${i}`] === manager){
                         yellowCards++;
                     }
             
-                    if(match[`Opp. Red card player ${i}`] === manager){
+                    if(match[`Opp. Red staff name ${i}`] === manager){
                         redCards++;
                     }
             
