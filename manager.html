@@ -387,6 +387,13 @@ flex-shrink:0;
     z-index:9999;
 }
 
+.manager-clubs{
+    margin-top:6px;
+    font-size:14px;
+    color:var(--muted);
+    font-weight:600;
+}
+
 @media(max-width:900px){
 
 .manager-match div:nth-child(6),
@@ -515,6 +522,26 @@ const managerMatches = data.filter(match =>
 
 );
 
+const clubs = [];
+
+managerMatches.forEach(match => {
+
+    if(
+        match.Manager === manager &&
+        !clubs.includes("FC Barcelona")
+    ){
+        clubs.push("FC Barcelona");
+    }
+
+    if(
+        match["Opp. Manager"] === manager &&
+        !clubs.includes(match["Opp. Team"])
+    ){
+        clubs.push(match["Opp. Team"]);
+    }
+
+});
+
 managerMatches.sort((a,b)=>{
 
 const da =
@@ -596,6 +623,9 @@ document.getElementById("managerProfile").innerHTML=`
     <div class="manager-info">
 
         <h1>${manager}</h1>
+        <div class="manager-clubs">
+            ${clubsText}
+        </div>
 
         <div class="manager-meta">
 
