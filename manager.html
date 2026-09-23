@@ -394,6 +394,27 @@ flex-shrink:0;
     font-weight:600;
 }
 
+.season-block{
+    margin-bottom:8px;
+}
+
+.season-header{
+    padding:10px 14px;
+    background:var(--meta-bg);
+    border:1px solid var(--meta-border);
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.season-header:hover{
+    background:var(--card-bg);
+}
+
+.season-matches{
+    margin-top:6px;
+}
+
 @media(max-width:900px){
 
 .manager-match div:nth-child(6),
@@ -924,7 +945,7 @@ function renderManagerStats(manager,data){
         : 0;
 
         html += `
-        <tr class="season-row">
+        <tr class="season-row" onclick="toggleSeason('season-${season.replace(/\//g,'-')}')" style="cursor:pointer">
 
             <td><strong>${season}</strong></td>
 
