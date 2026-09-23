@@ -575,6 +575,10 @@ renderManager(managerName,data);
 
 });
 
+function statValue(value){
+    return value === 0 ? "-" : value;
+}
+
 function renderManager(manager,data){
 
 const managerMatches = data.filter(match =>
@@ -773,17 +777,17 @@ const careerHtml = Object.keys(clubStats)
             </div>
 
             <div class="summary-box">
-                <b>${s.wins}</b>
+                <b>${statValue(s.wins)}</b>
                 Wins
             </div>
 
             <div class="summary-box">
-                <b>${s.draws}</b>
+                <b>${statValue(s.draws)}</b>
                 Draws
             </div>
 
             <div class="summary-box">
-                <b>${s.losses}</b>
+                <b>${statValue(s.losses)}</b>
                 Losses
             </div>
 
@@ -793,12 +797,12 @@ const careerHtml = Object.keys(clubStats)
             </div>
 
             <div class="summary-box">
-                <b>${s.yellowCards}</b>
+                <b>${statValue(s.yellowCards)}</b>
                 Yellow
             </div>
             
             <div class="summary-box">
-                <b>${s.redCards}</b>
+                <b>${statValue(s.redCards)}</b>
                 Red
             </div>
 
@@ -1017,11 +1021,11 @@ html += `
         </div>
 
         <div>
-            ${yellowCards}
+            ${statValue(yellowCards)}
         </div>
         
         <div>
-            ${redCards}
+            ${statValue(redCards)}
         </div>
 
     </div>
@@ -1117,11 +1121,9 @@ function renderManagerStats(manager,data){
     
         <td>${s.matches}</td>
     
-        <td>${s.wins}</td>
-    
-        <td>${s.draws}</td>
-    
-        <td>${s.losses}</td>
+        <td>${statValue(s.wins)}</td>
+        <td>${statValue(s.draws)}</td>
+        <td>${statValue(s.losses)}</td>
     
         <td>${winPct}%</td>
     
