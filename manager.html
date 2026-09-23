@@ -630,14 +630,30 @@ return da-db;
 
 });
 
+const barcaMatches = managerMatches
+.filter(match => match.Manager === manager);
+
+barcaMatches.sort((a,b)=>{
+
+    const da =
+    new Date(a.Date.split(".").reverse().join("-"));
+
+    const db =
+    new Date(b.Date.split(".").reverse().join("-"));
+
+    return da - db;
+
+});
+
+
 const debut =
-managerMatches.length
-? managerMatches[0]
+barcaMatches.length
+? barcaMatches[0]
 : null;
 
 const lastMatch =
-managerMatches.length
-? managerMatches[managerMatches.length - 1]
+barcaMatches.length
+? barcaMatches[barcaMatches.length - 1]
 : null;
 
 const coachedBarcelona =
