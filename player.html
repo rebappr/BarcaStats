@@ -698,6 +698,8 @@ data.forEach(match=>{
     
     clubStats[club].seasons.add(match.Season);
 
+    clubStats[club].matches++;
+
     for(let i=1;i<=12;i++){
 
         if(match[`Goal Player ${i}`]===player){
