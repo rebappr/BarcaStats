@@ -715,55 +715,55 @@ data.forEach(match=>{
     clubStats[club].seasons.add(match.Season);
     clubStats[club].matches++;
 
-    for(let i=1;i<=12;i++){
-    
+for(let i=1;i<=12;i++){
+
     if(
         match[`Goal Player ${i}`]===player ||
         match[`Opp. Goal Player ${i}`]===player
     ){
-        stats[season].goals++;
+        clubStats[club].goals++;
     }
-    
+
     if(
         match[`Assist Player ${i}`]===player ||
         match[`Opp. Assist Player ${i}`]===player
     ){
-        stats[season].assists++;
+        clubStats[club].assists++;
     }
-    
+
     if(
         match[`Yellow player ${i}`]===player ||
         match[`Opp. Yellow player ${i}`]===player
     ){
-        stats[season].yellow++;
+        clubStats[club].yellow++;
     }
-    
+
     if(
         match[`Red player ${i}`]===player ||
         match[`Opp. Red player ${i}`]===player
     ){
-        stats[season].red++;
+        clubStats[club].red++;
     }
-    
+
     let scored = null;
-    
+
     if(match[`Penalty player ${i}`]===player){
         scored = match[`Penalty scored ${i}`];
     }
-    
+
     if(match[`Opp. Penalty player ${i}`]===player){
         scored = match[`Opp. Penalty scored ${i}`];
     }
-    
+
     if(scored==="in"){
-        stats[season].penaltyGoals++;
+        clubStats[club].penaltyGoals++;
     }
-    
+
     if(scored==="not in"){
-        stats[season].missedPenalties++;
+        clubStats[club].missedPenalties++;
     }
-    
-    }
+
+}
 
 });
 
@@ -1108,8 +1108,6 @@ let gamePenaltyGoals = 0;
 let gameMissedPenalties = 0;
 let gameYellow = 0;
 let gameRed = 0;
-
-for(let i=1;i<=12;i++){
 
 for(let i=1;i<=12;i++){
 
