@@ -907,10 +907,21 @@ html += `
             alt="${game.competition}"
             title="${game.competition}">
         </div>
-
+    
+        <div>${game.date}</div>
+            
+        <div>${game.venue}</div>
+    
+        <div>${game.opponent}</div>
+    
         <div>
-            ${}">
-                ${resultType}
+            <span class="result-badge ${
+                game.resultType === "W" ? "result-win" :
+                game.resultType === "D" ? "result-draw" :
+                game.resultType === "L" ? "result-loss" :
+                ""
+            }">
+                ${game.result}
             </span>
         </div>
 
