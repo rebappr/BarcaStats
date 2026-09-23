@@ -2141,8 +2141,37 @@ const squadsHtml = `
             
                 </a>
             
-      </div>
-      </div>
+            </div>
+            
+            </div>
+            
+            <div
+                id="lineup-opp"
+                class="team-card">
+            
+                <h3>${escapeHtml(oppTitle)}</h3>
+            
+                ${oppPlayers}
+            
+                <h4>Bench</h4>
+            
+                ${oppBench}
+            
+                <h4>Manager</h4>
+            
+                <div class="player">
+            
+                    <a
+                        class="player-link"
+                        href="manager.html?name=${encodeURIComponent(oppManager)}">
+            
+                        ${escapeHtml(oppManager)}
+            
+                    </a>
+            
+                </div>
+            
+            </div>
 
        <div
            id="lineup-opp"
