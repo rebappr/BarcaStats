@@ -413,7 +413,9 @@ flex-shrink:0;
         90px
         70px
         1fr
-        90px;
+        90px
+        45px
+        45px;
 
     gap:10px;
 
@@ -434,7 +436,9 @@ flex-shrink:0;
         100px
         70px
         1fr
-        90px;
+        90px
+        45px
+        45px;
 
     gap:10px;
     align-items:center;
@@ -866,6 +870,8 @@ function buildSeasonMatches(manager, season, data){
                 <div>Venue</div>
                 <div>Opponent</div>
                 <div>Result</div>
+                <div>YC</div>
+                <div>RC</div>
             
             </div>
         `;
@@ -890,6 +896,34 @@ function buildSeasonMatches(manager, season, data){
     
         if(resultType === "W") resultClass = "result-win";
         if(resultType === "L") resultClass = "result-loss";
+            let yellowCards = 0;
+            let redCards = 0;
+            
+            for(let i=1;i<=12;i++){
+            
+                if(match.Manager === manager){
+            
+                    if(match[`Yellow card player ${i}`] === manager){
+                        yellowCards++;
+                    }
+            
+                    if(match[`Red card player ${i}`] === manager){
+                        redCards++;
+                    }
+            
+                }else{
+            
+                    if(match[`Opp. Yellow card player ${i}`] === manager){
+                        yellowCards++;
+                    }
+            
+                    if(match[`Opp. Red card player ${i}`] === manager){
+                        redCards++;
+                    }
+            
+                }
+            
+            }
     
 html += `
 
@@ -926,6 +960,14 @@ html += `
             <span class="result-badge ${resultClass}">
                 ${match.Result}
             </span>
+        </div>
+
+        <div>
+            ${yellowCards}
+        </div>
+        
+        <div>
+            ${redCards}
         </div>
 
     </div>
