@@ -935,16 +935,21 @@ function renderManagerStats(manager,data){
 
         if(!stats[season]){
 
-            stats[season] = {
-                matches:0,
-                wins:0,
-                draws:0,
-                losses:0
-            };
+        stats[season] = {
+            matches:0,
+            wins:0,
+            draws:0,
+            losses:0,
+            opponentClub:false
+        };
 
         }
 
         stats[season].matches++;
+
+        if(match["Opp. Manager"] === manager){
+            stats[season].opponentClub = true;
+        }
 
         let resultType;
 
@@ -983,7 +988,7 @@ function renderManagerStats(manager,data){
 
     html += `
     <tr
-        class="season-row"
+        class="season-row ${stats[season].opponentClub ? 'opponent-season' : ''}"
         onclick="toggleSeason('season-${season.replace(/\//g,'-')}')"
         style="cursor:pointer">
     
@@ -1003,6 +1008,7 @@ function renderManagerStats(manager,data){
     
     <tr
         id="season-${season.replace(/\//g,'-')}"
+        class="${stats[season].opponentClub ? 'opponent-season' : ''}"
         style="display:none;">
     
         <td colspan="6">
