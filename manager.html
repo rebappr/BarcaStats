@@ -889,39 +889,38 @@ function buildSeasonMatches(manager, season, data){
         if(resultType === "W") resultClass = "result-win";
         if(resultType === "L") resultClass = "result-loss";
     
-        html += `
-    
-        <a
-            href="match.html?id=${match.ID}"
-            style="
-                text-decoration:none;
-                color:inherit;
-            ">
-    
-        <div class="manager-match">
-        
-            <div class="competition-cell">
-        
-                <img
-                    src="logos/${competitionLogos[match.Competition] || 'default.png'}"
-                    class="competition-logo"
-                    alt="${match.Competition}"
-                    title="${match.Competition}">
-        
-            </div>
-        
-            <div>
-                ${match.Date}
-            Result}
-                </span>
-            </div>
-        
+html += `
+
+<a
+    href="match.html?id=${match.ID}"
+    style="
+        text-decoration:none;
+        color:inherit;
+    ">
+
+    <div class="manager-match">
+
+        <div class="competition-cell">
+
+            <img
+                src="logos/${competitionLogos[match.Competition] || 'default.png'}"
+                class="competition-logo"
+                alt="${match.Competition}"
+                title="${match.Competition}">
+
         </div>
 
-    
-        </a>
-    
-        `;
+        <div>
+            ${}">
+                ${resultType}
+            </span>
+        </div>
+
+    </div>
+
+</a>
+
+`;
     });
     
     html += `
