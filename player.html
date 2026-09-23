@@ -398,6 +398,18 @@ flex-shrink:0;
     color:var(--muted);
 }
 
+.club-title{
+    background:#e9ecef;
+    color:#222;
+    border:1px solid #cfd4da;
+}
+
+[data-theme="dark"] .club-title{
+    background:#3a3f46;
+    color:#fff;
+    border:1px solid #555;
+}
+
 @media(max-width:900px){
 
 .player-match div:nth-child(6),
@@ -908,7 +920,7 @@ Career Statistics
 
 ${Object.entries(clubStats).map(([club,s]) => `
 
-<div class="widget-title">
+<div class="widget-title club-title">
 ${club}
 </div>
 
