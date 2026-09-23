@@ -466,10 +466,11 @@ flex-shrink:0;
     grid-template-columns:
         35px
         100px
+        70px
         1fr
         90px;
 
-row-gap:8px;
+    row-gap:8px;
 }
 
 .competition-logo{
@@ -878,10 +879,10 @@ html += `
 
         <div class="competition-cell">
             <img
-            src="logos/${competitionLogos[match.competition] || 'default.png'}"
+            src="logos/${competitionLogos[match.Competition] || 'default.png'}"
             class="competition-logo"
-            alt="${match.competition}"
-            title="${match.competition}">
+            alt="${match.Competition}"
+            title="${match.Competition}">
         </div>
         
         <div>
