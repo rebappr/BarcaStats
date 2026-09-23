@@ -233,14 +233,16 @@ background:var(--meta-bg);
     background:#746923;
 }
 
-.opponent-career{
+.opponent-career .summary-box{
     background:#fff8c4;
-    border-radius:18px;
-    padding:6px;
+    border-color:#eab308;
+    color:#000;
 }
 
-[data-theme="dark"] .opponent-career{
+[data-theme="dark"] .opponent-career .summary-box{
     background:#5b5420;
+    border-color:#eab308;
+    color:#fff;
 }
 
 .matches-list{
@@ -1004,7 +1006,7 @@ ${Object.entries(clubStats)
 ${club}
 </div>
 
-<div class="summary-grid">
+<div class="summary-grid ${club !== 'FC Barcelona' ? 'opponent-career' : ''}">
 
     <div class="summary-box">
         <b>${s.seasons.size}</b>
