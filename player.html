@@ -645,6 +645,10 @@ age--;
 return age;
 }
 
+function statValue(value){
+    return value === 0 ? "-" : value;
+}
+
 function renderPlayer(player,data,players){
 
 const playerInfo =
@@ -1019,32 +1023,32 @@ ${club}
     </div>
 
     <div class="summary-box">
-        <b>${s.goals}</b>
+        <b>${statValue(s.goals)}</b>
         Goals
     </div>
 
     <div class="summary-box">
-        <b>${s.assists}</b>
+        <b>${statValue(s.assists)}</b>
         Assists
     </div>
 
     <div class="summary-box">
-        <b>${s.penaltyGoals}</b>
+        <b>${statValue(s.penaltyGoals)}</b>
         Penalty Goals
     </div>
 
     <div class="summary-box">
-        <b>${s.missedPenalties}</b>
+        <b>${statValue(s.missedPenalties)}</b>
         Missed Penalties
     </div>
 
     <div class="summary-box">
-        <b>${s.yellow}</b>
+        <b>${statValue(s.yellow)}</b>
         Yellow
     </div>
 
     <div class="summary-box">
-        <b>${s.red}</b>
+        <b>${statValue(s.red)}</b>
         Red
     </div>
 
@@ -1341,17 +1345,12 @@ style="cursor:pointer;">
 
 <td>${stats[season].matches}</td>
 
-<td>${stats[season].goals}</td>
-
-<td>${stats[season].assists}</td>
-
-<td>${stats[season].penaltyGoals}</td>
-
-<td>${stats[season].missedPenalties}</td>
-
-<td>${stats[season].yellow}</td>
-
-<td>${stats[season].red}</td>
+<td>${statValue(stats[season].goals)}</td>
+<td>${statValue(stats[season].assists)}</td>
+<td>${statValue(stats[season].penaltyGoals)}</td>
+<td>${statValue(stats[season].missedPenalties)}</td>
+<td>${statValue(stats[season].yellow)}</td>
+<td>${statValue(stats[season].red)}</td>
 
 </tr>
 
@@ -1416,17 +1415,17 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
         </span>
     </div>
 
-    <div>${game.goals}</div>
-
-    <div>${game.assists}</div>
-
-    <div>${game.penaltyGoals}</div>
-
-    <div>${game.missedPenalties}</div>
-
-    <div>${game.yellow}</div>
-
-    <div>${game.red}</div>
+    <div>${statValue(game.goals)}</div>
+    
+    <div>${statValue(game.assists)}</div>
+    
+    <div>${statValue(game.penaltyGoals)}</div>
+    
+    <div>${statValue(game.missedPenalties)}</div>
+    
+    <div>${statValue(game.yellow)}</div>
+    
+    <div>${statValue(game.red)}</div>
 
     <div class="mobile-match-stats">
 
@@ -1440,12 +1439,12 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
         </div>
 
         <div class="mobile-stats-values">
-            <span>${game.goals}</span>
-            <span>${game.assists}</span>
-            <span>${game.penaltyGoals}</span>
-            <span>${game.missedPenalties}</span>
-            <span>${game.yellow}</span>
-            <span>${game.red}</span>
+            <span>${statValue(game.goals)}</span>
+            <span>${statValue(game.assists)}</span>
+            <span>${statValue(game.penaltyGoals)}</span>
+            <span>${statValue(game.missedPenalties)}</span>
+            <span>${statValue(game.yellow)}</span>
+            <span>${statValue(game.red)}</span>
         </div>
 
     </div>
