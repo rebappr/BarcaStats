@@ -738,6 +738,12 @@ managerMatches.forEach(match=>{
 
 });
 
+const managerInfo =
+data.find(row =>
+    row.Manager === manager ||
+    row["Opp. Manager"] === manager
+);
+
 const clubsText = clubs.join(", ");
 
 const careerHtml = Object.keys(clubStats)
@@ -830,21 +836,43 @@ document.getElementById("managerProfile").innerHTML=`
         <div class="manager-meta">
 
         ${managerInfo?.["Full Name"] ? `
+        
         <div>
-            <b>Full name:</b> ${managerInfo["Full Name"]}
+        <b>Full Name:</b>
+        ${managerInfo["Full Name"]}
         </div>
+        
         ` : ""}
         
-        ${managerInfo?.Born ? `
+        ${managerInfo?.["Date of Birth"] ? `
+        
         <div>
-            <b>Born:</b> ${managerInfo.Born}
+        <b>Born:</b>
+        ${managerInfo["Date of Birth"]}
+        (${calculateAge(
+            managerInfo["Date of Birth"],
+            managerInfo["Death Date"]
+        )})
         </div>
+        
+        ` : ""}
+        
+        ${managerInfo?.["Death Date"] ? `
+        
+        <div>
+        <b>Died:</b>
+        ${managerInfo["Death Date"]}
+        </div>
+        
         ` : ""}
         
         ${managerInfo?.Nationality ? `
+        
         <div>
-            <b>Nationality:</b> ${managerInfo.Nationality}
+        <b>Nationality:</b>
+        ${managerInfo.Nationality}
         </div>
+        
         ` : ""}
 
         ${coachedBarcelona && debut ? `
@@ -1062,6 +1090,38 @@ html += `
     `;
 
     return html;
+}
+
+function calculateAge(birthDate, deathDate=""){
+
+if(!birthDate) return "";
+
+const [d,m,y] = birthDate.split(".");
+const birth = new Date(y,m-1,d);
+
+let end;
+
+if(deathDate){
+const [dd,mm,yy] = deathDate.split(".");
+end = new Date(yy,mm-1,dd);
+}else{
+end = new Date();
+}
+
+let age =
+end.getFullYear() - birth.getFullYear();
+
+const monthDiff =
+end.getMonth() - birth.getMonth();
+
+if(
+monthDiff < 0 ||
+(monthDiff === 0 && end.getDate() < birth.getDate())
+){
+age--;
+}
+
+return age;
 }
 
 function renderManagerStats(manager,data){
