@@ -869,55 +869,57 @@ function buildSeasonMatches(manager, season, data){
         `;
 
     matches.forEach(match => {
-
+    
         let resultClass = "result-draw";
-
+    
         let resultType;
-
+    
         if(match.Manager === manager){
-
+    
             resultType = match["Result type"];
-
+    
         }else{
-
+    
             resultType =
                 match["Result type"] === "W" ? "L" :
                 match["Result type"] === "L" ? "W" :
                 "D";
         }
-
+    
         if(resultType === "W") resultClass = "result-win";
         if(resultType === "L") resultClass = "result-loss";
-
+    
         html += `
-        
+    
         <a
             href="match.html?id=${match.ID}"
             style="
                 text-decoration:none;
                 color:inherit;
             ">
-        
+    
             <div class="manager-match">
-        
-                <div>
+    
+                <div class="competition-cell">
+    
                     <img
-                        src="logos/${competitionLogos[match.Competition] || '${match["Opp. Team"]}
-                </div>
-        
-                <div>
-                    <span class="result-badge ${resultClass}">
+                        src="logos/${competitionLogos[match.Competition] || 'default.png'}"
+                        class="competition-logo"
+                        alt="${match.Competition}"
+                        title="${match.Competition}">
+    
+                </div>       <span class="result-badge ${resultClass}">
                         ${match.Result}
                     </span>
                 </div>
-        
+    
             </div>
-        
+    
         </a>
-        
+    
         `;
     });
-
+    
     html += `
         </div>
     `;
