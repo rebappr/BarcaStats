@@ -649,6 +649,8 @@ career.matches
 ? ((career.wins / career.matches) * 100).toFixed(1)
 : 0;
 
+const clubsText = clubs.join(", ");
+
 document.getElementById("managerProfile").innerHTML=`
 
 <div class="manager-card">
@@ -776,7 +778,7 @@ function toggleSeason(id){
 
     el.style.display =
         el.style.display === "none"
-        ? "block"
+        ? "table-row"
         : "none";
 }
 
@@ -875,8 +877,10 @@ function renderManagerStats(manager,data){
     </tr>
     `;
 
-    document.getElementById("seasonRows").innerHTML =
-    html;
+});
+
+document.getElementById("seasonRows").innerHTML =
+html;
 
 }
 
