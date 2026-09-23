@@ -643,10 +643,7 @@ age--;
 return age;
 }
 
-function renderManager(manager,data,managers){
-
-const managerInfo =
-managers.find(p => p.Manager === manager);
+function renderManager(manager,data){
 
 const managerMatches = data.filter(match =>
 
@@ -654,23 +651,6 @@ const managerMatches = data.filter(match =>
     match["Opp. Manager"] === manager
 
 );
-
-for(let i=1;i<=6;i++){
-
-if(
-match[`Sub on ${i}`]===manager ||
-match[`Opp. Sub on ${i}`]===manager
-){
-appeared = true;
-}
-
-}
-
-if(appeared){
-managerMatches.push(match);
-}
-
-});
 
 managerMatches.sort((a,b)=>{
 
@@ -693,166 +673,6 @@ const lastMatch =
 managerMatches.length
 ? managerMatches[managerMatches.length - 1]
 : null;
-
-let nationality =
-managerInfo?.["Nationality 1"] || "";
-
-if(managerInfo?.["Nationality 2"]){
-
-nationality +=
-" / " +
-managerInfo["Nationality 2"];
-
-}
-
-const clubStats = {};
-
-data.forEach(match=>{
-
-    let forOpponent = false;
-    let appeared = false;
-
-    for(let i=1;i<=11;i++){
-
-        if(match[`Manager name ${i}`]===manager){
-            appeared = true;
-        }
-
-        if(match[`Opp. Manager name ${i}`]===manager){
-            appeared = true;
-            forOpponent = true;
-        }
-
-    }
-
-    for(let i=1;i<=6;i++){
-
-        if(match[`Sub on ${i}`]===manager){
-            appeared = true;
-        }
-
-        if(match[`Opp. Sub on ${i}`]===manager){
-            appeared = true;
-            forOpponent = true;
-        }
-
-    }
-
-    if(!appeared){
-        return;
-    }
-    
-    const club = forOpponent
-        ? match["Opp. Team"]
-        : "FC Barcelona";
-    
-    if(!clubStats[club]){
-    
-        clubStats[club] = {
-            seasons: new Set(),
-            matches:0,
-            goals:0,
-            assists:0,
-            penaltyGoals:0,
-            missedPenalties:0,
-            yellow:0,
-            red:0
-        };
-    
-    }
-    
-    clubStats[club].seasons.add(match.Season);
-    clubStats[club].matches++;
-
-for(let i=1;i<=12;i++){
-
-    if(
-        match[`Goal Manager ${i}`]===manager ||
-        match[`Opp. Goal Manager ${i}`]===manager
-    ){
-        clubStats[club].goals++;
-    }
-
-    if(
-        match[`Assist Manager ${i}`]===manager ||
-        match[`Opp. Assist Manager ${i}`]===manager
-    ){
-        clubStats[club].assists++;
-    }
-
-    if(
-        match[`Yellow manager ${i}`]===manager ||
-        match[`Opp. Yellow manager ${i}`]===manager
-    ){
-        clubStats[club].yellow++;
-    }
-
-    if(
-        match[`Red manager ${i}`]===manager ||
-        match[`Opp. Red manager ${i}`]===manager
-    ){
-        clubStats[club].red++;
-    }
-
-    let scored = null;
-
-    if(match[`Penalty manager ${i}`]===manager){
-        scored = match[`Penalty scored ${i}`];
-    }
-
-    if(match[`Opp. Penalty manager ${i}`]===manager){
-        scored = match[`Opp. Penalty scored ${i}`];
-    }
-
-    if(scored==="in"){
-        clubStats[club].penaltyGoals++;
-    }
-
-    if(scored==="not in"){
-        clubStats[club].missedPenalties++;
-    }
-
-}
-
-});
-
-const clubs = [];
-
-managerMatches.forEach(match => {
-
-    let club = null;
-
-    for(let i=1;i<=11;i++){
-
-        if(match[`Manager name ${i}`] === manager){
-            club = "FC Barcelona";
-        }
-
-        if(match[`Opp. Manager name ${i}`] === manager){
-            club = match["Opp. Team"];
-        }
-
-    }
-
-    for(let i=1;i<=6;i++){
-
-        if(match[`Sub on ${i}`] === manager){
-            club = "FC Barcelona";
-        }
-
-        if(match[`Opp. Sub on ${i}`] === manager){
-            club = match["Opp. Team"];
-        }
-
-    }
-
-    if(club && !clubs.includes(club)){
-        clubs.push(club);
-    }
-
-});
-
-const managerClub = clubs.join(", ");
 
 const career = {
 
@@ -900,13 +720,13 @@ career.matches
 
 document.getElementById("managerProfile").innerHTML=`
 
-<div class="player-card">
+<div class="manager-card">
 
-    <div class="player-info">
+    <div class="manager-info">
 
         <h1>${manager}</h1>
 
-        <div class="player-meta">
+        <div class="manager-meta">
 
             ${debut ? `
             <div>
@@ -978,8 +798,6 @@ Career Statistics
 
 </div>
 
-`).join("")}
-
 <div class="widget-title">
 Season Breakdown
 </div>
@@ -1007,7 +825,7 @@ Season Breakdown
 
 `;
 
-renderSeasonStats(manager,data);
+renderManagerStats(manager,data);
 
 }
 
@@ -1115,376 +933,91 @@ function renderManagerStats(manager,data){
     html;
 }
 
-function renderSeasonStats(manager,data){
+function renderManagerStats(manager,data){
 
-const stats={};
+    const stats = {};
 
-data.forEach(match=>{
+    data.forEach(match=>{
 
-let started=false;
-let bench=false;
+        const isManager =
+            match.Manager === manager ||
+            match["Opp. Manager"] === manager;
 
-let appeared=false;
-let forBarca=false;
-let forOpponent=false;
+        if(!isManager){
+            return;
+        }
 
-for(let i=1;i<=11;i++){
+        const season = match.Season;
 
-if(match[`Manager name ${i}`]===manager){
-    appeared=true;
-    started=true;
-    forBarca=true;
-}
+        if(!stats[season]){
 
-if(match[`Opp. Manager name ${i}`]===manager){
-    appeared=true;
-    started=true;
-    forOpponent=true;
-}
+            stats[season] = {
+                matches:0,
+                wins:0,
+                draws:0,
+                losses:0
+            };
 
-}
+        }
 
-for(let i=1;i<=6;i++){
+        stats[season].matches++;
 
-    if(match[`Sub on ${i}`]===manager){
-        appeared=true;
-        forBarca=true;
-    }
+        let resultType;
 
-    if(match[`Opp. Sub on ${i}`]===manager){
-        appeared=true;
-        forOpponent=true;
-    }
+        if(match.Manager === manager){
 
-}
+            resultType = match["Result type"];
 
-let played = appeared;
+        }else{
 
-for(let i=1;i<=12;i++){
+            resultType =
+                match["Result type"] === "W" ? "L" :
+                match["Result type"] === "L" ? "W" :
+                "D";
 
-if(
-match[`On the bench name ${i}`]===manager ||
-match[`Opp. On the bench name ${i}`]===manager
-){
-bench=true;
-}
-
-}
+        }
 
-if(!played && !bench){
-return;
-}
-
-const season=match.Season;
-
-if(!stats[season]){
-
-stats[season]={
-matches:0,
-wins:0,
-draws:0,
-losses:0,
-games:[]
-};
-
-}
-
-if(forOpponent){
-    stats[season].opponentClub = true;
-}
-
-if(played){
-    stats[season].matches++;
-}
-
-for(let i=1;i<=12;i++){
-
-    if(
-        match[`Goal Manager ${i}`]===manager ||
-        match[`Opp. Goal Manager ${i}`]===manager
-    ){
-        stats[season].goals++;
-    }
-
-    if(
-        match[`Assist Manager ${i}`]===manager ||
-        match[`Opp. Assist Manager ${i}`]===manager
-    ){
-        stats[season].assists++;
-    }
-
-    if(
-        match[`Yellow manager ${i}`]===manager ||
-        match[`Opp. Yellow manager ${i}`]===manager
-    ){
-        stats[season].yellow++;
-    }
-
-    if(
-        match[`Red manager ${i}`]===manager ||
-        match[`Opp. Red manager ${i}`]===manager
-    ){
-        stats[season].red++;
-    }
-
-    let scored = null;
-
-    if(match[`Penalty manager ${i}`]===manager){
-        scored = match[`Penalty scored ${i}`];
-    }
-
-    if(match[`Opp. Penalty manager ${i}`]===manager){
-        scored = match[`Opp. Penalty scored ${i}`];
-    }
-
-    if(scored==="in"){
-        stats[season].penaltyGoals++;
-    }
-
-    if(scored==="not in"){
-        stats[season].missedPenalties++;
-    }
-
-}
-
-let gameGoals = 0;
-let gameAssists = 0;
-let gamePenaltyGoals = 0;
-let gameMissedPenalties = 0;
-let gameYellow = 0;
-let gameRed = 0;
-
-for(let i=1;i<=12;i++){
-
-if(
-    match[`Goal Manager ${i}`]===manager ||
-    match[`Opp. Goal Manager ${i}`]===manager
-){
-    gameGoals++;
-}
+        if(resultType==="W") stats[season].wins++;
+        if(resultType==="D") stats[season].draws++;
+        if(resultType==="L") stats[season].losses++;
 
-if(
-    match[`Assist Manager ${i}`]===manager ||
-    match[`Opp. Assist Manager ${i}`]===manager
-){
-    gameAssists++;
-}
+    });
 
-if(
-    match[`Yellow manager ${i}`]===manager ||
-    match[`Opp. Yellow manager ${i}`]===manager
-){
-    gameYellow++;
-}
+    let html="";
 
-if(
-    match[`Red manager ${i}`]===manager ||
-    match[`Opp. Red manager ${i}`]===manager
-){
-    gameRed++;
-}
+    Object.keys(stats)
+    .sort()
+    .reverse()
+    .forEach(season=>{
 
-let scored = null;
+        const s = stats[season];
 
-if(match[`Penalty manager ${i}`]===manager){
-    scored = match[`Penalty scored ${i}`];
-}
+        const winPct =
+        s.matches
+        ? ((s.wins/s.matches)*100).toFixed(1)
+        : 0;
 
-if(match[`Opp. Penalty manager ${i}`]===manager){
-    scored = match[`Opp. Penalty scored ${i}`];
-}
+        html += `
+        <tr class="season-row">
 
-if(scored==="in"){
-    gamePenaltyGoals++;
-}
+            <td><strong>${season}</strong></td>
 
-if(scored==="not in"){
-    gameMissedPenalties++;
-}
+            <td>${s.matches}</td>
 
-}
+            <td>${s.wins}</td>
 
-stats[season].games.push({
-id:match.ID,
-date:match.Date,
-competition:match.Competition,
-venue:match["Home/Away"],
-opponent:match["Opp. Team"],
-result:match.Result,
-resultType: match["Result type"],
-played: played,
+            <td>${s.draws}</td>
 
-goals: gameGoals,
-assists: gameAssists,
-penaltyGoals: gamePenaltyGoals,
-missedPenalties: gameMissedPenalties,
-yellow: gameYellow,
-red: gameRed
-});
+            <td>${s.losses}</td>
 
-});
+            <td>${winPct}%</td>
 
-let html="";
+        </tr>
+        `;
+    });
 
-Object.keys(stats)
-.sort()
-.reverse()
-.forEach((season,index)=>{
-
-const seasonId=`season_${index}`;
-
-stats[season].games.sort((a,b)=>{
-
-const da =
-new Date(a.date.split(".").reverse().join("-"));
-
-const db =
-new Date(b.date.split(".").reverse().join("-"));
-
-return db - da;
-
-});
-
-html+=`
-
-<tr
-class="season-row ${stats[season].opponentClub ? 'opponent-season' : ''}"
-onclick="toggleSeason('${seasonId}')"
-style="cursor:pointer;">
-
-<td>
-<strong>${season}</strong>
-</td>
-
-<td>${stats[season].matches}</td>
-
-<td>${stats[season].goals}</td>
-
-<td>${stats[season].assists}</td>
-
-<td>${stats[season].penaltyGoals}</td>
-
-<td>${stats[season].missedPenalties}</td>
-
-<td>${stats[season].yellow}</td>
-
-<td>${stats[season].red}</td>
-
-</tr>
-
-<tr>
-
-<td colspan="8" style="padding:0;border:none;">
-
-<div
-id="${seasonId}"
-class="matches-list">
-
-<div class="matches-header">
-
-<div></div>
-<div>Date</div>
-<div>Venue</div>
-<div>Opponent</div>
-<div>Result</div>
-<div>G</div>
-<div>A</div>
-<div>PG</div>
-<div>MP</div>
-<div>YC</div>
-<div>RC</div>
-
-</div>
-
-${stats[season].games.map(game=>`
-
-<a
-href="match.html?id=${game.id}"
-style="
-text-decoration:none;
-color:inherit;
-">
-
-<div
-class="manager-match ${game.played ? 'manager-started' : 'manager-bench'}">
-
-    <div class="competition-cell">
-        <img
-        src="logos/${competitionLogos[game.competition] || 'default.png'}"
-        class="competition-logo"
-        alt="${game.competition}"
-        title="${game.competition}">
-    </div>
-
-    <div>${game.date}</div>
-        
-    <div>${game.venue}</div>
-
-    <div>${game.opponent}</div>
-
-    <div>
-        <span class="result-badge ${
-            game.resultType === "W" ? "result-win" :
-            game.resultType === "D" ? "result-draw" :
-            game.resultType === "L" ? "result-loss" :
-            ""
-        }">
-            ${game.result}
-        </span>
-    </div>
-
-    <div>${game.goals}</div>
-
-    <div>${game.assists}</div>
-
-    <div>${game.penaltyGoals}</div>
-
-    <div>${game.missedPenalties}</div>
-
-    <div>${game.yellow}</div>
-
-    <div>${game.red}</div>
-
-    <div class="mobile-match-stats">
-
-        <div class="mobile-stats-header">
-            <span>G</span>
-            <span>A</span>
-            <span>PG</span>
-            <span>MP</span>
-            <span>YC</span>
-            <span>RC</span>
-        </div>
-
-        <div class="mobile-stats-values">
-            <span>${game.goals}</span>
-            <span>${game.assists}</span>
-            <span>${game.penaltyGoals}</span>
-            <span>${game.missedPenalties}</span>
-            <span>${game.yellow}</span>
-            <span>${game.red}</span>
-        </div>
-
-    </div>
-
-</div>
-
-</a>
-
-`).join("")}
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById("seasonRows").innerHTML=
-html;
+    document.getElementById("seasonRows").innerHTML =
+    html;
 
 }
 
