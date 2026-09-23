@@ -679,7 +679,7 @@ data.forEach(match=>{
         return;
     }
 
-    seasons.add(match.Season);
+    clubStats[club].seasons.add(match.Season);
 
     const club = forOpponent
         ? match["Opp. Team"]
@@ -688,6 +688,7 @@ data.forEach(match=>{
     if(!clubStats[club]){
 
         clubStats[club] = {
+            seasons: new Set(),
             matches:0,
             goals:0,
             assists:0,
@@ -866,7 +867,7 @@ ${club}
 <div class="summary-grid">
 
     <div class="summary-box">
-        <b>${club === "FC Barcelona" ? seasons.size : "-"}</b>
+        <b>${s.seasons.size}</b>
         Seasons
     </div>
 
