@@ -633,24 +633,29 @@ managerMatches.some(
     match => match.Manager === manager
 );
 
-const career = {
-
-    seasons:new Set(),
-    matches:0,
-    wins:0,
-    draws:0,
-    losses:0,
-
-    goalsFor:0,
-    goalsAgainst:0
-
-};
+const clubStats = {};
 
 managerMatches.forEach(match=>{
 
-    career.matches++;
+    const club =
+        match.Manager === manager
+        ? "FC Barcelona"
+        : match["Opp. Team"];
 
-    career.seasons.add(match.Season);
+    if(!clubStats[club]){
+
+        clubStats[club] = {
+            seasons:new Set(),
+            matches:0,
+            wins:0,
+            draws:0,
+            losses:0
+        };
+
+    }
+
+    clubStats[club].matches++;
+    clubStats[club].seasons.add(match.Season);
 
     let resultType;
 
@@ -667,9 +672,9 @@ managerMatches.forEach(match=>{
 
     }
 
-    if(resultType === "W") career.wins++;
-    if(resultType === "D") career.draws++;
-    if(resultType === "L") career.losses++;
+    if(resultType === "W") clubStats[club].wins++;
+    if(resultType === "D") clubStats[club].draws++;
+    if(resultType === "L") clubStats[club].losses++;
 
 });
 
@@ -679,6 +684,69 @@ career.matches
 : 0;
 
 const clubsText = clubs.join(", ");
+
+const careerHtml = Object.keys(clubStats)
+.sort((a,b)=>{
+
+    if(a === "FC Barcelona") return -1;
+    if(b === "FC Barcelona") return 1;
+
+    return a.localeCompare(b);
+
+})
+.map(club=>{
+
+    const s = clubStats[club];
+
+    const winRate =
+        s.matches
+        ? ((s.wins / s.matches) * 100).toFixed(1)
+        : 0;
+
+    return `
+
+        <div class="widget-title club-title">
+            ${club}
+        </div>
+
+        <div class="summary-grid">
+
+            <div class="summary-box">
+                <b>${s.seasons.size}</b>
+                Seasons
+            </div>
+
+            <div class="summary-box">
+                <b>${s.matches}</b>
+                Matches
+            </div>
+
+            <div class="summary-box">
+                <b>${s.wins}</b>
+                Wins
+            </div>
+
+            <div class="summary-box">
+                <b>${s.draws}</b>
+                Draws
+            </div>
+
+            <div class="summary-box">
+                <b>${s.losses}</b>
+                Losses
+            </div>
+
+            <div class="summary-box">
+                <b>${winRate}%</b>
+                Win %
+            </div>
+
+        </div>
+
+    `;
+
+}).join("");
+`
 
 document.getElementById("managerProfile").innerHTML=`
 
@@ -729,44 +797,7 @@ document.getElementById("managerProfile").innerHTML=`
 Career Statistics
 </div>
 
-<div class="summary-grid">
-
-    <div class="summary-box">
-        <b>${career.seasons.size}</b>
-        Seasons
-    </div>
-
-    <div class="summary-box">
-        <b>${career.matches}</b>
-        Matches
-    </div>
-
-    <div class="summary-box">
-        <b>${career.wins}</b>
-        Wins
-    </div>
-
-    <div class="summary-box">
-        <b>${career.draws}</b>
-        Draws
-    </div>
-
-    <div class="summary-box">
-        <b>${career.losses}</b>
-        Losses
-    </div>
-
-    <div class="summary-box">
-        <b>${winRate}%</b>
-        Win %
-    </div>
-
-    <div class="summary-box">
-        <b>${career.goalsFor}:${career.goalsAgainst}</b>
-        Score
-    </div>
-
-</div>
+${careerHtml}
 
 <div class="widget-title">
 Season Breakdown
