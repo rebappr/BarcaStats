@@ -812,6 +812,10 @@ const careerHtml = Object.keys(clubStats)
 
 }).join("");
 
+const managerInfo = data.find(row =>
+    row.Manager === manager
+);
+
 document.getElementById("managerProfile").innerHTML=`
 
 <div class="manager-card">
@@ -824,6 +828,24 @@ document.getElementById("managerProfile").innerHTML=`
         </div>
 
         <div class="manager-meta">
+
+        ${managerInfo?.["Full name"] ? `
+        <div>
+            <b>Full name:</b> ${managerInfo["Full name"]}
+        </div>
+        ` : ""}
+        
+        ${managerInfo?.Born ? `
+        <div>
+            <b>Born:</b> ${managerInfo.Born}
+        </div>
+        ` : ""}
+        
+        ${managerInfo?.Nationality ? `
+        <div>
+            <b>Nationality:</b> ${managerInfo.Nationality}
+        </div>
+        ` : ""}
 
         ${coachedBarcelona && debut ? `
         <div>
