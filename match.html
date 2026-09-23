@@ -2129,13 +2129,19 @@ const squadsHtml = `
 
            ${barcaBench}
            
-           <h4>Manager</h4>
-           
-           <div class="player">
-           ${escapeHtml(barcaManager)}
-           </div>
-
-       </div>
+            <h4>Manager</h4>
+            
+            <div class="player">
+            
+                <a
+                    class="player-link"
+                    href="manager.html?name=${encodeURIComponent(barcaManager)}">
+            
+                    ${escapeHtml(barcaManager)}
+            
+                </a>
+            
+      </div>
 
        <div
            id="lineup-opp"
