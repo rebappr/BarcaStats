@@ -245,45 +245,6 @@ background:var(--meta-bg);
     color:#fff;
 }
 
-.matches-list{
-display:none;
-margin-top:8px;
-padding:8px;
-background:var(--meta-bg);
-border-radius:12px;
-}
-
-.matches-list.active{
-display:block;
-}
-
-.matches-header{
-display:grid;
-grid-template-columns:
-35px
-90px
-80px
-auto
-90px
-40px
-40px
-40px
-40px
-40px
-40px;
-
-gap:10px;
-
-font-size:12px;
-font-weight:700;
-text-transform:uppercase;
-
-padding:8px;
-margin-bottom:6px;
-
-opacity:.7;
-}
-
 .manager-match{
 display:grid;
 grid-template-columns:
@@ -325,16 +286,6 @@ background:var(--card-bg);
 
 .manager-match:last-child{
 border-bottom:none;
-}
-
-.manager-started{
-border-left:4px solid #22c55e;
-padding-left:10px;
-}
-
-.manager-bench{
-border-left:4px solid #f59e0b;
-padding-left:10px;
 }
 
 .bench-label{
@@ -387,10 +338,6 @@ width:20px;
 height:20px;
 object-fit:contain;
 flex-shrink:0;
-}
-
-.mobile-match-stats{
-    display:none;
 }
 
 .manager-club{
@@ -451,23 +398,6 @@ flex-shrink:0;
     display:none;
 }
 
-.matches-header div:nth-child(6),
-.matches-header div:nth-child(7),
-.matches-header div:nth-child(8),
-.matches-header div:nth-child(9),
-.matches-header div:nth-child(10),
-.matches-header div:nth-child(11){
-    display:none;
-}
-
-.matches-header{
-grid-template-columns:
-30px
-90px
-1fr
-70px;
-}
-
 .manager-match{
 grid-template-columns:
 30px
@@ -476,36 +406,6 @@ grid-template-columns:
 70px;
 
 row-gap:8px;
-}
-
-.mobile-match-stats{
-    display:block;
-    grid-column:1 / -1;
-
-    margin-top:6px;
-    padding-top:6px;
-
-    border-top:1px solid var(--meta-border);
-}
-
-.mobile-stats-header,
-.mobile-stats-values{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-
-    text-align:center;
-}
-
-.mobile-stats-header{
-    font-size:10px;
-    font-weight:700;
-    opacity:.7;
-    margin-bottom:4px;
-}
-
-.mobile-stats-values{
-    font-size:12px;
-    font-weight:600;
 }
 
 .competition-logo{
@@ -534,11 +434,6 @@ font-size:11px;
 }
 
 .competition-cell span{
-    display:none;
-}
-
-.matches-header div:nth-child(3),
-.manager-match div:nth-child(3){
     display:none;
 }
 
@@ -835,102 +730,6 @@ document
 .getElementById(id)
 .classList.toggle("active");
 
-}
-
-function renderManagerStats(manager,data){
-
-    const stats = {};
-
-    data.forEach(match=>{
-
-        const isManager =
-            match.Manager === manager ||
-            match["Opp. Manager"] === manager;
-
-        if(!isManager){
-            return;
-        }
-
-        const season = match.Season;
-
-        if(!stats[season]){
-
-            stats[season] = {
-                matches:0,
-                wins:0,
-                draws:0,
-                losses:0,
-                games:[]
-            };
-
-        }
-
-        stats[season].matches++;
-
-        let resultType;
-
-        if(match.Manager === manager){
-
-            resultType = match["Result type"];
-
-        }else{
-
-            resultType =
-                match["Result type"] === "W" ? "L" :
-                match["Result type"] === "L" ? "W" :
-                "D";
-
-        }
-
-        if(resultType==="W") stats[season].wins++;
-        if(resultType==="D") stats[season].draws++;
-        if(resultType==="L") stats[season].losses++;
-
-        stats[season].games.push({
-
-            id:match.ID,
-            date:match.Date,
-            competition:match.Competition,
-            opponent:match["Opp. Team"],
-            result:match.Result,
-            resultType
-
-        });
-
-    });
-
-    let html = "";
-
-    Object.keys(stats)
-    .sort()
-    .reverse()
-    .forEach((season,index)=>{
-
-        const s = stats[season];
-
-        const winPct =
-        s.matches
-        ? ((s.wins/s.matches)*100).toFixed(1)
-        : 0;
-
-        html += `
-        <tr
-        class="season-row"
-        onclick="toggleSeason('season_${index}')">
-
-            <td>${season}</td>
-            <td>${s.matches}</td>
-            <td>${s.wins}</td>
-            <td>${s.draws}</td>
-            <td>${s.losses}</td>
-            <td>${winPct}%</td>
-
-        </tr>
-        `;
-    });
-
-    document.getElementById("seasonRows").innerHTML =
-    html;
 }
 
 function renderManagerStats(manager,data){
