@@ -678,15 +678,13 @@ data.forEach(match=>{
     if(!appeared){
         return;
     }
-
-    clubStats[club].seasons.add(match.Season);
-
+    
     const club = forOpponent
         ? match["Opp. Team"]
         : "FC Barcelona";
-
+    
     if(!clubStats[club]){
-
+    
         clubStats[club] = {
             seasons: new Set(),
             matches:0,
@@ -697,10 +695,10 @@ data.forEach(match=>{
             yellow:0,
             red:0
         };
-
+    
     }
-
-    clubStats[club].matches++;
+    
+    clubStats[club].seasons.add(match.Season);
 
     for(let i=1;i<=12;i++){
 
