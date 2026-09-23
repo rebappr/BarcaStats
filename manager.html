@@ -686,11 +686,6 @@ managerMatches.forEach(match=>{
 
 });
 
-const winRate =
-career.matches
-? ((career.wins / career.matches) * 100).toFixed(1)
-: 0;
-
 const clubsText = clubs.join(", ");
 
 const careerHtml = Object.keys(clubStats)
@@ -754,7 +749,6 @@ const careerHtml = Object.keys(clubStats)
     `;
 
 }).join("");
-`
 
 document.getElementById("managerProfile").innerHTML=`
 
