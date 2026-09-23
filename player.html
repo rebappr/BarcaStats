@@ -767,18 +767,20 @@ for(let i=1;i<=12;i++){
 
 });
 
-const clubs = new Set();
+const clubs = [];
 
-for (const match of data) {
+playerMatches.forEach(match => {
+
+    let club = null;
 
     for(let i=1;i<=11;i++){
 
         if(match[`Player name ${i}`] === player){
-            clubs.add("FC Barcelona");
+            club = "FC Barcelona";
         }
 
         if(match[`Opp. Player name ${i}`] === player){
-            clubs.add(match["Opp. Team"]);
+            club = match["Opp. Team"];
         }
 
     }
@@ -786,16 +788,22 @@ for (const match of data) {
     for(let i=1;i<=6;i++){
 
         if(match[`Sub on ${i}`] === player){
-            clubs.add("FC Barcelona");
+            club = "FC Barcelona";
         }
 
         if(match[`Opp. Sub on ${i}`] === player){
-            clubs.add(match["Opp. Team"]);
+            club = match["Opp. Team"];
         }
 
     }
 
-}
+    if(club && !clubs.includes(club)){
+        clubs.push(club);
+    }
+
+});
+
+const playerClub = clubs.join(", ");
 
 const playerClub =
     clubs.size
@@ -1072,8 +1080,6 @@ if(forOpponent){
 if(played){
     stats[season].matches++;
 }
-
-for(let i=1;i<=12;i++){
 
 for(let i=1;i<=12;i++){
 
