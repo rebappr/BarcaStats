@@ -901,13 +901,11 @@ html += `
     <div class="manager-match">
 
         <div class="competition-cell">
-
             <img
-                src="logos/${competitionLogos[match.Competition] || 'default.png'}"
-                class="competition-logo"
-                alt="${match.Competition}"
-                title="${match.Competition}">
-
+            src="logos/${competitionLogos[game.competition] || 'default.png'}"
+            class="competition-logo"
+            alt="${game.competition}"
+            title="${game.competition}">
         </div>
 
         <div>
