@@ -458,22 +458,19 @@ flex-shrink:0;
 
 @media(max-width:900px){
 
-.manager-match div:nth-child(6),
-.manager-match div:nth-child(7),
-.manager-match div:nth-child(8),
-.manager-match div:nth-child(9),
-.manager-match div:nth-child(10),
-.manager-match div:nth-child(11){
+.manager-match div:nth-child(3){
     display:none;
 }
 
-.manager-match{
+.manager-match, 
+.player-match{
     grid-template-columns:
-        35px
-        100px
-        70px
+        30px
+        90px
         1fr
-        90px;
+        90px
+        35px
+        35px;
 
     row-gap:8px;
 }
