@@ -567,11 +567,13 @@ const competitionLogos = {
     "European Cup": "ec.png"
 };
 
-fetch("data.json")
-.then(r=>r.json())
-.then(data=>{
+Promise.all([
+    fetch("data.json").then(r=>r.json()),
+    fetch("managers.json").then(r=>r.json())
+])
+.then(([data, managers])=>{
 
-renderManager(managerName,data);
+    renderManager(managerName, data, managers);
 
 });
 
@@ -579,7 +581,7 @@ function statValue(value){
     return value === 0 ? "-" : value;
 }
 
-function renderManager(manager,data){
+function renderManager(manager,data,managers){
 
 const managerMatches = data.filter(match =>
 
@@ -739,10 +741,7 @@ managerMatches.forEach(match=>{
 });
 
 const managerInfo =
-data.find(row =>
-    row.Manager === manager ||
-    row["Opp. Manager"] === manager
-);
+managers.find(m => m.Manager === manager);
 
 const clubsText = clubs.join(", ");
 
@@ -818,7 +817,7 @@ const careerHtml = Object.keys(clubStats)
 
 }).join("");
 
-const managerInfo = data.find(row =>
+const managerInfo = managers.find(row =>
     row.Manager === manager
 );
 
