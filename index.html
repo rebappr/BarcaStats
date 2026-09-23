@@ -1054,7 +1054,7 @@ function initPlayerSearch(){
         results.innerHTML =
             `<div class="player-search-results">
                 ${filtered.map(player => `
-                    <a class="player.html?name=${encodeURIComponent(player)}">
+                    <a class="player-search-item" href="player.html?name=${encodeURIComponent(player)}">
                         ${player}
                     </a>
                 `).join("")}
