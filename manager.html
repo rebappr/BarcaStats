@@ -522,6 +522,20 @@ const managerMatches = data.filter(match =>
 
 );
 
+const seasonMatches = {};
+
+managerMatches.forEach(match => {
+
+    const season = match.Season || "Unknown";
+
+    if(!seasonMatches[season]){
+        seasonMatches[season] = [];
+    }
+
+    seasonMatches[season].push(match);
+
+});
+
 const clubs = [];
 
 managerMatches.forEach(match => {
@@ -614,6 +628,96 @@ career.matches
 ? ((career.wins / career.matches) * 100).toFixed(1)
 : 0;
 
+const clubsText = clubs.join(", ");
+
+let seasonsHtml = "";
+
+Object.keys(seasonMatches)
+.sort()
+.reverse()
+.forEach(season => {
+
+    seasonsHtml += `
+        <div class="season-block">
+
+            <div
+                class="season-header"
+                onclick="toggleSeason('season-${season.replace(/\//g,"-")}')">
+
+                ${season}
+                (${seasonMatches[season].length})
+            </div>
+
+            <div
+                id="season-${season.replace(/\//g,'-')}"
+                class="season-matches"
+                style="display:none;">
+
+                <table class="stats-table">
+
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Competition</th>
+                            <th>Opponent</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+    `;
+
+    seasonMatches[season].forEach(match => {
+
+        let resultClass = "result-draw";
+
+        let resultType;
+
+        if(match.Manager === manager){
+
+            resultType = match["Result type"];
+
+        }else{
+
+            resultType =
+                match["Result type"] === "W" ? "L" :
+                match["Result type"] === "L" ? "W" :
+                "D";
+
+        }
+
+        if(resultType === "W") resultClass = "result-win";
+        if(resultType === "L") resultClass = "result-loss";
+
+        seasonsHtml += `
+            <tr
+                style="cursor:pointer"
+                onclick="location.href='match.html?id=${match.ID}'">
+
+                <td>${match.Date}</td>
+
+                <td>${match.Competition}</td>
+
+                <td>${match["Opp. Team"]}</td>
+
+                <td>
+                    <span class="result-badge ${resultClass}">
+                        ${match.Result}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+    });
+
+    seasonsHtml += `
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    `;
+});
 
 
 document.getElementById("managerProfile").innerHTML=`
@@ -731,16 +835,28 @@ Season Breakdown
 
 `;
 
+<div class="widget-title">
+    Matches by Season
+</div>
+
+<div class="widget-card">
+    ${seasonsHtml}
+</div>
+
 renderManagerStats(manager,data);
 
 }
 
 function toggleSeason(id){
 
-document
-.getElementById(id)
-.classList.toggle("active");
+    const el = document.getElementById(id);
 
+    if(!el) return;
+
+    el.style.display =
+        el.style.display === "none"
+        ? "block"
+        : "none";
 }
 
 function renderManagerStats(manager,data){
