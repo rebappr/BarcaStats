@@ -667,6 +667,15 @@ barcaMatches.length
 ? barcaMatches[barcaMatches.length - 1]
 : null;
 
+let nationality =
+playerInfo?.["Nationality 1"] || "";
+
+if(playerInfo?.["Nationality 2"]){
+
+nationality +=
+" / " +
+playerInfo["Nationality 2"];
+
 const coachedBarcelona =
 managerMatches.some(
     match => match.Manager === manager
