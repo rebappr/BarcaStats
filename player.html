@@ -233,6 +233,16 @@ background:var(--meta-bg);
     background:#746923;
 }
 
+.opponent-career{
+    background:#fff8c4;
+    border-radius:18px;
+    padding:6px;
+}
+
+[data-theme="dark"] .opponent-career{
+    background:#5b5420;
+}
+
 .matches-list{
 display:none;
 margin-top:8px;
@@ -898,6 +908,8 @@ Career Statistics
 
 ${Object.entries(clubStats).map(([club,s]) => `
 
+<div class="${club !== 'FC Barcelona' ? 'opponent-career' : ''}">
+
 <div class="widget-title">
 ${club}
 </div>
@@ -943,6 +955,8 @@ ${club}
         <b>${s.red}</b>
         Red
     </div>
+
+</div>
 
 </div>
 
