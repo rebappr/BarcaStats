@@ -908,9 +908,7 @@ Career Statistics
 
 ${Object.entries(clubStats).map(([club,s]) => `
 
-<div class="${club !== 'FC Barcelona' ? 'opponent-career' : ''}">
-
-<div class="widget-title ${club !== 'FC Barcelona' ? 'opponent-season' : ''}">
+<div class="widget-title">
 ${club}
 </div>
 
@@ -955,8 +953,6 @@ ${club}
         <b>${s.red}</b>
         Red
     </div>
-
-</div>
 
 </div>
 
