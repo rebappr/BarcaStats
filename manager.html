@@ -157,7 +157,7 @@ border-radius:18px;
 
 .summary-grid{
 display:grid;
-grid-template-columns:repeat(8,1fr);
+grid-template-columns:repeat(7,1fr);
 gap:8px;
 }
 
@@ -506,38 +506,6 @@ renderManager(managerName,data);
 
 });
 
-function calculateAge(birthDate, deathDate=""){
-
-if(!birthDate) return "";
-
-const [d,m,y] = birthDate.split(".");
-const birth = new Date(y,m-1,d);
-
-let end;
-
-if(deathDate){
-const [dd,mm,yy] = deathDate.split(".");
-end = new Date(yy,mm-1,dd);
-}else{
-end = new Date();
-}
-
-let age =
-end.getFullYear() - birth.getFullYear();
-
-const monthDiff =
-end.getMonth() - birth.getMonth();
-
-if(
-monthDiff < 0 ||
-(monthDiff === 0 && end.getDate() < birth.getDate())
-){
-age--;
-}
-
-return age;
-}
-
 function renderManager(manager,data){
 
 const managerMatches = data.filter(match =>
@@ -575,7 +543,10 @@ const career = {
     matches:0,
     wins:0,
     draws:0,
-    losses:0
+    losses:0,
+
+    goalsFor:0,
+    goalsAgainst:0
 
 };
 
@@ -689,6 +660,11 @@ Career Statistics
     <div class="summary-box">
         <b>${winRate}%</b>
         Win %
+    </div>
+
+    <div class="summary-box">
+        <b>${career.goalsFor}:${career.goalsAgainst}</b>
+        Score
     </div>
 
 </div>
