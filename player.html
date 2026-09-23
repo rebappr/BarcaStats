@@ -701,39 +701,57 @@ data.forEach(match=>{
     clubStats[club].matches++;
 
     for(let i=1;i<=12;i++){
-
-        if(match[`Goal Player ${i}`]===player){
+    
+        if(
+            match[`Goal Player ${i}`]===player ||
+            match[`Opp. Goal Player ${i}`]===player
+        ){
             clubStats[club].goals++;
         }
-
-        if(match[`Assist Player ${i}`]===player){
+    
+        if(
+            match[`Assist Player ${i}`]===player ||
+            match[`Opp. Assist Player ${i}`]===player
+        ){
             clubStats[club].assists++;
         }
-
-        if(match[`Yellow player ${i}`]===player){
+    
+        if(
+            match[`Yellow player ${i}`]===player ||
+            match[`Opp. Yellow player ${i}`]===player
+        ){
             clubStats[club].yellow++;
         }
-
-        if(match[`Red player ${i}`]===player){
+    
+        if(
+            match[`Red player ${i}`]===player ||
+            match[`Opp. Red player ${i}`]===player
+        ){
             clubStats[club].red++;
         }
-
+    
     }
 
     for(let i=1;i<=12;i++){
-
-        if(match[`Penalty player ${i}`]===player){
-
-            if(match[`Penalty scored ${i}`]==="in"){
-                clubStats[club].penaltyGoals++;
-            }
-
-            if(match[`Penalty scored ${i}`]==="not in"){
-                clubStats[club].missedPenalties++;
-            }
-
+    
+        let scored = null;
+    
+        if(match[`Penalty player ${i}`] === player){
+            scored = match[`Penalty scored ${i}`];
         }
-
+    
+        if(match[`Opp. Penalty player ${i}`] === player){
+            scored = match[`Opp. Penalty scored ${i}`];
+        }
+    
+        if(scored === "in"){
+            clubStats[club].penaltyGoals++;
+        }
+    
+        if(scored === "not in"){
+            clubStats[club].missedPenalties++;
+        }
+    
     }
 
 });
