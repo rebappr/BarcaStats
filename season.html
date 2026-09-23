@@ -1684,7 +1684,9 @@ sortedPlayers.forEach(([name, stats]) => {
 html += `
 <tr>
    <td class="${statsSortColumn==='name'?'stats-selected':''}">
-       <a href="player.html?name=${encodeURIComponentnt-weight:600;">${name}</a>
+      <a class="player-link" href="player.html?name=${encodeURIComponent(name)}">
+         ${name}
+      </a>
    </td>
    <td class="${statsSortColumn==='squad'?'stats-selected':''}">
        ${stats.squad}
