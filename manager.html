@@ -782,6 +782,73 @@ function toggleSeason(id){
         : "none";
 }
 
+function buildSeasonMatches(manager, season, data){
+
+    const matches = data.filter(match => {
+
+        const isManager =
+            match.Manager === manager ||
+            match["Opp. Manager"] === manager;
+
+        return isManager && match.Season === season;
+
+    });
+
+    let html = `
+        <table class="stats-table">
+            <tbody>
+    `;
+
+    matches.forEach(match => {
+
+        let resultClass = "result-draw";
+
+        let resultType;
+
+        if(match.Manager === manager){
+
+            resultType = match["Result type"];
+
+        }else{
+
+            resultType =
+                match["Result type"] === "W" ? "L" :
+                match["Result type"] === "L" ? "W" :
+                "D";
+        }
+
+        if(resultType === "W") resultClass = "result-win";
+        if(resultType === "L") resultClass = "result-loss";
+
+        html += `
+            <tr
+                onclick="location.href='match.html?id=${match.ID}'"
+                style="cursor:pointer">
+
+                <td>${match.Date}</td>
+
+                <td>${match.Competition}</td>
+
+                <td>${match["Opp. Team"]}</td>
+
+                <td>
+                    <span class="result-badge ${resultClass}">
+                        ${match.Result}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    return html;
+}
+
 function renderManagerStats(manager,data){
 
     const stats = {};
@@ -871,7 +938,9 @@ function renderManagerStats(manager,data){
         style="display:none;">
     
         <td colspan="6">
-            Season matches
+        
+            ${buildSeasonMatches(manager, season, data)}
+        
         </td>
     
     </tr>
