@@ -663,15 +663,6 @@ barcaMatches.length
 ? barcaMatches[barcaMatches.length - 1]
 : null;
 
-let nationality =
-playerInfo?.["Nationality 1"] || "";
-
-if(playerInfo?.["Nationality 2"]){
-
-nationality +=
-" / " +
-playerInfo["Nationality 2"];
-
 const coachedBarcelona =
 managerMatches.some(
     match => match.Manager === manager
@@ -752,6 +743,18 @@ managerMatches.forEach(match=>{
 
 const managerInfo =
 managers.find(m => m.Manager === manager);
+
+let nationality =
+managerInfo?.Nationality || "";
+
+if(
+    managerInfo?.["Nationality 2"] &&
+    managerInfo["Nationality 2"] !== nationality
+){
+    nationality +=
+        " / " +
+        managerInfo["Nationality 2"];
+}
 
 const clubsText = clubs.join(", ");
 
@@ -871,11 +874,11 @@ document.getElementById("managerProfile").innerHTML=`
         
         ` : ""}
         
-        ${managerInfo?.Nationality ? `
+        ${nationality ? `
         
         <div>
-        <b>Nationality:</b>
-        ${managerInfo.Nationality}
+            <b>Nationality:</b>
+            ${nationality}
         </div>
         
         ` : ""}
