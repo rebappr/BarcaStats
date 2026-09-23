@@ -987,7 +987,18 @@ ${lastMatch ? `
 Career Statistics
 </div>
 
-${Object.entries(clubStats).map(([club,s]) => `
+${Object.entries(clubStats)
+
+.sort(([clubA],[clubB]) => {
+
+    if(clubA === "FC Barcelona") return -1;
+    if(clubB === "FC Barcelona") return 1;
+
+    return clubA.localeCompare(clubB);
+
+})
+
+.map(([club,s]) => `
 
 <div class="widget-title club-title">
 ${club}
