@@ -493,6 +493,10 @@ color:#A50044;
 }
 
 .main-menu a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     padding:12px 20px;
 
     border-radius:14px;
@@ -508,9 +512,6 @@ color:#A50044;
     font-weight:700;
 
     transition:all .2s ease;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,.05);
 }
 
 .main-menu a:hover{
@@ -535,6 +536,10 @@ color:#A50044;
 
 [data-theme="dark"] .main-menu a:hover{
     background:rgba(255,255,255,.08);
+}
+
+.main-menu a img{
+    display:none;
 }
 
 @media(max-width:900px){
@@ -597,9 +602,9 @@ color:#A50044;
     }
 
     .main-menu a img{
-        width:22px;
-        height:22px;
-
+        display:block;
+        width:28px;
+        height:28px;
         object-fit:contain;
     }
 
