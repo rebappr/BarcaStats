@@ -89,8 +89,8 @@ html[data-theme="dark"]{
         --bg:#f8fafc;
         --text:#0f172a;
 
-        --card-bg:#ffffff;
-        --card-border:#e2e8f0;
+        --card-bg:rgba(255,255,255,.88);
+        --card-border:rgba(0,0,0,.08);
 
         --meta-bg:#dfe5eb;
         --meta-border:#e2e8f0;
@@ -127,8 +127,8 @@ html[data-theme="light"]{
     --bg:#f8fafc;
     --text:#0f172a;
 
-    --card-bg:#ffffff;
-    --card-border:#e2e8f0;
+    --card-bg:rgba(255,255,255,.88);
+    --card-border:rgba(0,0,0,.08);
 
     --meta-bg:#dfe5eb;
     --meta-border:#e2e8f0;
