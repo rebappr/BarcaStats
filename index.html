@@ -687,6 +687,16 @@ Loading...
 </div>
 </div>
 
+<div class="widget-title">
+Top 10 Under Hansi Flick
+</div>
+
+<div class="widget-card">
+    <div id="topFlickPlayers">
+        Loading...
+    </div>
+</div>
+
 </div>
 
 <div class="right-column">
@@ -746,6 +756,7 @@ function renderHome(){
 
 renderLastMatch();
 renderNextMatch();
+renderTopFlickPlayers();
 
 const season = [...new Set(
 allMatches.map(m => m.Season)
@@ -888,6 +899,153 @@ document.getElementById("nextMatch").innerHTML = `
 
 </a>
 `;
+}
+
+function renderTopFlickPlayers(){
+
+    const stats = {};
+
+    // iba zápasy pod Flickom
+    const flickMatches = allMatches.filter(
+        m => m.Manager === "Hansi Flick"
+    );
+
+    function addPlayer(name){
+
+        if(!name) return;
+
+        name = String(name).trim();
+
+        if(name.includes("(OG)")) return;
+
+        if(!stats[name]){
+
+            stats[name] = {
+                squad:0,
+                goals:0,
+                assists:0
+            };
+
+        }
+    }
+
+    flickMatches.forEach(match => {
+
+        // squad appearances
+        for(let i=1;i<=11;i++){
+
+            const player = match[`Player name ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].squad++;
+
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player =
+            match[`On the bench name ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].squad++;
+
+            }
+
+        }
+
+        // goals
+        for(let i=1;i<=12;i++){
+
+            const player =
+            match[`Goal Player ${i}`];
+
+            if(player && !player.includes("(OG)")){
+
+                addPlayer(player);
+                stats[player].goals++;
+
+            }
+
+        }
+
+        // assists
+        for(let i=1;i<=12;i++){
+
+            const player =
+            match[`Assist Player ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].assists++;
+
+            }
+
+        }
+
+    });
+
+    const top = Object.entries(stats)
+    .map(([name,s]) => ({
+        name,
+        squad:s.squad,
+        goals:s.goals,
+        assists:s.assists,
+        total:s.goals + s.assists
+    }))
+    .sort((a,b) => b.total - a.total)
+    .slice(0,10);
+
+    let html = `
+    <table class="stats-table">
+
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Sq</th>
+                <th>G</th>
+                <th>A</th>
+                <th>G+A</th>
+            </tr>
+        </thead>
+
+        <tbody>
+    `;
+
+    top.forEach(player => {
+
+        html += `
+        <tr>
+
+            <td>
+                <a
+                    class="player-link"
+                    href="player.html?name=${encodeURIComponent(player.name)}">
+                    ${player.name}
+                </<td>${player.goals}</td>
+            <td>${player.assists}</td>
+            <td>${player.total}</td>
+
+        </tr>
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById(
+        "topFlickPlayers"
+    ).innerHTML = html;
+
 }
 
 function renderTopScorers(){
