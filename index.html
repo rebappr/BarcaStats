@@ -790,17 +790,6 @@ renderLastMatch();
 renderNextMatch();
 renderTopFlickPlayers();
 
-const season = [...new Set(
-allMatches.map(m => m.Season)
-)]
-.sort()
-.reverse()[0];
-
-const seasonMatches =
-allMatches.filter(
-m => m.Season === season
-);
-
 initPersonSearch();
 
 renderTopScorers();
