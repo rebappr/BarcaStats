@@ -937,28 +937,6 @@ document.getElementById("nextMatch").innerHTML = `
 `;
 }
 
-function sortFlick(column){
-
-    if(flickSortColumn === column){
-
-        flickSortDirection =
-            flickSortDirection === "asc"
-            ? "desc"
-            : "asc";
-
-    }else{
-
-        flickSortColumn = column;
-        flickSortDirection = "desc";
-
-    }
-
-    renderTopFlickPlayers();
-
-}
-
-window.sortFlick = sortFlick;
-
 function renderTopFlickPlayers(){
 
     const stats = {};
