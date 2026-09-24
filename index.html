@@ -276,15 +276,13 @@ font-weight:700;
 
 .flick-selected{
     background:rgba(0,77,152,.12);
-    color:white;
-    border-radius:8px;
 }
 
 .flick-column-selected{
     background:rgba(0,77,152,.12);
 }
     
-.flick-table th[onclick]{
+.flick-table th:not(:first-child){
     cursor:pointer;
     user-select:none;
 }
