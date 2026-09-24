@@ -452,8 +452,92 @@ flex-shrink:0;
     border-bottom:none;
 }
 
+.main-menu{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+
+    margin-bottom:12px;
+}
+
+.main-menu a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+
+    color:var(--text);
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.main-menu a:hover{
+    transform:translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #004D98,
+            #A50044
+        );
+
+    color:white;
+}
+
 @media(max-width:750px){
 
+    .main-menu{
+
+        position:fixed;
+
+        left:0;
+        right:0;
+        bottom:0;
+
+        z-index:9999;
+
+        margin:0;
+        padding:8px;
+
+        background:var(--card-bg);
+        border-top:1px solid var(--card-border);
+
+        justify-content:space-around;
+    }
+
+    .main-menu a{
+
+        flex-direction:column;
+
+        gap:4px;
+
+        padding:6px;
+
+        min-width:60px;
+
+        font-size:11px;
+
+        border:none;
+        background:none;
+    }
+
+    .main-menu a span:first-child{
+        font-size:20px;
+    }
+
+    body{
+        padding-bottom:75px;
+    }
+   
 .matches-header div:nth-child(3),
 .manager-match div:nth-child(3){
     display:none;
@@ -527,6 +611,35 @@ font-size:11px;
 Manager Profile
 </div>
 </div>
+
+<nav class="main-menu">
+
+    <a href="index.html">
+        <span>📅</span>
+        <span>Home</span>
+    </a>
+
+    <a href="seasons.html">
+        <span>📅</span>
+        <span>Seasons</span>
+    </a>
+
+    <a href="statistics.html">
+        <span>📊</span>
+        <span>Statistics</span>
+    </a>
+
+    <a href="records.html">
+        <span>🏆</span>
+        <span>Records</span>
+    </a>
+
+    <a href="trophies.html">
+        <span>🥇</span>
+        <span>Trophies</span>
+    </a>
+
+</nav>
 
 <div id="managerProfile">
 Loading...
