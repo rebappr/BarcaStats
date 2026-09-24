@@ -979,7 +979,7 @@ function renderTopFlickPlayers(){
         if(!stats[name]){
 
             stats[name] = {
-                squad:0,
+                appearances:0,
                 goals:0,
                 assists:0
             };
@@ -989,33 +989,33 @@ function renderTopFlickPlayers(){
 
     flickMatches.forEach(match => {
 
-        // squad appearances
-        for(let i=1;i<=11;i++){
+// základná zostava = odohraný zápas
+for(let i=1;i<=11;i++){
 
-            const player = match[`Player name ${i}`];
+    const player = match[Player name ${i}];
 
-            if(player){
+    if(player){
 
-                addPlayer(player);
-                stats[player].squad++;
+        addPlayer(player);
+        stats[player].appearances++;
 
-            }
+    }
 
-        }
+}
 
-        for(let i=1;i<=12;i++){
+// striedania IN = odohraný zápas
+for(let i=1;i<=12;i++){
 
-            const player =
-            match[`On the bench name ${i}`];
+    const player = match[Substitution IN Player ${i}];
 
-            if(player){
+    if(player){
 
-                addPlayer(player);
-                stats[player].squad++;
+        addPlayer(player);
+        stats[player].appearances++;
 
-            }
+    }
 
-        }
+}
 
         // goals
         for(let i=1;i<=12;i++){
@@ -1050,13 +1050,13 @@ function renderTopFlickPlayers(){
     });
 
     const top = Object.entries(stats)
-    .map(([name,s]) => ({
-        name,
-        squad:s.squad,
-        goals:s.goals,
-        assists:s.assists,
-        total:s.goals + s.assists
-    }))
+.map(([name,s]) => ({
+    name,
+    appearances:s.appearances,
+    goals:s.goals,
+    assists:s.assists,
+    total:s.goals + s.assists
+}))
     .sort((a,b) => {
     
         const valueA = a[flickSortColumn];
@@ -1076,8 +1076,8 @@ function renderTopFlickPlayers(){
                 <th>Player</th>
                 
                 <th
-                    class="${flickSortColumn==='squad'?'flick-selected':''}"
-                    onclick="sortFlick('squad')">
+                    class="${flickSortColumn==='appearances'?'flick-selected':''}"
+                    onclick="sortFlick('appearances')">
                     Sq
                 </th>
                 
@@ -1113,7 +1113,7 @@ function renderTopFlickPlayers(){
                     href="player.html?name=${encodeURIComponent(player.name)}">
                     ${player.name}</a>
             </td>
-            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.squad}</td>
+            <td class="${flickSortColumn==='appearances'?'flick-column-selected':''}">${player.appearances}</td>
             <td class="${flickSortColumn==='goals'?'flick-column-selected':''}">${player.goals}</td>
             <td class="${flickSortColumn==='assists'?'flick-column-selected':''}">${player.assists}</td>
             <td class="${flickSortColumn==='total'?'flick-column-selected':''}">${player.total}</td>
