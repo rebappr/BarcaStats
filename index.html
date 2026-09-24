@@ -497,45 +497,49 @@ color:#A50044;
     align-items:center;
     justify-content:center;
 
+    min-width:120px;
     padding:12px 20px;
 
     border-radius:14px;
 
     text-decoration:none;
 
-    background:var(--card-bg);
-    border:1px solid var(--card-border);
+    background:#004D98;
+    border:1px solid #003b73;
 
-    color:var(--text);
+    color:white;
 
     font-size:14px;
     font-weight:700;
 
-    transition:all .2s ease;
+    transition:.2s;
+
+    box-shadow:
+        0 4px 12px rgba(0,77,152,.25);
 }
 
 .main-menu a:hover{
     transform:translateY(-2px);
 
-    background:#f3f4f6;
+    background:#0066c8;
 
     box-shadow:
-        0 6px 18px rgba(0,0,0,.1);
+        0 8px 20px rgba(0,77,152,.35);
 }
 
 .main-menu a.active{
-    background:linear-gradient(
-        135deg,
-        #004D98,
-        #A50044
-    );
-
+    background:#A50044;
+    border-color:#8b0038;
     color:white;
-    border-color:transparent;
+}
+
+[data-theme="dark"] .main-menu a{
+    background:#004D98;
+    border-color:#0a5fb3;
 }
 
 [data-theme="dark"] .main-menu a:hover{
-    background:rgba(255,255,255,.08);
+    background:#0a5fb3;
 }
 
 .main-menu a img{
