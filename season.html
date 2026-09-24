@@ -676,6 +676,83 @@ width:120px;
     display:none;
 }
 
+.player-search-results{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+
+.search-type{
+    font-size:11px;
+    font-weight:700;
+    padding:2px 8px;
+    border-radius:999px;
+}
+
+.search-type.player{
+    background:rgba(0,77,152,.15);
+    color:#3b82f6;
+}
+
+.search-type.manager{
+    background:rgba(165,0,68,.15);
+    color:#e11d48;
+}
+
+.player-search-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 10px;
+    border-radius:10px;
+    text-decoration:none;
+    color:var(--text);
+    font-size:13px;
+    font-weight:600;
+}
+
+.player-search-item:hover{
+    background:var(--meta-bg);
+}
+
+.search-hero{
+    margin:12px 0 0 0;
+    display:none;
+}
+
+.search-hero.show{
+    display:block;
+}
+
+.player-search-input{
+    width:100%;
+    height:58px;
+    padding:0 20px;
+
+    font-size:16px;
+    color:var(--text);
+
+    border-radius:20px;
+    border:2px solid var(--card-border);
+
+    background:var(--card-bg);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+
+    transition:.2s;
+
+    margin-bottom:6px;
+}
+
+.search-hero .player-search-input:focus{
+    outline:none;
+    border-color:#3b82f6;
+
+    box-shadow:
+        0 0 0 4px rgba(59,130,246,.15);
+}
+
 @media(max-width:900px){
 
     .main-menu{
@@ -927,12 +1004,24 @@ font-size:12px;
         <span>Records</span>
     </a>
 
-    <a href="#">
+    <a href="#" id="searchToggle">
         <img src="icons/search-48.png">
         <span>Search</span>
     </a>
 
 </nav>
+
+<div class="search-hero">
+
+    <input
+        type="text"
+        id="personSearch"
+        placeholder="Search player or manager..."
+        class="player-search-input">
+
+    <div id="personSearchResults"></div>
+
+</div>
 
 <div class="content-layout">
 
@@ -1904,6 +1993,8 @@ Promise.all([
     renderSeasonDropdown();
     renderSeason();
 
+    initPersonSearch();
+
 })
 .catch(error => {
 
@@ -1911,6 +2002,149 @@ Promise.all([
 
 });
 
+function initPersonSearch(){
+
+    const searchItems = new Map();
+
+    allMatches.forEach(match => {
+
+        // Barcelona manager
+        if(match.Manager){
+
+            searchItems.set(
+                `manager-${match.Manager}`,
+                {
+                    name: match.Manager,
+                    type: "Manager"
+                }
+            );
+
+        }
+
+        // Opponent manager
+        if(match["Opp. Manager"]){
+
+            searchItems.set(
+                `manager-${match["Opp. Manager"]}`,
+                {
+                    name: match["Opp. Manager"],
+                    type: "Manager"
+                }
+            );
+
+        }
+
+        // Starting XI
+        for(let i=1;i<=11;i++){
+
+            if(match[`Player name ${i}`]){
+
+                searchItems.set(
+                    `player-${match[`Player name ${i}`]}`,
+                    {
+                        name: match[`Player name ${i}`],
+                        type: "Player"
+                    }
+                );
+
+            }
+
+            if(match[`Opp. Player name ${i}`]){
+
+                searchItems.set(
+                    `player-${match[`Opp. Player name ${i}`]}`,
+                    {
+                        name: match[`Opp. Player name ${i}`],
+                        type: "Player"
+                    }
+                );
+
+            }
+
+        }
+
+        // Bench
+        for(let i=1;i<=12;i++){
+
+            if(match[`On the bench name ${i}`]){
+
+                searchItems.set(
+                    `player-${match[`On the bench name ${i}`]}`,
+                    {
+                        name: match[`On the bench name ${i}`],
+                        type: "Player"
+                    }
+                );
+
+            }
+
+            if(match[`Opp. On the bench name ${i}`]){
+
+                searchItems.set(
+                    `player-${match[`Opp. On the bench name ${i}`]}`,
+                    {
+                        name: match[`Opp. On the bench name ${i}`],
+                        type: "Player"
+                    }
+                );
+
+            }
+
+        }
+
+    });
+
+    const itemList =
+        [...searchItems.values()]
+        .sort((a,b) => a.name.localeCompare(b.name));
+
+    const input =
+        document.getElementById("personSearch");
+
+    const results =
+        document.getElementById("personSearchResults");
+
+    input.addEventListener("input", () => {
+
+        const value =
+            input.value
+            .trim()
+            .toLowerCase();
+
+        if(!value){
+
+            results.innerHTML = "";
+            return;
+
+        }
+
+        const filtered =
+            itemList
+            .filter(item =>
+                item.name.toLowerCase().includes(value)
+            )
+            .slice(0,20);
+
+            results.innerHTML = `
+            <div class="player-search-results">
+            ${filtered.map(item => `
+            <a
+                class="player-search-item"
+                href="${
+                    item.type === 'Manager'
+                    ? `manager.html?name=${encodeURIComponent(item.name)}`
+                    : `player.html?name=${encodeURIComponent(item.name)}`
+                }">
+            ${item.name}
+            <span class="search-type ${item.type.toLowerCase()}">
+               ${item.type}
+            </span>
+            </a>
+            `).join("")}
+            </div>
+            `;
+});
+}
 
 
 (function(){
@@ -1968,6 +2202,29 @@ next === "dark"
 
 })();
 </script>
+
+document
+.getElementById("searchToggle")
+.addEventListener("click", e => {
+
+    e.preventDefault();
+
+    const searchBox =
+        document.querySelector(".search-hero");
+
+    const results =
+        document.getElementById("personSearchResults");
+
+    searchBox.classList.toggle("show");
+
+    if(!searchBox.classList.contains("show")){
+        results.innerHTML = "";
+        document.getElementById("personSearch").value = "";
+    }else{
+        document.getElementById("personSearch").focus();
+    }
+
+});
 
 </body>
 </html>
