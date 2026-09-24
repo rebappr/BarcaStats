@@ -468,12 +468,11 @@ flex-shrink:0;
 @media(max-width:750px){
 
     .main-menu{
-
         position:fixed;
 
         left:12px;
         right:12px;
-        bottom:12px;
+        bottom:10px;
 
         z-index:9999;
 
@@ -481,70 +480,73 @@ flex-shrink:0;
         justify-content:space-around;
         align-items:center;
 
-        padding:8px;
+        margin:0;
+        padding:4px 6px;
 
-        border-radius:28px;
+        border-radius:22px;
 
-        background:rgba(255,255,255,.18);
+        background:rgba(255,255,255,.14);
 
         backdrop-filter:blur(25px);
         -webkit-backdrop-filter:blur(25px);
 
-        border:1px solid rgba(255,255,255,.25);
+        border:1px solid rgba(255,255,255,.18);
 
         box-shadow:
-            0 8px 32px rgba(0,0,0,.20),
-            inset 0 1px 0 rgba(255,255,255,.35);
-
-        margin:0;
+            0 8px 24px rgba(0,0,0,.16),
+            inset 0 1px 0 rgba(255,255,255,.25);
     }
 
     .main-menu a{
-
         display:flex;
         flex-direction:column;
         align-items:center;
         justify-content:center;
 
-        gap:4px;
+        gap:2px;
 
-        min-width:60px;
+        min-width:52px;
 
-        padding:8px 10px;
+        padding:4px 6px;
 
         text-decoration:none;
 
         color:var(--text);
 
-        border-radius:18px;
+        border-radius:16px;
 
-        transition:all .25s ease;
+        transition:all .2s ease;
 
         background:transparent;
-        border:none;
-    }
-
-    .main-menu a span:first-child{
-        font-size:20px;
-    }
-
-    .main-menu a span:last-child{
-        font-size:11px;
-        font-weight:600;
     }
 
     .main-menu a:hover,
     .main-menu a.active{
-
-        background:rgba(255,255,255,.18);
+        background:rgba(255,255,255,.15);
 
         backdrop-filter:blur(15px);
+        -webkit-backdrop-filter:blur(15px);
+    }
 
-        transform:translateY(-2px);
+    .main-menu a img{
+        width:18px;
+        height:18px;
+
+        object-fit:contain;
+    }
+
+    .main-menu a span{
+        font-size:9px;
+        font-weight:600;
+        line-height:1;
     }
 
     body{
-        padding-bottom:90px;
+        padding-bottom:65px;
+    }
+
+    .back-btn{
+        bottom:75px;
     }
    
 .matches-header div:nth-child(3),
