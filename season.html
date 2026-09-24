@@ -136,22 +136,6 @@ font-size:18px;
 color:var(--text);
 }
 
-th{
-font-size:13px;
-}
-
-td{
-font-size:13px;
-}
-
-.stats-table th{
-    font-weight:800;
-}
-
-.matches-table th{
-    font-weight:800;
-}
-
 .container{
 max-width:1500px;
 margin:auto;
@@ -432,21 +416,52 @@ transform:none;
 }
 
 table{
-width:100%;
-border-collapse:collapse;
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:var(--meta-bg);
+    color:var(--muted);
+
+    padding:8px;
+    font-size:13px;
+    font-weight:800;
+
+    border-bottom:1px solid var(--meta-border);
+
+    text-align:center;
+    position:static;
+}
+
+td{
+    padding:8px;
+    font-size:13px;
+
+    border-bottom:1px solid var(--meta-border);
+}
+
+.stats-table th:first-child,
+.stats-table td:first-child,
+.debutants-table th:first-child,
+.debutants-table td:first-child,
+.matches-table th:first-child,
+.matches-table td:first-child,
+.laliga-table th:first-child,
+.laliga-table td:first-child{
+    text-align:left;
+}
+
+.stats-table th,
+.debutants-table th{
+    cursor:pointer;
+    user-select:none;
 }
 
 .stats-table,
 .debutants-table{
 width:100%;
 table-layout:fixed;
-}
-
-.stats-table th,
-.debutants-table th{
-cursor:pointer;
-user-select:none;
-font-weight:700;
 }
 
 .debutants-table th:first-child,
@@ -463,14 +478,6 @@ font-size:13px;
 width:50px;
 text-align:center;
 font-size:13px;
-}
-
-.stats-table thead th,
-.debutants-table thead th,
-.matches-table thead th{
-    padding:8px 4px;
-    border-bottom:1px solid var(--meta-border);
-    font-size:13px;
 }
 
 .matches-table{
@@ -503,15 +510,6 @@ width:auto;
 .matches-table td:nth-child(5){
 width:1%;
 text-align:center;
-}
-
-th{
-    background:var(--meta-bg);
-    color:var(--muted);
-    text-align:left;
-    padding:12px;
-
-    position:static;
 }
 
 td{
