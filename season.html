@@ -2221,6 +2221,49 @@ document
     }
 
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const searchToggle =
+        document.getElementById("searchToggle");
+
+    const searchBox =
+        document.querySelector(".search-hero");
+
+    const searchInput =
+        document.getElementById("personSearch");
+
+    const results =
+        document.getElementById("personSearchResults");
+
+    if(!searchToggle || !searchBox) return;
+
+    searchToggle.addEventListener("click", e => {
+
+        e.preventDefault();
+
+        searchBox.classList.toggle("show");
+
+        if(searchBox.classList.contains("show")){
+
+            searchInput?.focus();
+
+        }else{
+
+            if(searchInput){
+                searchInput.value = "";
+            }
+
+            if(results){
+                results.innerHTML = "";
+            }
+
+        }
+
+    });
+
+});
+    
 </script>
 </body>
 </html>
