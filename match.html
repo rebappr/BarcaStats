@@ -1134,6 +1134,8 @@ document
 .classList.add("active");
 }
 
+window.showMatchSection = showMatchSection;
+
 function escapeHtml(str){
 
     if(str === null || str === undefined){
@@ -1820,6 +1822,8 @@ tabs[1].classList.add("active");
 
 }
 
+window.showLineup = showLineup;
+
 function isHomeMatch(match){
 return String(match["Home/Away"] || "").trim() === "Home";
 }
@@ -2270,24 +2274,26 @@ document.getElementById("app").innerHTML = `
    
    </div>
    
-   <div class="right-column">
-   
-       ${showSquads ? `
-       <div id="squads-section"
-            class="match-section">
-   
-           <div class="section-title">
-               Line-ups
-           </div>
-   
-           ${squadsHtml}
-   
-       </div>
-       ` : ""}
-   
-   </div>
-
-`;
+    <div class="right-column">
+    
+        ${showSquads ? `
+        <div id="squads-section"
+             class="match-section">
+    
+            <div class="section-title">
+                Line-ups
+            </div>
+    
+            ${squadsHtml}
+    
+        </div>
+        ` : ""}
+    
+    </div>
+    
+    </div>
+    
+    `;
 
 if(window.innerWidth <= 900){
 
