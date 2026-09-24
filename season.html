@@ -421,9 +421,32 @@ th{
 }
 
 td{
-    padding:8px 4px;
+    padding:10px 6px;
     border-bottom:1px solid var(--meta-border);
     font-size:13px;
+}
+
+.laliga-table td,
+.matches-table td,
+.stats-table td,
+.debutants-table td{
+    font-weight:500;
+    letter-spacing:.1px;
+}
+
+.laliga-table th,
+.matches-table th,
+.stats-table th,
+.debutants-table th{
+    font-weight:700;
+    letter-spacing:.2px;
+}
+
+.matches-table td:nth-child(4),
+.laliga-table td:nth-child(2),
+.stats-table td:first-child,
+.debutants-table td:first-child{
+    font-weight:600;
 }
 
 .stats-table th:first-child,
