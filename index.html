@@ -779,6 +779,9 @@ function renderHome(){
 
 renderLastMatch();
 renderNextMatch();
+
+let flickSortColumn = "total";
+let flickSortDirection = "desc";
 renderTopFlickPlayers();
 
 const season = [...new Set(
@@ -924,6 +927,28 @@ document.getElementById("nextMatch").innerHTML = `
 `;
 }
 
+function sortFlick(column){
+
+    if(flickSortColumn === column){
+
+        flickSortDirection =
+            flickSortDirection === "asc"
+            ? "desc"
+            : "asc";
+
+    }else{
+
+        flickSortColumn = column;
+        flickSortDirection = "desc";
+
+    }
+
+    renderTopFlickPlayers();
+
+}
+
+window.sortFlick = sortFlick;
+
 function renderTopFlickPlayers(){
 
     const stats = {};
@@ -1022,21 +1047,50 @@ function renderTopFlickPlayers(){
         assists:s.assists,
         total:s.goals + s.assists
     }))
-    .sort((a,b) => b.total - a.total)
+    .sort((a,b) => {
+    
+        const valueA = a[flickSortColumn];
+        const valueB = b[flickSortColumn];
+    
+        return flickSortDirection === "asc"
+            ? valueA - valueB
+            : valueB - valueA;
+    
+    })
     .slice(0,10);
 
     let html = `
-    <table class="stats-table">
+    <table class="flick-table">
 
-        <thead>
-            <tr>
-                <th>Player</th>
-                <th>Sq</th>
-                <th>G</th>
-                <th>A</th>
-                <th>G+A</th>
-            </tr>
-        </thead>
+    <thead>
+        <tr>
+            <th>Player</th>
+    
+            <th
+                onclick="sortFlick('squad')"
+                style="cursor:pointer;">
+                Sq
+            </th>
+    
+            <th
+                onclick="sortFlick('goals')"
+                style="cursor:pointer;">
+                G
+            </th>
+    
+            <th
+                onclick="sortFlick('assists')"
+                style="cursor:pointer;">
+                A
+            </th>
+    
+            <th
+                onclick="sortFlick('total')"
+                style="cursor:pointer;">
+                G+A
+            </th>
+        </tr>
+    </thead>
 
         <tbody>
     `;
