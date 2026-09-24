@@ -274,14 +274,16 @@ font-weight:700;
     text-align:center;
 }
 
-.flick-selected{
-    background:rgba(0,77,152,.12);
+.flick-selected,
+.flick-column-selected{
+    background:
+        linear-gradient(
+        135deg,
+        #004D98,
+        #1e3a8a
+        );
 }
 
-.flick-column-selected{
-    background:rgba(0,77,152,.12);
-}
-    
 .flick-table th:not(:first-child){
     cursor:pointer;
     user-select:none;
