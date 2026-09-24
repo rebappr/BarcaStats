@@ -275,18 +275,18 @@ font-weight:700;
 }
 
 .flick-selected{
-    background:#004D98;
+    background:rgba(0,77,152,.12);
     color:white;
     border-radius:8px;
+}
+
+.flick-column-selected{
+    background:rgba(0,77,152,.12);
 }
     
 .flick-table th[onclick]{
     cursor:pointer;
     user-select:none;
-}
-
-.flick-column-selected{
-    background:rgba(0,77,152,.12);
 }
 
 .form-list{
@@ -1109,9 +1109,9 @@ function renderTopFlickPlayers(){
                     ${player.name}</a>
             </td>
             <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.squad}</td>
-            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.goals}</td>
-            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.assists}</td>
-            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.total}</td>
+            <td class="${flickSortColumn==='goals'?'flick-column-selected':''}">${player.goals}</td>
+            <td class="${flickSortColumn==='assists'?'flick-column-selected':''}">${player.assists}</td>
+            <td class="${flickSortColumn==='total'?'flick-column-selected':''}">${player.total}</td>
 
         </tr>
         `;
