@@ -273,6 +273,12 @@ font-weight:700;
     text-align:center;
 }
 
+.flick-selected{
+    background:#004D98;
+    color:white;
+    border-radius:8px;
+}
+
 .form-list{
 display:flex;
 gap:8px;
@@ -763,7 +769,10 @@ Loading...
 
 <script>
 
-let allMatches=[];
+let allMatches = [];
+
+let flickSortColumn = "total";
+let flickSortDirection = "desc";
 
 fetch("data.json")
 .then(r=>r.json())
@@ -779,9 +788,6 @@ function renderHome(){
 
 renderLastMatch();
 renderNextMatch();
-
-let flickSortColumn = "total";
-let flickSortDirection = "desc";
 renderTopFlickPlayers();
 
 const season = [...new Set(
@@ -1061,37 +1067,35 @@ function renderTopFlickPlayers(){
 
     let html = `
     <table class="flick-table">
-
-    <thead>
-        <tr>
-            <th>Player</th>
-    
-            <th
-                onclick="sortFlick('squad')"
-                style="cursor:pointer;">
-                Sq
-            </th>
-    
-            <th
-                onclick="sortFlick('goals')"
-                style="cursor:pointer;">
-                G
-            </th>
-    
-            <th
-                onclick="sortFlick('assists')"
-                style="cursor:pointer;">
-                A
-            </th>
-    
-            <th
-                onclick="sortFlick('total')"
-                style="cursor:pointer;">
-                G+A
-            </th>
-        </tr>
-    </thead>
-
+        <thead>
+            <tr>
+                <th>Player</th>
+                
+                <th
+                    class="${flickSortColumn==='squad'?'flick-selected':''}"
+                    onclick="sortFlick('squad')">
+                    Sq
+                </th>
+                
+                <th
+                    class="${flickSortColumn==='goals'?'flick-selected':''}"
+                    onclick="sortFlick('goals')">
+                    G
+                </th>
+                
+                <th
+                    class="${flickSortColumn==='assists'?'flick-selected':''}"
+                    onclick="sortFlick('assists')">
+                    A
+                </th>
+                
+                <th
+                    class="${flickSortColumn==='total'?'flick-selected':''}"
+                    onclick="sortFlick('total')">
+                    G+A
+                </th>
+            </tr>
+        </thead>
         <tbody>
     `;
 
