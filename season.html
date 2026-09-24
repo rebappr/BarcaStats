@@ -649,7 +649,146 @@ width:120px;
    font-weight:600;
 }
 
-@media (max-width:900px){
+.main-menu{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:6px;
+
+    margin-bottom:12px;
+    padding-left:0;
+}
+
+.main-menu a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:120px;
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:#004D98;
+    border-color:#0a5fb3;
+
+    color:white;
+
+    font-size:14px;
+    font-weight:700;
+
+    transition:.2s;
+
+    box-shadow:
+        0 4px 12px rgba(0,77,152,.25);
+}
+
+.main-menu a:hover{
+    transform:translateY(-2px);
+
+    background:#0a5fb3;
+
+    box-shadow:
+        0 8px 20px rgba(0,77,152,.35);
+}
+
+.main-menu a.active{
+    background:#A50044;
+    border-color:#8b0038;
+    color:white;
+}
+
+.main-menu a img{
+    display:none;
+}
+
+@media(max-width:900px){
+
+    .main-menu{
+        position:fixed;
+
+        left:12px;
+        right:12px;
+        bottom:10px;
+
+        z-index:9999;
+
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+
+        margin:0;
+        padding:4px 6px;
+
+        border-radius:22px;
+
+        background:rgba(255,255,255,.14);
+
+        backdrop-filter:blur(25px);
+        -webkit-backdrop-filter:blur(25px);
+
+        border:1px solid rgba(255,255,255,.18);
+
+        box-shadow:
+            0 8px 24px rgba(0,0,0,.16),
+            inset 0 1px 0 rgba(255,255,255,.25);
+    }
+
+    .main-menu a{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    
+        gap:3px;
+    
+        min-width:58px;
+    
+        padding:6px 8px;
+    
+        border-radius:18px;
+    
+        background:rgba(255,255,255,.08);
+    
+        backdrop-filter:blur(15px);
+    }
+
+    .main-menu a:hover{
+        background:rgba(255,255,255,.12);
+    
+        backdrop-filter:blur(15px);
+        -webkit-backdrop-filter:blur(15px);
+    }
+    
+    .main-menu a.active{
+        background:#004D98;
+        color:white;
+    
+        box-shadow:
+            0 4px 12px rgba(0,77,152,.35);
+    
+        backdrop-filter:blur(15px);
+        -webkit-backdrop-filter:blur(15px);
+    }
+
+    .main-menu a img{
+        display:block;
+        width:28px;
+        height:28px;
+        object-fit:contain;
+    }
+
+    .main-menu a span{
+        font-size:9px;
+        font-weight:600;
+        line-height:1;
+    }
+
+    body{
+        padding-bottom:65px;
+    }
 
 .content-layout{
 display:flex;
