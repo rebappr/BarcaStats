@@ -250,6 +250,29 @@ text-align:right;
 font-weight:700;
 }
 
+.flick-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.flick-table th,
+.flick-table td{
+    padding:8px 4px;
+    border-bottom:1px solid var(--meta-border);
+}
+
+.flick-table th:first-child,
+.flick-table td:first-child{
+    text-align:left;
+}
+
+.flick-table th:not(:first-child),
+.flick-table td:not(:first-child){
+    width:50px;
+    text-align:center;
+}
+
 .form-list{
 display:flex;
 gap:8px;
@@ -1027,7 +1050,7 @@ function renderTopFlickPlayers(){
                 <a
                     class="player-link"
                     href="player.html?name=${encodeURIComponent(player.name)}">
-                    ${player.name}
+                    ${player.name}</a>
                 </<td>${player.goals}</td>
             <td>${player.assists}</td>
             <td>${player.total}</td>
