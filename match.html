@@ -2353,37 +2353,41 @@ theme
 const button =
 document.getElementById("themeToggle");
 
-button.textContent =
-theme === "dark"
-? "☀️"
-: "🌙";
+if(button){
 
-button.addEventListener("click", () => {
+    button.textContent =
+    theme === "dark"
+    ? "☀️"
+    : "🌙";
 
-const current =
-document.documentElement.getAttribute("data-theme");
+    button.addEventListener("click", () => {
 
-const next =
-current === "dark"
-? "light"
-: "dark";
+        const current =
+        document.documentElement.getAttribute("data-theme");
 
-document.documentElement.setAttribute(
-"data-theme",
-next
-);
+        const next =
+        current === "dark"
+        ? "light"
+        : "dark";
 
-localStorage.setItem(
-"theme",
-next
-);
+        document.documentElement.setAttribute(
+            "data-theme",
+            next
+        );
 
-button.textContent =
-next === "dark"
-? "☀️"
-: "🌙";
+        localStorage.setItem(
+            "theme",
+            next
+        );
 
-});
+        button.textContent =
+        next === "dark"
+        ? "☀️"
+        : "🌙";
+
+    });
+
+}
 
 })();
 
