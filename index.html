@@ -432,6 +432,11 @@ color:#A50044;
 
 .search-hero{
     margin:12px 0 0 0;
+    display:none;
+}
+
+.search-hero.show{
+    display:block;
 }
 
 .player-search-input{
@@ -707,7 +712,7 @@ Home page
         <span>Records</span>
     </a>
 
-    <a href="#">
+    <a href="#" id="searchToggle">
         <img src="icons/search-48.png">
         <span>Search</span>
     </a>
@@ -1369,6 +1374,29 @@ next === "dark"
 });
 
 })();
+
+document
+.getElementById("searchToggle")
+.addEventListener("click", e => {
+
+    e.preventDefault();
+
+    const searchBox =
+        document.querySelector(".search-hero");
+
+    const results =
+        document.getElementById("personSearchResults");
+
+    searchBox.classList.toggle("show");
+
+    if(!searchBox.classList.contains("show")){
+        results.innerHTML = "";
+        document.getElementById("personSearch").value = "";
+    }else{
+        document.getElementById("personSearch").focus();
+    }
+
+});
 
 </script>
 
