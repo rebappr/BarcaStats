@@ -600,10 +600,20 @@ color:#A50044;
         backdrop-filter:blur(15px);
     }
 
-    .main-menu a:hover,
+    .main-menu a:hover{
+        background:rgba(255,255,255,.12);
+    
+        backdrop-filter:blur(15px);
+        -webkit-backdrop-filter:blur(15px);
+    }
+    
     .main-menu a.active{
-        background:rgba(255,255,255,.15);
-
+        background:#004D98;
+        color:white;
+    
+        box-shadow:
+            0 4px 12px rgba(0,77,152,.35);
+    
         backdrop-filter:blur(15px);
         -webkit-backdrop-filter:blur(15px);
     }
