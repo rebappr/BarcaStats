@@ -280,6 +280,10 @@ font-weight:700;
     border-radius:8px;
 }
 
+.flick-column-selected{
+    background:rgba(0,77,152,.12);
+}
+
 .form-list{
 display:flex;
 gap:8px;
@@ -1099,10 +1103,10 @@ function renderTopFlickPlayers(){
                     href="player.html?name=${encodeURIComponent(player.name)}">
                     ${player.name}</a>
             </td>
-            <td>${player.squad}</td>
-            <td>${player.goals}</td>
-            <td>${player.assists}</td>
-            <td>${player.total}</td>
+            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.squad}</td>
+            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.goals}</td>
+            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.assists}</td>
+            <td class="${flickSortColumn==='squad'?'flick-column-selected':''}">${player.total}</td>
 
         </tr>
         `;
