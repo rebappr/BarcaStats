@@ -1339,6 +1339,29 @@ ${careerHtml}
 
 `;
 
+const rightPanel =
+document.querySelector(".right-panel");
+
+if(coachedBarcelona){
+
+    rightPanel.innerHTML = `
+        <div class="widget-title">
+            Top 10 Under ${manager}
+        </div>
+
+        <div class="widget-card">
+            <div id="topManagerPlayers"></div>
+        </div>
+    `;
+
+    renderTopManagerPlayers(manager,data);
+
+}else{
+
+    rightPanel.innerHTML = "";
+
+}
+
 renderManagerStats(manager,data);
 renderTopManagerPlayers(manager,data);
 
@@ -1652,7 +1675,10 @@ function renderTopManagerPlayers(manager,data){
     }
 
     const managerMatches =
-        data.filter(match => match.Manager === manager);
+        data.filter(match =>
+            match.Manager === manager &&
+            match.Team === "FC Barcelona"
+        );
 
     managerMatches.forEach(match => {
 
