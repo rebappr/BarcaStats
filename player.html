@@ -872,13 +872,21 @@ const competitionLogos = {
     "European Cup": "ec.png"
 };
 
+let allMatches = [];
+let allPlayers = [];
+
 Promise.all([
 fetch("data.json").then(r=>r.json()),
 fetch("players.json").then(r=>r.json())
 ])
 .then(([data,players])=>{
 
-renderPlayer(playerName,data,players);
+    allMatches = data;
+    allPlayers = players;
+
+    renderPlayer(playerName,data,players);
+
+    initPersonSearch();
 
 });
 
