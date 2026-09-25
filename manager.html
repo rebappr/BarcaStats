@@ -667,14 +667,6 @@ color:#A50044;
 		font-size:18px;
 	}
 
-    .left-panel,
-    .right-panel{
-        flex:none !important;
-        width:100% !important;
-        min-width:0;
-        max-width:100%;
-        }
-
     .main-menu{
         position:fixed;
 
@@ -759,6 +751,19 @@ color:#A50044;
     body{
         padding-bottom:65px;
     }
+
+.left-panel,
+.right-panel{
+flex:none !important;
+width:100% !important;
+min-width:0;
+max-width:100%;
+}
+
+.right-panel{
+position:static !important;
+top:auto;
+}
 
 .matches-header div:nth-child(3),
 .manager-match div:nth-child(3){
