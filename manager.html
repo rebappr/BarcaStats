@@ -697,6 +697,40 @@ grid-template-columns:repeat(4,1fr);
 font-size:11px;
 }
 
+.stats-table th{
+    font-size:0;
+}
+
+.stats-table th:nth-child(1)::after{
+    content:"Season";
+    font-size:12px;
+}
+
+.stats-table th:nth-child(2)::after{
+    content:"M";
+    font-size:12px;
+}
+
+.stats-table th:nth-child(3)::after{
+    content:"W";
+    font-size:12px;
+}
+
+.stats-table th:nth-child(4)::after{
+    content:"D";
+    font-size:12px;
+}
+
+.stats-table th:nth-child(5)::after{
+    content:"L";
+    font-size:12px;
+}
+
+.stats-table th:nth-child(6)::after{
+    content:"W%";
+    font-size:12px;
+}
+
 }
 
 </style>
