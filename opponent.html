@@ -745,7 +745,7 @@ font-size:11px;
 <div class="header">
 <h1>Barça - Historical Database</h1>
 <div class="hero-subtitle">
-Manager Profile
+Opponent Profile
 </div>
 </div>
 
@@ -801,8 +801,8 @@ Loading...
 const params =
 new URLSearchParams(location.search);
 
-const managerName =
-params.get("name");
+const opponentName =
+params.get("team");
 
 const competitionLogos = {
     "Copa del Rey": "copa.png",
@@ -830,6 +830,8 @@ Promise.all([
 ])
 .then(([data, managers])=>{
 
+    allMatches = data;
+
     renderOpponent(opponentName, data);
 
     initPersonSearch();
@@ -841,6 +843,147 @@ function statValue(value){
 }
 
 function renderOpponent(team,data){
+
+    const matches = data.filter(
+        match => match["Opp. Team"] === team
+    );
+
+    if(!matches.length){
+
+        document.getElementById("managerProfile").innerHTML =
+            "<h2>Opponent not found</h2>";
+
+        return;
+    }
+
+    matches.sort((a,b)=>{
+
+        const da =
+            new Date(a.Date.split(".").reverse().join("-"));
+
+        const db =
+            new Date(b.Date.split(".").reverse().join("-"));
+
+        return da - db;
+
+    });
+
+    const firstMatch = matches[0];
+    const lastMatch = matches[matches.length - 1];
+
+    let wins = 0;
+    let draws = 0;
+    let losses = 0;
+
+    matches.forEach(match=>{
+
+        if(match["Result type"] === "W") wins++;
+        if(match["Result type"] === "D") draws++;
+        if(match["Result type"] === "L") losses++;
+
+    });
+
+    const winPct =
+        ((wins / matches.length) * 100).toFixed(1);
+
+    document.getElementById("managerProfile").innerHTML = `
+
+    <div class="manager-card">
+
+        <div class="manager-info">
+
+            <h1>${team}</h1>
+
+            <div class="manager-meta">
+
+                <div>
+                    <b>Matches:</b>
+                    ${matches.length}
+                </div>
+
+                <div>
+                    <b>First Match:</b>
+
+                    match.html?id=${firstMatch.ID}
+                        ${firstMatch.Date}
+                    </a>
+                </div>
+
+                <div>
+                    <b>Last Match:</b>
+
+                    <a href="match.html?id=${lastMatch.ID}">
+                        ${lastMatch.Date}
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="widget-title">
+        Statistics
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-box">
+            <b>${matches.length}</b>
+            Matches
+        </div>
+
+        <div class="summary-box">
+            <b>${statValue(wins)}</b>
+            Wins
+        </div>
+
+        <div class="summary-box">
+            <b>${statValue(draws)}</b>
+            Draws
+        </div>
+
+        <div class="summary-box">
+            <b>${statValue(losses)}</b>
+            Losses
+        </div>
+
+        <div class="summary-box">
+            <b>${winPct}%</b>
+            Win %
+        </div>
+
+    </div>
+
+    <div class="widget-title">
+        Season Breakdown
+    </div>
+
+    <div class="widget-card">
+
+        <table class="stats-table">
+
+            <thead>
+                <tr>
+                    <th>Season</th>
+                    <th>Matches</th>
+                    <th>Wins</th>
+                    <th>Draws</th>
+                    <th>Losses</th>
+                    <th>Win %</th>
+                </tr>
+            </thead>
+
+            <tbody id="seasonRows"></tbody>
+
+        </table>
+
+    </div>
+
+    `;
+
+    renderOpponentStats(team,data);
 
 }
 
@@ -975,34 +1118,6 @@ function buildOpponentMatches(team, season, data){
     
         if(resultType === "W") resultClass = "result-win";
         if(resultType === "L") resultClass = "result-loss";
-            let yellowCards = 0;
-            let redCards = 0;
-            
-            for(let i=1;i<=20;i++){
-            
-                if(match.Manager === manager){
-            
-                    if(match[`Yellow staff name ${i}`] === manager){
-                        yellowCards++;
-                    }
-            
-                    if(match[`Red staff name ${i}`] === manager){
-                        redCards++;
-                    }
-            
-                }else{
-            
-                    if(match[`Opp. Yellow staff name ${i}`] === manager){
-                        yellowCards++;
-                    }
-            
-                    if(match[`Opp. Red staff name ${i}`] === manager){
-                        redCards++;
-                    }
-            
-                }
-            
-            }
     
 html += `
 
@@ -1085,113 +1200,6 @@ age--;
 }
 
 return age;
-}
-
-function renderManagerStats(manager,data){
-
-    const stats = {};
-
-    data.forEach(match=>{
-
-        const isManager =
-            match.Manager === manager ||
-            match["Opp. Manager"] === manager;
-
-        if(!isManager){
-            return;
-        }
-
-        const season = match.Season;
-
-        if(!stats[season]){
-
-        stats[season] = {
-            matches:0,
-            wins:0,
-            draws:0,
-            losses:0,
-            opponentClub:false
-        };
-
-        }
-
-        stats[season].matches++;
-
-        if(match["Opp. Manager"] === manager){
-            stats[season].opponentClub = true;
-        }
-
-        let resultType;
-
-        if(match.Manager === manager){
-
-            resultType = match["Result type"];
-
-        }else{
-
-            resultType =
-                match["Result type"] === "W" ? "L" :
-                match["Result type"] === "L" ? "W" :
-                "D";
-
-        }
-
-        if(resultType==="W") stats[season].wins++;
-        if(resultType==="D") stats[season].draws++;
-        if(resultType==="L") stats[season].losses++;
-
-    });
-
-    let html="";
-
-    Object.keys(stats)
-    .sort()
-    .reverse()
-    .forEach(season=>{
-
-        const s = stats[season];
-
-        const winPct =
-        s.matches
-        ? ((s.wins/s.matches)*100).toFixed(1)
-        : 0;
-
-    html += `
-    <tr
-        class="season-row ${stats[season].opponentClub ? 'opponent-season' : ''}"
-        onclick="toggleSeason('season-${season.replace(/\//g,'-')}')"
-        style="cursor:pointer">
-    
-        <td><strong>${season}</strong></td>
-    
-        <td>${s.matches}</td>
-    
-        <td>${statValue(s.wins)}</td>
-        <td>${statValue(s.draws)}</td>
-        <td>${statValue(s.losses)}</td>
-    
-        <td>${winPct}%</td>
-    
-    </tr>
-    
-    <tr
-        id="season-${season.replace(/\//g,'-')}"
-        style="display:none;">
-    
-        <td colspan="6">
-        
-            ${buildSeasonMatches(manager, season, data)}
-        
-        </td>
-    
-    </tr>
-    `;
-
-});
-
-document.getElementById("seasonRows").innerHTML =
-html;
-
 }
 
 function initPersonSearch(){
