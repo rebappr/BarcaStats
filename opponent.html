@@ -819,7 +819,6 @@ const competitionLogos = {
 
 let allMatches = [];
 
-Promise.all([
 fetch("data.json")
 .then(r => r.json())
 .then(data => {
@@ -836,7 +835,7 @@ fetch("data.json")
     console.error(error);
 
 });
-
+    
 function statValue(value){
     return value === 0 ? "-" : value;
 }
