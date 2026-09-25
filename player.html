@@ -1766,7 +1766,9 @@ function initPersonSearch(){
 
     allMatches.forEach(match => {
 
+        // Barcelona manager
         if(match.Manager){
+
             searchItems.set(
                 `manager-${match.Manager}`,
                 {
@@ -1774,9 +1776,12 @@ function initPersonSearch(){
                     type: "Manager"
                 }
             );
+
         }
 
+        // Opponent manager
         if(match["Opp. Manager"]){
+
             searchItems.set(
                 `manager-${match["Opp. Manager"]}`,
                 {
@@ -1784,11 +1789,14 @@ function initPersonSearch(){
                     type: "Manager"
                 }
             );
+
         }
 
+        // Starting XI
         for(let i=1;i<=11;i++){
 
             if(match[`Player name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`Player name ${i}`]}`,
                     {
@@ -1796,9 +1804,11 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
             if(match[`Opp. Player name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`Opp. Player name ${i}`]}`,
                     {
@@ -1806,13 +1816,16 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
         }
 
+        // Bench
         for(let i=1;i<=12;i++){
 
             if(match[`On the bench name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`On the bench name ${i}`]}`,
                     {
@@ -1820,9 +1833,11 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
             if(match[`Opp. On the bench name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`Opp. On the bench name ${i}`]}`,
                     {
@@ -1830,6 +1845,7 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
         }
@@ -1885,9 +1901,9 @@ function initPersonSearch(){
             `).join("")}
             </div>
             `;
-    });
-
+});
 }
+
 
 (function(){
 
@@ -1948,6 +1964,7 @@ if(button){
 
 })();
 
+
 const searchToggle =
     document.getElementById("searchToggle");
 
@@ -1984,10 +2001,5 @@ if(searchToggle){
 }
 
 </script>
-
-<a href="index.html" class="back-btn">
-    ← Home
-</a>
-
 </body>
 </html>
