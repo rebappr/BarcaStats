@@ -1492,7 +1492,13 @@ if(season === latestSeason){
                 </td>
 
                 <td>
-                    ${match["Opp. Team"] || ""}
+                <a 
+                class="player-link"
+                href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}"
+                onclick="event.stopPropagation();"
+                >
+                ${match['Opp. Team'] || ''}
+                </a>
                 </td>
 
                 <td>
