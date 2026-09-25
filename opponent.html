@@ -400,10 +400,9 @@ flex-shrink:0;
     display:grid;
     grid-template-columns:
         80px
-        160px
+        1fr
         90px
         70px
-        1fr
         90px;
 
     gap:6px;
@@ -422,10 +421,9 @@ flex-shrink:0;
     display:grid;
     grid-template-columns:
         80px
-        160px
+        1fr
         90px
         70px
-        1fr
         90px;
 
     gap:6px;
@@ -745,7 +743,6 @@ max-width:100%;
     grid-template-columns:
         80px
         35px
-        90px
         1fr
         90px;
 
@@ -1060,7 +1057,6 @@ function buildOpponentMatches(team, data){
                 <div>Competition</div>
                 <div>Date</div>
                 <div>Venue</div>
-                <div>Opponent</div>
                 <div>Result</div>            
             </div>
         `;
@@ -1106,10 +1102,6 @@ html += `
         
         <div>
             ${match["Home/Away"] || ""}
-        </div>
-        
-        <div>
-            ${match["Opp. Team"]}
         </div>
         
         <div>
