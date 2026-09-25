@@ -1760,6 +1760,133 @@ html;
 
 }
 
+function initPersonSearch(){
+
+    const searchItems = new Map();
+
+    allMatches.forEach(match => {
+
+        if(match.Manager){
+            searchItems.set(
+                `manager-${match.Manager}`,
+                {
+                    name: match.Manager,
+                    type: "Manager"
+                }
+            );
+        }
+
+        if(match["Opp. Manager"]){
+            searchItems.set(
+                `manager-${match["Opp. Manager"]}`,
+                {
+                    name: match["Opp. Manager"],
+                    type: "Manager"
+                }
+            );
+        }
+
+        for(let i=1;i<=11;i++){
+
+            if(match[`Player name ${i}`]){
+                searchItems.set(
+                    `player-${match[`Player name ${i}`]}`,
+                    {
+                        name: match[`Player name ${i}`],
+                        type: "Player"
+                    }
+                );
+            }
+
+            if(match[`Opp. Player name ${i}`]){
+                searchItems.set(
+                    `player-${match[`Opp. Player name ${i}`]}`,
+                    {
+                        name: match[`Opp. Player name ${i}`],
+                        type: "Player"
+                    }
+                );
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            if(match[`On the bench name ${i}`]){
+                searchItems.set(
+                    `player-${match[`On the bench name ${i}`]}`,
+                    {
+                        name: match[`On the bench name ${i}`],
+                        type: "Player"
+                    }
+                );
+            }
+
+            if(match[`Opp. On the bench name ${i}`]){
+                searchItems.set(
+                    `player-${match[`Opp. On the bench name ${i}`]}`,
+                    {
+                        name: match[`Opp. On the bench name ${i}`],
+                        type: "Player"
+                    }
+                );
+            }
+
+        }
+
+    });
+
+    const itemList =
+        [...searchItems.values()]
+        .sort((a,b) => a.name.localeCompare(b.name));
+
+    const input =
+        document.getElementById("personSearch");
+
+    const results =
+        document.getElementById("personSearchResults");
+
+    input.addEventListener("input", () => {
+
+        const value =
+            input.value
+            .trim()
+            .toLowerCase();
+
+        if(!value){
+
+            results.innerHTML = "";
+            return;
+
+        }
+
+        const filtered =
+            itemList
+            .filter(item =>
+                item.name.toLowerCase().includes(value)
+            )
+            .slice(0,20);
+
+        results.innerHTML = `
+            <div class="player-search-results">
+            ${filtered.map(item => `
+            ${
+                    item.type === 'Manager'
+                    ? `manager.html?name=${encodeURIComponent(item.name)}`
+                    : `player.html?name=${encodeURIComponent(item.name)}`
+                }
+                ${item.name}
+                <span class="search-type ${item.type.toLowerCase()}">
+                    ${item.type}
+                </span>
+            </a>
+            `).join("")}
+            </div>
+        `;
+    });
+
+}
+
 (function(){
 
 const savedTheme =
