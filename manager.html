@@ -826,17 +826,19 @@ Manager Profile
 
 </div>
 
+<div id="managerProfile">
+    Loading...
+</div>
+
 <div class="content-layout">
 
     <div class="left-panel">
-
-        <div id="managerProfile">
-        Loading...
-        </div>
+        <div id="managerContent"></div>
+    </div>
 
     <div class="right-panel">
     </div>
-    
+
 </div>
 
 </div>
@@ -1226,14 +1228,18 @@ document.getElementById("managerProfile").innerHTML=`
 
 </div>
 
+`;
+
+document.getElementById("managerContent").innerHTML = `
+
 <div class="widget-title">
-Statistics
+    Statistics
 </div>
 
 ${careerHtml}
 
 <div class="widget-title">
-Season Breakdown
+    Season Breakdown
 </div>
 
 <div class="widget-card">
