@@ -429,34 +429,6 @@ flex-shrink:0;
     border-bottom:none;
 }
 
-.back-btn{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #004D98,
-            #A50044
-        );
-
-    color:white;
-    text-decoration:none;
-
-    padding:14px 22px;
-
-    border-radius:999px;
-
-    font-weight:700;
-    font-size:13px;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.25);
-
-    z-index:9999;
-}
-
 .main-menu{
     display:flex;
     justify-content:flex-start;
@@ -486,6 +458,7 @@ flex-shrink:0;
 
     font-size:14px;
     font-weight:700;
+    text-transform:uppercase;
 
     transition:.2s;
 
@@ -626,6 +599,7 @@ flex-shrink:0;
         flex-direction:column;
         align-items:center;
         justify-content:center;
+        text-transform:uppercase;
     
         gap:3px;
     
@@ -675,16 +649,6 @@ flex-shrink:0;
         padding-bottom:65px;
     }
 
-.back-btn{
-    right:10px;
-    bottom:10px;
-
-    padding:10px 14px;
-
-    font-size:12px;
-    font-weight:600;
-}
-   
 .matches-header div:nth-child(3),
 .manager-match div:nth-child(3){
     display:none;
@@ -1721,10 +1685,6 @@ if(searchToggle){
 }
 
 </script>
-
-<a href="index.html" class="back-btn">
-    ← Home
-</a>
 
 </body>
 </html>
