@@ -818,19 +818,22 @@ const competitionLogos = {
 };
 
 let allMatches = [];
-let allPlayers = [];
 
 Promise.all([
-    fetch("data.json").then(r=>r.json()),
-    fetch("opponents.json").then(r=>r.json())
-])
-.then(([data, opponents])=>{
+fetch("data.json")
+.then(r => r.json())
+.then(data => {
 
     allMatches = data;
 
     renderOpponent(opponentName, data);
 
     initPersonSearch();
+
+})
+.catch(error => {
+
+    console.error(error);
 
 });
 
