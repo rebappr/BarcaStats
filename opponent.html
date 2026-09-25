@@ -922,11 +922,6 @@ function renderOpponent(team,data){
             Losses
         </div>
 
-        <div class="summary-box">
-            <b>${winPct}%</b>
-            Win %
-        </div>
-
     </div>
 
     <div class="widget-title">
@@ -944,7 +939,6 @@ function renderOpponent(team,data){
                     <th>Wins</th>
                     <th>Draws</th>
                     <th>Losses</th>
-                    <th>Win %</th>
                 </tr>
             </thead>
 
@@ -1021,7 +1015,7 @@ function renderOpponentStats(team,data){
         id="season-${season.replace(/\//g,'-')}"
         style="display:none">
 
-            <td colspan="6">
+            <td colspan="5">
 
                 ${buildOpponentMatches(team,season,data)}
 
