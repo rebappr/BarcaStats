@@ -591,6 +591,45 @@ flex-shrink:0;
     text-decoration:underline;
 }
 
+.flick-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.flick-table th,
+.flick-table td{
+    padding:8px 4px;
+    border-bottom:1px solid var(--meta-border);
+    font-size:13px;
+}
+
+.flick-table th:first-child,
+.flick-table td:first-child{
+    text-align:left;
+}
+
+.flick-table th:not(:first-child),
+.flick-table td:not(:first-child){
+    width:50px;
+    text-align:center;
+}
+
+.flick-selected,
+.flick-column-selected{
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #004D98,
+        #1e3a8a
+    );
+}
+
+.flick-table th:not(:first-child){
+    cursor:pointer;
+    user-select:none;
+}
+
 @media(max-width:750px){
 
     .left-panel,
@@ -836,6 +875,17 @@ Manager Profile
     </div>
 
     <div class="right-panel">
+    
+        <div class="widget-title">
+            Top 10 Under Manager
+        </div>
+    
+        <div class="widget-card">
+            <div id="topManagerPlayers">
+                Loading...
+            </div>
+        </div>
+    
     </div>
 
 </div>
@@ -869,6 +919,31 @@ const competitionLogos = {
 
 let allMatches = [];
 let allPlayers = [];
+
+let managerSortColumn = "total";
+let managerSortDirection = "desc";
+
+function sortManagerPlayers(column){
+
+    if(managerSortColumn === column){
+
+        managerSortDirection =
+            managerSortDirection === "asc"
+            ? "desc"
+            : "asc";
+
+    }else{
+
+        managerSortColumn = column;
+        managerSortDirection = "desc";
+
+    }
+
+    renderTopManagerPlayers(managerName, allMatches);
+
+}
+
+window.sortManagerPlayers = sortManagerPlayers;
 
 Promise.all([
     fetch("data.json").then(r=>r.json()),
@@ -1265,6 +1340,7 @@ ${careerHtml}
 `;
 
 renderManagerStats(manager,data);
+renderTopManagerPlayers(manager,data);
 
 }
 
@@ -1552,6 +1628,202 @@ function renderManagerStats(manager,data){
 
 document.getElementById("seasonRows").innerHTML =
 html;
+
+}
+
+function renderTopManagerPlayers(manager,data){
+
+    const stats = {};
+
+    function addPlayer(name){
+
+        if(!name) return;
+
+        if(!stats[name]){
+
+            stats[name] = {
+                matches:0,
+                goals:0,
+                assists:0
+            };
+
+        }
+
+    }
+
+    const managerMatches =
+        data.filter(match => match.Manager === manager);
+
+    managerMatches.forEach(match => {
+
+        for(let i=1;i<=11;i++){
+
+            const player =
+                match[`Player name ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].matches++;
+
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player =
+                match[`Substitution IN Player ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].matches++;
+
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player =
+                match[`Goal Player ${i}`];
+
+            if(player && !player.includes("(OG)")){
+
+                addPlayer(player);
+                stats[player].goals++;
+
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            const player =
+                match[`Assist Player ${i}`];
+
+            if(player){
+
+                addPlayer(player);
+                stats[player].assists++;
+
+            }
+
+        }
+
+    });
+
+    const top = Object.entries(stats)
+
+    .map(([name,s]) => ({
+
+        name,
+        matches:s.matches,
+        goals:s.goals,
+        assists:s.assists,
+        total:s.goals + s.assists
+
+    }))
+
+    .sort((a,b) => {
+
+        const valueA = a[managerSortColumn];
+        const valueB = b[managerSortColumn];
+
+        return managerSortDirection === "asc"
+            ? valueA - valueB
+            : valueB - valueA;
+
+    })
+
+    .slice(0,10);
+
+    let html = `
+
+    <table class="flick-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Player</th>
+
+                <th
+                    class="${managerSortColumn==='matches' ? 'flick-selected' : ''}"
+                    onclick="sortManagerPlayers('matches')">
+                    M
+                </th>
+
+                <th
+                    class="${managerSortColumn==='goals' ? 'flick-selected' : ''}"
+                    onclick="sortManagerPlayers('goals')">
+                    G
+                </th>
+
+                <th
+                    class="${managerSortColumn==='assists' ? 'flick-selected' : ''}"
+                    onclick="sortManagerPlayers('assists')">
+                    A
+                </th>
+
+                <th
+                    class="${managerSortColumn==='total' ? 'flick-selected' : ''}"
+                    onclick="sortManagerPlayers('total')">
+                    G+A
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+    `;
+
+    top.forEach(player => {
+
+        html += `
+
+        <tr>
+
+            <td>
+                <a
+                    class="player-link"
+                    href="player.html?name=${encodeURIComponent(player.name)}">
+                    ${player.name}
+                </a>
+            </td>
+
+            <td class="${managerSortColumn==='matches' ? 'flick-column-selected' : ''}">
+                ${player.matches}
+            </td>
+
+            <td class="${managerSortColumn==='goals' ? 'flick-column-selected' : ''}">
+                ${player.goals || "-"}
+            </td>
+
+            <td class="${managerSortColumn==='assists' ? 'flick-column-selected' : ''}">
+                ${player.assists || "-"}
+            </td>
+
+            <td class="${managerSortColumn==='total' ? 'flick-column-selected' : ''}">
+                ${player.total || "-"}
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById(
+        "topManagerPlayers"
+    ).innerHTML = html;
 
 }
 
