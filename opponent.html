@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<div id="opponentHeader"></div>
+
+<div class="content-layout">
+
+    <div class="left-panel">
+        <div id="opponentProfile"></div>
+    </div>
+
+    <div class="right-panel">
+    </div>
+
+</div>na<!DOCTYPE html>
 <html lang="sk">
 <head>
 <meta charset="UTF-8">
@@ -819,21 +830,17 @@ Opponent Profile
 
 </div>
 
-    <div id="opponentProfile">
-    Loading...
-    </div>
+<div id="opponentHeader"></div>
 
 <div class="content-layout">
 
     <div class="left-panel">
-
+        <div id="opponentProfile"></div>
     </div>
 
     <div class="right-panel">
-    
-    
-    
     </div>
+
 </div>
 
 <script>
@@ -928,17 +935,19 @@ function renderOpponent(team,data){
     const winPct =
         ((wins / matches.length) * 100).toFixed(1);
 
-    document.getElementById("opponentProfile").innerHTML = `
+    document.getElementById("opponentHeader").innerHTML = `
 
     <div class="opponent-card">
-
+    
         <div class="opponent-info">
-
             <h1>${team}</h1>
-
         </div>
-
+    
     </div>
+    
+    `;
+
+    document.getElementById("opponentProfile").innerHTML = `
 
     <div class="widget-title">
         Statistics
