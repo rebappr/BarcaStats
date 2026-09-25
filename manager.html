@@ -566,6 +566,16 @@ flex-shrink:0;
         0 0 0 4px rgba(59,130,246,.15);
 }
 
+.club-link{
+    color:inherit;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.club-link:hover{
+    text-decoration:underline;
+}
+
 @media(max-width:750px){
 
     .main-menu{
@@ -1039,8 +1049,21 @@ const careerHtml = Object.keys(clubStats)
     return `
 
         <div class="widget-title club-title">
-            ${club}
+            ${
+                club !== "FC Barcelona"
+                ? `
+                    <a
+                        href="team.html?name=${encodeURIComponent(club)}"
+                        class="club-link">
+                        ${club}
+                    </a>
+                  `
+                : club
+            }
         </div>
+
+
+`;
 
         <div class="summary-grid ${club !== 'FC Barcelona' ? 'opponent-career' : ''}">
 
