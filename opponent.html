@@ -383,6 +383,7 @@ flex-shrink:0;
 .matches-header{
     display:grid;
     grid-template-columns:
+        80px
         35px
         90px
         70px
@@ -404,8 +405,9 @@ flex-shrink:0;
 .opponent-match{
     display:grid;
     grid-template-columns:
+        80px
         35px
-        100px
+        90px
         70px
         1fr
         90px;
@@ -681,20 +683,19 @@ flex-shrink:0;
     font-weight:600;
 }
    
-.matches-header div:nth-child(3),
-.opponent-match div:nth-child(3){
+.matches-header div:nth-child(4),
+.opponent-match div:nth-child(4){
     display:none;
 }
 
 .opponent-match, 
 .matches-header{
     grid-template-columns:
-        30px
+        80px
+        35px
         90px
         1fr
-        90px
-        35px
-        35px;
+        90px;
 
     row-gap:8px;
 }
@@ -949,7 +950,8 @@ function buildOpponentMatches(team, data){
         
             <div class="matches-header">
             
-                <div></div>
+                <div>Season</div>
+                <div>Competition</div>
                 <div>Date</div>
                 <div>Venue</div>
                 <div>Opponent</div>
@@ -977,12 +979,19 @@ html += `
 
     <div class="opponent-match">
 
+        <div>
+            ${match.Season}
+        </div>
+
         <div class="competition-cell">
             <img
             src="logos/${competitionLogos[match.Competition] || 'default.png'}"
             class="competition-logo"
             alt="${match.Competition}"
             title="${match.Competition}">
+            <span>
+            ${match.Competition}
+            </span>
         </div>
         
         <div>
