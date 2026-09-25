@@ -178,7 +178,7 @@ border-radius:18px;
 
 .summary-grid{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(5,1fr);
 gap:8px;
 }
 
@@ -951,8 +951,20 @@ function renderOpponent(team,data){
     
         if(parts.length !== 2) return;
     
-        goalsFor += parts[0];
-        goalsAgainst += parts[1];
+        const homeGoals = parts[0];
+        const awayGoals = parts[1];
+    
+        if(match["Home/Away"] === "Home"){
+    
+            goalsFor += homeGoals;
+            goalsAgainst += awayGoals;
+    
+        }else{
+    
+            goalsFor += awayGoals;
+            goalsAgainst += homeGoals;
+    
+        }
     
     });
 
