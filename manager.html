@@ -1604,22 +1604,24 @@ function initPersonSearch(){
             )
             .slice(0,20);
 
-        results.innerHTML = `
+            results.innerHTML = `
             <div class="player-search-results">
             ${filtered.map(item => `
-            ${
+            <a
+                class="player-search-item"
+                href="${
                     item.type === 'Manager'
                     ? `manager.html?name=${encodeURIComponent(item.name)}`
                     : `player.html?name=${encodeURIComponent(item.name)}`
-                }
-                ${item.name}
-                <span class="search-type ${item.type.toLowerCase()}">
-                    ${item.type}
-                </span>
+                }">
+            ${item.name}
+            <span class="search-type ${item.type.toLowerCase()}">
+               ${item.type}
+            </span>
             </a>
             `).join("")}
             </div>
-        `;
+            `;
     });
 
 }
