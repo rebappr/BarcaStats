@@ -513,6 +513,28 @@ color:#A50044;
 .main-menu a img{
     display:none;
 }
+    
+.search-menu-btn{
+    min-width:56px !important;
+    width:56px;
+    padding:12px !important;
+    font-size:20px;
+}
+
+    #searchToggle span{
+        display:none;
+    }
+
+    #searchToggle img{
+        display:block;
+        width:24px;
+        height:24px;
+    }
+
+    #searchToggle{
+        min-width:56px;
+        padding:12px;
+    }
 
 @media(max-width:900px){
 
@@ -695,7 +717,7 @@ Home page
         <span>Records</span>
     </a>
 
-    <a href="#" id="searchToggle">
+    <a href="#" id="searchToggle" class="search-menu-btn">
         <img src="icons/search-48.png">
         <span>Search</span>
     </a>
