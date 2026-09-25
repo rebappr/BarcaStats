@@ -940,6 +940,22 @@ function renderOpponent(team,data){
 
     });
 
+    let goalsFor = 0;
+    let goalsAgainst = 0;
+    
+    matches.forEach(match => {
+    
+        const parts = (match.Result || "")
+            .split(":")
+            .map(Number);
+    
+        if(parts.length !== 2) return;
+    
+        goalsFor += parts[0];
+        goalsAgainst += parts[1];
+    
+    });
+
     const winPct =
         ((wins / matches.length) * 100).toFixed(1);
 
@@ -981,6 +997,11 @@ function renderOpponent(team,data){
     <div class="summary-box losses">
         <b>${statValue(losses)}</b>
         Losses
+    </div>
+
+    <div class="summary-box">
+        <b>${goalsFor}:${goalsAgainst}</b>
+        Score
     </div>
 
     </div>
