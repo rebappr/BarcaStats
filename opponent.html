@@ -945,14 +945,21 @@ function renderOpponent(team,data){
     
     matches.forEach(match => {
     
-        const parts = (match.Result || "")
-            .split(":")
-            .map(Number);
+        const result = (match.Result || "").trim();
     
-        if(parts.length !== 2) return;
+        if(result === "-:-") return;
     
-        const homeGoals = parts[0];
-        const awayGoals = parts[1];
+        if(!result.includes(":")) return;
+    
+        const [homeGoals, awayGoals] =
+            result.split(":").map(Number);
+    
+        if(
+            isNaN(homeGoals) ||
+            isNaN(awayGoals)
+        ){
+            return;
+        }
     
         if(match["Home/Away"] === "Home"){
     
