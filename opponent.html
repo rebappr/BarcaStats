@@ -595,8 +595,27 @@ flex-shrink:0;
     border:1px solid var(--result-loss);
     color:var(--result-loss);
 }
+    
+    #searchToggle span{
+        display:none;
+    }
+
+    #searchToggle img{
+        display:block;
+        width:20px;
+        height:20px;
+    }
+
+    #searchToggle{
+        min-width:56px;
+        padding:10px 4px;
+    }
 
 @media(max-width:750px){
+    
+    #searchToggle span{
+        display:block;
+    }
 
     .main-menu{
         position:fixed;
