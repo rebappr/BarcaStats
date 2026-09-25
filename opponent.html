@@ -36,6 +36,12 @@ color:var(--text);
 min-height:100vh;
 }
 
+.content-layout{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+
 .left-panel{
 flex:1.1;
 min-width:0;
@@ -809,19 +815,21 @@ Opponent Profile
 
 </div>
 
-<div class="left-panel">
+<div class="content-layout">
 
-<div id="opponentProfile">
-Loading...
-</div>
+    <div class="left-panel">
+    
+    <div id="opponentProfile">
+    Loading...
+    </div>
 
-</div>
+    </div>
 
-<div class="right-panel">
-
-
-
-</div>
+    <div class="right-panel">
+    
+    
+    
+    </div>
 </div>
 
 <script>
