@@ -565,14 +565,14 @@ flex-shrink:0;
     box-shadow:
         0 0 0 4px rgba(59,130,246,.15);
 }
-
-.club-link{
-    color:inherit;
+    
+.manager-clubs a{
+    color:var(--link-color);
     text-decoration:none;
-    font-weight:700;
+    font-weight:600;
 }
 
-.club-link:hover{
+.manager-clubs a:hover{
     text-decoration:underline;
 }
 
@@ -1028,7 +1028,13 @@ if(
         managerInfo["Nationality 2"];
 }
 
-const clubsText = clubs.join(", ");
+const clubsText = clubs.map(club =>
+
+    club === "FC Barcelona"
+    ? club
+    : `<a href="team.html?name=${encodeURIComponent(club)}">${club}</a>`
+
+).join(", ");
 
 const careerHtml = Object.keys(clubStats)
 .sort((a,b)=>{
@@ -1051,17 +1057,7 @@ const careerHtml = Object.keys(clubStats)
     return `
 
         <div class="widget-title club-title">
-            ${
-                club !== "FC Barcelona"
-                ? `
-                    <a
-                        href="team.html?name=${encodeURIComponent(club)}"
-                        class="club-link">
-                        ${club}
-                    </a>
-                  `
-                : club
-            }
+            ${club}
         </div>
 
         <div class="summary-grid ${club !== 'FC Barcelona' ? 'opponent-career' : ''}">
