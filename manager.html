@@ -1688,8 +1688,7 @@ function renderTopManagerPlayers(manager,data){
 
     const managerMatches =
         data.filter(match =>
-            match.Manager === manager &&
-            match.Team === "FC Barcelona"
+            match.Manager === manager
         );
 
     managerMatches.forEach(match => {
