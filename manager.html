@@ -842,6 +842,8 @@ Promise.all([
 ])
 .then(([data, managers])=>{
 
+    allMatches = data;
+
     renderManager(managerName, data, managers);
 
     initPersonSearch();
