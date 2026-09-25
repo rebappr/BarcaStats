@@ -36,6 +36,22 @@ color:var(--text);
 min-height:100vh;
 }
 
+.content-layout{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.left-panel{
+flex:1.1;
+min-width:0;
+}
+
+.right-panel{
+flex:.9;
+min-width:0;
+}
+
 .theme-toggle{
 position:fixed;
 bottom:20px;
@@ -578,6 +594,14 @@ flex-shrink:0;
 
 @media(max-width:750px){
 
+    .left-panel,
+    .right-panel{
+        flex:none !important;
+        width:100% !important;
+        min-width:0;
+        max-width:100%;
+        }
+
     .main-menu{
         position:fixed;
 
@@ -802,8 +826,17 @@ Manager Profile
 
 </div>
 
-<div id="managerProfile">
-Loading...
+<div class="content-layout">
+
+    <div class="left-panel">
+
+        <div id="managerProfile">
+        Loading...
+        </div>
+
+    <div class="right-panel">
+    </div>
+    
 </div>
 
 </div>
