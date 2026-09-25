@@ -925,130 +925,22 @@ function renderOpponent(team,data){
     </div>
 
     <div class="widget-title">
-        Season Breakdown
+        Matches
     </div>
-
-    <div class="widget-card">
-
-        <table class="stats-table">
-
-            <thead>
-                <tr>
-                    <th>Season</th>
-                    <th>Matches</th>
-                    <th>Wins</th>
-                    <th>Draws</th>
-                    <th>Losses</th>
-                </tr>
-            </thead>
-
-            <tbody id="seasonRows"></tbody>
-
-        </table>
-
-    </div>
+        
+        <div class="widget-card">
+            ${buildOpponentMatches(team, data)}
+        </div>
 
     `;
 
-    renderOpponentStats(team,data);
-
 }
 
-function renderOpponentStats(team,data){
-
-    const stats = {};
-
-    data.forEach(match=>{
-
-        if(match["Opp. Team"] !== team) return;
-
-        const season = match.Season;
-
-        if(!stats[season]){
-            stats[season] = {
-                matches:0,
-                wins:0,
-                draws:0,
-                losses:0
-            };
-        }
-
-        stats[season].matches++;
-
-        if(match["Result type"]==="W") stats[season].wins++;
-        if(match["Result type"]==="D") stats[season].draws++;
-        if(match["Result type"]==="L") stats[season].losses++;
-
-    });
-
-    let html="";
-
-    Object.keys(stats)
-    .sort()
-    .reverse()
-    .forEach(season=>{
-
-        const s = stats[season];
-
-        const winPct =
-            ((s.wins/s.matches)*100).toFixed(1);
-
-        html += `
-
-        <tr
-        class="season-row"
-        onclick="toggleSeason('season-${season.replace(/\//g,'-')}')">
-
-            <td><strong>${season}</strong></td>
-
-            <td>${s.matches}</td>
-
-            <td>${statValue(s.wins)}</td>
-            <td>${statValue(s.draws)}</td>
-            <td>${statValue(s.losses)}</td>
-
-            <td>${winPct}%</td>
-
-        </tr>
-
-        <tr
-        id="season-${season.replace(/\//g,'-')}"
-        style="display:none">
-
-            <td colspan="5">
-
-                ${buildOpponentMatches(team,season,data)}
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-    document.getElementById("seasonRows").innerHTML =
-    html;
-}
-
-function toggleSeason(id){
-
-    const el = document.getElementById(id);
-
-    if(!el) return;
-
-    el.style.display =
-        el.style.display === "none"
-        ? "table-row"
-        : "none";
-}
-
-function buildOpponentMatches(team, season, data){
+function buildOpponentMatches(team, data){
 
         const matches = data.filter(match =>
         
-            match["Opp. Team"] === team &&
-            match.Season === season
+            match["Opp. Team"] === team
         
         );
 
