@@ -947,7 +947,7 @@ managerMatches.forEach(match=>{
     const club =
         match.Manager === manager
         ? "FC Barcelona"
-        : match.Team;
+        : match["Opp. Team"];
 
     if(!clubStats[club]){
 
