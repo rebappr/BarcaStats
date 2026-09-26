@@ -858,9 +858,18 @@ max-width:100%;
 
 @media(max-width:767px){
 
+.content-layout{
+    display:flex;
+    flex-direction:column;
+}
+
+.left-panel{
+    order:1;
+}
+
 .right-panel{
-margin-top:0 !important;
-padding-top:0 !important;
+    order:2;
+    margin-top:0;
 }
 
 #laligaWidget,
