@@ -769,7 +769,7 @@ text-align:center;
     opacity:.7;
 }
 
-.match-line{
+.matches-line{
     display:grid;
     grid-template-columns:
         80px
@@ -783,22 +783,23 @@ text-align:center;
     font-size:12px;
 }
 
-.match-line{
+.matches-line{
     padding:8px;
     border-bottom:1px solid var(--meta-border);
     font-size:12px;
     transition:.2s;
 }
 
-.match-line:hover{
+.matches-line:hover{
     background:var(--meta-bg);
 }
 
-.match-line:last-child{
+.matches-line:last-child{
     border-bottom:none;
 }
 
-.match-line div:last-child{
+.matches-header div:last-child,
+.matches-line div:last-child{
     display:flex;
     justify-content:center;
 }
@@ -1066,12 +1067,12 @@ font-size:18px;
     }
 
     .matches-header div:nth-child(4),
-    .match-line div:nth-child(4){
+    .matches-line div:nth-child(4){
         display:none;
     }
 
     .matches-header,
-    .match-line{
+    .matches-line{
         grid-template-columns:
             75px
             30px
@@ -1958,7 +1959,7 @@ function buildCurrentSeasonMatches(data){
 
         html += `
 
-	        <div class="match-line" onclick="location.href='match.html?id=${match.ID}'">
+	        <div class="matches-line" onclick="location.href='match.html?id=${match.ID}'">
 
                 <div>
                     ${match.Date}
