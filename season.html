@@ -1411,6 +1411,28 @@ function renderSeason(){
 let goalsFor = 0;
 let goalsAgainst = 0;
 
+playedMatches.forEach(match => {
+
+    const homeGoals =
+        Number(match["Goals home team"]) || 0;
+
+    const awayGoals =
+        Number(match["Goals away team"]) || 0;
+
+    if(match["Home/Away"] === "Home"){
+
+        goalsFor += homeGoals;
+        goalsAgainst += awayGoals;
+
+    }else{
+
+        goalsFor += awayGoals;
+        goalsAgainst += homeGoals;
+
+    }
+
+});
+
    document.getElementById(
     "seasonOverview"
 ).innerHTML = `
@@ -1446,26 +1468,6 @@ let goalsAgainst = 0;
 
 `;
 
-playedMatches.forEach(match => {
-
-    const homeGoals =
-        Number(match["Goals home team"]) || 0;
-
-    const awayGoals =
-        Number(match["Goals away team"]) || 0;
-
-    if(match["Home/Away"] === "Home"){
-
-        goalsFor += homeGoals;
-        goalsAgainst += awayGoals;
-
-    }else{
-
-        goalsFor += awayGoals;
-        goalsAgainst += homeGoals;
-
-    }
-
 	const latestSeason =
 	    [...new Set(allMatches.map(x => x.Season))]
 	    .sort()
@@ -1475,8 +1477,6 @@ playedMatches.forEach(match => {
 	    season === latestSeason
 	    ? ""
 	    : "none";
-
-});
 
 renderSeasonSummary(
     seasonMatches
