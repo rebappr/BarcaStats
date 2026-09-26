@@ -748,7 +748,22 @@ text-align:center;
         padding:10px 4px;
     }
 
-@media(max-width:900px){
+@media (min-width: 768px) and (max-width: 1023px) {
+
+	.container{
+		padding:6px;
+		}
+    
+	.left-panel,
+	.right-panel{
+		flex:none !important;
+		width:100% !important;
+		min-width:0;
+		max-width:100%;
+		}
+}
+
+@media(max-width:767px){
     
     #searchToggle span{
         display:block;
