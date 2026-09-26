@@ -775,11 +775,6 @@ text-align:center;
     border-bottom:none;
 }
 
-.season-link{
-    text-decoration:none;
-    color:inherit;
-}
-
 .opponent-link{
     color:var(--link-color);
     text-decoration:none;
@@ -1935,11 +1930,7 @@ function buildCurrentSeasonMatches(data){
 
         html += `
 
-        <a
-            href="match.html?id=${match.ID}"
-            class="season-link">
-
-            <div class="season-match">
+	        <div class="season-match" onclick="location.href='match.html?id=${match.ID}'">
 
                 <div>
                     ${match.Date}
@@ -1977,8 +1968,6 @@ function buildCurrentSeasonMatches(data){
                 </div>
 
             </div>
-
-        </a>
         `;
 
     });
