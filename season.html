@@ -746,7 +746,28 @@ text-align:center;
         padding:10px 4px;
     }
 
-.matches-header,
+
+.matches-header{
+    display:grid;
+    grid-template-columns:
+        80px
+        1fr
+        1.3fr
+        70px
+        90px;
+
+    gap:4px;
+
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+
+    padding:8px;
+    margin-bottom:6px;
+
+    opacity:.7;
+}
+
 .season-match{
     display:grid;
     grid-template-columns:
@@ -756,8 +777,9 @@ text-align:center;
         70px
         90px;
 
-    gap:6px;
+    gap:4px;
     align-items:center;
+    font-size:12px;
 }
 
 .season-match{
