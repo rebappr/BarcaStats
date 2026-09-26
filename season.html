@@ -261,16 +261,28 @@ border:1px solid var(--result-loss);
 color:var(--result-loss);
 }
 
-.summary-box.matches{
-background:color-mix(in srgb, #004D98 15%, transparent);
-border:1px solid #004D98;
-color:#ffffff;
+.summary-box.matches,
+.summary-box.goals{
+    background:rgba(0,77,152,.10);
+    border:1px solid rgba(0,77,152,.25);
+    color:#004D98;
 }
 
-.summary-box.goals{
-background:color-mix(in srgb, #004D98 15%, transparent);
-border:1px solid #004D98;
-color:#ffffff;
+.summary-box.matches b,
+.summary-box.goals b{
+    color:#004D98;
+}
+
+[data-theme="dark"] .summary-box.matches,
+[data-theme="dark"] .summary-box.goals{
+    background:rgba(0,77,152,.20);
+    border:1px solid #004D98;
+    color:#ffffff;
+}
+
+[data-theme="dark"] .summary-box.matches b,
+[data-theme="dark"] .summary-box.goals b{
+    color:#ffffff;
 }
 
 .laliga-table{
