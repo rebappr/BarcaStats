@@ -2037,7 +2037,9 @@ function buildMatchRow(match){
 			<div>
 				${
 				match['Opp. Team'] !== 'FC Barcelona'
-				? `<a href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}" onclick="event.stopPropagation();">
+				? `<a href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}" 
+				class="opponent-link"
+				onclick="event.stopPropagation();">
 				${match['Opp. Team']}
 				</a>`
 				: match['Opp. Team']
