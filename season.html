@@ -858,18 +858,9 @@ max-width:100%;
 
 @media(max-width:767px){
 
-.content-layout{
-    display:flex;
-    flex-direction:column;
-}
-
-.left-panel{
-    order:1;
-}
-
 .right-panel{
-    order:2;
-    margin-top:0;
+margin-top:0 !important;
+padding-top:0 !important;
 }
 
 #laligaWidget,
@@ -898,8 +889,8 @@ color:#fff;
 
 font-size:12px;
 font-weight:700;
-text-transform:uppercase;
-letter-spacing:.2px;
+	    text-transform:uppercase;
+	    letter-spacing:.2px;
 
 cursor:pointer;
 }
@@ -1309,43 +1300,12 @@ Month
 </div>
 </div>
 
-<div id="laligaWidget">
-
-    <div class="widget-card">
-        <div id="laligaTable">
-            Loading...
-        </div>
-    </div>
-
-</div>
-
-<div id="mobileDebutantsSection">
-<div class="widget-title">
-    Season Debutants
-</div>
-
-<div class="widget-card">
-    <div id="seasonSummary">
-        Loading...
-    </div>
-</div>
-</div>
-
-<div id="mobileStatisticsSection">
-<div class="widget-card">
-<div id="statistics">
-Loading...
-</div>
-</div>
-</div>
-
 
 </div>
 
 <div class="right-panel">
 
 <div id="laligaWidget" class="mobile-hidden-section">
-<div class="mobile-hidden-section">
 
 <div class="widget-title">
 La Liga Table
@@ -1360,7 +1320,6 @@ Loading...
 </div>
 
 <div id="mobileDebutantsSection" class="mobile-hidden-section">
-<div class="mobile-hidden-section">
 <div class="widget-title">
 Season Debutants
 </div>
@@ -1373,7 +1332,6 @@ Loading...
 </div>
 
 <div id="mobileStatisticsSection" class="mobile-hidden-section">
-<div class="mobile-hidden-section">
 <div class="widget-title">
 Statistics
 </div>
