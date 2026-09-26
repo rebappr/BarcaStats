@@ -1277,6 +1277,9 @@ function renderSeason(){
         x => x.Season === season
     );
 
+	document.getElementById("seasonMatches").innerHTML =
+    buildCurrentSeasonMatches(seasonMatches);
+
     if(!seasonMatches.length){
 
         document.getElementById(
@@ -1947,10 +1950,7 @@ function renderSeasonDropdown(){
 
 function buildCurrentSeasonMatches(data){
 
-    const currentSeason = "2025-26";
-
-    const matches = data
-        .filter(match => match.Season === currentSeason)
+    const matches = [...data]
         .sort((a,b)=>{
 
             const da =
