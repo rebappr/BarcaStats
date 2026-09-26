@@ -19,6 +19,10 @@
 box-sizing:border-box;
 }
 
+html{
+    -webkit-text-size-adjust:100%;
+}
+
 body{
 margin:0;
 font-family:'Inter',sans-serif;
@@ -27,7 +31,6 @@ background:var(--bg);
 
 color:var(--text);
 min-height:100vh;
--webkit-text-size-adjust:100%;
 }
 
 .container{
@@ -1463,72 +1466,63 @@ function initPersonSearch(){
 
 (function(){
 
-const savedTheme =
-localStorage.getItem("theme");
+    const savedTheme =
+        localStorage.getItem("theme");
 
-const systemTheme =
-window.matchMedia("(prefers-color-scheme: dark)").matches
-? "dark"
-: "light";
+    const systemTheme =
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
 
-const theme =
-savedTheme || systemTheme;
+    const theme =
+        savedTheme || systemTheme;
 
-document.documentElement.setAttribute(
-"data-theme",
-theme
-);
+    document.documentElement.setAttribute(
+        "data-theme",
+        theme
+    );
 
-const button =
-document.getElementById("themeToggle");
+    const button =
+        document.getElementById("themeToggle");
 
-const button =
-document.getElementById("themeToggle");
+    function updateThemeButton(theme){
 
-const isDark = theme === "dark";
+        button.querySelector(".theme-icon").textContent =
+            theme === "dark"
+            ? "☀️"
+            : "🌙";
 
-button.querySelector(".theme-icon").textContent =
-isDark ? "☀️" : "🌙";
+        button.querySelector(".theme-text").textContent =
+            theme === "dark"
+            ? "Dark"
+            : "Light";
+    }
 
-button.querySelector(".theme-text").textContent =
-isDark ? "Dark" : "Light";
+    updateThemeButton(theme);
 
-button.querySelector(".theme-icon").textContent =
-next === "dark"
-? "☀️"
-: "🌙";
+    button.addEventListener("click",()=>{
 
-button.querySelector(".theme-text").textContent =
-next === "dark"
-? "Dark"
-: "Light";
+        const current =
+            document.documentElement.getAttribute("data-theme");
 
-button.addEventListener("click", () => {
+        const next =
+            current === "dark"
+            ? "light"
+            : "dark";
 
-const current =
-document.documentElement.getAttribute("data-theme");
+        document.documentElement.setAttribute(
+            "data-theme",
+            next
+        );
 
-const next =
-current === "dark"
-? "light"
-: "dark";
+        localStorage.setItem(
+            "theme",
+            next
+        );
 
-document.documentElement.setAttribute(
-"data-theme",
-next
-);
+        updateThemeButton(next);
 
-localStorage.setItem(
-"theme",
-next
-);
-
-button.textContent =
-next === "dark"
-? "☀️"
-: "🌙";
-
-});
+    });
 
 })();
 
