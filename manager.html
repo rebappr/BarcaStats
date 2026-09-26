@@ -446,62 +446,6 @@ flex-shrink:0;
     border-bottom:none;
 }
 
-.main-menu{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    gap:6px;
-
-    margin-bottom:12px;
-    padding-left:0;
-}
-
-.main-menu a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:120px;
-    padding:12px 20px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    background:#004D98;
-    border-color:#0a5fb3;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:700;
-    text-transform:uppercase;
-
-    transition:.2s;
-
-    box-shadow:
-        0 4px 12px rgba(0,77,152,.25);
-}
-
-.main-menu a:hover{
-    transform:translateY(-2px);
-
-    background:#0a5fb3;
-
-    box-shadow:
-        0 8px 20px rgba(0,77,152,.35);
-}
-
-.main-menu a.active{
-    background:#A50044;
-    border-color:#8b0038;
-    color:white;
-}
-
-.main-menu a img{
-    display:none;
-}
-
 .player-search-results{
     display:flex;
     flex-direction:column;
@@ -640,7 +584,92 @@ font-weight:600;
 color:#A50044;
 }
 
-    #searchToggle span{
+.main-menu{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:6px;
+
+    margin-bottom:12px;
+    padding-left:0;
+}
+
+.main-menu a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:120px;
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:#004D98;
+    border-color:#0a5fb3;
+
+    color:white;
+
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+
+    transition:.2s;
+
+    box-shadow:
+        0 4px 12px rgba(0,77,152,.25);
+}
+
+.main-menu a img{
+    display:none;
+}
+
+.main-menu a:hover,
+.menu-theme-btn:hover{
+    transform:translateY(-2px);
+
+    background:#0a5fb3;
+
+    box-shadow:
+        0 8px 20px rgba(0,77,152,.35);
+}
+
+.main-menu a.active{
+    background:#A50044;
+    border-color:#8b0038;
+    color:white;
+}
+
+.main-menu a img{
+    display:none;
+}
+
+.menu-theme-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:56px;
+    padding:6px 4px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#004D98;
+    color:white;
+
+    font-size:20px;
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0,77,152,.25);
+
+    transition:.2s;
+}
+    
+    #searchToggle span,
+	.theme-text{
         display:none;
     }
 
