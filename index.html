@@ -345,25 +345,31 @@ border-radius:16px;
 margin-top:10px;
 }
 
-.theme-toggle{
-position:fixed;
-bottom:20px;
-left:20px;
+.menu-theme-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-width:52px;
-height:52px;
+    min-width:56px;
+    padding:10px 4px;
 
-border:none;
-border-radius:50%;
+    border:none;
+    border-radius:14px;
 
-cursor:pointer;
+    background:#004D98;
+    color:white;
 
-background:#A50044;
-color:white;
+    font-size:20px;
+    cursor:pointer;
 
-font-size:20px;
+    box-shadow:
+        0 4px 12px rgba(0,77,152,.25);
 
-z-index:9999;
+    transition:.2s;
+}
+
+.menu-theme-btn:hover{
+    background:#0a5fb3;
 }
 
 .player-link{
@@ -536,9 +542,17 @@ color:#A50044;
 		font-size:18px;
 	}
 
-    .theme-toggle{
-    bottom:90px;
-    }
+	.menu-theme-btn{
+	    min-width:58px;
+	
+	    padding:6px 8px;
+	
+	    border-radius:18px;
+	
+	    background:#0A5FB3;
+	
+	    font-size:28px;
+	}
 
     .main-menu{
         position:fixed;
@@ -677,10 +691,6 @@ padding:6px 14px;
 </head>
 <body>
 
-<button id="themeToggle" class="theme-toggle">
-🌙
-</button>
-
 <div class="container">
 
 <div class="header">
@@ -719,6 +729,10 @@ Home page
         <img src="icons/search-48.png">
         <span>Search</span>
     </a>
+
+	<button id="themeToggle" class="menu-theme-btn">
+	    🌙
+	</button>	
 
 </nav>
 
