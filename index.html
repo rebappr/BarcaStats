@@ -542,19 +542,8 @@ color:#A50044;
 		font-size:18px;
 	}
 
+    .main-menu,
 	.menu-theme-btn{
-	    min-width:58px;
-	
-	    padding:6px 8px;
-	
-	    border-radius:18px;
-	
-	    background:#0A5FB3;
-	
-	    font-size:28px;
-	}
-
-    .main-menu{
         position:fixed;
 
         left:12px;
@@ -584,7 +573,8 @@ color:#A50044;
             inset 0 1px 0 rgba(255,255,255,.25);
     }
 
-    .main-menu a{
+    .main-menu a,
+	.menu-theme-btn a{
         display:flex;
         flex-direction:column;
         align-items:center;
@@ -604,7 +594,8 @@ color:#A50044;
         backdrop-filter:blur(15px);
     }
     
-    .main-menu a:hover{
+    .main-menu a:hover,
+	.menu-theme-btn a:hpver{
         background:#004D98;
     
         backdrop-filter:blur(15px);
@@ -630,7 +621,8 @@ color:#A50044;
         object-fit:contain;
     }
 
-    .main-menu a span{
+    .main-menu a span,
+	.menu-theme-btn a span{
         font-size:9px;
         font-weight:600;
         line-height:1;
