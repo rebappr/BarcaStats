@@ -746,7 +746,7 @@ Home page
 
 	<button id="themeToggle" class="menu-theme-btn">
 	    <span class="theme-icon">🌙</span>
-	    <span class="theme-text">Theme</span>
+	    <span class="theme-text"></span>
 	</button>
 
 </nav>
@@ -1482,10 +1482,26 @@ theme
 const button =
 document.getElementById("themeToggle");
 
+const button =
+document.getElementById("themeToggle");
+
+const isDark = theme === "dark";
+
+button.querySelector(".theme-icon").textContent =
+isDark ? "☀️" : "🌙";
+
+button.querySelector(".theme-text").textContent =
+isDark ? "Dark" : "Light";
+
 button.querySelector(".theme-icon").textContent =
 next === "dark"
 ? "☀️"
 : "🌙";
+
+button.querySelector(".theme-text").textContent =
+next === "dark"
+? "Dark"
+: "Light";
 
 button.addEventListener("click", () => {
 
