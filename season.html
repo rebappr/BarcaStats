@@ -1282,10 +1282,10 @@ function renderSeason(){
 
     if(!seasonMatches.length){
 
-        document.getElementById(
-            "matches"
-        ).innerHTML =
-        "<div class='empty'>Season not found</div>";
+		document.getElementById(
+		    "seasonMatches"
+		).innerHTML =
+		"<div class='empty'>Season not found</div>";
 
         return;
     }
@@ -1993,9 +1993,7 @@ function buildCurrentSeasonMatches(data){
 				</div>
 	
 				<div>
-				    }"
-				        class="opponent-link"
-				        onclick="event.stopPropagation();"
+				    opponent.html?team=${encodeURIComponent(match['Opp. Team'])}"
 				    >
 				        ${match['Opp. Team']}
 				    </a>
