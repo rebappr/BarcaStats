@@ -837,6 +837,10 @@ text-align:center;
     color:white;
 }
 
+.mobile-sections{
+    display:none;
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
 
 	.container{
@@ -853,6 +857,38 @@ text-align:center;
 }
 
 @media(max-width:767px){
+
+	.mobile-sections{
+	    display:flex;
+	    gap:6px;
+	    overflow-x:auto;
+	    margin:10px 0;
+	}
+	
+	.mobile-section-btn{
+	    flex:none;
+	
+	    padding:10px 14px;
+	
+	    border:none;
+	    border-radius:18px;
+	
+	    background:#004D98;
+	    color:#fff;
+	
+	    font-size:12px;
+	    font-weight:700;
+	
+	    cursor:pointer;
+	}
+	
+	.mobile-section-btn.active{
+	    background:#A50044;
+	}
+	
+	.mobile-hidden-section{
+	    display:none;
+	}
     
     #searchToggle span,
 	.theme-text{
@@ -1177,8 +1213,36 @@ font-size:18px;
 
     <div id="seasonOverview"></div>
 
+		<div class="mobile-sections">
+		
+		    <button class="mobile-section-btn active"
+		            onclick="showMobileSection('matches', this)">
+		        Matches
+		    </button>
+		
+		    <button class="mobile-section-btn"
+		            onclick="showMobileSection('table', this)">
+		        Table
+		    </button>
+		
+		    <button class="mobile-section-btn"
+		            onclick="showMobileSection('debutants', this)">
+		        Debutants
+		    </button>
+		
+		    <button class="mobile-section-btn"
+		            onclick="showMobileSection('statistics', this)">
+		        Statistics
+		    </button>
+		
+		</div>
+	
+	<div id="mobileMatchesSection">
+
 	<div class="widget-title">
     	Matches
+	</div>
+
 	</div>
 
 	<div class="widget-card">
@@ -1229,7 +1293,7 @@ font-size:18px;
 
 <div class="right-panel">
 
-<div id="laligaWidget">
+<div id="laligaWidget" class="mobile-hidden-section">
 
     <div class="widget-title">
         La Liga Table
@@ -1243,21 +1307,21 @@ font-size:18px;
 
 </div>
 
-<div class="widget-title">
+<div class="widget-title" class="mobile-hidden-section">
     Season Debutants
 </div>
 
-<div class="widget-card">
+<div class="widget-card"  class="mobile-hidden-section">
     <div id="seasonSummary">
         Loading...
     </div>
 </div>
 
-<div class="widget-title">
+<div class="widget-title" class="mobile-hidden-section">
 Statistics
 </div>
 
-<div class="widget-card">
+<div class="widget-card"  class="mobile-hidden-section">
 <div id="statistics">
 Loading...
 </div>
@@ -2252,6 +2316,21 @@ Promise.all([
     renderSeasonDropdown();
     renderSeason();
 
+	if(window.innerWidth <= 767){
+	
+	    document.getElementById(
+	        'laligaWidget'
+	    ).style.display = 'none';
+	
+	    document.getElementById(
+	        'mobileDebutantsSection'
+	    ).style.display = 'none';
+	
+	    document.getElementById(
+	        'mobileStatisticsSection'
+	    ).style.display = 'none';
+	}
+
     initPersonSearch();
 
 })
@@ -2500,6 +2579,60 @@ if(searchToggle){
         }
 
     });
+
+}
+
+function showMobileSection(section, button){
+
+    if(window.innerWidth > 767) return;
+
+    document.querySelectorAll(
+        '.mobile-section-btn'
+    ).forEach(btn =>
+        btn.classList.remove('active')
+    );
+
+    button.classList.add('active');
+
+    document.getElementById(
+        'mobileMatchesSection'
+    ).style.display = 'none';
+
+    document.getElementById(
+        'laligaWidget'
+    ).style.display = 'none';
+
+    document.getElementById(
+        'mobileDebutantsSection'
+    ).style.display = 'none';
+
+    document.getElementById(
+        'mobileStatisticsSection'
+    ).style.display = 'none';
+
+    if(section === 'matches'){
+        document.getElementById(
+            'mobileMatchesSection'
+        ).style.display = 'block';
+    }
+
+    if(section === 'table'){
+        document.getElementById(
+            'laligaWidget'
+        ).style.display = 'block';
+    }
+
+    if(section === 'debutants'){
+        document.getElementById(
+            'mobileDebutantsSection'
+        ).style.display = 'block';
+    }
+
+    if(section === 'statistics'){
+        document.getElementById(
+            'mobileStatisticsSection'
+        ).style.display = 'block';
+    }
 
 }
 
