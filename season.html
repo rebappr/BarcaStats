@@ -1989,7 +1989,7 @@ function buildCurrentSeasonMatches(data){
             const db =
                 new Date(b.Date.split(".").reverse().join("-"));
 
-            return db - da;
+            return da - db;
 
         });
 
