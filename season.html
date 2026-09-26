@@ -814,6 +814,29 @@ text-align:center;
     text-decoration:underline;
 }
 
+.matches-view-switch{
+    display:flex;
+    gap:6px;
+    margin-bottom:10px;
+}
+
+.matches-view-switch button{
+    padding:8px 12px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+
+    background:var(--card-bg);
+    color:var(--text);
+
+    border:1px solid var(--card-border);
+}
+
+.matches-view-switch button.active{
+    background:#004D98;
+    color:white;
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
 
 	.container{
@@ -1162,6 +1185,31 @@ font-size:18px;
 
     <div class="matches-list">
 
+		<div class="matches-view-switch">
+
+		    <button class="active"
+		            data-view="all"
+		            onclick="setMatchesView('all')">
+		        All
+		    </button>
+		
+		    <button data-view="upcoming"
+		            onclick="setMatchesView('upcoming')">
+		        Upcoming
+		    </button>
+		
+		    <button data-view="competition"
+		            onclick="setMatchesView('competition')">
+		        Competition
+		    </button>
+		
+		    <button data-view="month"
+		            onclick="setMatchesView('month')">
+		        Month
+		    </button>
+		
+		</div>
+
         <div class="matches-header">
 
             <div>Date</div>
@@ -1226,6 +1274,7 @@ let allPlayers = [];
 let playerBirthDates = {};
 
 let matchFilter = "played"; 
+let matchesView = "all";
 
 let season =
 new URLSearchParams(
@@ -1295,28 +1344,6 @@ function renderSeason(){
 let goalsFor = 0;
 let goalsAgainst = 0;
 
-playedMatches.forEach(match => {
-
-    const homeGoals =
-        Number(match["Goals home team"]) || 0;
-
-    const awayGoals =
-        Number(match["Goals away team"]) || 0;
-
-    if(match["Home/Away"] === "Home"){
-
-        goalsFor += homeGoals;
-        goalsAgainst += awayGoals;
-
-    }else{
-
-        goalsFor += awayGoals;
-        goalsAgainst += homeGoals;
-
-    }
-
-});
-
    document.getElementById(
     "seasonOverview"
 ).innerHTML = `
@@ -1351,6 +1378,38 @@ playedMatches.forEach(match => {
 </div>
 
 `;
+
+playedMatches.forEach(match => {
+
+    const homeGoals =
+        Number(match["Goals home team"]) || 0;
+
+    const awayGoals =
+        Number(match["Goals away team"]) || 0;
+
+    if(match["Home/Away"] === "Home"){
+
+        goalsFor += homeGoals;
+        goalsAgainst += awayGoals;
+
+    }else{
+
+        goalsFor += awayGoals;
+        goalsAgainst += homeGoals;
+
+    }
+
+	const latestSeason =
+	    [...new Set(allMatches.map(x => x.Season))]
+	    .sort()
+	    .reverse()[0];
+	
+	document.querySelector('[data-view="upcoming"]').style.display =
+	    season === latestSeason
+	    ? ""
+	    : "none";
+
+});
 
 renderSeasonSummary(
     seasonMatches
@@ -1930,9 +1989,81 @@ function renderSeasonDropdown(){
 
 }
 
+function setMatchesView(view){
+
+    matchesView = view;
+
+    document
+        .querySelectorAll(".matches-view-switch button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    document
+        .querySelector(`[data-view="${view}"]`)
+        ?.classList.add("active");
+
+    renderSeason();
+}
+
+function buildMatchRow(match){
+
+    let resultClass = "result-draw";
+
+    if(match["Result type"] === "W")
+        resultClass = "result-win";
+
+    if(match["Result type"] === "L")
+        resultClass = "result-loss";
+
+    return `
+
+        <div class="matches-line"
+             onclick="location.href='match.html?id=${match.ID}'">
+
+            <div>
+                ${match.Date}
+            </div>
+
+			<div class="competition-cell">
+			    ${
+			        competitionLogos[match.Competition]
+			        ? `
+			        <img src="logos/${competitionLogos[match.Competition]}" alt="${match.Competition}">
+			        `
+			        : ""
+			    }
+			    <span>${match.Competition}</span>
+			</div>
+
+			<div>
+				${
+				match['Opp. Team'] !== 'FC Barcelona'
+				? `<a href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}" onclick="event.stopPropagation();">
+				${match['Opp. Team']}
+				</a>`
+				: match['Opp. Team']
+				}
+			</div>
+
+            <div>
+                ${match["Home/Away"]}
+            </div>
+
+            <div>
+
+                <span class="result-badge ${resultClass}">
+                    ${match.Result}
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
 function buildCurrentSeasonMatches(data){
 
-    const matches = [...data]
+    let matches = [...data]
         .sort((a,b)=>{
 
             const da =
@@ -1945,19 +2076,107 @@ function buildCurrentSeasonMatches(data){
 
         });
 
-    let html = "";
+let html = "";
+
+if(matchesView === "competition"){
+
+    const grouped = {};
+
+    matches.forEach(match => {
+		
+		if(!grouped[match.Competition]){
+		            grouped[match.Competition] = [];
+		        }
+		
+		        grouped[match.Competition].push(match);
+		
+		    });
+		
+		    Object.keys(grouped).forEach(comp => {
+		
+		        html += `
+		            <div class="competition-title">
+		                ${comp}
+		            </div>
+		        `;
+		
+		        grouped[comp].forEach(match => {
+		
+		            html += buildMatchRow(match);
+		
+		        });
+		
+		    });
+		
+		    return html;
+		}
+
+	if(matchesView === "month"){
+
+    const grouped = {};
 
     matches.forEach(match => {
 
-        let resultClass = "result-draw";
+        const d =
+            new Date(
+                match.Date.split(".").reverse().join("-")
+            );
 
-        if(match["Result type"] === "W")
-            resultClass = "result-win";
+        const month =
+            d.toLocaleDateString(
+                "en-US",
+                {
+                    month:"long",
+                    year:"numeric"
+                }
+            );
 
-        if(match["Result type"] === "L")
-            resultClass = "result-loss";
+		if(!grouped[month]){
+		            grouped[month] = [];
+		        }
+		
+		        grouped[month].push(match);
+		
+		    });
+		
+		    Object.keys(grouped).forEach(month => {
+		
+		        html += `
+		            <div class="competition-title">
+		                ${month}
+		            </div>
+		        `;
+		
+		        grouped[month].forEach(match => {
+		
+		            html += buildMatchRow(match);
+		
+		        });
+		
+		    });
+		
+		    return html;
+		}
 
-        html += `
+		if(matchesView === "upcoming"){
+		
+		    matches = matches.filter(
+		        x => x.Result === "-:-"
+		    );
+		
+		}
+		
+		matches.forEach(match => {
+		
+		    let resultClass = "result-draw";
+		
+		    if(match["Result type"] === "W")
+		        resultClass = "result-win";
+		
+		    if(match["Result type"] === "L")
+		        resultClass = "result-loss";
+		
+		    html += `
 
 	        <div class="matches-line" onclick="location.href='match.html?id=${match.ID}'">
 
@@ -1997,11 +2216,11 @@ function buildCurrentSeasonMatches(data){
                 </div>
 
             </div>
-        `;
-
-    });
-
-    return html;
+	    `;
+	
+	});
+	
+	return html;
 }
 
 Promise.all([
