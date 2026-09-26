@@ -2533,18 +2533,18 @@ theme
 const button =
 document.getElementById("themeToggle");
 
-function updateThemeButton(theme){
+    function updateThemeButton(theme){
 
-button.querySelector(".theme-icon").textContent =
-theme === "dark"
-? "☀️"
-: "🌙";
+        button.querySelector(".theme-icon").textContent =
+            theme === "dark"
+            ? "☀️"
+            : "🌙";
 
-button.querySelector(".theme-text").textContent =
-theme === "dark"
-? "Light"
-: "Dark";
-}
+        button.querySelector(".theme-text").textContent =
+            theme === "dark"
+            ? "Light"
+            : "Dark";
+    }
 
 updateThemeButton(theme);
 
