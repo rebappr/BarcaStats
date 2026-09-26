@@ -1934,41 +1934,49 @@ function initPersonSearch(){
 
 (function(){
 
-const savedTheme =
-localStorage.getItem("theme");
+    const savedTheme =
+        localStorage.getItem("theme");
 
-const systemTheme =
-window.matchMedia("(prefers-color-scheme: dark)").matches
-? "dark"
-: "light";
+    const systemTheme =
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
 
-const theme =
-savedTheme || systemTheme;
+    const theme =
+        savedTheme || systemTheme;
 
-document.documentElement.setAttribute(
-"data-theme",
-theme
-);
+    document.documentElement.setAttribute(
+        "data-theme",
+        theme
+    );
 
-const button =
-document.getElementById("themeToggle");
+    const button =
+        document.getElementById("themeToggle");
 
-if(button){
+    function updateThemeButton(theme){
 
-    button.textContent =
-    theme === "dark"
-    ? "☀️"
-    : "🌙";
+        button.querySelector(".theme-icon").textContent =
+            theme === "dark"
+            ? "☀️"
+            : "🌙";
 
-    button.addEventListener("click", () => {
+        button.querySelector(".theme-text").textContent =
+            theme === "dark"
+            ? "Dark"
+            : "Light";
+    }
+
+    updateThemeButton(theme);
+
+    button.addEventListener("click",()=>{
 
         const current =
-        document.documentElement.getAttribute("data-theme");
+            document.documentElement.getAttribute("data-theme");
 
         const next =
-        current === "dark"
-        ? "light"
-        : "dark";
+            current === "dark"
+            ? "light"
+            : "dark";
 
         document.documentElement.setAttribute(
             "data-theme",
@@ -1980,14 +1988,9 @@ if(button){
             next
         );
 
-        button.textContent =
-        next === "dark"
-        ? "☀️"
-        : "🌙";
+        updateThemeButton(next);
 
     });
-
-}
 
 })();
 
