@@ -631,9 +631,21 @@ flex-shrink:0;
 
 @media(max-width:767px){
     
-    #searchToggle span{
+    #searchToggle span,
+	.theme-text{
         display:block;
     }
+
+	.theme-text{
+	    font-size:9px;
+	    font-weight:600;
+	    line-height:1;
+	}
+	
+	.theme-icon{
+	    font-size:14px;
+	    line-height:1;
+	}
 
 	.header h1{
 		font-size:18px;
@@ -689,7 +701,28 @@ flex-shrink:0;
         backdrop-filter:blur(15px);
     }
 
-    .main-menu a:hover{
+	.menu-theme-btn{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-transform:uppercase;
+    
+        gap:3px;
+    
+        min-width:58px;
+    
+        padding:12px 8px;
+    
+        border-radius:18px;
+    
+        background:#0A5FB3;
+    
+        backdrop-filter:blur(15px);
+    }
+    
+    .main-menu a:hover,
+	.menu-theme-btn:hover{
         background:#004D98;
     
         backdrop-filter:blur(15px);
