@@ -436,7 +436,6 @@ td{
 }
 
 .laliga-table td,
-.matches-table td,
 .stats-table td,
 .debutants-table td{
     font-weight:500;
@@ -444,14 +443,12 @@ td{
 }
 
 .laliga-table th,
-.matches-table th,
 .stats-table th,
 .debutants-table th{
     font-weight:700;
     letter-spacing:.2px;
 }
 
-.matches-table td:nth-child(4),
 .laliga-table td:nth-child(2),
 .stats-table td:first-child,
 .debutants-table td:first-child{
@@ -462,8 +459,6 @@ td{
 .stats-table td:first-child,
 .debutants-table th:first-child,
 .debutants-table td:first-child,
-.matches-table th:first-child,
-.matches-table td:first-child,
 .laliga-table th:first-child,
 .laliga-table td:first-child{
     text-align:left;
@@ -481,45 +476,6 @@ td{
 width:50px;
 text-align:center;
 font-size:13px;
-}
-
-.matches-table{
-    width:100%;
-}
-
-.matches-table th:nth-child(1),
-.matches-table td:nth-child(1){
-width:100px;
-text-align:center;
-}
-
-.matches-table th:nth-child(2),
-.matches-table td:nth-child(2){
-width:1%;
-text-align:left;
-}
-
-.matches-table th:nth-child(3),
-.matches-table td:nth-child(3){
-width:1%;
-text-align:center;
-}
-
-.matches-table th:nth-child(4),
-.matches-table td:nth-child(4){
-width:auto;
-text-align:left;
-}
-
-.matches-table th:nth-child(5),
-.matches-table td:nth-child(5){
-width:1%;
-text-align:center;
-}
-
-.matches-table tbody tr:hover{
-background:var(--meta-bg);
-cursor:pointer;
 }
 
 .badge{
@@ -978,26 +934,6 @@ text-align:center;
         padding-bottom:90px;
     }
 
-    .matches-table th:nth-child(1),
-    .matches-table td:nth-child(1){
-        display:none;
-    }
-
-    .matches-table th:nth-child(2),
-    .matches-table td:nth-child(2){
-        width:80px; 
-    }
-
-    .matches-table th:nth-child(3),
-    .matches-table td:nth-child(3){
-        width:55px; 
-    }
-
-    .matches-table th:nth-child(5),
-    .matches-table td:nth-child(5){
-        width:65px; 
-    }
-
 .content-layout{
 display:flex;
 flex-direction:column;
@@ -1036,14 +972,6 @@ input[list],
 select,
 .toggle-btn{
 width:100%;
-}
-
-.matches-table th,
-.matches-table td, 
-.stats-table th,
-.stats-table td{
-padding:6px 4px;
-font-size:13px;
 }
 
 .result-badge{
