@@ -515,7 +515,7 @@ color:#A50044;
 }
     
     #searchToggle span,
-	.theme-text span{
+	.theme-text{
         display:none;
     }
 
@@ -533,9 +533,20 @@ color:#A50044;
 @media(max-width:900px){
     
     #searchToggle span,
-	.theme-text span{
+	.theme-text{
         display:block;
     }
+
+	.theme-text{
+	    font-size:9px;
+	    font-weight:600;
+	    line-height:1;
+	}
+	
+	.theme-icon{
+	    font-size:28px;
+	    line-height:1;
+	}
 
 	.header h1{
 		font-size:18px;
@@ -612,7 +623,7 @@ color:#A50044;
     }
     
     .main-menu a:hover,
-	.menu-theme-btn:hpver{
+	.menu-theme-btn:{
         background:#004D98;
     
         backdrop-filter:blur(15px);
