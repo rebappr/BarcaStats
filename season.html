@@ -2017,26 +2017,29 @@ function buildCurrentSeasonMatches(data){
                     ${match.Date}
                 </div>
 
-				<div class="competition-cell">
-				
-				    ${
-				        competitionLogos[match.Competition]
-				        ? `
-				        <img
-				            src="logos/${.Competition]}
-				        `
-				        : ""
-				    }
-				
-				    <span>${match.Competition}</span>
-				
-				</div>
-	
-				<div>
-				    opponent.html?team=${encodeURIComponent(match['Opp. Team'])}"
-				    >
-				        ${match['Opp. Team']}
-				    </a>
+<div class="season-match">
+
+    <div>
+        ${match.Date}
+    </div>
+
+			    <div class="competition-cell">
+			        ${
+			            competitionLogos[match.Competition]
+			            ? `
+						<img src="logos/${competitionLogos[match.Competition]}"
+						alt="${match.Competition}">`
+					: ""
+					}
+			        <span>${match.Competition}</span>
+			    </div>
+			
+			    <div>
+			        <a href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}"
+					class="opponent-link"
+					onclick="event.stopPropagation();">
+					${match['Opp. Team']}
+					</a>
 				</div>
 
                 <div>
@@ -2054,7 +2057,7 @@ function buildCurrentSeasonMatches(data){
             </div>
 
         </a>
-
+,
         `;
 
     });
