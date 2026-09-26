@@ -919,11 +919,12 @@ text-align:center;
     
         min-width:58px;
     
-        padding:12px 8px;
+        padding:6px 8px;
     
         border-radius:18px;
     
         background:#0A5FB3;
+		height:auto;
     
         backdrop-filter:blur(15px);
     }
@@ -1273,21 +1274,6 @@ location.search
 let statsSortColumn = "goals";
 let statsSortDirection = "desc";
 
-function animateContent(){
-
-    const layout =
-    document.querySelector(".content-layout");
-
-    if(!layout) return;
-
-    layout.classList.remove("animate");
-
-    void layout.offsetWidth;
-
-    layout.classList.add("animate");
-
-}
-
 function renderSeason(){
 
     const seasonMatches =
@@ -1572,28 +1558,27 @@ function render(matches){
 
 matches = filteredMatches;
 
-if(matches.length === 0){
-
-    html += `
-    <div class="widget-card">
-        <div class="empty">No Matches</div>
-    </div>
-    `;
-
-    document.getElementById("matches").innerHTML = html;
-    return;
-}
-
-    matches = filteredMatches;
-
-    if(matches.length === 0){
-
-        document.getElementById("matches").innerHTML =
-        "<div class='empty'>No Matches</div>";
-
-        return;
-
-    }
+	if(matches.length === 0){
+	
+	    html += `
+	    <div class="widget-card">
+	        <div class="empty">No Matches</div>
+	    </div>
+	    `;
+	
+	    document.getElementById("matches").innerHTML = html;
+	    return;
+	}
+	
+	    matches = filteredMatches;
+	
+	if(matches.length === 0){
+	
+	    document.getElementById("matches").innerHTML =
+	        "<div class='widget-card'><div class='empty'>No Matches</div></div>";
+	
+	    return;
+	}
 
    matches.sort((a, b) => {
    
@@ -2192,27 +2177,19 @@ function buildCurrentSeasonMatches(data){
                     ${match.Date}
                 </div>
 
-                <div class="competition-cell">
-
-                    logos/${competitionLogos[match.Competition] || 'default.png'}
-
-                    <span>
-                        ${match.Competition}
-                    </span>
-
-                </div>
-
-                <div>
-
-                    opponent.html?team=${encodeURIComponent(match["
-                        class="opponent-link"
-                        onclick="event.stopPropagation();">
-
-                        ${match["Opp. Team"]}
-
-                    </a>
-
-                </div>
+				<div class="competition-cell">
+				    logos/${competitionLogos[match.Competition] || 'default.png'}
+				    <span>${match.Competition}</span>
+				</div>
+	
+				<div>
+				    }"
+				        class="opponent-link"
+				        onclick="event.stopPropagation();"
+				    >
+				        ${match['Opp. Team']}
+				    </a>
+				</div>
 
                 <div>
                     ${match["Home/Away"]}
@@ -2445,10 +2422,10 @@ function initPersonSearch(){
             ? "☀️"
             : "🌙";
 
-        button.querySelector(".theme-text").textContent =
-            theme === "dark"
-            ? "Dark"
-            : "Light";
+		button.querySelector(".theme-text").textContent =
+		    theme === "dark"
+		    ? "Light"
+		    : "Dark";
     }
 
     updateThemeButton(theme);
