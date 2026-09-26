@@ -119,6 +119,19 @@ font-size:18px;
     border-radius:18px;
 }
 
+.competition-cell{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.competition-cell img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
 .widget-card{
 background:var(--card-bg);
 backdrop-filter:blur(20px);
@@ -1270,6 +1283,23 @@ location.search
 let statsSortColumn = "goals";
 let statsSortDirection = "desc";
 
+const competitionLogos = {
+    "Copa del Rey": "copa.png",
+    "Copa de la Liga": "copa-liga.png",
+    "Copa de la Coronacion": "copa.png",
+    "FIFA Club World Cup": "fifa.png",
+    "Qualification for La Liga": "laliga.png",
+    "La Liga": "laliga.png",
+    "Supercopa de Espana": "supercopa.png",
+    "UEFA Champions League": "ucl.png",
+    "Cup Winners' Cup": "cwc.png",
+    "UEFA Europa League": "europa.png",
+    "UEFA Super Cup": "uefa-supercup.png",
+    "UEFA Cup": "uefa-cup.png",
+    "Inter-Cities Fairs Cup": "inter-cup.png",
+    "European Cup": "ec.png"
+};
+
 function renderSeason(){
 
     const seasonMatches =
@@ -1988,8 +2018,18 @@ function buildCurrentSeasonMatches(data){
                 </div>
 
 				<div class="competition-cell">
-				    logos/${competitionLogos[match.Competition] || 'default.png'}
+				
+				    ${
+				        competitionLogos[match.Competition]
+				        ? `
+				        <img
+				            src="logos/${.Competition]}
+				        `
+				        : ""
+				    }
+				
 				    <span>${match.Competition}</span>
+				
 				</div>
 	
 				<div>
