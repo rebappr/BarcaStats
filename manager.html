@@ -1125,6 +1125,14 @@ managerMatches.forEach(match => {
 
 });
 
+const clubsText = clubs.map(club =>
+
+    club === "FC Barcelona"
+    ? club
+    : `<a href="opponent.html?name=${encodeURIComponent(club)}">${club}</a>`
+
+).join(", ");
+
 managerMatches.sort((a,b)=>{
 
 const da =
@@ -1255,14 +1263,6 @@ if(
         " / " +
         managerInfo["Nationality 2"];
 }
-
-const clubsText = clubs.map(club =>
-
-    club === "FC Barcelona"
-    ? club
-    : `<a href="opponent.html?name=${encodeURIComponent(club)}">${club}</a>`
-
-).join(", ");
 
 const careerHtml = Object.keys(clubStats)
 .sort((a,b)=>{
