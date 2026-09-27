@@ -1260,7 +1260,7 @@ const clubsText = clubs.map(club =>
 
     club === "FC Barcelona"
     ? club
-    : `<a href="opponent.html?team=${encodeURIComponent(club)}">${club}</a>`
+    : `<a href="opponent.html?name=${encodeURIComponent(club)}">${club}</a>`
 
 ).join(", ");
 
@@ -2116,7 +2116,7 @@ function initPersonSearch(){
 				    item.type === 'Manager'
 				        ? `manager.html?name=${encodeURIComponent(item.name)}`
 				        : item.type === 'Opponent'
-				            ? `opponent.html?team=${encodeURIComponent(item.name)}`
+				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
 				            : `player.html?name=${encodeURIComponent(item.name)}`
 				}">
 				${item.name}
