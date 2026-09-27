@@ -913,11 +913,19 @@ if(!match) return;
 const homeTeam =
     match["Home/Away"] === "Home"
         ? "Barcelona"
-        : match["Opp. Team"];
+        : `<a class="opponent-link"
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
+              onclick="event.stopPropagation()">
+              ${match["Opp. Team"]}
+           </a>`;
 
 const awayTeam =
     match["Home/Away"] === "Home"
-        ? match["Opp. Team"]
+        ? `<a class="opponent-link"
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
+              onclick="event.stopPropagation()">
+              ${match["Opp. Team"]}
+           </a>`
         : "Barcelona";
 
 document.getElementById("lastMatch").innerHTML = `
@@ -972,11 +980,19 @@ return;
 const homeTeam =
     next["Home/Away"] === "Home"
         ? "Barcelona"
-        : next["Opp. Team"];
+        : `<a class="opponent-link"
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
+              onclick="event.stopPropagation()">
+              ${next["Opp. Team"]}
+           </a>`;
 
 const awayTeam =
     next["Home/Away"] === "Home"
-        ? next["Opp. Team"]
+        ? `<a class="opponent-link"
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
+              onclick="event.stopPropagation()">
+              ${next["Opp. Team"]}
+           </a>`
         : "Barcelona";
 
 document.getElementById("nextMatch").innerHTML = `
