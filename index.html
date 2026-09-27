@@ -137,6 +137,18 @@ color:var(--muted);
 font-size:13px;
 }
 
+.player-link,
+.opponent-link{
+color:var(--link-color);
+text-decoration:none;
+font-weight:600;
+}
+
+.player-link:hover,
+.opponent-link:hover{
+text-decoration:underline;
+}
+
 .fixture-card{
 display:flex;
 align-items:center;
@@ -163,7 +175,7 @@ text-transform:uppercase;
 }
 
 .fixture-opponent{
-    font-weight:800;
+    font-weight:800 !important;
 }
 
 .fixture-center{
@@ -349,18 +361,6 @@ text-decoration:none;
 padding:10px 16px;
 border-radius:16px;
 margin-top:10px;
-}
-
-.player-link,
-.opponent-link{
-color:var(--link-color);
-text-decoration:none;
-font-weight:600;
-}
-
-.player-link:hover,
-.opponent-link:hover{
-text-decoration:underline;
 }
 
 .player-search-results{
