@@ -2533,7 +2533,7 @@ function initPersonSearch(){
 				    item.type === 'Manager'
 				        ? `manager.html?name=${encodeURIComponent(item.name)}`
 				        : item.type === 'Opponent'
-				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
+				            ? `opponent.html?team=${encodeURIComponent(item.name)}`
 				            : `player.html?name=${encodeURIComponent(item.name)}`
 				}">
 				${item.name}
