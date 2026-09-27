@@ -162,6 +162,10 @@ font-weight:800;
 text-transform:uppercase;
 }
 
+.fixture-opponent{
+    font-weight:800;
+}
+
 .fixture-center{
 min-width:120px;
 }
@@ -912,14 +916,14 @@ if(!match) return;
 const homeTeam =
     match["Home/Away"] === "Home"
         ? "Barcelona"
-        : `<a class="opponent-link"
+        : `<a class="opponent-link fixture-opponent"
               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
               ${match["Opp. Team"]}
            </a>`;
 
 const awayTeam =
     match["Home/Away"] === "Home"
-        ? `<a class="opponent-link"
+        : `<a class="opponent-link fixture-opponent"
               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
               ${match["Opp. Team"]}
            </a>`
@@ -981,14 +985,14 @@ return;
 const homeTeam =
     next["Home/Away"] === "Home"
         ? "Barcelona"
-        : `<a class="opponent-link"
+        : `<a class="opponent-link fixture-opponent"
               href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
               ${next["Opp. Team"]}
            </a>`;
 
 const awayTeam =
     next["Home/Away"] === "Home"
-        ? `<a class="opponent-link"
+        : `<a class="opponent-link fixture-opponent"
               href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
               ${next["Opp. Team"]}
            </a>`
