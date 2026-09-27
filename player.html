@@ -1083,6 +1083,14 @@ playerInfo["Nationality 2"];
 
 }
 
+const clubsText = clubs.map(club =>
+
+    club === "FC Barcelona"
+    ? club
+    : `<a href="opponent.html?name=${encodeURIComponent(club)}">${club}</a>`
+
+).join(", ");
+
 const clubStats = {};
 
 data.forEach(match=>{
