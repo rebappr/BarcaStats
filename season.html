@@ -2149,7 +2149,7 @@ return `
 			<div>
 				${
 				match['Opp. Team'] !== 'FC Barcelona'
-				? `<a href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}" 
+				? `<a href="opponent.html?name=${encodeURIComponent(match['Opp. Team'])}" 
 				class="opponent-link"
 				onclick="event.stopPropagation();">
 				${match['Opp. Team']}
@@ -2310,7 +2310,7 @@ html += `
 			    </div>
 			
 			    <div>
-			        <a href="opponent.html?team=${encodeURIComponent(match['Opp. Team'])}"
+			        <a href="opponent.html?name=${encodeURIComponent(match['Opp. Team'])}"
 					class="opponent-link"
 					onclick="event.stopPropagation();">
 					${match['Opp. Team']}
@@ -2533,7 +2533,7 @@ function initPersonSearch(){
 				    item.type === 'Manager'
 				        ? `manager.html?name=${encodeURIComponent(item.name)}`
 				        : item.type === 'Opponent'
-				            ? `opponent.html?team=${encodeURIComponent(item.name)}`
+				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
 				            : `player.html?name=${encodeURIComponent(item.name)}`
 				}">
 				${item.name}
