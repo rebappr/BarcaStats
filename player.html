@@ -402,6 +402,16 @@ flex-shrink:0;
     color:var(--muted);
 }
 
+.player-club a{
+    color:var(--link-color);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.player-club a:hover{
+    text-decoration:underline;
+}
+
 .club-title{
     background:#dbeafe;
     color:#1e3a8a;
@@ -1254,7 +1264,7 @@ playerMatches.forEach(match => {
 
 });
 
-const playerClub = clubs.join(", ");
+const playerClub = clubsText;
 
 document.getElementById("playerProfile").innerHTML=`
 
