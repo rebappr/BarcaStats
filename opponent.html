@@ -201,6 +201,38 @@ font-size:22px;
 margin-bottom:4px;
 }
 
+
+
+.summary-box.wins{
+    background:var(--result-win-bg);
+    border:1px solid var(--result-win);
+    color:var(--result-win);
+}
+
+.summary-box.draws{
+    background:var(--result-draw-bg);
+    border:1px solid var(--result-draw);
+    color:var(--result-draw);
+}
+
+.summary-box.losses{
+    background:var(--result-loss-bg);
+    border:1px solid var(--result-loss);
+    color:var(--result-loss);
+}
+
+.summary-box.matches,
+.summary-box.goals{
+    background:rgba(0,77,152,.10);
+    border:1px solid rgba(0,77,152,.25);
+    color:#004D98;
+}
+
+.summary-box.matches b,
+.summary-box.goals b{
+    color:#004D98;
+}
+
 .widget-card{
 background:var(--card-bg);
 border:1px solid var(--card-border);
@@ -527,24 +559,6 @@ flex-shrink:0;
 
     box-shadow:
         0 0 0 4px rgba(59,130,246,.15);
-}
-
-.summary-box.wins{
-    background:var(--result-win-bg);
-    border:1px solid var(--result-win);
-    color:var(--result-win);
-}
-
-.summary-box.draws{
-    background:var(--result-draw-bg);
-    border:1px solid var(--result-draw);
-    color:var(--result-draw);
-}
-
-.summary-box.losses{
-    background:var(--result-loss-bg);
-    border:1px solid var(--result-loss);
-    color:var(--result-loss);
 }
 
 .main-menu{
