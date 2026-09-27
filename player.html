@@ -1849,6 +1849,19 @@ function initPersonSearch(){
 
         }
 
+		// Opponent team
+		if(match["Opp. Team"]){
+		
+		    searchItems.set(
+		        `opponent-${match["Opp. Team"]}`,
+		        {
+		            name: match["Opp. Team"],
+		            type: "Opponent"
+		        }
+		    );
+		
+		}
+
         // Starting XI
         for(let i=1;i<=11;i++){
 
@@ -1946,21 +1959,22 @@ function initPersonSearch(){
             <a
                 class="player-search-item"
                 href="${
-                    item.type === 'Manager'
-                    ? `manager.html?name=${encodeURIComponent(item.name)}`
-                    : `player.html?name=${encodeURIComponent(item.name)}`
-                }">
-            ${item.name}
-            <span class="search-type ${item.type.toLowerCase()}">
-               ${item.type}
-            </span>
+				    item.type === 'Manager'
+				        ? `manager.html?name=${encodeURIComponent(item.name)}`
+				        : item.type === 'Opponent'
+				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
+				            : `player.html?name=${encodeURIComponent(item.name)}`
+				}">
+            ${item.name} (${item.type.toLowerCase()})
+			<span class="search-type ${item.type.toLowerCase()}">
+			   ${item.type}
+			</span>
             </a>
             `).join("")}
             </div>
             `;
 });
 }
-
 
 (function(){
 
