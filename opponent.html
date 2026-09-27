@@ -1229,29 +1229,50 @@ function initPersonSearch(){
 
     allMatches.forEach(match => {
 
+        // Barcelona manager
         if(match.Manager){
+
             searchItems.set(
-                `opponent-${match.Manager}`,
+                `manager-${match.Manager}`,
                 {
                     name: match.Manager,
                     type: "Manager"
                 }
             );
+
         }
 
+        // Opponent manager
         if(match["Opp. Manager"]){
+
             searchItems.set(
-                `opponent-${match["Opp. Manager"]}`,
+                `manager-${match["Opp. Manager"]}`,
                 {
                     name: match["Opp. Manager"],
                     type: "Manager"
                 }
             );
+
         }
 
+		// Opponent team
+		if(match["Opp. Team"]){
+		
+		    searchItems.set(
+		        `opponent-${match["Opp. Team"]}`,
+		        {
+		            name: match["Opp. Team"],
+		            type: "Opponent"
+		        }
+		    );
+		
+		}
+
+        // Starting XI
         for(let i=1;i<=11;i++){
 
             if(match[`Player name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`Player name ${i}`]}`,
                     {
@@ -1259,9 +1280,11 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
             if(match[`Opp. Player name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`Opp. Player name ${i}`]}`,
                     {
@@ -1269,13 +1292,16 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
         }
 
+        // Bench
         for(let i=1;i<=12;i++){
 
             if(match[`On the bench name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`On the bench name ${i}`]}`,
                     {
@@ -1283,9 +1309,11 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
             if(match[`Opp. On the bench name ${i}`]){
+
                 searchItems.set(
                     `player-${match[`Opp. On the bench name ${i}`]}`,
                     {
@@ -1293,6 +1321,7 @@ function initPersonSearch(){
                         type: "Player"
                     }
                 );
+
             }
 
         }
@@ -1336,20 +1365,21 @@ function initPersonSearch(){
             <a
                 class="player-search-item"
                 href="${
-                    item.type === 'Manager'
-                    ? `manager.html?name=${encodeURIComponent(item.name)}`
-                    : `player.html?name=${encodeURIComponent(item.name)}`
-                }">
-            ${item.name}
-            <span class="search-type ${item.type.toLowerCase()}">
-               ${item.type}
-            </span>
+				    item.type === 'Manager'
+				        ? `manager.html?name=${encodeURIComponent(item.name)}`
+				        : item.type === 'Opponent'
+				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
+				            : `player.html?name=${encodeURIComponent(item.name)}`
+				}">
+            ${item.name} (${item.type.toLowerCase()})
+			<span class="search-type ${item.type.toLowerCase()}">
+			   ${item.type}
+			</span>
             </a>
             `).join("")}
             </div>
             `;
-    });
-
+});
 }
 
 (function(){
