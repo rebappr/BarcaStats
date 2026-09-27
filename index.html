@@ -383,6 +383,11 @@ color:#A50044;
     color:#e11d48;
 }
 
+.search-type.opponent{
+    background:rgba(34,197,94,.15);
+    color:#16a34a;
+}
+
 .player-search-item{
     display:flex;
     justify-content:space-between;
@@ -774,7 +779,7 @@ Home page
     <input
         type="text"
         id="personSearch"
-        placeholder="Search player or manager..."
+        placeholder="Search player, manager or opponent..."
         class="player-search-input">
 
     <div id="personSearchResults"></div>
@@ -1367,6 +1372,19 @@ function initPersonSearch(){
 
         }
 
+		// Opponent team
+		if(match["Opp. Team"]){
+		
+		    searchItems.set(
+		        `opponent-${match["Opp. Team"]}`,
+		        {
+		            name: match["Opp. Team"],
+		            type: "Opponent"
+		        }
+		    );
+		
+		}
+
         // Starting XI
         for(let i=1;i<=11;i++){
 
@@ -1464,10 +1482,12 @@ function initPersonSearch(){
             <a
                 class="player-search-item"
                 href="${
-                    item.type === 'Manager'
-                    ? `manager.html?name=${encodeURIComponent(item.name)}`
-                    : `player.html?name=${encodeURIComponent(item.name)}`
-                }">
+				    item.type === 'Manager'
+				        ? `manager.html?name=${encodeURIComponent(item.name)}`
+				        : item.type === 'Opponent'
+				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
+				            : `player.html?name=${encodeURIComponent(item.name)}`
+				}">
             ${item.name}
             <span class="search-type ${item.type.toLowerCase()}">
                ${item.type}
