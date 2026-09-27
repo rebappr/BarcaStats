@@ -914,22 +914,20 @@ const homeTeam =
     match["Home/Away"] === "Home"
         ? "Barcelona"
         : `<a class="opponent-link"
-              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
-              onclick="event.stopPropagation()">
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
               ${match["Opp. Team"]}
            </a>`;
 
 const awayTeam =
     match["Home/Away"] === "Home"
         ? `<a class="opponent-link"
-              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
-              onclick="event.stopPropagation()">
+              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
               ${match["Opp. Team"]}
            </a>`
         : "Barcelona";
 
 document.getElementById("lastMatch").innerHTML = `
-<a href="match.html?id=${match.ID}" class="fixture-link">
+<div class="fixture-link">
 
     <div class="fixture-title">
         LAST MATCH
@@ -942,9 +940,13 @@ document.getElementById("lastMatch").innerHTML = `
         </div>
 
         <div class="fixture-center">
-            <div class="fixture-score">
-                ${match.Result}
-            </div>
+            <a
+			href="match.html?id=${match.ID}"
+			class="fixture-score"
+			style="display:inline-block;text-decoration:none;color:white;"
+			>
+			${match.Result}
+			</a>
         </div>
 
         <div class="fixture-team">
@@ -981,16 +983,14 @@ const homeTeam =
     next["Home/Away"] === "Home"
         ? "Barcelona"
         : `<a class="opponent-link"
-              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
-              onclick="event.stopPropagation()">
+              href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
               ${next["Opp. Team"]}
            </a>`;
 
 const awayTeam =
     next["Home/Away"] === "Home"
         ? `<a class="opponent-link"
-              href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
-              onclick="event.stopPropagation()">
+              href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
               ${next["Opp. Team"]}
            </a>`
         : "Barcelona";
@@ -1008,11 +1008,15 @@ document.getElementById("nextMatch").innerHTML = `
             ${homeTeam}
         </div>
 
-        <div class="fixture-center">
-            <div class="fixture-vs">
-                VS
-            </div>
-        </div>
+		<div class="fixture-center">
+		    <a
+		        href="match.html?id=${next.ID}"
+		        class="fixture-vs"
+		        style="display:inline-block;text-decoration:none;color:inherit;"
+		    >
+		        VS
+		    </a>
+		</div>
 
         <div class="fixture-team">
             ${awayTeam}
