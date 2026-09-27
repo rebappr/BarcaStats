@@ -923,7 +923,7 @@ const homeTeam =
 
 const awayTeam =
     match["Home/Away"] === "Home"
-        : `<a class="opponent-link fixture-opponent"
+        ? `<a class="opponent-link fixture-opponent"
               href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}">
               ${match["Opp. Team"]}
            </a>`
@@ -992,7 +992,7 @@ const homeTeam =
 
 const awayTeam =
     next["Home/Away"] === "Home"
-        : `<a class="opponent-link fixture-opponent"
+        ? `<a class="opponent-link fixture-opponent"
               href="opponent.html?name=${encodeURIComponent(next["Opp. Team"])}">
               ${next["Opp. Team"]}
            </a>`
