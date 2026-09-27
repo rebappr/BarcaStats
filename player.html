@@ -1970,10 +1970,10 @@ function initPersonSearch(){
 				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
 				            : `player.html?name=${encodeURIComponent(item.name)}`
 				}">
-            ${item.name} (${item.type.toLowerCase()})
-			<span class="search-type ${item.type.toLowerCase()}">
-			   ${item.type}
-			</span>
+				${item.name}
+				<span class="search-type ${item.type.toLowerCase()}">
+				   (${item.type})
+				</span>
             </a>
             `).join("")}
             </div>
