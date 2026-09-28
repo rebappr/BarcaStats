@@ -825,7 +825,7 @@ padding:6px 14px;
     </a>
 
 	<button id="themeToggle" class="menu-theme-btn">
-	    <span class="theme-icon">🌙</span>
+	    <img src="icons/icons/moon-48.png">
 	    <span class="theme-text"></span>
 	</button>
 
@@ -1597,18 +1597,20 @@ function initPersonSearch(){
     const button =
         document.getElementById("themeToggle");
 
-    function updateThemeButton(theme){
-
-        button.querySelector(".theme-icon").textContent =
-            theme === "dark"
-            ? "☀️"
-            : "🌙";
-
-        button.querySelector(".theme-text").textContent =
-            theme === "dark"
-            ? "Light"
-            : "Dark";
-    }
+	function updateThemeButton(theme){
+	
+	    const icon = button.querySelector(".theme-icon");
+	
+	    icon.src =
+	        theme === "dark"
+	        ? "icons/sun-48.png"
+	        : "icons/moon-48.png";
+	
+	    button.querySelector(".theme-text").textContent =
+	        theme === "dark"
+	        ? "Light"
+	        : "Dark";
+	}
 
     updateThemeButton(theme);
 
