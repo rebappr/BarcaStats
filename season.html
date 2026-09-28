@@ -1296,12 +1296,7 @@ Upcoming
 
 <button data-view="competition"
 onclick="setMatchesView('competition')">
-Competition
-</button>
-
-<button data-view="month"
-onclick="setMatchesView('month')">
-Month
+By Competition
 </button>
 
 </div>
@@ -2216,59 +2211,56 @@ html += buildMatchRow(match);
 return html;
 }
 
-if(matchesView === "month"){
-
-const grouped = {};
-
-matches.forEach(match => {
-
-const d =
-new Date(
-match.Date.split(".").reverse().join("-")
-);
-
-const month =
-d.toLocaleDateString(
-"en-US",
-{
-month:"long",
-year:"numeric"
-}
-);
-
-if(!grouped[month]){
-grouped[month] = [];
-}
-
-grouped[month].push(match);
-
-});
-
-Object.keys(grouped).forEach(month => {
-
-html += `
-		            <div class="competition-title">
-		                ${month}
-		            </div>
-		        `;
-
-grouped[month].forEach(match => {
-
-html += buildMatchRow(match);
-
-});
-
-});
-
-return html;
-}
-
 if(matchesView === "upcoming"){
 
 matches = matches.filter(
 x => x.Result === "-:-"
 );
 
+}
+
+if(matchesView === "all" || matchesView === "upcoming"){
+
+    const grouped = {};
+
+    matches.forEach(match => {
+
+        const d =
+        new Date(
+            match.Date.split(".").reverse().join("-")
+        );
+
+        const month =
+        d.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+        if(!grouped[month]){
+            grouped[month] = [];
+        }
+
+        grouped[month].push(match);
+    });
+
+    Object.keys(grouped).forEach(month => {
+
+        html += `
+            <div class="competition-title">
+                ${month}
+            </div>
+        `;
+
+        grouped[month].forEach(match => {
+            html += buildMatchRow(match);
+        });
+
+    });
+
+    return html;
 }
 
 matches.forEach(match => {
