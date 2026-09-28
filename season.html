@@ -1748,19 +1748,12 @@ renderLaLigaTable();
 
 function renderLaLigaTable() {
 
-fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasTvebHze4kVo/export?format=csv&gid=443901137")
-.then(response => response.text())
-.then(csv => {
-
-    const rows = csv
-        .trim()
-        .split("\n")
-        .map(row => row.split(","));
-
-    const data = rows.slice(1);
+fetch("tablelaliga.json")
+.then(response => response.json())
+.then(data => {
 
     const seasonRows = data.filter(
-        row => row[0].trim() === season
+        row => row.Season === season
     );
 
     const widget =
@@ -1786,7 +1779,7 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
 
     seasonRows.forEach(row => {
 
-        const position = parseInt(row[1]);
+        const position = Number(row.Position);
 
         let rowClass = "";
         let posBadgeClass = "";
@@ -1798,7 +1791,7 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
             posBadgeClass = "relegation";
         }
 
-        if(row[2].trim() === "Barcelona"){
+        if(row.Club === "Barcelona"){
             rowClass = "barca-row";
         }
 
@@ -1812,20 +1805,20 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
             </div>
 
             <div class="table-club">
-                <span>${row[2]}</span>
+                <span>${row.Club}</span>
             </div>
 
             <div class="table-played">
-                ${row[3]}
+                ${row.Matches}
             </div>
 
             <div class="table-goaldiff">
-                ${Number(row[8]) > 0 ? "+" : ""}
-                ${row[8]}
+                ${Number(row.Difference) > 0 ? "+" : ""}
+                ${row.Difference}
             </div>
 
             <div class="table-points">
-                ${row[9]}
+                ${row.Points}
             </div>
 
         </div>
@@ -1844,6 +1837,7 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
     document.getElementById(
         "laligaWidget"
     ).style.display = "none";
+
 });
 }
 
