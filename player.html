@@ -1279,47 +1279,21 @@ for(let i=1;i<=12;i++){
 
 });
 
-const clubs = [];
+const clubs = Object.keys(clubStats)
+.sort((a,b) => {
 
-playerMatches.forEach(match => {
+    if(a === "FC Barcelona") return -1;
+    if(b === "FC Barcelona") return 1;
 
-    let club = null;
-
-    for(let i=1;i<=11;i++){
-
-        if(match[`Player name ${i}`] === player){
-            club = "FC Barcelona";
-        }
-
-        if(match[`Opp. Player name ${i}`] === player){
-            club = match["Opp. Team"];
-        }
-
-    }
-
-    for(let i=1;i<=6;i++){
-
-        if(match[`Sub on ${i}`] === player){
-            club = "FC Barcelona";
-        }
-
-        if(match[`Opp. Sub on ${i}`] === player){
-            club = match["Opp. Team"];
-        }
-
-    }
-
-    if(club && !clubs.includes(club)){
-        clubs.push(club);
-    }
+    return a.localeCompare(b);
 
 });
 
 const clubsText = clubs.map(club =>
 
     club === "FC Barcelona"
-    ? club
-    : `<a href="opponent.html?name=${encodeURIComponent(club)}">${club}</a>`
+        ? club
+        : `<a href="opponent.html?name=${encodeURIComponent(club)}">${club}</a>`
 
 ).join(", ");
 
