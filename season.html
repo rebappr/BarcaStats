@@ -2145,9 +2145,15 @@ select.innerHTML = seasons.map(s => `
 
 select.addEventListener("change", e => {
 
-location.href =
-`season.html?season=${encodeURIComponent(e.target.value)}`;
+    season = e.target.value;
 
+    history.replaceState(
+        {},
+        "",
+        `season.html?season=${encodeURIComponent(season)}`
+    );
+
+    renderSeason();
 });
 
 }
