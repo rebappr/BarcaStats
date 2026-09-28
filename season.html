@@ -2328,13 +2328,13 @@ return `
 
 			<div>
 				${
-				match['Opp. Team'] !== 'FC Barcelona'
-				? `<a href="opponent.html?name=${encodeURIComponent(match['Opp. Team'])}" 
+				row.club !== 'FC Barcelona'
+				? `<a href="opponent.html?name=${encodeURIComponent(row.club)}" 
 				class="opponent-link"
 				onclick="event.stopPropagation();">
-				${match['Opp. Team']}
+				${row.club}
 				</a>`
-				: match['Opp. Team']
+				: row.club
 				}
 			</div>
 
