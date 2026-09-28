@@ -1624,9 +1624,7 @@ widget.style.display = "none";
 return;
 }
 
-if(window.innerWidth > 767){
-    widget.style.display = "block";
-}
+widget.style.display = "block";
 
 let html = `
        <table class="laliga-table">
@@ -2742,9 +2740,12 @@ document.getElementById(
 }
 
 if(section === 'table'){
-document.getElementById(
-'laligaWidget'
-).style.display = 'block';
+
+    document.getElementById(
+        'laligaWidget'
+    ).style.display = 'block';
+
+    renderLaLigaTable();
 }
 
 if(section === 'debutants'){
