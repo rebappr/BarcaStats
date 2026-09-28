@@ -1753,11 +1753,10 @@ fetch("tablelaliga.json")
 .then(data => {
 
     const seasonRows = data.filter(
-        row => row.Season === season
+        row => row.season === season
     );
 
-    const widget =
-        document.getElementById("laligaWidget");
+    const widget = document.getElementById("laligaWidget");
 
     if(!seasonRows.length){
 
@@ -1779,7 +1778,7 @@ fetch("tablelaliga.json")
 
     seasonRows.forEach(row => {
 
-        const position = Number(row.Position);
+        const position = Number(row.position);
 
         let rowClass = "";
         let posBadgeClass = "";
@@ -1791,7 +1790,7 @@ fetch("tablelaliga.json")
             posBadgeClass = "relegation";
         }
 
-        if(row.Club === "Barcelona"){
+        if(row.club === "Barcelona"){
             rowClass = "barca-row";
         }
 
@@ -1800,43 +1799,39 @@ fetch("tablelaliga.json")
 
             <div>
                 <div class="position-circle ${posBadgeClass}">
-                    ${position}
+                    ${row.position}
                 </div>
             </div>
 
             <div class="table-club">
-                <span>${row.Club}</span>
+                <span>${row.club}</span>
             </div>
 
             <div class="table-played">
-                ${row.Matches}
+                ${row.matches}
             </div>
 
             <div class="table-goaldiff">
-                ${Number(row.Difference) > 0 ? "+" : ""}
-                ${row.Difference}
+                ${Number(row.difference) > 0 ? "+" : ""}
+                ${row.difference}
             </div>
 
             <div class="table-points">
-                ${row.Points}
+                ${row.points}
             </div>
 
         </div>
         `;
     });
 
-    document.getElementById(
-        "laligaTable"
-    ).innerHTML = html;
+    document.getElementById("laligaTable").innerHTML = html;
 
 })
 .catch(error => {
 
     console.error(error);
 
-    document.getElementById(
-        "laligaWidget"
-    ).style.display = "none";
+    document.getElementById("laligaWidget").style.display = "none";
 
 });
 }
