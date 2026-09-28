@@ -1805,8 +1805,16 @@ fetch("tablelaliga.json")
             </div>
 
             <div class="table-club">
-                <span>${row.club}</span>
-            </div>
+				${
+				match['Opp. Team'] !== 'FC Barcelona'
+				? `<a href="opponent.html?name=${encodeURIComponent(match['Opp. Team'])}" 
+				class="opponent-link"
+				onclick="event.stopPropagation();">
+				${match['Opp. Team']}
+				</a>`
+				: match['Opp. Team']
+				}
+			</div>
 
             <div class="table-played">
                 ${row.matches}
