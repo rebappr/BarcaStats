@@ -551,21 +551,16 @@ margin-top:10px;
     align-items:center;
     justify-content:center;
 
-    min-width:58px;
-    padding:6px 8px;
+    min-width:56px;
+    padding:10px 4px;
 
     border:none;
     border-radius:14px;
 
     background:#004D98;
-    color:white;
-
-    font-size:20px;
     cursor:pointer;
 
-    box-shadow:
-        0 4px 12px rgba(0,77,152,.25);
-
+    box-shadow:0 4px 12px rgba(0,77,152,.25);
     transition:.2s;
 }
     
@@ -586,17 +581,13 @@ margin-top:10px;
     }
 
 	.theme-icon{
-		width:28px;
-		height:28px;
-        min-width:56px;
-        padding:0;
-	}
-
-	.theme-icon img{
-        display:block;
+	    display:block;
 	    width:20px;
 	    height:20px;
+	    object-fit:contain;
+	    flex-shrink:0;
 	}
+
 
 @media (min-width: 768px) and (max-width: 950px) {
 
@@ -692,24 +683,22 @@ margin-top:10px;
     }
 
 	.menu-theme-btn{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        text-transform:uppercase;
-    
-        gap:3px;
-    
-        min-width:58px;
-    
-        padding:12px 8px;
-    
-        border-radius:18px;
-    
-        background:#0A5FB3;
-    
-        backdrop-filter:blur(15px);
-    }
+	    display:flex;
+	    flex-direction:column;
+	    align-items:center;
+	    justify-content:center;
+	
+	    gap:3px;
+	
+	    min-width:58px;
+	    padding:6px 8px;
+	
+	    border-radius:18px;
+	
+	    background:#0A5FB3;
+	
+	    backdrop-filter:blur(15px);
+	}
     
     .main-menu a:hover,
 	.menu-theme-btn:hover{
@@ -730,13 +719,31 @@ margin-top:10px;
         -webkit-backdrop-filter:blur(15px);
     }
 
-    .main-menu a img,
-	theme-icon img{
-        display:block;
-        width:28px;
-        height:28px;
-        object-fit:contain;
-    }
+	.main-menu a img,
+	.theme-icon{
+	    display:block;
+	    width:28px;
+	    height:28px;
+		
+	.menu-theme-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:56px;
+    padding:10px 4px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#004D98;
+    cursor:pointer;
+
+    box-shadow:0 4px 12px rgba(0,77,152,.25);
+    transition:.2s;
+}menu
+	    object-fit:contain;
+	}
 
     .main-menu a span{
         font-size:9px;
