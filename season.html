@@ -939,6 +939,94 @@ display:none;
     object-fit:contain;
 }
 
+.table-header{
+    display:grid;
+    grid-template-columns:
+    36px
+    1fr
+    36px
+    48px
+    48px;
+
+    gap:6px;
+
+    padding:8px;
+    margin-bottom:6px;
+
+    background:var(--meta-bg);
+
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+
+    opacity:.7;
+}
+
+.table-line{
+    display:grid;
+    grid-template-columns:
+    36px
+    1fr
+    36px
+    48px
+    48px;
+
+    gap:6px;
+    align-items:center;
+
+    padding:8px;
+
+    border-bottom:1px solid var(--meta-border);
+
+    transition:.2s;
+}
+
+.table-line:hover{
+    background:var(--meta-bg);
+}
+
+.table-line:last-child{
+    border-bottom:none;
+}
+
+.table-club{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-weight:600;
+}
+
+.table-club img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.table-points{
+    text-align:center;
+    font-weight:800;
+}
+
+.table-goaldiff{
+    text-align:center;
+    font-weight:700;
+}
+
+.table-played{
+    text-align:center;
+}
+
+.table-line.barca-row{
+    background:var(--meta-bg);
+}
+
+.table-line.barca-row .table-club,
+.table-line.barca-row .table-points{
+    font-weight:800;
+}
+
 @media (min-width: 768px) and (max-width: 950px) {
 
 .container{
@@ -1679,25 +1767,42 @@ return;
 
 widget.style.display = "block";
 
-let html = `
-       <table class="laliga-table">
+html += `
+<div class="table-line ${rowClass}">
 
-           <thead>
-               <tr>
-                   <th>#</th>
-                   <th>Club</th>
-                   <th>M</th>
-                   <th>W</th>
-                   <th>D</th>
-                   <th>L</th>
-                   <th>Goals</th>
-                   <th>+/-</th>
-                   <th>Pts</th>
-               </tr>
-           </thead>
+    <div>
+        <div class="position-circle ${posBadgeClass}">
+            ${team.position}
+        </div>
+    </div>
 
-           <tbody>
-       `;
+    <div class="table-club">
+
+        ${
+            team.logo
+            ? `<img src="${team.logo}`
+            : ""
+        }
+
+        <span>${team.club}</span>
+
+    </div>
+
+    <div class="table-played">
+        ${team.matches}
+    </div>
+
+    <div class="table-goaldiff">
+        ${team.difference > 0 ? "+" : ""}
+        ${team.difference}
+    </div>
+
+    <div class="table-points">
+        ${team.points}
+    </div>
+
+</div>
+`;
 
 seasonRows.forEach(row => {
 
