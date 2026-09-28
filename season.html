@@ -1598,6 +1598,9 @@ fetch("https://docs.google.com/spreadsheets/d/1DjlD21Srkmw2As8zcya6S51K6ZbF_jasT
 .then(response => response.text())
 .then(csv => {
 
+console.log("LaLiga loaded");
+console.log("Season:", season);
+
 const rows = csv
 .trim()
 .split("\n")
@@ -1608,6 +1611,8 @@ const data = rows.slice(1);
 const seasonRows = data.filter(
 row => row[0].trim() === season
 );
+
+console.log("Rows:", seasonRows.length);
 
 const widget =
 document.getElementById("laligaWidget");
@@ -2737,10 +2742,9 @@ document.getElementById(
 }
 
 if(section === 'table'){
-    document.getElementById(
-        'laligaWidget'
-    ).style.display = 'block';
-    renderLaLigaTable();
+document.getElementById(
+'laligaWidget'
+).style.display = 'block';
 }
 
 if(section === 'debutants'){
