@@ -649,6 +649,41 @@ flex-shrink:0;
         padding:10px 4px;
     }
 
+.menu-theme-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:56px;
+    padding:10px 4px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#004D98;
+    cursor:pointer;
+
+    box-shadow:0 4px 12px rgba(0,77,152,.25);
+    transition:.2s;
+}
+
+.menu-theme-btn:hover{
+    background:#0a5fb3;
+    transform:translateY(-2px);
+}
+
+.theme-text{
+    display:none;
+}
+
+.theme-icon{
+    display:block;
+    width:20px;
+    height:20px;
+    object-fit:contain;
+}
+``
+
 @media (min-width: 768px) and (max-width: 950px) {
 
 	.container{
@@ -665,6 +700,38 @@ flex-shrink:0;
 }
 
 @media(max-width:767px){
+
+	.theme-text{
+	    display:block;
+	    font-size:9px;
+	    font-weight:600;
+	    line-height:1;
+	    text-transform:uppercase;
+	    color:#fff;
+	}
+	
+	.theme-icon{
+	    width:28px;
+	    height:28px;
+	}
+	
+	.menu-theme-btn{
+	    display:flex;
+	    flex-direction:column;
+	    align-items:center;
+	    justify-content:center;
+	
+	    gap:3px;
+	
+	    min-width:58px;
+	    padding:6px 8px;
+	
+	    border-radius:18px;
+	
+	    background:#0A5FB3;
+	
+	    backdrop-filter:blur(15px);
+	}
 
     .header-logo{
         width:82px;
@@ -955,7 +1022,7 @@ font-size:13px;
     </a>
 
 	<button id="themeToggle" class="menu-theme-btn">
-	    <span class="theme-icon">🌙</span>
+	    <img class="theme-icon" src="icons/moon-48.png">
 	    <span class="theme-text"></span>
 	</button>
 
@@ -2056,20 +2123,23 @@ function initPersonSearch(){
 
     function updateThemeButton(theme){
 
-        button.querySelector(".theme-icon").textContent =
+        const icon =
+            button.querySelector(".theme-icon");
+
+        icon.src =
             theme === "dark"
-            ? "☀️"
-            : "🌙";
+            ? "icons/sun-48.png"
+            : "icons/moon-48.png";
 
         button.querySelector(".theme-text").textContent =
             theme === "dark"
-            ? "Light"
-            : "Dark";
+            ? "LIGHT"
+            : "DARK";
     }
 
     updateThemeButton(theme);
 
-    button.addEventListener("click",()=>{
+    button.addEventListener("click", () => {
 
         const current =
             document.documentElement.getAttribute("data-theme");
@@ -2090,7 +2160,6 @@ function initPersonSearch(){
         );
 
         updateThemeButton(next);
-
     });
 
 })();
