@@ -79,6 +79,19 @@ font-size:22px;
 font-weight:700;
 }
 
+.header-inner{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.header-logo{
+    width:64px;
+    height:64px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
 .hero-subtitle{
 margin-top:8px;
 font-size:16px;
@@ -574,6 +587,11 @@ margin-top:10px;
 }
 
 @media(max-width:767px){
+
+    .header-logo{
+        width:48px;
+        height:48px;
+    }
     
     #searchToggle span,
 	.theme-text{
@@ -756,14 +774,18 @@ padding:6px 14px;
 <div class="container">
 
 <div class="header">
+    <div class="header-inner">
+        <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
 
-<h1>Barça DB</h1>
-
-<div class="hero-subtitle">
-Home page
+        <div>
+            <h1>Barça DB</h1>
+            <div class="hero-subtitle">
+                Home page
+            </div>
+        </div>
+    </div>
 </div>
 
-</div>
 
 <nav class="main-menu">
 
