@@ -1355,16 +1355,23 @@ function renderTopManagers(){
 
         stats[manager].matches++;
 
-        const score =
-            String(match.Result || "")
-            .split(":");
-
-        if(score.length === 2){
-
-            stats[manager].gf += Number(score[0]) || 0;
-            stats[manager].ga += Number(score[1]) || 0;
-
-        }
+		if(match["Home/Away"] === "Home"){
+		
+		    stats[manager].gf +=
+		        Number(match["Goals home team"]) || 0;
+		
+		    stats[manager].ga +=
+		        Number(match["Goals away team"]) || 0;
+		
+		}else{
+		
+		    stats[manager].gf +=
+		        Number(match["Goals away team"]) || 0;
+		
+		    stats[manager].ga +=
+		        Number(match["Goals home team"]) || 0;
+		
+		}
 
         if(match["Result type"] === "W"){
             stats[manager].wins++;
