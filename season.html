@@ -909,12 +909,19 @@ display:none;
     transition:.2s;
 }
 
-.table-line-full > div:not(:first-child):not(:nth-child(2)),
-.table-header-full > div:not(:first-child):not(:nth-child(2)){
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+.table-header-full > div,
+.table-line-full > div{
+    justify-self:center;
+}
+
+.table-header-full > div:nth-child(1),
+.table-line-full > div:nth-child(1){
+    justify-self:start;
+}
+
+.table-header-full > div:nth-child(2),
+.table-line-full > div:nth-child(2){
+    justify-self:start;
 }
 
 .table-line:last-child{
