@@ -18,6 +18,8 @@
 
 <meta name="robots" content="index,follow">
 
+<meta name="description" content="">
+
 <meta name="author" content="RE">
 
 <meta property="og:image"
@@ -2096,6 +2098,23 @@ const teamA = homeMatch
 const teamB = homeMatch
 ? (match["Opp. Team"] || "")
 : "Barcelona";
+
+const opponentName = match["Opp. Team"] || "";
+
+document.title =
+`FC Barcelona vs ${opponentName} | Barça Database`;
+
+document.querySelector('meta[name="description"]')
+?.setAttribute(
+    "content",
+    `Match details, lineups, goals and statistics for FC Barcelona vs ${opponentName}.`
+);
+
+const canonical = document.querySelector('link[rel="canonical"]');
+
+if (canonical) {
+    canonical.href = location.href;
+}
 
 const barcaTitle = homeMatch
 ? "Barcelona"
