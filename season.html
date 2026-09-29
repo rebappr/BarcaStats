@@ -875,16 +875,19 @@ display:none;
 .table-line-full{
     display:grid;
     grid-template-columns:
-    36px
-    1fr
-    40px
-    40px
-    40px
-    40px
-    70px
-    50px
-    50px;
+    36px   /* # */
+    1fr  /* club */
+    40px   /* M */
+    40px   /* W */
+    40px   /* D */
+    40px   /* L */
+    70px   /* Goals */
+    50px   /* GD */
+    50px;  /* Pts */
+
+    align-items:center;
 }
+
 
 .table-line{
     display:grid;
@@ -1283,20 +1286,18 @@ padding:3px 8px;
 
 .table-header-full,
 .table-line-full{
-    font-size:11px;
-
     grid-template-columns:
     28px
-    140px
+    120px
     35px
     35px
     35px
     35px
-    70px
-    45px
-    45px;
+    60px
+    40px
+    40px;
 
-    min-width:500px;
+    min-width:430px;
 }
 
 .stats-table th:nth-child(2),
