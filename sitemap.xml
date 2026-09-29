@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://barcadb.com/</loc>
+  </url>
+
+  <url>
+    <loc>https://barcadb.com/season.html</loc>
+  </url>
+
+  <url>
+    <loc>https://barcadb.com/player.html</loc>
+  </url>
+
+  <url>
+    <loc>https://barcadb.com/manager.html</loc>
+  </url>
+
+  <url>
+    <loc>https://barcadb.com/opponent.html</loc>
+  </url>
+
+  <url>
+    <loc>https://barcadb.com/match.html</loc>
+  </url>
+
+</urlset>
