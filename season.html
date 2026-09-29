@@ -888,6 +888,11 @@ display:none;
     align-items:center;
 }
 
+.table-line-full .table-played,
+.table-line-full .table-goaldiff,
+.table-line-full .table-points{
+    text-align:center;
+}
 
 .table-line{
     display:grid;
@@ -1842,18 +1847,18 @@ fetch("tablelaliga.json")
 		                }
 		            </div>
 		
-		            <div>${row.matches}</div>
-		            <div>${row.wins}</div>
-		            <div>${row.draws}</div>
-		            <div>${row.looses}</div>
-		            <div>${row.goals}</div>
-		
-		            <div>
-		                ${Number(row.difference) > 0 ? "+" : ""}
-		                ${row.difference}
-		            </div>
-		
-		            <div>${row.points}</div>
+					<div class="table-played">${row.matches}</div>
+					<div>${row.wins}</div>
+					<div>${row.draws}</div>
+					<div>${row.looses}</div>
+					<div>${row.goals}</div>
+					
+					<div class="table-goaldiff">
+					    ${Number(row.difference) > 0 ? "+" : ""}
+					    ${row.difference}
+					</div>
+					
+					<div class="table-points">${row.points}</div>
 		
 		        </div>`;
 		    }
