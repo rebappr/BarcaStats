@@ -1824,7 +1824,7 @@ fetch("tablelaliga.json")
 		        posBadgeClass = "relegation";
 		    }
 		
-		    if(row.club === "Barcelona"){
+		    if(row.club === "FC Barcelona"){
 		        rowClass = "barca-row";
 		    }
 		
@@ -1840,7 +1840,7 @@ fetch("tablelaliga.json")
 		
 		            <div class="table-club">
 		                ${
-		                row.club !== "Barcelona"
+		                row.club !== "FC Barcelona"
 		                ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
 		                      class="opponent-link"
 		                      onclick="event.stopPropagation();">
@@ -1876,7 +1876,7 @@ fetch("tablelaliga.json")
 		
 		            <div class="table-club">
 		                ${
-		                row.club !== "Barcelona"
+		                row.club !== "FC Barcelona"
 		                ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
 		                      class="opponent-link"
 		                      onclick="event.stopPropagation();">
