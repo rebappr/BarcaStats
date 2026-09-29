@@ -90,7 +90,7 @@ html[data-theme="dark"]{
         --text:#0f172a;
 
         --card-bg::#f1f5f9;
-        --card-border:#334155;
+        --card-border:rgba(0,77,152,.25);
 
         --meta-bg:#dfe5eb;
         --meta-border:#e2e8f0;
@@ -128,7 +128,7 @@ html[data-theme="light"]{
     --text:#0f172a;
 
     --card-bg::#f1f5f9;
-    --card-border:#334155;
+    --card-border:rgba(0,77,152,.25);
 
     --meta-bg:#dfe5eb;
     --meta-border:#e2e8f0;
