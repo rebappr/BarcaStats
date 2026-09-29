@@ -1323,16 +1323,20 @@ padding:3px 8px;
 .table-line-full{
     grid-template-columns:
     28px
-    120px
-    35px
-    35px
-    35px
-    35px
+    1fr
+    32px
+    32px
+    32px
+    32px
     60px
-    40px
     40px;
 
-    min-width:430px;
+    min-width:390px;
+}
+
+.table-header-full > div:nth-child(8),
+.table-line-full > div:nth-child(8){
+    display:none;
 }
 
 .stats-table th:nth-child(2),
