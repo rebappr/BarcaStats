@@ -1123,6 +1123,20 @@ const competitionLogos = {
     "European Cup": "ec.png"
 };
 
+document.title = `${opponentName} | Barça Database`;
+
+document.querySelector('meta[name="description"]')
+?.setAttribute(
+    "content",
+    `FC Barcelona head-to-head statistics against ${opponentName}.`
+);
+
+const canonical = document.querySelector('link[rel="canonical"]');
+
+if (canonical) {
+    canonical.href = location.href;
+}
+
 let allMatches = [];
 
 fetch("data.json")
