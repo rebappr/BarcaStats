@@ -919,9 +919,26 @@ display:none;
     transition:.2s;
 }
 
+.table-line > div:nth-child(1),
+.table-header > div:nth-child(1),
+.table-line > div:nth-child(2),
+.table-header > div:nth-child(2){
+    justify-self:start;
+}
+
+.table-line > div,
+.table-header > div{
+    justify-self:center;
+}
+
 .table-header-full > div,
 .table-line-full > div{
     justify-self:center;
+}
+
+.table-header > div:not(:nth-child(1)):not(:nth-child(2)),
+.table-line > div:not(:nth-child(1)):not(:nth-child(2)){
+    text-align:center;
 }
 
 .table-header-full > div:nth-child(1),
