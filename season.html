@@ -874,18 +874,22 @@ display:none;
 .table-header-full,
 .table-line-full{
     display:grid;
-    grid-template-columns:
-    36px   /* # */
-    180px /* club */
-    40px   /* M */
-    40px   /* W */
-    40px   /* D */
-    40px   /* L */
-    70px   /* Goals */
-    50px   /* GD */
-    50px;  /* Pts */
 
+    grid-template-columns:
+    36px
+    180px
+    40px
+    40px
+    40px
+    40px
+    70px
+    50px
+    50px;
+
+    gap:6px;
     align-items:center;
+    padding:8px;
+    border-bottom:1px solid var(--meta-border);
 }
 
 .table-line-full .table-played,
@@ -961,11 +965,11 @@ display:none;
     text-align:center;
 }
 
-.table-line.barca-row{
+.barca-row{
     background:var(--meta-bg);
 }
 
-.table-line.barca-row .table-club{
+.barca-row .table-club{
     font-weight:800;
 	color:#A50044;
 }
@@ -1827,7 +1831,7 @@ fetch("tablelaliga.json")
 		    else{
 		
 		        html += `
-		        <div class="table-line table-line-full ${rowClass}">
+		        <div class="table-line-full ${rowClass}">
 		
 		            <div>
 		                <div class="position-circle ${posBadgeClass}">
