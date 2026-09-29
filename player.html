@@ -1751,7 +1751,9 @@ id:match.ID,
 date:match.Date,
 competition:match.Competition,
 venue:match["Home/Away"],
-opponent:match["Opp. Team"],
+opponent: forOpponent
+    ? "FC Barcelona"
+    : match["Opp. Team"],
 result:match.Result,
 resultType: match["Result type"],
 played: played,
