@@ -676,6 +676,16 @@ flex-shrink:0;
     object-fit:contain;
 }
 
+.opponent-link{
+    color:var(--link-color);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.opponent-link:hover{
+    text-decoration:underline;
+}
+
 @media(max-width:820px){
 
 	.theme-text{
@@ -1824,12 +1834,11 @@ class="matches-list">
 
 ${stats[season].games.map(game=>`
 
-<a
-href="match.html?id=${game.id}"
-style="
-text-decoration:none;
-color:inherit;
-">
+<div
+class="match-link-wrapper"
+onclick="location.href='match.html?id=${game.id}'"
+style="cursor:pointer;"
+>
 
 <div
 class="player-match ${game.played ? 'player-started' : 'player-bench'}">
@@ -1848,7 +1857,13 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
         
     <div>${game.venue}</div>
 
-    <div>${game.opponent}</div>
+    <div>
+		<a href="opponent.html?name=${encodeURIComponent(game.opponent)}"
+		class="opponent-link"
+		onclick="event.stopPropagation();">
+		${game.opponent}
+		</a>
+	</div>
 
     <div>
         <span class="result-badge ${
@@ -1897,7 +1912,7 @@ class="player-match ${game.played ? 'player-started' : 'player-bench'}">
 
 </div>
 
-</a>
+</div>
 
 `).join("")}
 
