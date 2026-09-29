@@ -1747,23 +1747,21 @@ if(scored==="not in"){
 }
 
 stats[season].games.push({
-id:match.ID,
-date:match.Date,
-competition:match.Competition,
-venue:match["Home/Away"],
-opponent: forOpponent
-    ? "FC Barcelona"
-    : match["Opp. Team"],
-result:match.Result,
-resultType: match["Result type"],
-played: played,
+    id:match.ID,
+    date:match.Date,
+    competition:match.Competition,
+    venue:match["Home/Away"],
+    opponent:match["Opp. Team"],
+    result:match.Result,
+    resultType: match["Result type"],
+    played: played,
 
-goals: gameGoals,
-assists: gameAssists,
-penaltyGoals: gamePenaltyGoals,
-missedPenalties: gameMissedPenalties,
-yellow: gameYellow,
-red: gameRed
+    goals: gameGoals,
+    assists: gameAssists,
+    penaltyGoals: gamePenaltyGoals,
+    missedPenalties: gameMissedPenalties,
+    yellow: gameYellow,
+    red: gameRed
 });
 
 });
