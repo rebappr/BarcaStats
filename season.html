@@ -1746,102 +1746,98 @@ fetch("tablelaliga.json")
 	
 	}
 
-    seasonRows.forEach(row => {
-
-        const position = Number(row.position);
-
-        let rowClass = "";
-        let posBadgeClass = "";
-
-        if(position === 1){
-            posBadgeClass = "leader";
-        }
-        else if(position >= 18){
-            posBadgeClass = "relegation";
-        }
-
-        if(row.club === "Barcelona"){
-            rowClass = "barca-row";
-        }
-
-        html += `
-		if(tableView === "short"){
+		seasonRows.forEach(row => {
 		
-		    html += `
-		    <div class="table-line ${rowClass}">
-		        <div>
-		            <div class="position-circle ${posBadgeClass}">
-		                ${row.position}
+		    const position = Number(row.position);
+		
+		    let rowClass = "";
+		    let posBadgeClass = "";
+		
+		    if(position === 1){
+		        posBadgeClass = "leader";
+		    } else if(position >= 18){
+		        posBadgeClass = "relegation";
+		    }
+		
+		    if(row.club === "Barcelona"){
+		        rowClass = "barca-row";
+		    }
+		
+		    if(tableView === "short"){
+		
+		        html += `
+		        <div class="table-line ${rowClass}">
+		            <div>
+		                <div class="position-circle ${posBadgeClass}">
+		                    ${row.position}
+		                </div>
 		            </div>
-		        </div>
 		
-		        <div class="table-club">
-		            ${
-		            row.club !== 'Barcelona'
-		            ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
-		                 class="opponent-link"
-		                 onclick="event.stopPropagation();">
-		                 ${row.club}
-		               </a>`
-		            : row.club
-		            }
-		        </div>
-		
-		        <div class="table-played">${row.matches}</div>
-		
-		        <div class="table-goaldiff">
-		            ${Number(row.difference) > 0 ? "+" : ""}
-		            ${row.difference}
-		        </div>
-		
-		        <div class="table-points">
-		            ${row.points}
-		        </div>
-		    </div>
-		    `;
-		
-		}else{
-		
-		    html += `
-		    <div class="table-line table-line-full ${rowClass}">
-		
-		        <div>
-		            <div class="position-circle ${posBadgeClass}">
-		                ${row.position}
+		            <div class="table-club">
+		                ${
+		                row.club !== "Barcelona"
+		                ? `<a href="opponent.html?name=${encodeURIComponent(row.club)}"
+		                      class="opponent-link"
+		                      onclick="event.stopPropagation();">
+		                      ${row.club}
+		                   </a>`
+		                : row.club
+		                }
 		            </div>
-		        </div>
 		
-		        <div class="table-club">
-		            ${
-		            row.club !== 'Barcelona'
-		            ? `"
-		                 class="opponent-link"
-		                 onclick="event.stopPropagation();">
-		                 ${row.club}
-		               </a>`
-		            : row.club
-		            }
-		        </div>
+		            <div class="table-played">${row.matches}</div>
 		
-		        <div>${row.matches}</div>
-		        <div>${row.wins}</div>
-		        <div>${row.draws}</div>
-		        <div>${row.looses}</div>
-		        <div>${row.goals}</div>
+		            <div class="table-goaldiff">
+		                ${Number(row.difference) > 0 ? "+" : ""}
+		                ${row.difference}
+		            </div>
 		
-		        <div>
-		            ${Number(row.difference) > 0 ? "+" : ""}
-		            ${row.difference}
-		        </div>
+		            <div class="table-points">
+		                ${row.points}
+		            </div>
+		        </div>`;
+		    }
 		
-		        <div>${row.points}</div>
+		    else{
 		
-		    </div>
-		    `;
+		        html += `
+		        <div class="table-line table-line-full ${rowClass}">
 		
-		}
-    });
-
+		            <div>
+		                <div class="position-circle ${posBadgeClass}">
+		                    ${row.position}
+		                </div>
+		            </div>
+		
+		            <div class="table-club">
+		                ${
+		                row.club !== "Barcelona"
+		                ? `"
+		                      class="opponent-link"
+		                      onclick="event.stopPropagation();">
+		                      ${row.club}
+		                   </a>`
+		                : row.club
+		                }
+		            </div>
+		
+		            <div>${row.matches}</div>
+		            <div>${row.wins}</div>
+		            <div>${row.draws}</div>
+		            <div>${row.looses}</div>
+		            <div>${row.goals}</div>
+		
+		            <div>
+		                ${Number(row.difference) > 0 ? "+" : ""}
+		                ${row.difference}
+		            </div>
+		
+		            <div>${row.points}</div>
+		
+		        </div>`;
+		    }
+		});
+	
     document.getElementById("laligaTable").innerHTML = html;
 
 })
