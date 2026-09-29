@@ -871,34 +871,6 @@ display:none;
     opacity:.7;
 }
 
-.table-header-full,
-.table-line-full{
-    display:grid;
-
-    grid-template-columns:
-    36px
-    180px
-    40px
-    40px
-    40px
-    40px
-    70px
-    50px
-    50px;
-
-    gap:6px;
-    align-items:center;
-    padding:8px;
-    border-bottom:1px solid var(--meta-border);
-	font-size:12px;
-}
-
-.table-line-full .table-played,
-.table-line-full .table-goaldiff,
-.table-line-full .table-points{
-    text-align:center;
-}
-
 .table-line{
     display:grid;
     grid-template-columns:
@@ -929,6 +901,35 @@ display:none;
 .table-line > div,
 .table-header > div{
     justify-self:center;
+}
+
+
+.table-header-full,
+.table-line-full{
+    display:grid;
+
+    grid-template-columns:
+    36px
+    1fr
+    40px
+    40px
+    40px
+    40px
+    70px
+    50px
+    50px;
+
+    gap:6px;
+    align-items:center;
+    padding:8px;
+    border-bottom:1px solid var(--meta-border);
+	font-size:12px;
+}
+
+.table-line-full .table-played,
+.table-line-full .table-goaldiff,
+.table-line-full .table-points{
+    text-align:center;
 }
 
 .table-header-full > div,
