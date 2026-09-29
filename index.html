@@ -874,6 +874,16 @@ Loading...
 </div>
 
 <div class="widget-title">
+    Barcelona Managers (100+ Matches)
+</div>
+
+<div class="widget-card">
+    <div id="topManagers">
+        Loading...
+    </div>
+</div>
+
+<div class="widget-title">
 Top 10 Under Hansi Flick
 </div>
 
@@ -930,6 +940,8 @@ let allMatches = [];
 
 let flickSortColumn = "total";
 let flickSortDirection = "desc";
+let managerTableSortColumn = "winPct";
+let managerTableSortDirection = "desc";
 
 fetch("data.json")
 .then(r=>r.json())
@@ -946,6 +958,7 @@ function renderHome(){
 renderLastMatch();
 renderNextMatch();
 renderTopFlickPlayers();
+renderTopManagers();
 
 initPersonSearch();
 
@@ -1121,6 +1134,27 @@ function sortFlick(column){
 
 window.sortFlick = sortFlick;
 
+function sortManagers(column){
+
+    if(managerTableSortColumn === column){
+
+        managerTableSortDirection =
+            managerTableSortDirection === "asc"
+            ? "desc"
+            : "asc";
+
+    }else{
+
+        managerTableSortColumn = column;
+        managerTableSortDirection = "desc";
+
+    }
+
+    renderTopManagers();
+}
+
+window.sortManagers = sortManagers;
+
 function renderTopFlickPlayers(){
 
     const stats = {};
@@ -1293,6 +1327,157 @@ for(let i=1;i<=12;i++){
     document.getElementById(
         "topFlickPlayers"
     ).innerHTML = html;
+
+}
+
+function renderTopManagers(){
+
+    const stats = {};
+
+    allMatches.forEach(match => {
+
+        const manager = match.Manager;
+
+        if(!manager) return;
+
+        if(!stats[manager]){
+
+            stats[manager] = {
+                matches:0,
+                wins:0,
+                draws:0,
+                losses:0,
+                gf:0,
+                ga:0
+            };
+
+        }
+
+        stats[manager].matches++;
+
+        const score =
+            String(match.Result || "")
+            .split(":");
+
+        if(score.length === 2){
+
+            stats[manager].gf += Number(score[0]) || 0;
+            stats[manager].ga += Number(score[1]) || 0;
+
+        }
+
+        if(match["Result type"] === "W"){
+            stats[manager].wins++;
+        }
+
+        if(match["Result type"] === "D"){
+            stats[manager].draws++;
+        }
+
+        if(match["Result type"] === "L"){
+            stats[manager].losses++;
+        }
+
+    });
+
+    const managers = Object.entries(stats)
+
+    .map(([name,s]) => ({
+
+        name,
+
+        matches:s.matches,
+        wins:s.wins,
+        draws:s.draws,
+        losses:s.losses,
+        gf:s.gf,
+        ga:s.ga,
+
+        winPct:
+            Number(
+                ((s.wins / s.matches) * 100)
+                .toFixed(1)
+            )
+
+    }))
+
+    .filter(m => m.matches >= 100)
+
+    .sort((a,b) => {
+
+        const valueA = a[managerTableSortColumn];
+        const valueB = b[managerTableSortColumn];
+
+        return managerTableSortDirection === "asc"
+            ? valueA - valueB
+            : valueB - valueA;
+
+    });
+
+    let html = `
+    <table class="flick-table">
+        <thead>
+            <tr>
+
+                <th>Manager</th>
+
+                <th class="${managerTableSortColumn==='matches' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('matches')">M</th>
+
+                <th class="${managerTableSortColumn==='wins' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('wins')">W</th>
+
+                <th class="${managerTableSortColumn==='draws' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('draws')">D</th>
+
+                <th class="${managerTableSortColumn==='losses' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('losses')">L</th>
+
+                <th class="${managerTableSortColumn==='gf' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('gf')">GF</th>
+
+                <th class="${managerTableSortColumn==='ga' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('ga')">GA</th>
+
+                <th class="${managerTableSortColumn==='winPct' ? 'flick-selected' : ''}"
+                    onclick="sortManagers('winPct')">W%</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+    `;
+
+    managers.forEach(manager => {
+
+        html += `
+        <tr>
+
+            <td>
+                <a class="player-link"
+                   href="manager.html?name=${encodeURIComponente}
+                </a>
+            </td>
+
+            <td>${manager.matches}</td>
+            <td>${manager.wins}</td>
+            <td>${manager.draws}</td>
+            <td>${manager.losses}</td>
+            <td>${manager.gf}</td>
+            <td>${manager.ga}</td>
+            <td>${manager.winPct}%</td>
+
+        </tr>
+        `;
+
+    });
+
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    document.getElementById("topManagers").innerHTML = html;
 
 }
 
