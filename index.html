@@ -334,7 +334,7 @@ font-weight:700;
 
 .flick-table th:not(:first-child),
 .flick-table td:not(:first-child){
-    width:50px;
+    width:60px;
     text-align:center;
 }
 
@@ -1453,19 +1453,41 @@ function renderTopManagers(){
         html += `
         <tr>
 
-            <td>
-                <a class="player-link"
-                   href="manager.html?name=${encodeURIComponente}
-                </a>
-            </td>
+			<td>
+			    <a
+			        class="player-link"
+			        href="manager.html?name=${encodeURIComponent(manager.name)}">
+			        ${manager.name}
+			    </a>
+			</td>
 
-            <td>${manager.matches}</td>
-            <td>${manager.wins}</td>
-            <td>${manager.draws}</td>
-            <td>${manager.losses}</td>
-            <td>${manager.gf}</td>
-            <td>${manager.ga}</td>
-            <td>${manager.winPct}%</td>
+			<td class="${managerTableSortColumn==='matches' ? 'flick-column-selected' : ''}">
+			    ${manager.matches}
+			</td>
+			
+			<td class="${managerTableSortColumn==='wins' ? 'flick-column-selected' : ''}">
+			    ${manager.wins}
+			</td>
+			
+			<td class="${managerTableSortColumn==='draws' ? 'flick-column-selected' : ''}">
+			    ${manager.draws}
+			</td>
+			
+			<td class="${managerTableSortColumn==='losses' ? 'flick-column-selected' : ''}">
+			    ${manager.losses}
+			</td>
+			
+			<td class="${managerTableSortColumn==='gf' ? 'flick-column-selected' : ''}">
+			    ${manager.gf}
+			</td>
+			
+			<td class="${managerTableSortColumn==='ga' ? 'flick-column-selected' : ''}">
+			    ${manager.ga}
+			</td>
+			
+			<td class="${managerTableSortColumn==='winPct' ? 'flick-column-selected' : ''}">
+			    ${manager.winPct}%
+			</td>
 
         </tr>
         `;
