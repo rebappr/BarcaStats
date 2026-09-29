@@ -906,6 +906,14 @@ display:none;
     transition:.2s;
 }
 
+.table-line-full > div:not(:first-child):not(:nth-child(2)),
+.table-header-full > div:not(:first-child):not(:nth-child(2)){
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
 .table-line:last-child{
     border-bottom:none;
 }
