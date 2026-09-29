@@ -1720,13 +1720,9 @@ html += `
 			<a href="opponent.html?name=${encodeURIComponent(match["Opp. Team"])}"
 			class="opponent-link"
 			onclick="event.stopPropagation();">
-			${game.opponent}
+			${match["Opp. Team"]}
 			</a>
 		</div>
-        
-        <div>
-            ${match["Opp. Team"]}
-        </div>
         
         <div>
             <span class="result-badge ${resultClass}">
