@@ -1167,6 +1167,20 @@ const competitionLogos = {
     "European Cup": "ec.png"
 };
 
+document.title = `${managerName} | Barça Database`;
+
+document.querySelector('meta[name="description"]')
+?.setAttribute(
+    "content",
+    `${managerName} managerial statistics, matches, wins, draws and losses with FC Barcelona.`
+);
+
+const canonical = document.querySelector('link[rel="canonical"]');
+
+if (canonical) {
+    canonical.href = location.href;
+}
+
 let allMatches = [];
 let allPlayers = [];
 
