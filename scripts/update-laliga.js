@@ -32,6 +32,8 @@ const CLUB_MAP = {
 
 async function run() {
 
+  console.log("Starting updater...");
+
   const response = await fetch(
     "https://api.football-data.org/v4/competitions/PD/standings",
     {
@@ -40,6 +42,8 @@ async function run() {
       }
     }
   );
+
+  console.log("API status:", response.status);
 
   if (!response.ok) {
     throw new Error(API returned ${response.status});
@@ -53,7 +57,13 @@ async function run() {
     apiData.season.endDate.slice(2, 4);
 
   const standings =
-    apiData.standings.find(x => x.type === "TOTAL");
+    apiData.standings.find(
+      x => x.type === "TOTAL"
+    );
+
+  if (!standings) {
+    throw new Error("TOTAL standings not found");
+  }
 
   const currentRows = standings.table.map(team => {
 
@@ -77,18 +87,16 @@ async function run() {
     };
   });
 
-  const existing =
-    JSON.parse(
-      fs.readFileSync(
-        "tablelaliga.json",
-        "utf8"
-      )
-    );
+  const existing = JSON.parse(
+    fs.readFileSync(
+      "tablelaliga.json",
+      "utf8"
+    )
+  );
 
-  const historical =
-    existing.filter(
-      row => row.season !== season
-    );
+  const historical = existing.filter(
+    row => row.season !== season
+  );
 
   const finalData = [
     ...historical,
@@ -100,9 +108,7 @@ async function run() {
     JSON.stringify(finalData)
   );
 
-  console.log(
-    Updated ${season}
-  );
+  console.log(Updated ${season});
 }
 
 run().catch(err => {
