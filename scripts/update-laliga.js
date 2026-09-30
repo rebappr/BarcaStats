@@ -4,27 +4,27 @@ const CLUB_MAP = {
   "FC Barcelona": "FC Barcelona",
   "Real Madrid CF": "Real Madrid",
   "Club Atlético de Madrid": "Atlético de Madrid",
-  "Athletic Club": "Athletic Club",
+  "Athletic Club": "Athletic Bilbao",
   "Real Betis Balompié": "Real Betis",
   "Real Sociedad de Fútbol": "Real Sociedad",
-  "Villarreal CF": "Villarreal CF",
-  "Valencia CF": "Valencia CF",
-  "Sevilla FC": "FC Sevilla",
-  "Getafe CF": "Getafe CF",
+  "Villarreal CF": "Villarreal",
+  "Valencia CF": "Valencia",
+  "Sevilla FC": "Sevilla",
+  "Getafe CF": "Getafe",
   "Rayo Vallecano de Madrid": "Rayo Vallecano",
   "CA Osasuna": "Osasuna",
-  "RC Celta de Vigo": "Celta de Vigo",
-  "RCD Espanyol de Barcelona": "RCD Espanyol",
-  "Deportivo Alavés": "Deportivo Alavés",
-  "Levante UD": "Levante UD ",
-  "Elche CF": "Elche CF",
-  "RC Deportivo La Coruña": "Deportivo A Coruñs",
-  "Málaga CF": "Málaga CF",
+  "RC Celta de Vigo": "Celta Vigo",
+  "RCD Espanyol de Barcelona": "Espanyol",
+  "Deportivo Alavés": "Alavés",
+  "Levante UD": "Levante",
+  "Elche CF": "Elche",
+  "RC Deportivo La Coruña": "Deportivo",
+  "Málaga CF": "Malaga",
   "Real Racing Club de Santander": "Racing Santander",
-  "Girona FC": "Girona FC",
-  "CD Leganés": "CD Leganés",
-  "RCD Mallorca": "RCD Mallorca",
-  "UD Las Palmas": "UD Las Palmas",
+  "Girona FC": "Girona",
+  "CD Leganés": "Leganes",
+  "RCD Mallorca": "Mallorca",
+  "UD Las Palmas": "Las Palmas",
   "Real Valladolid CF": "Valladolid",
   "Real Oviedo": "Real Oviedo",
   "Real Zaragoza": "Real Zaragoza"
@@ -43,10 +43,10 @@ async function run() {
     }
   );
 
-  console.log("API status:", response.status);
+  console.log("API status: " + response.status);
 
   if (!response.ok) {
-    throw new Error(API returned ${response.status});
+    throw new Error("API returned " + response.status);
   }
 
   const apiData = await response.json();
@@ -56,21 +56,22 @@ async function run() {
     "/" +
     apiData.season.endDate.slice(2, 4);
 
-  const standings =
-    apiData.standings.find(
-      x => x.type === "TOTAL"
-    );
+  const standings = apiData.standings.find(
+    function(x) {
+      return x.type === "TOTAL";
+    }
+  );
 
   if (!standings) {
     throw new Error("TOTAL standings not found");
   }
 
-  const currentRows = standings.table.map(team => {
+  const currentRows = standings.table.map(function(team) {
 
     const apiName = team.team.name;
 
     if (!CLUB_MAP[apiName]) {
-      console.log(UNKNOWN CLUB: ${apiName});
+      console.log("UNKNOWN CLUB: " + apiName);
     }
 
     return {
@@ -81,7 +82,7 @@ async function run() {
       wins: String(team.won),
       draws: String(team.draw),
       losses: String(team.lost),
-      goals: ${team.goalsFor}:${team.goalsAgainst},
+      goals: String(team.goalsFor) + ":" + String(team.goalsAgainst),
       difference: String(team.goalDifference),
       points: String(team.points)
     };
@@ -95,23 +96,23 @@ async function run() {
   );
 
   const historical = existing.filter(
-    row => row.season !== season
+    function(row) {
+      return row.season !== season;
+    }
   );
 
-  const finalData = [
-    ...historical,
-    ...currentRows
-  ];
+  const finalData = historical.concat(currentRows);
 
   fs.writeFileSync(
     "tablelaliga.json",
     JSON.stringify(finalData)
   );
 
-  console.log(Updated ${season});
+  console.log("Updated " + season);
 }
 
-run().catch(err => {
+run().catch(function(err) {
   console.error(err);
   process.exit(1);
 });
+
