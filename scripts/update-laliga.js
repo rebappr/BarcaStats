@@ -15,7 +15,7 @@ const CLUB_MAP = {
   "CA Osasuna": "CA Osasuna",
   "RC Celta de Vigo": "Celta de Vigo",
   "RCD Espanyol de Barcelona": "RCD Espanyol",
-  "Deportivo Alavés": "Deportivi Alavés",
+  "Deportivo Alavés": "Deportivo Alavés",
   "Levante UD": "Levante UD",
   "Elche CF": "Elche CF",
   "RC Deportivo La Coruña": "Deportivo A Coruňa",
