@@ -18,7 +18,7 @@ const CLUB_MAP = {
   "Deportivo Alavés": "Deportivo Alavés",
   "Levante UD": "Levante UD",
   "Elche CF": "Elche CF",
-  "RC Deportivo La Coruña": "Deportivo A Coruňa",
+  "RC Deportivo La Coruña": "Deportivo A Coruña",
   "Málaga CF": "Málaga CF",
   "Real Racing Club de Santander": "Racing Santander",
   "Girona FC": "Girona FC",
