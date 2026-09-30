@@ -105,7 +105,7 @@ async function run() {
 
   fs.writeFileSync(
     "tablelaliga.json",
-    JSON.stringify(finalData)
+    JSON.stringify(finalData, null, 2)
   );
 
   console.log("Updated " + season);
