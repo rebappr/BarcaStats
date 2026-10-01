@@ -1066,11 +1066,15 @@ function parseDate(date) {
 
 function renderLastMatch(){
 
-const played = allMatches
-.filter(m => parseDate(m.Date) <= new Date())
+const today = new Date();
+
+today.setHours(0,0,0,0);
+
+const next = allMatches
+.filter(m => parseDate(m.Date) >= today)
 .sort((a,b) =>
-parseDate(b.Date) - parseDate(a.Date)
-);
+parseDate(a.Date) - parseDate(b.Date)
+)[0];
 
 const match = played[0];
 
@@ -1131,8 +1135,14 @@ document.getElementById("lastMatch").innerHTML = `
 
 function renderNextMatch(){
 
+const today = new Date();
+
+today.setHours(0,0,0,0);
+
 const next = allMatches
-.filter(m => parseDate(m.Date) > new Date())
+.filter(m =>
+parseDate(m.Date) >= today
+)
 .sort((a,b) =>
 parseDate(a.Date) - parseDate(b.Date)
 )[0];
