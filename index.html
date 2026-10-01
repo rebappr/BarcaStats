@@ -1012,15 +1012,32 @@ let flickSortDirection = "desc";
 let managerTableSortColumn = "winPct";
 let managerTableSortDirection = "desc";
 
-fetch("data.json")
-.then(r=>r.json())
-.then(data=>{
+Promise.all([
+fetch("data.json").then(r => r.json()),
+fetch("current-season.json").then(r => r.json())
+])
+.then(([matchesData,currentData]) => {
 
-allMatches=data;
+currentData.forEach(currentMatch => {
+
+const match = matchesData.find(m =>
+m.Date === currentMatch.Date &&
+m.Competition === currentMatch.Competition &&
+m["Opp. Team"] === currentMatch["Opp. Team"]
+);
+
+if(match){
+match.Result = currentMatch.Result;
+}
+
+});
+
+allMatches = matchesData;
 
 renderHome();
 
-});
+})
+.catch(error => console.error(error));
 
 function renderHome(){
 
