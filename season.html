@@ -1662,13 +1662,47 @@ const competitionLogos = {
 
 function renderSeason(){
 
-const seasonMatches =
-allMatches.filter(
-x => x.Season === season
-);
+const now = new Date();
 
-document.getElementById("seasonMatches").innerHTML =
-buildCurrentSeasonMatches(seasonMatches);
+const currentSeason =
+  now.getMonth() >= 6
+    ? now.getFullYear() +
+      "/" +
+      String(now.getFullYear() + 1).slice(2)
+    : (now.getFullYear() - 1) +
+      "/" +
+      String(now.getFullYear()).slice(2);
+
+if (season === currentSeason) {
+
+  fetch("current-season.json")
+    .then(r => r.json())
+    .then(seasonMatches => {
+
+      document.getElementById(
+        "seasonMatches"
+      ).innerHTML =
+        buildCurrentSeasonMatches(
+          seasonMatches
+        );
+
+    });
+
+} else {
+
+  const seasonMatches =
+    allMatches.filter(
+      x => x.Season === season
+    );
+
+  document.getElementById(
+    "seasonMatches"
+  ).innerHTML =
+    buildCurrentSeasonMatches(
+      seasonMatches
+    );
+
+}
 
 if(!seasonMatches.length){
 
