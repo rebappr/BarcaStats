@@ -36,3 +36,4 @@ jobs:
             git commit -m "Update current season"
             git push
           fi
+ 
