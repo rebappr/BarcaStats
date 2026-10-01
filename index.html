@@ -1019,7 +1019,6 @@ fetch("current-season.json").then(r => r.json())
 .then(([matchesData,currentData]) => {
 
 function normalizeName(name){
-
 return String(name || "")
 .toLowerCase()
 .replace(/fc /g,"")
@@ -1027,7 +1026,6 @@ return String(name || "")
 .replace(/./g,"")
 .replace(/\s+/g," ")
 .trim();
-
 }
 
 currentData.forEach(currentMatch => {
@@ -1035,11 +1033,8 @@ currentData.forEach(currentMatch => {
 const match = matchesData.find(m =>
 
 m.Date === currentMatch.Date &&
-
 m.Competition === currentMatch.Competition &&
-
 m["Home/Away"] === currentMatch["Home/Away"] &&
-
 normalizeName(m["Opp. Team"]) ===
 normalizeName(currentMatch["Opp. Team"])
 
@@ -1055,30 +1050,20 @@ match.Result !== "-:-" &&
 match.Result.includes(":")
 ){
 
-const parts = match.Result.split(":");
-
-const homeGoals = Number(parts[0]);
-const awayGoals = Number(parts[1]);
+const [homeGoals,awayGoals] =
+match.Result.split(":").map(Number);
 
 if(match["Home/Away"] === "Home"){
 
-if(homeGoals > awayGoals){
-match["Result type"] = "W";
-}else if(homeGoals < awayGoals){
-match["Result type"] = "L";
-}else{
-match["Result type"] = "D";
-}
+match["Result type"] =
+homeGoals > awayGoals ? "W" :
+homeGoals < awayGoals ? "L" : "D";
 
 }else{
 
-if(awayGoals > homeGoals){
-match["Result type"] = "W";
-}else if(awayGoals < homeGoals){
-match["Result type"] = "L";
-}else{
-match["Result type"] = "D";
-}
+match["Result type"] =
+awayGoals > homeGoals ? "W" :
+awayGoals < homeGoals ? "L" : "D";
 
 }
 
