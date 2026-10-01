@@ -1111,11 +1111,13 @@ const today = new Date();
 
 today.setHours(0,0,0,0);
 
-const next = allMatches
-.filter(m => parseDate(m.Date) >= today)
+const played = allMatches
+.filter(m =>
+parseDate(m.Date) < today
+)
 .sort((a,b) =>
-parseDate(a.Date) - parseDate(b.Date)
-)[0];
+parseDate(b.Date) - parseDate(a.Date)
+);
 
 const match = played[0];
 
