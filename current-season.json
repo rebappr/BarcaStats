@@ -1,5 +1,6 @@
 [
   {
+    "ApiId": "564642",
     "Date": "23.8.2026",
     "Competition": "La Liga",
     "Opp. Team": "Elche CF",
@@ -7,6 +8,7 @@
     "Result": "0:5"
   },
   {
+    "ApiId": "564630",
     "Date": "27.8.2026",
     "Competition": "La Liga",
     "Opp. Team": "Athletic Club",
@@ -14,6 +16,7 @@
     "Result": "2:0"
   },
   {
+    "ApiId": "564650",
     "Date": "31.8.2026",
     "Competition": "La Liga",
     "Opp. Team": "Rayo Vallecano",
@@ -21,6 +24,7 @@
     "Result": "5:2"
   },
   {
+    "ApiId": "564659",
     "Date": "6.9.2026",
     "Competition": "La Liga",
     "Opp. Team": "Valencia CF",
@@ -28,6 +32,7 @@
     "Result": "0:5"
   },
   {
+    "ApiId": "575329",
     "Date": "9.9.2026",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Feyenoord Rotterdam",
@@ -35,6 +40,7 @@
     "Result": "5:1"
   },
   {
+    "ApiId": "564675",
     "Date": "13.9.2026",
     "Competition": "La Liga",
     "Opp. Team": "Levante UD",
@@ -42,6 +48,7 @@
     "Result": "2:4"
   },
   {
+    "ApiId": "564687",
     "Date": "16.9.2026",
     "Competition": "La Liga",
     "Opp. Team": "Racing Santander",
@@ -49,6 +56,7 @@
     "Result": "7:2"
   },
   {
+    "ApiId": "564690",
     "Date": "19.9.2026",
     "Competition": "La Liga",
     "Opp. Team": "FC Sevilla",
@@ -56,6 +64,7 @@
     "Result": "1:3"
   },
   {
+    "ApiId": "564700",
     "Date": "10.10.2026",
     "Competition": "La Liga",
     "Opp. Team": "Getafe CF",
@@ -63,6 +72,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575344",
     "Date": "13.10.2026",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Galatasaray SK",
@@ -70,6 +80,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564713",
     "Date": "17.10.2026",
     "Competition": "La Liga",
     "Opp. Team": "Real Betis",
@@ -77,6 +88,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575367",
     "Date": "20.10.2026",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Paris Saint-Germain",
@@ -84,6 +96,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564723",
     "Date": "25.10.2026",
     "Competition": "La Liga",
     "Opp. Team": "Real Madrid",
@@ -91,6 +104,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564732",
     "Date": "1.11.2026",
     "Competition": "La Liga",
     "Opp. Team": "Deportivo Alavés",
@@ -98,6 +112,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575380",
     "Date": "3.11.2026",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Aston Villa",
@@ -105,6 +120,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564746",
     "Date": "8.11.2026",
     "Competition": "La Liga",
     "Opp. Team": "Atlético de Madrid",
@@ -112,6 +128,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564749",
     "Date": "22.11.2026",
     "Competition": "La Liga",
     "Opp. Team": "Villarreal CF",
@@ -119,6 +136,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575404",
     "Date": "25.11.2026",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Sabah FK",
@@ -126,6 +144,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564766",
     "Date": "29.11.2026",
     "Competition": "La Liga",
     "Opp. Team": "Deportivo A Coruña",
@@ -133,6 +152,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564773",
     "Date": "6.12.2026",
     "Competition": "La Liga",
     "Opp. Team": "Celta de Vigo",
@@ -140,6 +160,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575415",
     "Date": "8.12.2026",
     "Competition": "UEFA Champions League",
     "Opp. Team": "FC Manchester City",
@@ -147,6 +168,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564779",
     "Date": "13.12.2026",
     "Competition": "La Liga",
     "Opp. Team": "Málaga CF",
@@ -154,6 +176,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564793",
     "Date": "20.12.2026",
     "Competition": "La Liga",
     "Opp. Team": "Real Sociedad",
@@ -161,6 +184,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564805",
     "Date": "3.1.2027",
     "Competition": "La Liga",
     "Opp. Team": "RCD Espanyol",
@@ -168,6 +192,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564811",
     "Date": "10.1.2027",
     "Competition": "La Liga",
     "Opp. Team": "CA Osasuna",
@@ -175,6 +200,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564819",
     "Date": "17.1.2027",
     "Competition": "La Liga",
     "Opp. Team": "Elche CF",
@@ -182,6 +208,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575288",
     "Date": "20.1.2027",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Sporting CP",
@@ -189,6 +216,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564832",
     "Date": "24.1.2027",
     "Competition": "La Liga",
     "Opp. Team": "Deportivo Alavés",
@@ -196,6 +224,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "575289",
     "Date": "27.1.2027",
     "Competition": "UEFA Champions League",
     "Opp. Team": "Como 1907",
@@ -203,6 +232,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564844",
     "Date": "31.1.2027",
     "Competition": "La Liga",
     "Opp. Team": "Valencia CF",
@@ -210,6 +240,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564857",
     "Date": "7.2.2027",
     "Competition": "La Liga",
     "Opp. Team": "Atlético de Madrid",
@@ -217,6 +248,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564861",
     "Date": "14.2.2027",
     "Competition": "La Liga",
     "Opp. Team": "Villarreal CF",
@@ -224,6 +256,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564871",
     "Date": "21.2.2027",
     "Competition": "La Liga",
     "Opp. Team": "Levante UD",
@@ -231,6 +264,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564884",
     "Date": "28.2.2027",
     "Competition": "La Liga",
     "Opp. Team": "Athletic Club",
@@ -238,6 +272,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564888",
     "Date": "7.3.2027",
     "Competition": "La Liga",
     "Opp. Team": "Real Betis",
@@ -245,6 +280,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564906",
     "Date": "14.3.2027",
     "Competition": "La Liga",
     "Opp. Team": "Deportivo A Coruña",
@@ -252,6 +288,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564912",
     "Date": "21.3.2027",
     "Competition": "La Liga",
     "Opp. Team": "Rayo Vallecano",
@@ -259,6 +296,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564919",
     "Date": "4.4.2027",
     "Competition": "La Liga",
     "Opp. Team": "FC Sevilla",
@@ -266,6 +304,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564935",
     "Date": "11.4.2027",
     "Competition": "La Liga",
     "Opp. Team": "Racing Santander",
@@ -273,6 +312,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564939",
     "Date": "18.4.2027",
     "Competition": "La Liga",
     "Opp. Team": "RCD Espanyol",
@@ -280,6 +320,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564950",
     "Date": "21.4.2027",
     "Competition": "La Liga",
     "Opp. Team": "Celta de Vigo",
@@ -287,6 +328,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564961",
     "Date": "2.5.2027",
     "Competition": "La Liga",
     "Opp. Team": "CA Osasuna",
@@ -294,6 +336,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564975",
     "Date": "9.5.2027",
     "Competition": "La Liga",
     "Opp. Team": "Real Madrid",
@@ -301,6 +344,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564980",
     "Date": "16.5.2027",
     "Competition": "La Liga",
     "Opp. Team": "Real Sociedad",
@@ -308,6 +352,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "564989",
     "Date": "23.5.2027",
     "Competition": "La Liga",
     "Opp. Team": "Málaga CF",
@@ -315,6 +360,7 @@
     "Result": "-:-"
   },
   {
+    "ApiId": "565006",
     "Date": "30.5.2027",
     "Competition": "La Liga",
     "Opp. Team": "Getafe CF",
