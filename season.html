@@ -2633,16 +2633,57 @@ fetch("players.json").then(r => r.json())
 ])
 .then(([matchesData,currentData,playersData]) => {
 
+function normalizeName(name){
+return String(name || "")
+.toLowerCase()
+.replace(/fc /g,"")
+.replace(/ cf/g,"")
+.replace(/./g,"")
+.replace(/\s+/g," ")
+.trim();
+}
+
 currentData.forEach(currentMatch => {
 
 const match = matchesData.find(m =>
+
 m.Date === currentMatch.Date &&
 m.Competition === currentMatch.Competition &&
-m["Opp. Team"] === currentMatch["Opp. Team"]
+m["Home/Away"] === currentMatch["Home/Away"] &&
+normalizeName(m["Opp. Team"]) ===
+normalizeName(currentMatch["Opp. Team"])
+
 );
 
 if(match){
+
 match.Result = currentMatch.Result;
+
+if(
+match.Result &&
+match.Result !== "-:-" &&
+match.Result.includes(":")
+){
+
+const [homeGoals,awayGoals] =
+match.Result.split(":").map(Number);
+
+if(match["Home/Away"] === "Home"){
+
+match["Result type"] =
+homeGoals > awayGoals ? "W" :
+homeGoals < awayGoals ? "L" : "D";
+
+}else{
+
+match["Result type"] =
+awayGoals > homeGoals ? "W" :
+awayGoals < homeGoals ? "L" : "D";
+
+}
+
+}
+
 }
 
 });
