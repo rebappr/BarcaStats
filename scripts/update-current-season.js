@@ -1,43 +1,54 @@
 const fs = require("fs");
 
 const CLUB_MAP = {
+  "FC Barcelona": "FC Barcelona",
   "Real Madrid CF": "Real Madrid",
   "Club Atlético de Madrid": "Atlético de Madrid",
-  "Athletic Club": "Athletic Bilbao",
+  "Athletic Club": "Athletic Club",
   "Real Betis Balompié": "Real Betis",
   "Real Sociedad de Fútbol": "Real Sociedad",
-  "Villarreal CF": "Villarreal",
-  "Valencia CF": "Valencia",
-  "Sevilla FC": "Sevilla",
-  "Getafe CF": "Getafe",
+  "Villarreal CF": "Villarreal CF",
+  "Valencia CF": "Valencia CF",
+  "Sevilla FC": "FC Sevilla",
+  "Getafe CF": "Getafe CF",
   "Rayo Vallecano de Madrid": "Rayo Vallecano",
-  "CA Osasuna": "Osasuna",
-  "RC Celta de Vigo": "Celta Vigo",
-  "RCD Espanyol de Barcelona": "Espanyol",
-  "Deportivo Alavés": "Alavés",
-  "Girona FC": "Girona",
-  "RCD Mallorca": "Mallorca",
-  "Real Racing Club de Santander": "Racing Santander"
+  "CA Osasuna": "CA Osasuna",
+  "RC Celta de Vigo": "Celta de Vigo",
+  "RCD Espanyol de Barcelona": "RCD Espanyol",
+  "Deportivo Alavés": "Deportivo Alavés",
+  "Levante UD": "Levante UD",
+  "Elche CF": "Elche CF",
+  "RC Deportivo La Coruña": "Deportivo A Coruña",
+  "Málaga CF": "Málaga CF",
+  "Real Racing Club de Santander": "Racing Santander",
+  "Girona FC": "Girona FC",
+  "CD Leganés": "CD Leganés",
+  "RCD Mallorca": "RCD Mallorca",
+  "UD Las Palmas": "UD Las Palmas",
+  "Real Valladolid CF": "Valladolid",
+  "Real Oviedo": "Real Oviedo",
+  "Real Zaragoza": "Real Zaragoza",
+  "Feyenoord Rotterdam": "Feyenoord Rotterdam",
+  "Galatasaray SK": "Galatasaray SK",
+  "Paris Saint-Germain FC": "Paris Saint-Germain",
+  "Aston Villa FC": "Aston Villa",
+  "Sabah FK": "Sabah FK",
+  "Manchester City FC": "FC Manchester City",
+  "Sporting Clube de Portugal": "Sporting CP",
+  "Como 1907": "Como 1907"
 };
 
 const COMPETITION_MAP = {
   "Primera Division": "La Liga",
-  "UEFA Champions League": "Champions League",
+  "UEFA Champions League": "UEFA Champions League",
   "Copa del Rey": "Copa del Rey",
-  "Super Cup": "Spanish Super Cup",
+  "Super Cup": "Supercopa de España",
   "FIFA Club World Cup": "Club World Cup"
 };
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
-
-  return (
-    d.getDate() +
-    "." +
-    (d.getMonth() + 1) +
-    "." +
-    d.getFullYear()
-  );
+  return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear();
 }
 
 async function run() {
@@ -52,14 +63,20 @@ async function run() {
   );
 
   if (!response.ok) {
-    throw new Error(
-      "API returned " + response.status
-    );
+    throw new Error("API returned " + response.status);
   }
 
   const data = await response.json();
 
   const matches = data.matches.map(function(match) {
+
+    if (!CLUB_MAP[match.homeTeam.name]) {
+      console.log("UNKNOWN CLUB: " + match.homeTeam.name);
+    }
+
+    if (!CLUB_MAP[match.awayTeam.name]) {
+      console.log("UNKNOWN CLUB: " + match.awayTeam.name);
+    }
 
     const home =
       CLUB_MAP[match.homeTeam.name] ||
@@ -90,40 +107,26 @@ async function run() {
 
     return {
       "Date": formatDate(match.utcDate),
-
-      "Competition":
-        COMPETITION_MAP[
-          match.competition.name
-        ] ||
-        match.competition.name,
-
+      "Competition": COMPETITION_MAP[match.competition.name] || match.competition.name,
       "Opp. Team": opponent,
-
-      "Home/Away":
-        isHome ? "Home" : "Away",
-
+      "Home/Away": isHome ? "Home" : "Away",
       "Result": result
     };
+
   });
 
   fs.writeFileSync(
     "current-season.json",
-    JSON.stringify(
-      matches,
-      null,
-      2
-    )
+    JSON.stringify(matches, null, 2)
   );
 
-  console.log(
-    "Saved " +
-    matches.length +
-    " matches"
-  );
+  console.log("Saved " + matches.length + " matches");
+
 }
 
 run().catch(function(err) {
   console.error(err);
   process.exit(1);
 });
+
 
