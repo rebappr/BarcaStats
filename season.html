@@ -2628,37 +2628,46 @@ return html;
 
 Promise.all([
 fetch("data.json").then(r => r.json()),
+fetch("current-season.json").then(r => r.json()),
 fetch("players.json").then(r => r.json())
 ])
-.then(([matchesData, playersData]) => {
+.then(([matchesData,currentData,playersData]) => {
+
+currentData.forEach(currentMatch => {
+
+const match = matchesData.find(m =>
+m.Date === currentMatch.Date &&
+m.Competition === currentMatch.Competition &&
+m["Opp. Team"] === currentMatch["Opp. Team"]
+);
+
+if(match){
+match.Result = currentMatch.Result;
+}
+
+});
 
 allMatches = matchesData;
 
 if(!season){
-season = [...new Set(
-matchesData.map(x => x.Season)
-)].sort().reverse()[0];
+season = [...new Set(matchesData.map(x => x.Season))]
+.sort()
+.reverse()[0];
 }
 
 allPlayers = playersData;
 
 playersData.forEach(player => {
-
-playerBirthDates[
-player.Player.trim()
-] = player["Date of Birth"];
-
+playerBirthDates[player.Player.trim()] =
+player["Date of Birth"];
 });
 
 renderSeasonDropdown();
 renderSeason();
-
 initPersonSearch();
 
 })
-.catch(error => {
-
-console.error(error);
+.catch(error => console.error(error));
 
 });
 
