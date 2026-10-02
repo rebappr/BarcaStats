@@ -639,7 +639,151 @@ margin-top:10px;
 	    flex-shrink:0;
 	}
 
+.menu-toggle{
+    display:none;
+}
+
+.side-menu{
+    display:none;
+}
+
+.menu-overlay{
+    display:none;
+}
+
 @media(max-width:820px){
+      
+.main-menu{
+    display:none !important;
+}
+
+.header-text{
+    flex:1;
+}
+
+.menu-toggle{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:48px;
+    height:48px;
+
+    margin-left:auto;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.15);
+
+    cursor:pointer;
+}
+
+.side-menu{
+
+    position:fixed;
+
+    top:0;
+    left:-220px;
+
+    width:220px;
+
+    height:100vh;
+
+    z-index:10001;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    padding:20px 12px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #004D98,
+        #A50044
+    );
+
+    transition:left .3s ease;
+
+    box-shadow:
+        10px 0 25px rgba(0,0,0,.3);
+}
+
+.side-menu.open{
+    left:0;
+}
+
+.side-menu a,
+.side-menu button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.side-menu img{
+
+    width:24px;
+
+    height:24px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+}
+
+.menu-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    background:rgba(0,0,0,.55);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+}
+
+.menu-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+}
 
     .header-logo{
         width:82px;
@@ -791,7 +935,7 @@ margin-top:10px;
     }
 
     body{
-        padding-bottom:65px;
+        padding-bottom:0;
     }
 
 .flick-table th:not(:first-child),
@@ -865,21 +1009,68 @@ padding:6px 14px;
 </head>
 <body>
 
-<div class="container">
+<div class="header-inner">
 
-<div class="header">
-    <div class="header-inner">
-        <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
+    logos/barcadb-logo.png
 
-        <div>
-            <h1>Barça Database</h1>
-            <div class="hero-subtitle">
-                Home page
-            </div>
+    <div class="header-text">
+        <h1>Barça Database</h1>
+        <div class="hero-subtitle">
+            Home page
         </div>
     </div>
+
+    <button id="menuToggle" class="menu-toggle">
+
+        <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            stroke-width="2.5"
+            stroke-linecap="round">
+
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+
+        </svg>
+
+    </button>
+
 </div>
 
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<nav class="side-menu" id="sideMenu">
+
+    <a href="index.html">
+        <img src="icons/home-48.png">
+        <span>Home</span>
+    </a>
+
+    <a href="season.html">
+        <img src="icons/seasons-48.png">
+        <span>Seasons</span>
+    </a>
+
+    <a href="#">
+        <img src="icons/records-48.png">
+        <span>Records</span>
+    </a>
+
+    <a href="#" id="searchToggle" class="search-menu-btn">
+        <img src="icons/search-48.png">
+        <span>Search</span>
+    </a>
+
+	<button id="themeToggleSide">
+	    <img src="icons/moon-48.png">
+	    <span>Theme</span>
+	</button>
+
+</nav>
 
 <nav class="main-menu">
 
@@ -2023,6 +2214,54 @@ document
     }else{
         document.getElementById("personSearch").focus();
     }
+
+});
+
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const sideMenu =
+    document.getElementById("sideMenu");
+
+const menuOverlay =
+    document.getElementById("menuOverlay");
+
+menuToggle.addEventListener("click", () => {
+
+    sideMenu.classList.add("open");
+    menuOverlay.classList.add("show");
+
+});
+
+menuOverlay.addEventListener("click", () => {
+
+    sideMenu.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+});
+
+document
+.getElementById("sideSearchToggle")
+.addEventListener("click", e => {
+
+    e.preventDefault();
+
+    sideMenu.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    document
+        .getElementById("searchToggle")
+        .click();
+
+});
+
+document
+.getElementById("themeToggleSide")
+.addEventListener("click", () => {
+
+    document
+        .getElementById("themeToggle")
+        .click();
 
 });
 
