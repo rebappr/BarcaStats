@@ -1412,41 +1412,6 @@ function initPersonSearch(){
 });
 }
 
-const searchToggle =
-    document.getElementById("searchToggle");
-
-if(searchToggle){
-
-    searchToggle.addEventListener("click", e => {
-
-        e.preventDefault();
-
-        const searchBox =
-            document.querySelector(".search-hero");
-
-        const results =
-            document.getElementById("personSearchResults");
-
-        const input =
-            document.getElementById("personSearch");
-
-        searchBox.classList.toggle("show");
-
-        if(searchBox.classList.contains("show")){
-
-            input.focus();
-
-        }else{
-
-            input.value = "";
-            results.innerHTML = "";
-
-        }
-
-    });
-
-}
-
 const menuToggle =
     document.getElementById("menuToggle");
 
