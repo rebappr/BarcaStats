@@ -2631,7 +2631,82 @@ function initPersonSearch(){
 });
 }
 
+const menuToggle =
+document.getElementById("menuToggle");
+
+const menuOverlay =
+document.getElementById("menuOverlay");
+
+const mainMenu =
+document.querySelector(".main-menu");
+
+if(menuToggle && menuOverlay && mainMenu){
+
+    menuToggle.addEventListener("click", () => {
+
+        mainMenu.classList.toggle("open");
+        menuOverlay.classList.toggle("show");
+
+        menuToggle.textContent =
+        mainMenu.classList.contains("open")
+        ? "✕"
+        : "☰";
+
+    });
+
+    menuOverlay.addEventListener("click", () => {
+
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const mobileInput =
+    document.getElementById("mobilePersonSearch");
+
+    const desktopInput =
+    document.getElementById("personSearch");
+
+    if(!mobileInput || !desktopInput){
+        return;
+    }
+
+    mobileInput.addEventListener("input", () => {
+
+        desktopInput.value =
+        mobileInput.value;
+
+        desktopInput.dispatchEvent(
+            new Event("input")
+        );
+
+        const desktopResults =
+        document.getElementById(
+            "personSearchResults"
+        );
+
+        const mobileResults =
+        document.getElementById(
+            "mobileSearchResults"
+        );
+
+        if(desktopResults && mobileResults){
+
+            mobileResults.innerHTML =
+            desktopResults.innerHTML;
+        }
+
+    });
+
+});
+
+
 </script>
-<script src="script/menu.js"></script>
 </body>
 </html>
