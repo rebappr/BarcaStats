@@ -2522,10 +2522,11 @@ function initPersonSearch(){
 
     allMatches.forEach(match => {
 
+        // Barcelona manager
         if(match.Manager){
 
             searchItems.set(
-                manager-${match.Manager},
+                `manager-${match.Manager}`,
                 {
                     name: match.Manager,
                     type: "Manager"
@@ -2534,10 +2535,11 @@ function initPersonSearch(){
 
         }
 
+        // Opponent manager
         if(match["Opp. Manager"]){
 
             searchItems.set(
-                manager-${match["Opp. Manager"]},
+                `manager-${match["Opp. Manager"]}`,
                 {
                     name: match["Opp. Manager"],
                     type: "Manager"
@@ -2546,39 +2548,41 @@ function initPersonSearch(){
 
         }
 
-        if(match["Opp. Team"]){
+		// Opponent team
+		if(match["Opp. Team"]){
+		
+		    searchItems.set(
+		        `opponent-${match["Opp. Team"]}`,
+		        {
+		            name: match["Opp. Team"],
+		            type: "Opponent"
+		        }
+		    );
+		
+		}
 
-            searchItems.set(
-                opponent-${match["Opp. Team"]},
-                {
-                    name: match["Opp. Team"],
-                    type: "Opponent"
-                }
-            );
-
-        }
-
+        // Starting XI
         for(let i=1;i<=11;i++){
 
-            if(match[Player name ${i}]){
+            if(match[`Player name ${i}`]){
 
                 searchItems.set(
-                    player-${match[Player name ${i}]},
+                    `player-${match[`Player name ${i}`]}`,
                     {
-                        name: match[Player name ${i}],
-                        type:"Player"
+                        name: match[`Player name ${i}`],
+                        type: "Player"
                     }
                 );
 
             }
 
-            if(match[Opp. Player name ${i}]){
+            if(match[`Opp. Player name ${i}`]){
 
                 searchItems.set(
-                    player-${match[Opp. Player name ${i}]},
+                    `player-${match[`Opp. Player name ${i}`]}`,
                     {
-                        name: match[Opp. Player name ${i}],
-                        type:"Player"
+                        name: match[`Opp. Player name ${i}`],
+                        type: "Player"
                     }
                 );
 
@@ -2586,27 +2590,28 @@ function initPersonSearch(){
 
         }
 
+        // Bench
         for(let i=1;i<=12;i++){
 
-            if(match[On the bench name ${i}]){
+            if(match[`On the bench name ${i}`]){
 
                 searchItems.set(
-                    player-${match[On the bench name ${i}]},
+                    `player-${match[`On the bench name ${i}`]}`,
                     {
-                        name: match[On the bench name ${i}],
-                        type:"Player"
+                        name: match[`On the bench name ${i}`],
+                        type: "Player"
                     }
                 );
 
             }
 
-            if(match[Opp. On the bench name ${i}]){
+            if(match[`Opp. On the bench name ${i}`]){
 
                 searchItems.set(
-                    player-${match[Opp. On the bench name ${i}]},
+                    `player-${match[`Opp. On the bench name ${i}`]}`,
                     {
-                        name: match[Opp. On the bench name ${i}],
-                        type:"Player"
+                        name: match[`Opp. On the bench name ${i}`],
+                        type: "Player"
                     }
                 );
 
@@ -2618,23 +2623,15 @@ function initPersonSearch(){
 
     const itemList =
         [...searchItems.values()]
-        .sort((a,b)=>
-            a.name.localeCompare(b.name)
-        );
+        .sort((a,b) => a.name.localeCompare(b.name));
 
     const input =
         document.getElementById("personSearch");
 
     const results =
-        document.getElementById(
-            "personSearchResults"
-        );
+        document.getElementById("personSearchResults");
 
-    if(!input || !results){
-        return;
-    }
-
-    input.addEventListener("input",()=>{
+    input.addEventListener("input", () => {
 
         const value =
             input.value
@@ -2651,39 +2648,31 @@ function initPersonSearch(){
         const filtered =
             itemList
             .filter(item =>
-                item.name
-                    .toLowerCase()
-                    .includes(value)
+                item.name.toLowerCase().includes(value)
             )
             .slice(0,20);
 
-        results.innerHTML = 
-        <div class="player-search-results">
-
-            ${filtered.map(item => 
-            
-            ${
-                    item.type === 
-                        : item.type === "Opponent"
-                            ? opponent.html?name=${encodeURIComponent(item.name)}
-                            : player.html?name=${encodeURIComponent(item.name)}
-                }">
-
-                ${item.name}
-
-                <span class="search-type ${item.type.toLowerCase()}">
-                    (${item.type})
-                </span>
-
+            results.innerHTML = `
+            <div class="player-search-results">
+            ${filtered.map(item => `
+            <a
+                class="player-search-item"
+                href="${
+				    item.type === 'Manager'
+				        ? `manager.html?name=${encodeURIComponent(item.name)}`
+				        : item.type === 'Opponent'
+				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
+				            : `player.html?name=${encodeURIComponent(item.name)}`
+				}">
+				${item.name}
+				<span class="search-type ${item.type.toLowerCase()}">
+				   (${item.type})
+				</span>
             </a>
-
-            ).join("")}
-
-        </div>
-        `;
-
-    });
-
+            `).join("")}
+            </div>
+            `;
+});
 }
 
 </script>
