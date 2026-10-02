@@ -67,29 +67,6 @@ color:var(--text);
 min-height:100vh;
 }
 
-.theme-toggle{
-position:fixed;
-left:20px;
-bottom:20px;
-
-width:52px;
-height:52px;
-
-border:none;
-border-radius:50%;
-
-cursor:pointer;
-
-background:#A50044;
-color:white;
-
-font-size:20px;
-font-weight:700;
-
-z-index:9999;
-display:none;
-}
-
 .header{
 background:
 linear-gradient(
@@ -840,10 +817,6 @@ display:block !important;
         width:82px;
         height:82px;
     }
-
-	.theme-toggle{
-	display:none;
-	}
 
 	.header h1{
 		font-size:18px;
@@ -2470,69 +2443,6 @@ opp.classList.add("mobile-hidden");
 
 });
 
-(function(){
-
-const savedTheme =
-localStorage.getItem("theme");
-
-const systemTheme =
-window.matchMedia("(prefers-color-scheme: dark)").matches
-? "dark"
-: "light";
-
-const theme =
-savedTheme || systemTheme;
-
-document.documentElement.setAttribute(
-"data-theme",
-theme
-);
-
-const button =
-document.getElementById("themeToggle");
-
-if(button){
-
-    button.textContent =
-    theme === "dark"
-    ? "☀️"
-    : "🌙";
-
-    button.addEventListener("click", () => {
-
-        const current =
-        document.documentElement.getAttribute("data-theme");
-
-        const next =
-        current === "dark"
-        ? "light"
-        : "dark";
-
-        document.documentElement.setAttribute(
-            "data-theme",
-            next
-        );
-
-        localStorage.setItem(
-            "theme",
-            next
-        );
-
-        button.textContent =
-        next === "dark"
-        ? "☀️"
-        : "🌙";
-
-    });
-
-}
-
-})();
-
 </script>
-
-<a href="index.html" class="back-btn">
-    ← Home
-</a>
 </body>
 </html>
