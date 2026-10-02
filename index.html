@@ -535,8 +535,7 @@ margin-top:10px;
         0 4px 12px rgba(0,77,152,.25);
 }
 
-.main-menu a:hover,
-.menu-theme-btn:hover{
+.main-menu a:hover{
     transform:translateY(-2px);
 
     background:#0a5fb3;
@@ -554,32 +553,6 @@ margin-top:10px;
 .main-menu a img{
     display:none;
 }
-
-.menu-theme-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:56px;
-    padding:10px 4px;
-
-    border:none;
-    border-radius:14px;
-
-    background:#004D98;
-    cursor:pointer;
-
-    box-shadow:0 4px 12px rgba(0,77,152,.25);
-    transition:.2s;
-}
-
-	.theme-icon{
-	    display:block;
-	    width:20px;
-	    height:20px;
-	    object-fit:contain;
-	    flex-shrink:0;
-	}
 
 .menu-toggle{
     display:none;
@@ -739,22 +712,6 @@ margin-top:10px;
         height:82px;
     }
 
-	.theme-text{
-	    font-size:9px;
-	    font-weight:600;
-	    line-height:1;
-	    display:block;
-	    font-size:9px;
-	    text-transform:uppercase;
-		color:#ffffff;
-	}
-	
-	.theme-icon{
-	    width:28px;
-	    height:28px;
-	    object-fit:contain;
-	}
-
 	.header h1{
 		font-size:18px;
 	}
@@ -799,8 +756,7 @@ margin-top:10px;
     left:0;
 }
 
-.main-menu a,
-.menu-theme-btn{
+.main-menu a{
 
     display:flex;
 
@@ -825,8 +781,7 @@ margin-top:10px;
     color:white;
 }
 
-.main-menu a img,
-.theme-icon{
+.main-menu a img{
 
     display:block;
 
@@ -967,11 +922,6 @@ padding:6px 14px;
         <img src="icons/records-48.png">
         <span>Records</span>
     </a>
-
-	<button id="themeToggle" class="menu-theme-btn">
-	    <img class="theme-icon" src="icons/moon-48.png">
-	    <span class="theme-text"></span>
-	</button>
 
 </nav>
 
@@ -1989,70 +1939,6 @@ function initPersonSearch(){
             `;
 });
 }
-
-(function(){
-
-    const savedTheme =
-        localStorage.getItem("theme");
-
-    const systemTheme =
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-
-    const theme =
-        savedTheme || systemTheme;
-
-    document.documentElement.setAttribute(
-        "data-theme",
-        theme
-    );
-
-    const button =
-        document.getElementById("themeToggle");
-
-	function updateThemeButton(theme){
-	
-	    const icon = button.querySelector(".theme-icon");
-	
-	    icon.src =
-	        theme === "dark"
-	        ? "icons/sun-48.png"
-	        : "icons/moon-48.png";
-	
-	    button.querySelector(".theme-text").textContent =
-	        theme === "dark"
-	        ? "Light"
-	        : "Dark";
-	}
-
-    updateThemeButton(theme);
-
-    button.addEventListener("click",()=>{
-
-        const current =
-            document.documentElement.getAttribute("data-theme");
-
-        const next =
-            current === "dark"
-            ? "light"
-            : "dark";
-
-        document.documentElement.setAttribute(
-            "data-theme",
-            next
-        );
-
-        localStorage.setItem(
-            "theme",
-            next
-        );
-
-        updateThemeButton(next);
-
-    });
-
-})();
 
 const menuToggle =
     document.getElementById("menuToggle");
