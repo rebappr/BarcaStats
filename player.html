@@ -992,20 +992,51 @@ font-size:13px;
 
 <div class="container">
 
+<div class="menu-overlay" id="menuOverlay"></div>
+
 <div class="header">
     <div class="header-inner">
         <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
 
-        <div>
+        <div class="header-text">
             <h1>Barça Database</h1>
             <div class="hero-subtitle">
-                Player profile
-            </div>
+            Player profile
         </div>
     </div>
+
+<div class="desktop-search">
+
+    <input
+        type="text"
+        id="personSearch"
+        placeholder="Search player, manager, opponent..."
+        class="desktop-search-input">
+
+    <div id="personSearchResults"></div>
+
+</div>
+
+    <button id="menuToggle" class="menu-toggle">
+    	☰
+    </button>
+
+</div>
 </div>
 
 <nav class="main-menu">
+
+    <div class="mobile-menu-search">
+
+        <input
+            type="text"
+            id="mobilePersonSearch"
+            placeholder="Search player, manager..."
+            class="mobile-search-input">
+
+        <div id="mobileSearchResults"></div>
+
+    </div>
 
     <a href="index.html">
         <img src="icons/home-48.png">
@@ -1023,18 +1054,6 @@ font-size:13px;
     </a>
 
 </nav>
-
-<div class="search-hero">
-
-    <input
-        type="text"
-        id="personSearch"
-        placeholder="Search player, manager or opponent..."
-        class="player-search-input">
-
-    <div id="personSearchResults"></div>
-
-</div>
 
 <div id="playerProfile">
 Loading...
