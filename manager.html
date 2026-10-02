@@ -317,13 +317,25 @@ background:var(--meta-bg);
     background:#fff2a3;
 }
 
-[data-theme="dark"] .opponent-season{
+@media (prefers-color-scheme: dark){
+    
+.opponent-career .summary-box{
+    background:#5b5420;
+    border:1px solid #eab308;
+    color:#fff;
+}
+
+.opponent-career .summary-box b{
+    color:#fde68a;
+}
+
+.opponent-season{
     background:#5b5420;
 }
 
-[data-theme="dark"] .opponent-season:hover{
+.opponent-season:hover{
     background:#746923;
-}
+}}
 
 .opponent-career .summary-box{
     background:#fff8c4;
@@ -333,16 +345,6 @@ background:var(--meta-bg);
 
 .opponent-career .summary-box b{
     color:#92400e;
-}
-
-[data-theme="dark"] .opponent-career .summary-box{
-    background:#5b5420;
-    border:1px solid #eab308;
-    color:#fff;
-}
-
-[data-theme="dark"] .opponent-career .summary-box b{
-    color:#fde68a;
 }
 
 .stats-table th:first-child,
