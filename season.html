@@ -1277,17 +1277,35 @@ display:none;
 
 <div class="container">
 
+<div class="menu-overlay" id="menuOverlay"></div>
+
 <div class="header">
     <div class="header-inner">
         <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
 
-        <div>
-            <h1>Barça Database</h1>
-            <div class="hero-subtitle">
-                Season Overview
-            </div>
-        </div>
+<div class="header-text">
+    <h1>Barça Database</h1>
+
+    <div class="hero-subtitle">
+        Season Overview
     </div>
+</div>
+
+<div class="desktop-search">
+
+    <input
+        type="text"
+        id="personSearch"
+        placeholder="Search player, manager, opponent..."
+        class="desktop-search-input">
+
+    <div id="personSearchResults"></div>
+
+</div>
+
+<button id="menuToggle" class="menu-toggle">
+    ☰
+</button>
 
 	<div class="season-selector">
 		<select id="seasonSelect"></select>
