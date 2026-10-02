@@ -2877,6 +2877,19 @@ menuToggle.addEventListener("click", () => {
 
 });
 
+window.addEventListener("resize", () => {
+
+    if(window.innerWidth > 820){
+
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
+
+    }
+
+});
+
 menuOverlay.addEventListener("click", () => {
 
     mainMenu.classList.remove("open");
@@ -2916,21 +2929,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-
-window.addEventListener("resize", () => {
-
-    if(window.innerWidth > 820){
-
-        mainMenu.classList.remove("open");
-        menuOverlay.classList.remove("show");
-
-        menuToggle.textContent = "☰";
-
-    }
-
-});
-
-
 
 </script>
 </body>
