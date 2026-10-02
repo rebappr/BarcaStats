@@ -1071,25 +1071,77 @@ font-size:10px;
 </head>
 
 <body>
-
-<button id="themeToggle" class="theme-toggle">
-    🌙
-</button>
-
+      
 <div class="container">
+      
+<div class="menu-overlay" id="menuOverlay"></div>
 
 <div class="header">
     <div class="header-inner">
-        <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
 
-        <div>
+        logos/barcadb-logo.png
+
+        <div class="header-text">
+
             <h1>Barça Database</h1>
+
             <div class="hero-subtitle">
                 Match report
             </div>
+
         </div>
+
+        <div class="desktop-search">
+
+            <input
+                type="text"
+                id="personSearch"
+                placeholder="Search player, manager, opponent..."
+                class="desktop-search-input">
+
+            <div id="personSearchResults"></div>
+
+        </div>
+
+        <button
+            id="menuToggle"
+            class="menu-toggle">
+            ☰
+        </button>
+
     </div>
 </div>
+
+<nav class="main-menu">
+
+    <div class="mobile-menu-search">
+
+        <input
+            type="text"
+            id="mobilePersonSearch"
+            placeholder="Search player, manager..."
+            class="mobile-search-input">
+
+        <div id="mobileSearchResults"></div>
+
+    </div>
+
+    <a href="index.html">
+        icons/home-48.png
+        <span>Home</span>
+    </a>
+
+    <a href="season.html">
+        icons/seasons-48.png
+        <span>Seasons</span>
+    </a>
+
+    #
+        icons/records-48.png
+        <span>Records</span>
+    </a>
+
+</nav>
 
     <div id="app">
         Loading...
