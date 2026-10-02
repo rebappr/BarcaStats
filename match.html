@@ -2466,6 +2466,50 @@ opp.classList.add("mobile-hidden");
 
 });
 
+window.addEventListener("resize", () => {
+
+    if(window.innerWidth > 820){
+
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
+
+    }
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const mobileInput =
+        document.getElementById("mobilePersonSearch");
+
+    const desktopInput =
+        document.getElementById("personSearch");
+
+    if(!mobileInput || !desktopInput){
+        return;
+    }
+
+    mobileInput.addEventListener("input", () => {
+
+        desktopInput.value =
+            mobileInput.value;
+
+        desktopInput.dispatchEvent(
+            new Event("input")
+        );
+
+        document.getElementById(
+            "mobileSearchResults"
+        ).innerHTML =
+            document.getElementById(
+                "personSearchResults"
+            ).innerHTML;
+    });
+
+});
+
 </script>
 <script src="script/menu.jsscript"></script>
 </body>
