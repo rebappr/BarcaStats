@@ -549,44 +549,6 @@ flex-shrink:0;
 .player-search-item:hover{
     background:var(--meta-bg);
 }
-
-.search-hero{
-    margin:12px 0 0 0;
-    display:none;
-}
-
-.search-hero.show{
-    display:block;
-}
-
-.player-search-input{
-    width:100%;
-    height:58px;
-    padding:0 20px;
-
-    font-size:16px;
-    color:var(--text);
-
-    border-radius:20px;
-    border:2px solid var(--card-border);
-
-    background:var(--card-bg);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.15);
-
-    transition:.2s;
-
-    margin-bottom:6px;
-}
-
-.search-hero .player-search-input:focus{
-    outline:none;
-    border-color:#3b82f6;
-
-    box-shadow:
-        0 0 0 4px rgba(59,130,246,.15);
-}
     
 .manager-clubs a{
     color:var(--link-color);
@@ -792,8 +754,83 @@ color:#A50044;
 	.opponent-link:hover{
 	    text-decoration:underline;
 	}
+    
+.menu-toggle{
+    display:none;
+}
+
+.menu-overlay{
+    display:none;
+}
+
+.desktop-search{
+    width:340px;
+    position:relative;
+    margin-left:auto;
+}
+
+.desktop-search-input{
+    width:100%;
+    height:48px;
+    padding:0 16px;
+    border:none;
+    border-radius:16px;
+    background:rgba(255,255,255,.12);
+    font-size:16px;
+}
+
+.mobile-menu-search{
+    display:none;
+}
 
 @media(max-width:820px){
+
+.main-menu{
+
+    position:fixed;
+
+    top:0;
+
+    left:-75%;
+
+    width:70%;
+
+    height:100vh;
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    padding:20px 12px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #004D98,
+        #A50044
+    );
+
+    transition:left .3s ease;
+
+    margin:0;
+}
+
+.main-menu.open{
+    left:0;
+}
+
+.main-menu a img{
+
+    display:block;
+
+    width:24px;
+
+    height:24px;
+}
 
 	.theme-text{
 	    display:block;
@@ -851,58 +888,6 @@ color:#A50044;
 	.header h1{
 		font-size:18px;
 	}
-
-    .main-menu{
-        position:fixed;
-
-        left:12px;
-        right:12px;
-        bottom:10px;
-
-        z-index:9999;
-
-        display:flex;
-        justify-content:space-around;
-        align-items:center;
-
-        margin:0;
-        padding:4px 6px;
-
-        border-radius:22px;
-
-        background:rgba(255,255,255,.14);
-
-        backdrop-filter:blur(25px);
-        -webkit-backdrop-filter:blur(25px);
-
-        border:1px solid rgba(255,255,255,.18);
-
-        box-shadow:
-            0 8px 24px rgba(0,0,0,.16),
-            inset 0 1px 0 rgba(255,255,255,.25);
-    }
-
-    .main-menu a{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        text-transform:uppercase;
-    
-        gap:3px;
-    
-        min-width:58px;
-    
-        padding:6px 8px;
-    
-        border-radius:18px;
-    
-        background:#0A5FB3;
-    
-        backdrop-filter:blur(15px);
-    }
-
-
 
 	.menu-theme-btn{
 	    display:flex;
@@ -1073,6 +1058,30 @@ font-size:13px;
             </div>
         </div>
     </div>
+    <div class="header-text">
+    <h1>Barça Database</h1>
+
+    <div class="hero-subtitle">
+        Season Overview
+    </div>
+</div>
+
+<div class="desktop-search">
+
+    <input
+        type="text"
+        id="personSearch"
+        placeholder="Search player, manager, opponent..."
+        class="desktop-search-input">
+
+    <div id="personSearchResults"></div>
+
+</div>
+
+<button id="menuToggle" class="menu-toggle">
+    ☰
+</button>
+
 </div>
 
 <nav class="main-menu">
@@ -1093,18 +1102,6 @@ font-size:13px;
     </a>
 	
 </nav>
-
-<div class="search-hero">
-
-    <input
-        type="text"
-        id="personSearch"
-        placeholder="Search player, manager or opponent..."
-        class="player-search-input">
-
-    <div id="personSearchResults"></div>
-
-</div>
 
 <div id="managerProfile">
     Loading...
@@ -2270,40 +2267,66 @@ function initPersonSearch(){
 });
 }
 
-const searchToggle =
-    document.getElementById("searchToggle");
+const menuToggle =
+    document.getElementById("menuToggle");
 
-if(searchToggle){
+const menuOverlay =
+    document.getElementById("menuOverlay");
 
-    searchToggle.addEventListener("click", e => {
+const mainMenu =
+    document.querySelector(".main-menu");
 
-        e.preventDefault();
+menuToggle.addEventListener("click", () => {
 
-        const searchBox =
-            document.querySelector(".search-hero");
+    mainMenu.classList.toggle("open");
+    menuOverlay.classList.toggle("show");
 
-        const results =
-            document.getElementById("personSearchResults");
+    menuToggle.textContent =
+        mainMenu.classList.contains("open")
+        ? "✕"
+        : "☰";
 
-        const input =
-            document.getElementById("personSearch");
+});
 
-        searchBox.classList.toggle("show");
+menuOverlay.addEventListener("click", () => {
 
-        if(searchBox.classList.contains("show")){
+    mainMenu.classList.remove("open");
+    menuOverlay.classList.remove("show");
 
-            input.focus();
+    menuToggle.textContent = "☰";
 
-        }else{
+});
 
-            input.value = "";
-            results.innerHTML = "";
+document.addEventListener("DOMContentLoaded", () => {
 
-        }
+    const mobileInput =
+        document.getElementById("mobilePersonSearch");
 
+    const desktopInput =
+        document.getElementById("personSearch");
+
+    if(!mobileInput || !desktopInput){
+        return;
+    }
+
+    mobileInput.addEventListener("input", () => {
+
+        desktopInput.value =
+            mobileInput.value;
+
+        desktopInput.dispatchEvent(
+            new Event("input")
+        );
+
+        document.getElementById(
+            "mobileSearchResults"
+        ).innerHTML =
+            document.getElementById(
+                "personSearchResults"
+            ).innerHTML;
     });
 
-}
+});
 
 </script>
 
