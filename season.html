@@ -337,17 +337,17 @@ color:var(--result-loss);
     color:#004D98;
 }
 
-[data-theme="dark"] .summary-box.matches,
-[data-theme="dark"] .summary-box.goals{
+@media (prefers-color-scheme: dark){
+ .summary-box.matches,
+.summary-box.goals{
     background:rgba(0,77,152,.20);
     border:1px solid #004D98;
     color:#ffffff;
 }
-
-[data-theme="dark"] .summary-box.matches b,
-[data-theme="dark"] .summary-box.goals b{
+.summary-box.matches b,
+.summary-box.goals b{
     color:#ffffff;
-}
+}}
 
 .header h1{
 margin:0;
