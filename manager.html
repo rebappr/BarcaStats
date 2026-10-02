@@ -998,54 +998,52 @@ font-size:13px;
 <body>
 
 <div class="container">
-    
+
 <div class="menu-overlay" id="menuOverlay"></div>
 
 <div class="header">
     <div class="header-inner">
         <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
 
-    <div class="header-text">
-
-        <h1>Barça Database</h1>
-
-        <div class="hero-subtitle">
-            Manager Profile
+        <div class="header-text">
+            <h1>Barça Database</h1>
+            <div class="hero-subtitle">
+            Manager profile
         </div>
-
     </div>
 
-    <div class="desktop-search">
-
-        <input
-            type="text"
-            id="personSearch"
-            placeholder="Search player, manager, opponent..."
-            class="desktop-search-input">
-
-        <div id="personSearchResults"></div>
-
-    </div>
-
-    <button id="menuToggle" class="menu-toggle">
-        ☰
-    </button>
-
-</div>
-
-<nav class="main-menu">
-    
-<div class="mobile-menu-search">
+<div class="desktop-search">
 
     <input
         type="text"
-        id="mobilePersonSearch"
-        placeholder="Search player, manager..."
-        class="mobile-search-input">
+        id="personSearch"
+        placeholder="Search player, manager, opponent..."
+        class="desktop-search-input">
 
-    <div id="mobileSearchResults"></div>
+    <div id="personSearchResults"></div>
 
 </div>
+
+    <button id="menuToggle" class="menu-toggle">
+    	☰
+    </button>
+
+</div>
+</div>
+
+<nav class="main-menu">
+
+    <div class="mobile-menu-search">
+
+        <input
+            type="text"
+            id="mobilePersonSearch"
+            placeholder="Search player, manager..."
+            class="mobile-search-input">
+
+        <div id="mobileSearchResults"></div>
+
+    </div>
 
     <a href="index.html">
         <img src="icons/home-48.png">
@@ -1061,7 +1059,7 @@ font-size:13px;
         <img src="icons/records-48.png">
         <span>Records</span>
     </a>
-	
+
 </nav>
 
 <div id="managerProfile">
