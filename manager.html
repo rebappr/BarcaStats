@@ -2246,6 +2246,22 @@ menuToggle.addEventListener("click", () => {
         mainMenu.classList.contains("open")
         ? "✕"
         : "☰";
+        
+if(mainMenu.classList.contains("open")){
+
+    setTimeout(() => {
+
+        const input =
+            document.getElementById(
+                "mobilePersonSearch"
+            );
+
+        if(input){
+            input.focus();
+        }
+
+    }, 250);
+}
 
 });
 
