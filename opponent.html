@@ -301,17 +301,47 @@ margin-bottom:4px;
     color:#004D98;
 }
 
-[data-theme="dark"] .summary-box.matches,
-[data-theme="dark"] .summary-box.goals{
+@media (prefers-color-scheme: dark){
+      
+.opponent-match:hover{
+    background:var(--card-bg);
+}
+      
+.club-title{
+    background:#1e3a5f;
+    color:#dbeafe;
+    border:1px solid #3b82f6;
+}
+      
+.opponent-career .summary-box{
+    background:#5b5420;
+    border:1px solid #eab308;
+    color:#fff;
+}
+
+.opponent-career .summary-box b{
+    color:#fde68a;
+}
+      
+.opponent-season{
+    background:#5b5420;
+}
+
+.opponent-season:hover{
+    background:#746923;
+}
+
+.summary-box.matches,
+.summary-box.goals{
     background:rgba(0,77,152,.20);
     border:1px solid #004D98;
     color:#ffffff;
 }
 
-[data-theme="dark"] .summary-box.matches b,
-[data-theme="dark"] .summary-box.goals b{
+.summary-box.matches b,
+.summary-box.goals b{
     color:#ffffff;
-}
+}}
 
 .widget-card{
 background:var(--card-bg);
@@ -363,14 +393,6 @@ background:var(--meta-bg);
     background:#fff2a3;
 }
 
-[data-theme="dark"] .opponent-season{
-    background:#5b5420;
-}
-
-[data-theme="dark"] .opponent-season:hover{
-    background:#746923;
-}
-
 .opponent-career .summary-box{
     background:#fff8c4;
     border:1px solid #eab308;
@@ -379,16 +401,6 @@ background:var(--meta-bg);
 
 .opponent-career .summary-box b{
     color:#92400e;
-}
-
-[data-theme="dark"] .opponent-career .summary-box{
-    background:#5b5420;
-    border:1px solid #eab308;
-    color:#fff;
-}
-
-[data-theme="dark"] .opponent-career .summary-box b{
-    color:#fde68a;
 }
 
 .stats-table th:first-child,
@@ -403,10 +415,6 @@ background:var(--meta-bg);
 
 .opponent-match:hover{
     background:#e5e7eb;
-}
-
-[data-theme="dark"] .opponent-match:hover{
-    background:var(--card-bg);
 }
 
 .opponent-match:last-child{
@@ -472,12 +480,6 @@ flex-shrink:0;
     background:#dbeafe;
     color:#1e3a8a;
     border:1px solid #93c5fd;
-}
-
-[data-theme="dark"] .club-title{
-    background:#1e3a5f;
-    color:#dbeafe;
-    border:1px solid #3b82f6;
 }
 
 .opponent-clubs{
