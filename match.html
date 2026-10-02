@@ -1098,31 +1098,6 @@ font-size:10px;
 
 console.log("SCRIPT STARTED");
 
-(function(){
-
-if(!localStorage.getItem("theme")){
-
-const systemTheme =
-window.matchMedia("(prefers-color-scheme: dark)").matches
-? "dark"
-: "light";
-
-document.documentElement.setAttribute(
-"data-theme",
-systemTheme
-);
-
-}else{
-
-document.documentElement.setAttribute(
-"data-theme",
-localStorage.getItem("theme")
-);
-
-}
-
-})();
-
 const params = new URLSearchParams(location.search);
 const matchId = params.get("id");
 
