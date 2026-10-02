@@ -2782,6 +2782,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+window.addEventListener("resize", () => {
+
+    if(window.innerWidth > 820){
+
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
+
+    }
+
+});
+
+
 
 </script>
 </body>
