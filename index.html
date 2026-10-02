@@ -670,14 +670,18 @@ margin-top:10px;
     margin-left:auto;
 
     border:none;
+
     border-radius:14px;
 
     background:rgba(255,255,255,.15);
 
     color:white;
 
-    font-size:28px;
+    font-size:30px;
+
     font-weight:700;
+
+    line-height:1;
 
     cursor:pointer;
 }
@@ -897,22 +901,7 @@ padding:6px 14px;
     </div>
 
     <button id="menuToggle" class="menu-toggle">
-
-        <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            stroke-width="2.5"
-            stroke-linecap="round">
-
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-
-        </svg>
-
+    	☰
     </button>
 
 </div>
@@ -2051,8 +2040,13 @@ const mainMenu =
 
 menuToggle.addEventListener("click", () => {
 
-    mainMenu.classList.add("open");
-    menuOverlay.classList.add("show");
+    mainMenu.classList.toggle("open");
+    menuOverlay.classList.toggle("show");
+
+    menuToggle.textContent =
+        mainMenu.classList.contains("open")
+        ? "✕"
+        : "☰";
 
 });
 
@@ -2060,6 +2054,8 @@ menuOverlay.addEventListener("click", () => {
 
     mainMenu.classList.remove("open");
     menuOverlay.classList.remove("show");
+
+    menuToggle.textContent = "☰";
 
 });
 
@@ -2069,6 +2065,8 @@ window.addEventListener("resize", () => {
 
         mainMenu.classList.remove("open");
         menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
 
     }
 
