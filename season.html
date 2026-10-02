@@ -66,29 +66,6 @@ color:var(--text);
 min-height:100vh;
 }
 
-.theme-toggle{
-position:fixed;
-left:20px;
-bottom:20px;
-
-width:52px;
-height:52px;
-
-border:none;
-border-radius:50%;
-
-cursor:pointer;
-
-background:#A50044;
-color:white;
-
-font-size:20px;
-font-weight:700;
-
-z-index:9999;
-display:none;
-}
-
 .content-layout{
 display:flex;
 gap:6px;
@@ -691,8 +668,7 @@ box-shadow:
 display:none;
 }
 
-.main-menu a:hover,
-.menu-theme-btn:hover{
+.main-menu a:hover{
 transform:translateY(-2px);
 
 background:#0a5fb3;
@@ -711,31 +687,7 @@ color:white;
 display:none;
 }
 
-.menu-theme-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-
-min-width:56px;
-padding:6px 4px;
-
-border:none;
-border-radius:14px;
-
-background:#004D98;
-color:white;
-
-font-size:20px;
-cursor:pointer;
-
-box-shadow:
-0 4px 12px rgba(0,77,152,.25);
-
-transition:.2s;
-}
-
-#searchToggle span,
-.theme-text{
+#searchToggle span{
 display:none;
 }
 
@@ -848,40 +800,6 @@ color:white;
 
 .mobile-sections{
 display:none;
-}
-
-.menu-theme-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:56px;
-    padding:10px 4px;
-
-    border:none;
-    border-radius:14px;
-
-    background:#004D98;
-    cursor:pointer;
-
-    box-shadow:0 4px 12px rgba(0,77,152,.25);
-    transition:.2s;
-}
-
-.menu-theme-btn:hover{
-    background:#0a5fb3;
-    transform:translateY(-2px);
-}
-
-.theme-text{
-    display:none;
-}
-
-.theme-icon{
-    display:block;
-    width:20px;
-    height:20px;
-    object-fit:contain;
 }
 
 .table-header{
@@ -1079,38 +997,6 @@ border:none;
 
 @media(max-width:820px){
 
-	.theme-text{
-	    display:block;
-	    font-size:9px;
-	    font-weight:600;
-	    line-height:1;
-	    text-transform:uppercase;
-	    color:#fff;
-	}
-	
-	.theme-icon{
-	    width:28px;
-	    height:28px;
-	}
-	
-	.menu-theme-btn{
-	    display:flex;
-	    flex-direction:column;
-	    align-items:center;
-	    justify-content:center;
-	
-	    gap:3px;
-	
-	    min-width:58px;
-	    padding:6px 8px;
-	
-	    border-radius:18px;
-	
-	    background:#0A5FB3;
-	
-	    backdrop-filter:blur(15px);
-	}
-
     .header-logo{
         width:82px;
         height:82px;
@@ -1186,22 +1072,6 @@ margin-top:0 !important;
 display:none;
 }
 
-#searchToggle span,
-.theme-text{
-display:block;
-}
-
-.theme-text{
-font-size:9px;
-font-weight:600;
-line-height:1;
-}
-
-.theme-icon{
-font-size:14px;
-line-height:1;
-}
-
 .header h1{
 font-size:18px;
 }
@@ -1256,26 +1126,7 @@ background:#0A5FB3;
 backdrop-filter:blur(15px);
 }
 
-	.menu-theme-btn{
-	    display:flex;
-	    flex-direction:column;
-	    align-items:center;
-	    justify-content:center;
-	
-	    gap:3px;
-	
-	    min-width:58px;
-	    padding:6px 8px;
-	
-	    border-radius:18px;
-	
-	    background:#0A5FB3;
-	
-	    backdrop-filter:blur(15px);
-	}
-
-.main-menu a:hover,
-.menu-theme-btn:hover{
+.main-menu a:hover{
 background:#004D98;
 
 backdrop-filter:blur(15px);
@@ -1459,16 +1310,6 @@ display:none;
 <img src="icons/records-48.png">
 <span>Records</span>
 </a>
-
-<a href="#" id="searchToggle" class="search-menu-btn">
-<img src="icons/search-48.png">
-<span>Search</span>
-</a>
-
-	<button id="themeToggle" class="menu-theme-btn">
-	    <img class="theme-icon" src="icons/moon-48.png">
-	    <span class="theme-text"></span>
-	</button>
 
 </nav>
 
