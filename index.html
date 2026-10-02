@@ -661,10 +661,6 @@ margin-top:10px;
     display:none !important;
 }
 
-.header-text{
-    flex:1;
-}
-
 .menu-toggle{
 
     display:flex;
@@ -678,91 +674,20 @@ margin-top:10px;
     margin-left:auto;
 
     border:none;
-
     border-radius:14px;
 
     background:rgba(255,255,255,.15);
 
-    cursor:pointer;
-}
-
-.side-menu{
-
-    position:fixed;
-
-    top:0;
-    left:-220px;
-
-    width:220px;
-
-    height:100vh;
-
-    z-index:10001;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-    padding:20px 12px;
-
-    background:
-    linear-gradient(
-        180deg,
-        #004D98,
-        #A50044
-    );
-
-    transition:left .3s ease;
-
-    box-shadow:
-        10px 0 25px rgba(0,0,0,.3);
-}
-
-.side-menu.open{
-    left:0;
-}
-
-.side-menu a,
-.side-menu button{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    width:100%;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    background:rgba(255,255,255,.12);
-
     color:white;
 
-    font-size:15px;
-
+    font-size:28px;
     font-weight:700;
 
     cursor:pointer;
 }
 
-.side-menu img{
-
-    width:24px;
-
-    height:24px;
-
-    object-fit:contain;
-
-    flex-shrink:0;
+.header-text{
+    flex:1;
 }
 
 .menu-overlay{
@@ -771,9 +696,9 @@ margin-top:10px;
 
     inset:0;
 
-    z-index:10000;
-
     background:rgba(0,0,0,.55);
+
+    z-index:9998;
 
     opacity:0;
 
@@ -783,9 +708,7 @@ margin-top:10px;
 }
 
 .menu-overlay.show{
-
     opacity:1;
-
     visibility:visible;
 }
 
@@ -818,6 +741,77 @@ margin-top:10px;
 	.header h1{
 		font-size:18px;
 	}
+      
+.main-menu{
+
+    position:fixed;
+
+    top:0;
+    left:-240px;
+
+    width:220px;
+
+    height:100vh;
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    padding:20px 12px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #004D98,
+        #A50044
+    );
+
+    transition:left .3s ease;
+
+    margin:0;
+
+    box-shadow:
+        10px 0 30px rgba(0,0,0,.3);
+}
+
+.main-menu.open{
+    left:0;
+}
+
+.main-menu a,
+.menu-theme-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    min-width:unset;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+}
+
+.main-menu a img,
+.theme-icon{
+
+    display:block;
+
+    width:24px;
+    height:24px;
+}
 
     body{
         padding-bottom:0;
