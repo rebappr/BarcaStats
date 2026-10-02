@@ -1614,6 +1614,96 @@ if(searchToggle){
 
 }
 
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const menuOverlay =
+    document.getElementById("menuOverlay");
+
+const mainMenu =
+    document.querySelector(".main-menu");
+
+menuToggle.addEventListener("click", () => {
+
+    mainMenu.classList.toggle("open");
+    menuOverlay.classList.toggle("show");
+
+    menuToggle.textContent =
+        mainMenu.classList.contains("open")
+        ? "✕"
+        : "☰";
+        
+if(mainMenu.classList.contains("open")){
+
+    setTimeout(() => {
+
+        const input =
+            document.getElementById(
+                "mobilePersonSearch"
+            );
+
+        if(input){
+            input.focus();
+        }
+
+    }, 250);
+}
+
+});
+
+menuOverlay.addEventListener("click", () => {
+
+    mainMenu.classList.remove("open");
+    menuOverlay.classList.remove("show");
+
+    menuToggle.textContent = "☰";
+
+});
+
+window.addEventListener("resize", () => {
+
+    if(window.innerWidth > 820){
+
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
+
+    }
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const mobileInput =
+        document.getElementById("mobilePersonSearch");
+
+    const desktopInput =
+        document.getElementById("personSearch");
+
+    if(!mobileInput || !desktopInput){
+        return;
+    }
+
+    mobileInput.addEventListener("input", () => {
+
+        desktopInput.value =
+            mobileInput.value;
+
+        desktopInput.dispatchEvent(
+            new Event("input")
+        );
+
+        document.getElementById(
+            "mobileSearchResults"
+        ).innerHTML =
+            document.getElementById(
+                "personSearchResults"
+            ).innerHTML;
+    });
+
+});
+
 </script>
 
 </body>
