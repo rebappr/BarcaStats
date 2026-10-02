@@ -887,6 +887,7 @@ padding:6px 14px;
 </style>
 </head>
 <body>
+<div class="menu-overlay" id="menuOverlay"></div>
 
 <div class="header">
     <div class="header-inner">
@@ -2043,76 +2044,30 @@ function initPersonSearch(){
 
 })();
 
-document
-.getElementById("searchToggle")
-.addEventListener("click", e => {
-
-    e.preventDefault();
-
-    const searchBox =
-        document.querySelector(".search-hero");
-
-    const results =
-        document.getElementById("personSearchResults");
-
-    searchBox.classList.toggle("show");
-
-    if(!searchBox.classList.contains("show")){
-        results.innerHTML = "";
-        document.getElementById("personSearch").value = "";
-    }else{
-        document.getElementById("personSearch").focus();
-    }
-
-});
-
 const menuToggle =
     document.getElementById("menuToggle");
-
-const sideMenu =
-    document.getElementById("sideMenu");
 
 const menuOverlay =
     document.getElementById("menuOverlay");
 
+const mainMenu =
+    document.querySelector(".main-menu");
+
 menuToggle.addEventListener("click", () => {
 
-    sideMenu.classList.add("open");
+    mainMenu.classList.add("open");
     menuOverlay.classList.add("show");
 
 });
 
 menuOverlay.addEventListener("click", () => {
 
-    sideMenu.classList.remove("open");
+    mainMenu.classList.remove("open");
     menuOverlay.classList.remove("show");
 
 });
 
-document
-.getElementById("sideSearchToggle")
-.addEventListener("click", e => {
 
-    e.preventDefault();
-
-    sideMenu.classList.remove("open");
-    menuOverlay.classList.remove("show");
-
-    document
-        .getElementById("searchToggle")
-        .click();
-
-});
-
-document
-.getElementById("themeToggleSide")
-.addEventListener("click", () => {
-
-    document
-        .getElementById("themeToggle")
-        .click();
-
-});
 
 </script>
 
