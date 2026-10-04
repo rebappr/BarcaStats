@@ -1732,7 +1732,9 @@ fetch("tablelaliga.json")
         return;
     }
 
+    if(window.innerWidth > 820){
     widget.style.display = "block";
+}
 
 	let html = "";
 	
@@ -2930,6 +2932,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 "personSearchResults"
             ).innerHTML;
     });
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    if(window.innerWidth <= 820){
+
+        document.getElementById("laligaWidget").style.display = "none";
+        document.getElementById("mobileDebutantsSection").style.display = "none";
+        document.getElementById("mobileStatisticsSection").style.display = "none";
+
+        document.getElementById("mobileMatchesSection").style.display = "block";
+    }
 
 });
 
