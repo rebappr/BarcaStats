@@ -738,7 +738,9 @@ today.setHours(0,0,0,0);
 
 const next = allMatches
 .filter(m =>
-parseDate(m.Date) >= today
+    parseDate(m.Date) > today ||
+    !m.Result ||
+    m.Result === "-:-"
 )
 .sort((a,b) =>
 parseDate(a.Date) - parseDate(b.Date)
@@ -1108,9 +1110,12 @@ function renderTopManagers(){
         const valueA = a[managerTableSortColumn];
         const valueB = b[managerTableSortColumn];
 
-        return managerTableSortDirection === "asc"
-            ? valueA - valueB
-            : valueB - valueA;
+        const diff =
+    managerTableSortDirection === "asc"
+        ? valueA - valueB
+        : valueB - valueA;
+
+return diff || a.name.localeCompare(b.name);
 
     });
 
@@ -1227,7 +1232,10 @@ Object.entries(stats)
 .sort((a,b)=>b[1]-a[1])
 .slice(0,10);
 
-let html="<table class='stats-table'>";
+let html=
+<table class="stats-table">
+<tbody>
+;
 
 top.forEach(row=>{
 
@@ -1245,7 +1253,10 @@ html+=`
        `;
 });
 
-html+="</table>";
+html += 
+</tbody>
+</table>
+;
 
 document.getElementById(
 "topScorers"
@@ -1275,7 +1286,10 @@ Object.entries(stats)
 .sort((a,b)=>b[1]-a[1])
 .slice(0,10);
 
-let html="<table class='stats-table'>";
+let html=
+<table class="stats-table">
+<tbody>
+;
 
 top.forEach(row=>{
 
@@ -1293,7 +1307,10 @@ html+=`
        `;
 });
 
-html+="</table>";
+html += 
+</tbody>
+</table>
+;
 
 document.getElementById(
 "topAssists"
@@ -1523,36 +1540,28 @@ menuOverlay.addEventListener("click", () => {
 
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+const mobileInput =
+    document.getElementById("mobilePersonSearch");
 
-    const mobileInput =
-        document.getElementById("mobilePersonSearch");
+const mobileResults =
+    document.getElementById("mobileSearchResults");
 
-    const desktopInput =
-        document.getElementById("personSearch");
-
-    if(!mobileInput || !desktopInput){
-        return;
-    }
+if(mobileInput){
 
     mobileInput.addEventListener("input", () => {
 
-        desktopInput.value =
-            mobileInput.value;
+        input.value = mobileInput.value;
 
-        desktopInput.dispatchEvent(
+        input.dispatchEvent(
             new Event("input")
         );
 
-        document.getElementById(
-            "mobileSearchResults"
-        ).innerHTML =
-            document.getElementById(
-                "personSearchResults"
-            ).innerHTML;
+        mobileResults.innerHTML =
+            results.innerHTML;
+
     });
 
-});
+}
 
 </script>
 
