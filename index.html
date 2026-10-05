@@ -1469,7 +1469,7 @@ function initPersonSearch(){
 	searchResults =
     		document.getElementById("personSearchResults");
 
-    input.addEventListener("input", () => {
+    searchInput.addEventListener("input", () => {
 
         const value =
             searchInput.value
@@ -1478,7 +1478,7 @@ function initPersonSearch(){
 
         if(!value){
 
-            results.innerHTML = "";
+            searchResults.innerHTML = "";
             return;
 
         }
