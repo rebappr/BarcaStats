@@ -201,255 +201,6 @@ fetch("data.json")
     console.error(error);
 
 });
-    
-function statValue(value){
-    return value === 0 ? "-" : value;
-}
-
-function renderOpponent(team,data){
-
-    const matches = data.filter(
-        match => match["Opp. Team"] === team
-    );
-
-    if(!matches.length){
-
-        document.getElementById("opponentProfile").innerHTML =
-            "<h2>Opponent not found</h2>";
-
-        return;
-    }
-
-    matches.sort((a,b)=>{
-
-        const da =
-            new Date(a.Date.split(".").reverse().join("-"));
-
-        const db =
-            new Date(b.Date.split(".").reverse().join("-"));
-
-        return da - db;
-
-    });
-
-    let wins = 0;
-    let draws = 0;
-    let losses = 0;
-
-    matches.forEach(match=>{
-
-        if(match["Result type"] === "W") wins++;
-        if(match["Result type"] === "D") draws++;
-        if(match["Result type"] === "L") losses++;
-
-    });
-
-    let goalsFor = 0;
-    let goalsAgainst = 0;
-    
-    matches.forEach(match => {
-    
-        const result = (match.Result || "").trim();
-    
-        if(result === "-:-") return;
-    
-        if(!result.includes(":")) return;
-    
-        const [homeGoals, awayGoals] =
-            result.split(":").map(Number);
-    
-        if(
-            isNaN(homeGoals) ||
-            isNaN(awayGoals)
-        ){
-            return;
-        }
-    
-        if(match["Home/Away"] === "Home"){
-    
-            goalsFor += homeGoals;
-            goalsAgainst += awayGoals;
-    
-        }else{
-    
-            goalsFor += awayGoals;
-            goalsAgainst += homeGoals;
-    
-        }
-    
-    });
-
-    document.getElementById("opponentHeader").innerHTML = `
-
-    <div class="opponent-card">
-    
-        <div class="opponent-info">
-            <h1>${team}</h1>
-        </div>
-    
-    </div>
-    
-    `;
-
-    document.getElementById("opponentProfile").innerHTML = `
-
-	<div class="widget-title">
-	    Overview
-	</div>
-	
-    <div class="summary-grid">
-
-        <div class="summary-box matches">
-            <b>${matches.length}</b>
-            Matches
-        </div>
-
-    <div class="summary-box wins">
-        <b>${statValue(wins)}</b>
-        Wins
-    </div>
-    
-    <div class="summary-box draws">
-        <b>${statValue(draws)}</b>
-        Draws
-    </div>
-    
-    <div class="summary-box losses">
-        <b>${statValue(losses)}</b>
-        Losses
-    </div>
-
-    <div class="summary-box goals">
-        <b>${goalsFor}:${goalsAgainst}</b>
-        Score
-    </div>
-
-    </div>
-
-    <div class="widget-title">
-        Matches
-    </div>
-        
-        <div class="widget-card">
-            ${buildOpponentMatches(team, data)}
-        </div>
-
-    `;
-
-}
-
-function buildOpponentMatches(team, data){
-
-        const matches = data.filter(match =>
-        
-            match["Opp. Team"] === team
-        
-        );
-
-        let html = `
-            <div class="matches-header">
-            
-                <div>Season</div>
-                <div>Competition</div>
-                <div>Date</div>
-                <div>Venue</div>
-                <div>Result</div>            
-            </div>
-        `;
-
-    matches.forEach(match => {
-    
-        let resultClass = "result-draw";
-    
-        const resultType = match["Result type"];
-    
-        if(resultType === "W") resultClass = "result-win";
-        if(resultType === "L") resultClass = "result-loss";
-    
-html += `
-
-<a
-    href="match.html?id=${match.ID}"
-    style="
-        text-decoration:none;
-        color:inherit;
-    ">
-
-    <div class="opponent-match">
-
-        <div>
-            ${match.Season}
-        </div>
-
-        <div class="competition-cell">
-            <img
-            src="logos/${competitionLogos[match.Competition] || 'default.png'}"
-            class="competition-logo"
-            alt="${match.Competition}"
-            title="${match.Competition}">
-            <span>
-            ${match.Competition}
-            </span>
-        </div>
-        
-        <div>
-            ${match.Date}
-        </div>
-        
-        <div>
-            ${match["Home/Away"] || ""}
-        </div>
-        
-        <div>
-            <span class="result-badge ${resultClass}">
-                ${match.Result}
-            </span>
-        </div>
-
-    </div>
-
-</a>
-
-`;
-    });
-    
-    html += `
-    `;
-
-    return html;
-}
-
-function calculateAge(birthDate, deathDate=""){
-
-if(!birthDate) return "";
-
-const [d,m,y] = birthDate.split(".");
-const birth = new Date(y,m-1,d);
-
-let end;
-
-if(deathDate){
-const [dd,mm,yy] = deathDate.split(".");
-end = new Date(yy,mm-1,dd);
-}else{
-end = new Date();
-}
-
-let age =
-end.getFullYear() - birth.getFullYear();
-
-const monthDiff =
-end.getMonth() - birth.getMonth();
-
-if(
-monthDiff < 0 ||
-(monthDiff === 0 && end.getDate() < birth.getDate())
-){
-age--;
-}
-
-return age;
-}
 
 function initPersonSearch(){
 
@@ -610,60 +361,117 @@ function initPersonSearch(){
 });
 }
 
-const menuToggle =
-    document.getElementById("menuToggle");
+document.addEventListener("DOMContentLoaded", () => {
 
-const menuOverlay =
-    document.getElementById("menuOverlay");
+    const menuToggle =
+        document.getElementById("menuToggle");
 
-const mainMenu =
-    document.querySelector(".main-menu");
+    const menuOverlay =
+        document.getElementById("menuOverlay");
 
-menuToggle.addEventListener("click", () => {
+    const mainMenu =
+        document.querySelector(".main-menu");
 
-    mainMenu.classList.toggle("open");
-    menuOverlay.classList.toggle("show");
+    if(!menuToggle || !menuOverlay || !mainMenu){
+        return;
+    }
 
-    menuToggle.textContent =
-        mainMenu.classList.contains("open")
-        ? "✕"
-        : "☰";
-        
-if(mainMenu.classList.contains("open")){
-
-    setTimeout(() => {
-
-        const input =
-            document.getElementById(
-                "mobilePersonSearch"
-            );
-
-        if(input){
-            input.focus();
-        }
-
-    }, 250);
-}
-
-});
-
-menuOverlay.addEventListener("click", () => {
-
-    mainMenu.classList.remove("open");
-    menuOverlay.classList.remove("show");
-
-    menuToggle.textContent = "☰";
-
-});
-
-window.addEventListener("resize", () => {
-
-    if(window.innerWidth > 820){
+    function closeMenu(){
 
         mainMenu.classList.remove("open");
         menuOverlay.classList.remove("show");
 
         menuToggle.textContent = "☰";
+    }
+
+    function openMenu(){
+
+        mainMenu.classList.add("open");
+        menuOverlay.classList.add("show");
+
+        menuToggle.textContent = "✕";
+
+        setTimeout(() => {
+
+            const input =
+                document.getElementById(
+                    "mobilePersonSearch"
+                );
+
+            if(input){
+                input.focus();
+            }
+
+        }, 250);
+
+    }
+
+    menuToggle.addEventListener("click", () => {
+
+        if(mainMenu.classList.contains("open")){
+            closeMenu();
+        }else{
+            openMenu();
+        }
+
+    });
+
+    menuOverlay.addEventListener(
+        "click",
+        closeMenu
+    );
+
+    window.addEventListener("resize", () => {
+
+        if(window.innerWidth > 820){
+            closeMenu();
+        }
+
+    });
+
+    const mobileInput =
+        document.getElementById(
+            "mobilePersonSearch"
+        );
+
+    const desktopInput =
+        document.getElementById(
+            "personSearch"
+        );
+
+    if(mobileInput && desktopInput){
+
+        mobileInput.addEventListener(
+            "input",
+            () => {
+
+                desktopInput.value =
+                    mobileInput.value;
+
+                desktopInput.dispatchEvent(
+                    new Event("input")
+                );
+
+                const mobileResults =
+                    document.getElementById(
+                        "mobileSearchResults"
+                    );
+
+                const desktopResults =
+                    document.getElementById(
+                        "personSearchResults"
+                    );
+
+                if(
+                    mobileResults &&
+                    desktopResults
+                ){
+                    mobileResults.innerHTML =
+                        desktopResults.innerHTML;
+                }
+
+            }
+        );
 
     }
 
