@@ -22,6 +22,11 @@
 <meta property="og:description"
       content="Comprehensive FC Barcelona database with match results, player statistics, managers, trophies and historical records.">
 
+<meta property="og:image:alt"
+      content="Barça Database logo">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <link rel="canonical"
       href="https://barcadb.com/">
 
@@ -660,7 +665,9 @@ today.setHours(0,0,0,0);
 
 const played = allMatches
 .filter(m =>
-parseDate(m.Date) < today
+    parseDate(m.Date) <= today &&
+    m.Result &&
+    m.Result !== "-:-"
 )
 .sort((a,b) =>
 parseDate(b.Date) - parseDate(a.Date)
