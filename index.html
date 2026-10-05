@@ -578,7 +578,7 @@ function normalizeName(name){
         .toLowerCase()
         .replace(/^fc\s+/g, "")
         .replace(/\scf$/g, "")
-        .replace(/./g, "")
+        .replace(/[.]/g, "")
         .replace(/\s+/g, " ")
         .trim();
 }
