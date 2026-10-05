@@ -1555,12 +1555,12 @@ if(mobileInput){
 
         searchInput.value = mobileInput.value;
 
-        input.dispatchEvent(
+        searchInput.dispatchEvent(
             new Event("input")
         );
 
         mobileResults.innerHTML =
-            results.innerHTML;
+            searchResults.innerHTML;
 
     });
 
