@@ -722,6 +722,44 @@ margin-top:10px;
 		font-size:18px;
 	}
       
+.main-menu{
+
+    position:fixed;
+
+    top:0;
+
+    left:-75%;
+
+    width:70%;
+
+    height:100vh;
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:0;
+
+    padding:20px 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #004D98,
+            #A50044
+        );
+
+    transition:left .3s ease;
+
+    margin:0;
+}
+
+.main-menu.open{
+    left:0;
+}
+      
 .main-menu a{
 
     display:flex;
