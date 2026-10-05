@@ -183,49 +183,30 @@ text-decoration:underline;
 }
 
 .desktop-search{
-
     width:340px;
-
     position:relative;
-
     margin-left:auto;
 }
 
 .desktop-search-input{
-
     width:100%;
-
     height:48px;
-
     padding:0 16px;
-
     border:none;
-
     border-radius:16px;
-
     background:rgba(255,255,255,.12);
-
     color:#A9A9A9;
-
     font-size:16px;
 }
 
 #personSearchResults{
-
     position:absolute;
-
     top:54px;
-
     left:0;
-
     right:0;
-
     z-index:9999;
-
     border-radius:16px;
-
     overflow:hidden;
-
     background:var(--card-bg);
 }
 
@@ -409,7 +390,18 @@ text-decoration:underline;
 }
 
 .main-menu a.active{
-    background:transparent;
+    background:linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #fff4c4 35%,
+        #FDC52C 100%
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.15);
     font-weight:800;
     border-bottom:1px solid rgba(255,255,255,.25);
 }
