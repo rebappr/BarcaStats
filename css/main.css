@@ -393,6 +393,7 @@ text-decoration:underline;
     background:transparent;
     font-weight:800;
     color:#FDC52C;
+    border-bottom:1px solid rgba(255,255,255,.25);
 }
 
 .main-menu a.active span{
