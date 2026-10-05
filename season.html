@@ -1905,13 +1905,15 @@ function setTableView(view){
 
 function buildMatchRow(match){
 
-let resultClass = "result-draw";
+let resultClass = "result-empty";
 
-if(match["Result type"] === "W")
-resultClass = "result-win";
-
-if(match["Result type"] === "L")
-resultClass = "result-loss";
+if(match["Result type"] === "W"){
+    resultClass = "result-win";
+}else if(match["Result type"] === "D"){
+    resultClass = "result-draw";
+}else if(match["Result type"] === "L"){
+    resultClass = "result-loss";
+}
 
 return `
 
@@ -2020,50 +2022,6 @@ x => x.Result === "-:-"
 
 }
 
-if(matchesView === "all" || matchesView === "upcoming"){
-
-    const grouped = {};
-
-    matches.forEach(match => {
-
-        const d =
-        new Date(
-            match.Date.split(".").reverse().join("-")
-        );
-
-        const month =
-        d.toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-        if(!grouped[month]){
-            grouped[month] = [];
-        }
-
-        grouped[month].push(match);
-    });
-
-    Object.keys(grouped).forEach(month => {
-
-        html += `
-            <div class="competition-title">
-                ${month}
-            </div>
-        `;
-
-        grouped[month].forEach(match => {
-            html += buildMatchRow(match);
-        });
-
-    });
-
-    return html;
-}
-
 matches.forEach(match => {
 
 let resultClass = "result-empty";
@@ -2136,7 +2094,7 @@ return String(name || "")
 .toLowerCase()
 .replace(/\bfc\b/g,"")
 .replace(/\bcf\b/g,"")
-.replace(/./g,"")
+.replace(/[.]/g,"")
 .replace(/\s+/g," ")
 .trim();
 }
