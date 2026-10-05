@@ -1500,7 +1500,7 @@ season: match.Season,
 date: matchDate,
 dateText: match.Date,
 birthDate:
-playerBirthDates[player.trim()] || ""
+playerBirthDates[String(player).trim()] || ""
 };
 
 }
@@ -1844,10 +1844,20 @@ select.addEventListener("change", e => {
 
     season = e.target.value;
 
+    matchesView = "all";
+
+    document
+        .querySelectorAll('[data-view]')
+        .forEach(btn => btn.classList.remove('active'));
+
+    document
+        .querySelector('[data-view="all"]')
+        ?.classList.add('active');
+
     history.replaceState(
         {},
         "",
-        `season.html?season=${encodeURIComponent(season)}`
+        season.html?season=${encodeURIComponent(season)}
     );
 
     renderSeason();
@@ -2048,10 +2058,13 @@ if(matchesView === "all" || matchesView === "upcoming"){
 
 matches.forEach(match => {
 
-let resultClass = "result-draw";
+let resultClass = "result-empty";
 
 if(match["Result type"] === "W")
 resultClass = "result-win";
+
+if(match["Result type"] === "D")
+resultClass = "result-draw";
 
 if(match["Result type"] === "L")
 resultClass = "result-loss";
@@ -2113,8 +2126,8 @@ fetch("players.json").then(r => r.json())
 function normalizeName(name){
 return String(name || "")
 .toLowerCase()
-.replace(/fc /g,"")
-.replace(/ cf/g,"")
+.replace(/\bfc\b/g,"")
+.replace(/\bcf\b/g,"")
 .replace(/./g,"")
 .replace(/\s+/g," ")
 .trim();
@@ -2348,7 +2361,7 @@ function initPersonSearch(){
 
 function showMobileSection(section, button){
 
-if(window.innerWidth > 1500) return;
+if(window.innerWidth > 820) return;
 
 document.querySelectorAll(
 '.mobile-section-btn'
