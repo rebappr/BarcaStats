@@ -2403,28 +2403,6 @@ document.getElementById(
 
 }
 
-window.addEventListener("resize", () => {
-
-    if(window.innerWidth > 820){
-
-        mainMenu.classList.remove("open");
-        menuOverlay.classList.remove("show");
-
-        menuToggle.textContent = "☰";
-
-    }
-
-});
-
-menuOverlay.addEventListener("click", () => {
-
-    mainMenu.classList.remove("open");
-    menuOverlay.classList.remove("show");
-
-    menuToggle.textContent = "☰";
-
-});
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const menuToggle = document.getElementById("menuToggle");
