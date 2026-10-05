@@ -73,6 +73,19 @@
 
 <style>
 
+.dashboard{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:6px;
+}
+
+.left-column,
+.right-column{
+display:flex;
+flex-direction:column;
+gap:0px;
+}
+
 .widget-card{
 background:var(--card-bg);
 backdrop-filter:blur(20px);
@@ -107,18 +120,6 @@ margin:0 0 5px;
 .match-meta{
 color:var(--muted);
 font-size:13px;
-}
-
-.player-link,
-.opponent-link{
-color:var(--link-color);
-text-decoration:none;
-font-weight:600;
-}
-
-.player-link:hover,
-.opponent-link:hover{
-text-decoration:underline;
 }
 
 .fixture-card{
@@ -373,121 +374,6 @@ margin-top:10px;
 
 .player-search-item:hover{
     background:var(--meta-bg);
-}
-
-.main-menu{
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    gap:6px;
-
-    margin-bottom:12px;
-    padding-left:0;
-}
-
-.main-menu a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:120px;
-    padding:12px 20px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    background:#004D98;
-    border-color:#0a5fb3;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:700;
-    text-transform:uppercase;
-
-    transition:.2s;
-
-    box-shadow:
-        0 4px 12px rgba(0,77,152,.25);
-}
-
-.main-menu a:hover{
-    transform:translateY(-2px);
-
-    background:#0a5fb3;
-
-    box-shadow:
-        0 8px 20px rgba(0,77,152,.35);
-}
-
-.main-menu a.active{
-    background:#A50044;
-    border-color:#8b0038;
-    color:white;
-}
-
-.main-menu a img{
-    display:none;
-}
-
-.menu-toggle{
-    display:none;
-}
-
-.desktop-search{
-
-    width:340px;
-
-    position:relative;
-
-    margin-left:auto;
-}
-
-.desktop-search-input{
-
-    width:100%;
-
-    height:48px;
-
-    padding:0 16px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:rgba(255,255,255,.12);
-
-    color:#A9A9A9;
-
-    font-size:16px;
-}
-
-#personSearchResults{
-
-    position:absolute;
-
-    top:54px;
-
-    left:0;
-
-    right:0;
-
-    z-index:9999;
-
-    border-radius:16px;
-
-    overflow:hidden;
-
-    background:var(--card-bg);
-}
-
-.desktop-search-input::placeholder{
-    color:#A9A9A9;
-}
-
-.mobile-menu-search{
-    display:none;
 }
 
 @media(max-width:820px){
