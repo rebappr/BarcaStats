@@ -564,6 +564,9 @@ let flickSortDirection = "desc";
 let managerTableSortColumn = "winPct";
 let managerTableSortDirection = "desc";
 
+let searchInput;
+let searchResults;
+
 Promise.all([
 fetch("data.json").then(r => r.json()),
 fetch("current-season.json").then(r => r.json())
@@ -1460,11 +1463,11 @@ function initPersonSearch(){
         [...searchItems.values()]
         .sort((a,b) => a.name.localeCompare(b.name));
 
-    const input =
-        document.getElementById("personSearch");
+    	searchInput =
+    		document.getElementById("personSearch");
 
-    const results =
-        document.getElementById("personSearchResults");
+	searchResults =
+    		document.getElementById("personSearchResults");
 
     input.addEventListener("input", () => {
 
