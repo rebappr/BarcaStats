@@ -701,10 +701,6 @@ border:none;
     -webkit-overflow-scrolling:touch;
 }
 
-.menu-toggle{
-    display:none;
-}
-
 @media(max-width:820px){
 
 .left-panel{
@@ -2405,27 +2401,6 @@ document.getElementById(
 }
 
 }
-
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const menuOverlay =
-    document.getElementById("menuOverlay");
-
-const mainMenu =
-    document.querySelector(".main-menu");
-
-menuToggle.addEventListener("click", () => {
-
-    mainMenu.classList.toggle("open");
-    menuOverlay.classList.toggle("show");
-
-    menuToggle.textContent =
-        mainMenu.classList.contains("open")
-        ? "✕"
-        : "☰";
-
-});
 
 window.addEventListener("resize", () => {
 
