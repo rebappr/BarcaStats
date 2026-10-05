@@ -1641,10 +1641,7 @@ Object.entries(stats)
 .sort((a,b)=>b[1]-a[1])
 .slice(0,10);
 
-let html=
-<table class="stats-table">
-<tbody>
-;
+let html = <table class="stats-table"><tbody>;
 
 top.forEach(row=>{
 
@@ -1662,10 +1659,7 @@ html+=`
        `;
 });
 
-html += 
-</tbody>
-</table>
-;
+html += </tbody></table>;
 
 document.getElementById(
 "topScorers"
@@ -1695,10 +1689,7 @@ Object.entries(stats)
 .sort((a,b)=>b[1]-a[1])
 .slice(0,10);
 
-let html=
-<table class="stats-table">
-<tbody>
-;
+let html = <table class="stats-table"><tbody>;
 
 top.forEach(row=>{
 
@@ -1716,10 +1707,7 @@ html+=`
        `;
 });
 
-html += 
-</tbody>
-</table>
-;
+html += </tbody></table>;
 
 document.getElementById(
 "topAssists"
