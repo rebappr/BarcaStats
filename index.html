@@ -1472,7 +1472,7 @@ function initPersonSearch(){
     input.addEventListener("input", () => {
 
         const value =
-            input.value
+            searchInput.value
             .trim()
             .toLowerCase();
 
@@ -1553,7 +1553,7 @@ if(mobileInput){
 
     mobileInput.addEventListener("input", () => {
 
-        input.value = mobileInput.value;
+        searchInput.value = mobileInput.value;
 
         input.dispatchEvent(
             new Event("input")
