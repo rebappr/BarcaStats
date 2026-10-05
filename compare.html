@@ -146,6 +146,8 @@ min-width:0;
 
 <script>
 
+let allMatches = [];
+
 fetch("data.json")
 .then(r => r.json())
 .then(data => {
@@ -156,9 +158,7 @@ fetch("data.json")
 
 })
 .catch(error => {
-
     console.error(error);
-
 });
 
 function initPersonSearch(){
@@ -167,11 +167,10 @@ function initPersonSearch(){
 
     allMatches.forEach(match => {
 
-        // Barcelona manager
         if(match.Manager){
 
             searchItems.set(
-                `manager-${match.Manager}`,
+                manager-${match.Manager},
                 {
                     name: match.Manager,
                     type: "Manager"
@@ -180,11 +179,10 @@ function initPersonSearch(){
 
         }
 
-        // Opponent manager
         if(match["Opp. Manager"]){
 
             searchItems.set(
-                `manager-${match["Opp. Manager"]}`,
+                manager-${match["Opp. Manager"]},
                 {
                     name: match["Opp. Manager"],
                     type: "Manager"
@@ -193,40 +191,38 @@ function initPersonSearch(){
 
         }
 
-		// Opponent team
-		if(match["Opp. Team"]){
-		
-		    searchItems.set(
-		        `opponent-${match["Opp. Team"]}`,
-		        {
-		            name: match["Opp. Team"],
-		            type: "Opponent"
-		        }
-		    );
-		
-		}
+        if(match["Opp. Team"]){
 
-        // Starting XI
+            searchItems.set(
+                opponent-${match["Opp. Team"]},
+                {
+                    name: match["Opp. Team"],
+                    type: "Opponent"
+                }
+            );
+
+        }
+
         for(let i=1;i<=11;i++){
 
-            if(match[`Player name ${i}`]){
+            if(match[Player name ${i}]){
 
                 searchItems.set(
-                    `player-${match[`Player name ${i}`]}`,
+                    player-${match[Player name ${i}]},
                     {
-                        name: match[`Player name ${i}`],
+                        name: match[Player name ${i}],
                         type: "Player"
                     }
                 );
 
             }
 
-            if(match[`Opp. Player name ${i}`]){
+            if(match[Opp. Player name ${i}]){
 
                 searchItems.set(
-                    `player-${match[`Opp. Player name ${i}`]}`,
+                    player-${match[Opp. Player name ${i}]},
                     {
-                        name: match[`Opp. Player name ${i}`],
+                        name: match[Opp. Player name ${i}],
                         type: "Player"
                     }
                 );
@@ -235,27 +231,26 @@ function initPersonSearch(){
 
         }
 
-        // Bench
         for(let i=1;i<=12;i++){
 
-            if(match[`On the bench name ${i}`]){
+            if(match[On the bench name ${i}]){
 
                 searchItems.set(
-                    `player-${match[`On the bench name ${i}`]}`,
+                    player-${match[On the bench name ${i}]},
                     {
-                        name: match[`On the bench name ${i}`],
+                        name: match[On the bench name ${i}],
                         type: "Player"
                     }
                 );
 
             }
 
-            if(match[`Opp. On the bench name ${i}`]){
+            if(match[Opp. On the bench name ${i}]){
 
                 searchItems.set(
-                    `player-${match[`Opp. On the bench name ${i}`]}`,
+                    player-${match[Opp. On the bench name ${i}]},
                     {
-                        name: match[`Opp. On the bench name ${i}`],
+                        name: match[Opp. On the bench name ${i}],
                         type: "Player"
                     }
                 );
@@ -275,6 +270,10 @@ function initPersonSearch(){
 
     const results =
         document.getElementById("personSearchResults");
+
+    if(!input || !results){
+        return;
+    }
 
     input.addEventListener("input", () => {
 
@@ -297,27 +296,28 @@ function initPersonSearch(){
             )
             .slice(0,20);
 
-            results.innerHTML = `
+        results.innerHTML = 
             <div class="player-search-results">
-            ${filtered.map(item => `
-            <a
-                class="player-search-item"
-                href="${
-				    item.type === 'Manager'
-				        ? `manager.html?name=${encodeURIComponent(item.name)}`
-				        : item.type === 'Opponent'
-				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
-				            : `player.html?name=${encodeURIComponent(item.name)}`
-				}">
-				${item.name}
-				<span class="search-type ${item.type.toLowerCase()}">
-				   (${item.type})
-				</span>
-            </a>
-            `).join("")}
+            ${filtered.map(item => 
+                <a
+                    class="player-search-item"
+                    href="${
+                        item.type === 'Manager'
+                        ? manager.html?name=${encodeURIComponent(item.name)}
+                        : item.type === 'Opponent'
+                        ? opponent.html?name=${encodeURIComponent(item.name)}
+                        : player.html?name=${encodeURIComponent(item.name)}
+                    }">
+                    ${item.name}
+                    <span class="search-type ${item.type.toLowerCase()}">
+                        (${item.type})
+                    </span>
+                </a>
+            ).join("")}
             </div>
-            `;
-});
+        ;
+    });
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -330,6 +330,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mainMenu =
         document.querySelector(".main-menu");
+
+    const mobileInput =
+        document.getElementById("mobilePersonSearch");
+
+    const desktopInput =
+        document.getElementById("personSearch");
 
     if(!menuToggle || !menuOverlay || !mainMenu){
         return;
@@ -350,18 +356,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         menuToggle.textContent = "✕";
 
-        setTimeout(() => {
+        if(mobileInput){
 
-            const input =
-                document.getElementById(
-                    "mobilePersonSearch"
-                );
+            setTimeout(() => {
+                mobileInput.focus();
+            }, 250);
 
-            if(input){
-                input.focus();
-            }
-
-        }, 250);
+        }
 
     }
 
@@ -388,55 +389,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    const mobileInput =
-        document.getElementById(
-            "mobilePersonSearch"
-        );
-
-    const desktopInput =
-        document.getElementById(
-            "personSearch"
-        );
-
     if(mobileInput && desktopInput){
 
-        mobileInput.addEventListener(
-            "input",
-            () => {
+        mobileInput.addEventListener("input", () => {
 
-                desktopInput.value =
-                    mobileInput.value;
+            desktopInput.value =
+                mobileInput.value;
 
-                desktopInput.dispatchEvent(
-                    new Event("input")
+            desktopInput.dispatchEvent(
+                new Event("input")
+            );
+
+            const mobileResults =
+                document.getElementById(
+                    "mobileSearchResults"
                 );
 
-                const mobileResults =
-                    document.getElementById(
-                        "mobileSearchResults"
-                    );
+            const desktopResults =
+                document.getElementById(
+                    "personSearchResults"
+                );
 
-                const desktopResults =
-                    document.getElementById(
-                        "personSearchResults"
-                    );
-
-                if(
-                    mobileResults &&
-                    desktopResults
-                ){
-                    mobileResults.innerHTML =
-                        desktopResults.innerHTML;
-                }
-
+            if(
+                mobileResults &&
+                desktopResults
+            ){
+                mobileResults.innerHTML =
+                    desktopResults.innerHTML;
             }
-        );
+
+        });
 
     }
 
 });
 
 </script>
+
 
 </body>
 </html>
