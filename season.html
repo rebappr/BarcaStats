@@ -43,35 +43,6 @@
 
 <style>
 
-@font-face{
-    font-family:'Inter';
-    src:url('fonts/Inter-Regular.woff2') format('woff2');
-}
-
-html{
-    -webkit-text-size-adjust:100%;
-}
-
-*{
-box-sizing:border-box;
-}
-
-body{
-margin:0;
-font-family:'Inter',sans-serif;
-
-background: var(--bg);
-
-color:var(--text);
-min-height:100vh;
-}
-
-.content-layout{
-display:flex;
-gap:6px;
-align-items:flex-start;
-}
-
 .content-layout.animate{
 animation:pageRefresh .4s ease;
 }
@@ -106,25 +77,6 @@ background:var(--card-bg);
 border:1px solid var(--card-border);
 color:var(--text);
 font-size:18px;
-}
-
-.widget-title{
-    margin:6px 0 6px;
-    padding:8px 14px;
-
-    background:linear-gradient(
-        135deg,
-        rgba(0,77,152,.95),
-        rgba(165,0,68,.95)
-    );
-
-    color:white;
-
-    font-size:14px;
-    font-weight:700;
-    text-transform:uppercase;
-
-    border-radius:18px;
 }
 
 .competition-title{
@@ -170,12 +122,6 @@ font-size:18px;
 color:var(--text);
 }
 
-.container{
-max-width:1500px;
-margin:auto;
-padding:10px;
-}
-
 .header-row{
 display:flex;
 align-items:center;
@@ -212,75 +158,6 @@ font-weight:600;
 .season-selector select option{
 background:#0f2d6b;
 color:white;
-}
-
-.header{
-background:
-linear-gradient(
-135deg,
-rgba(0,77,152,.95),
-rgba(165,0,68,.95)
-);
-
-padding:16px;
-border-radius:28px;
-color:white;
-margin-bottom:6px;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.25);
-}
-
-.header h1{
-    margin:0;
-    font-size:22px;
-    font-weight:800;
-
-    background:linear-gradient(
-        90deg,
-        #ffffff 0%,
-        #fff4c4 35%,
-        #FDC52C 100%
-    );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.15);
-    text-transform:uppercase;
-}
-
-.header-inner{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.header-logo{
-    width:128px;
-    height:128px;
-    object-fit:contain;
-    flex-shrink:0;
-}
-
-.hero-subtitle{
-margin-top:8px;
-font-size:16px;
-font-weight:500;
-    background:linear-gradient(
-        90deg,
-        #ffffff 0%,
-        #fff4c4 35%,
-        #FDC52C 100%
-    );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.15);
-    font-weight:800;
 }
 
 .summary-grid{
@@ -451,8 +328,6 @@ font-weight:600;
 text-align:left;
 }
 
-
-
 .stats-table th{
 cursor:pointer;
 user-select:none;
@@ -545,110 +420,6 @@ width:120px;
 text-align:center;
 }
 
-.player-search-results{
-display:flex;
-flex-direction:column;
-gap:2px;
-}
-
-.search-type{
-font-size:11px;
-font-weight:700;
-padding:2px 8px;
-border-radius:999px;
-}
-
-.search-type.player{
-background:rgba(0,77,152,.15);
-color:#3b82f6;
-}
-
-.search-type.manager{
-background:rgba(165,0,68,.15);
-color:#e11d48;
-}
-
-.search-type.opponent{
-    background:rgba(34,197,94,.15);
-    color:#16a34a;
-}
-
-.player-search-item{
-    display:flex;
-    align-items:center;
-    padding:8px 10px;
-    border-radius:10px;
-    text-decoration:none;
-    color:var(--text);
-    font-size:12px;
-    font-weight:600;
-    gap:6px;
-}
-
-.player-search-item{
-background:var(--meta-bg);
-}
-
-.main-menu{
-display:flex;
-justify-content:flex-start;
-align-items:center;
-gap:6px;
-
-margin-bottom:12px;
-padding-left:0;
-}
-
-.main-menu a{
-display:flex;
-align-items:center;
-justify-content:center;
-
-min-width:120px;
-padding:12px 20px;
-
-border-radius:14px;
-
-text-decoration:none;
-
-background:#004D98;
-border-color:#0a5fb3;
-
-color:white;
-
-font-size:14px;
-font-weight:700;
-text-transform:uppercase;
-
-transition:.2s;
-
-box-shadow:
-0 4px 12px rgba(0,77,152,.25);
-}
-
-.main-menu a img{
-display:none;
-}
-
-.main-menu a:hover{
-transform:translateY(-2px);
-
-background:#0a5fb3;
-
-box-shadow:
-0 8px 20px rgba(0,77,152,.35);
-}
-
-.main-menu a.active{
-background:#A50044;
-border-color:#8b0038;
-color:white;
-}
-
-.main-menu a img{
-display:none;
-}
-
 .matches-header{
 display:grid;
 grid-template-columns:
@@ -705,18 +476,6 @@ border-bottom:none;
 .matches-line div:last-child{
 display:flex;
 justify-content:center;
-}
-
-.player-link,
-.opponent-link{
-color:var(--link-color);
-text-decoration:none;
-font-weight:600;
-}
-
-.player-link:hover,
-.opponent-link:hover{
-text-decoration:underline;
 }
 
 .matches-view-switch{
@@ -943,54 +702,6 @@ border:none;
 
 .menu-toggle{
     display:none;
-}
-
-.desktop-search{
-    width:340px;
-    position:relative;
-    margin-left:auto;
-}
-
-.desktop-search-input{
-    width:100%;
-    height:48px;
-    padding:0 16px;
-    border:none;
-    border-radius:16px;
-    background:rgba(255,255,255,.12);
-    font-size:16px;
-    color:#A9A9A9;
-}
-
-.desktop-search-input::placeholder{
-    color:#A9A9A9;
-}
-
-.mobile-search-input::placeholder{
-    color:rgba(255,255,255,.12);
-}
-
-.mobile-menu-search{
-    display:none;
-}
-
-#personSearchResults{
-
-    position:absolute;
-
-    top:54px;
-
-    left:0;
-
-    right:0;
-
-    z-index:9999;
-
-    border-radius:16px;
-
-    overflow:hidden;
-
-    background:var(--card-bg);
 }
 
 @media(max-width:820px){
