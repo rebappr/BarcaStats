@@ -821,16 +821,16 @@ color:#A50044;
 
     flex-direction:column;
 
-    gap:8px;
+    gap:0;
 
     padding:20px 12px;
 
     background:
-    linear-gradient(
-        180deg,
-        #004D98,
-        #A50044
-    );
+        linear-gradient(
+            180deg,
+            #004D98,
+            #A50044
+        );
 
     transition:left .3s ease;
 
@@ -840,7 +840,7 @@ color:#A50044;
 .main-menu.open{
     left:0;
 }
-
+      
 .main-menu a{
 
     display:flex;
@@ -857,13 +857,21 @@ color:#A50044;
 
     min-width:unset;
 
-    padding:14px 16px;
+    padding:12px 12px;
 
-    border-radius:14px;
+    border-radius:0;
 
-    background:rgba(255,255,255,.12);
+    background:transparent;
+
+    box-shadow:none;
 
     color:white;
+
+    font-weight:500;
+
+    text-transform:uppercase;
+
+    border-bottom:1px solid rgba(255,255,255,.25);
 }
 
 .main-menu a img{
@@ -871,11 +879,33 @@ color:#A50044;
     display:block;
 
     width:24px;
+
     height:24px;
+
+    object-fit:contain;
+}
+
+.main-menu a:hover{
+
+    background:transparent;
+
+    box-shadow:none;
+
+    transform:none;
 }
 
 .main-menu a.active{
-    background:#0a5fb3;
+    background:transparent;
+    font-weight:800;
+    border-bottom:1px solid rgba(255,255,255,.25);
+}
+
+.main-menu a.active span{
+    font-weight:800;
+}
+
+.main-menu.open{
+    left:0;
 }
 
     .header-logo{
