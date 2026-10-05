@@ -19,6 +19,9 @@
 <meta name="description"
       content="Comprehensive FC Barcelona database with match results, player statistics, managers, trophies and historical records.">
 
+<meta property="og:description"
+      content="Comprehensive FC Barcelona database with match results, player statistics, managers, trophies and historical records.">
+
 <link rel="canonical"
       href="https://barcadb.com/">
 
@@ -43,14 +46,8 @@
 <meta name="author"
       content="RE">
 
-<link rel="canonical"
-      href="https://barcadb.com/">
-
 <meta property="og:image"
       content="https://barcadb.com/logos/barcadb-logo.png">
-
-<meta property="og:url"
-      content="https://barcadb.com/">
 
 <meta property="og:type"
       content="website">
@@ -569,13 +566,13 @@ fetch("current-season.json").then(r => r.json())
 .then(([matchesData,currentData]) => {
 
 function normalizeName(name){
-return String(name || "")
-.toLowerCase()
-.replace(/fc /g,"")
-.replace(/ cf/g,"")
-.replace(/./g,"")
-.replace(/\s+/g," ")
-.trim();
+    return String(name || "")
+        .toLowerCase()
+        .replace(/^fc\s+/g, "")
+        .replace(/\scf$/g, "")
+        .replace(/./g, "")
+        .replace(/\s+/g, " ")
+        .trim();
 }
 
 currentData.forEach(currentMatch => {
