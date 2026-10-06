@@ -853,6 +853,77 @@ function updateCompareResult(){
 
 }
 
+function getPlayerInfo(playerName){
+
+    const matches = [];
+
+    allMatches.forEach(match => {
+
+        let played = false;
+
+        for(let i=1;i<=11;i++){
+
+            if(
+                match[Player name ${i}]
+                === playerName
+            ){
+                played = true;
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            if(
+                match[On the bench name ${i}]
+                === playerName
+            ){
+                played = true;
+            }
+
+        }
+
+        if(played){
+            matches.push(match);
+        }
+
+    });
+
+    if(matches.length === 0){
+        return null;
+    }
+
+    return {
+
+        name:playerName,
+
+        debut:
+            matches[0].Date || "-",
+
+        lastMatch:
+            matches[matches.length-1].Date || "-",
+
+        matches:
+            matches.length
+
+    };
+
+}
+
+resultText.innerHTML = `
+<span class="player-a">
+    ${selectedPlayerA}
+</span>
+
+vs
+
+<span class="player-b">
+    ${selectedPlayerB}
+</span>`;
+
+updateBasicInfo();
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
