@@ -932,13 +932,6 @@ if(played){
 
 });
 
-matches.sort((a,b) => {
-
-    return new Date(a.Date) -
-           new Date(b.Date);
-
-});
-
 if(matches.length === 0){
     return null;
 }
@@ -957,12 +950,12 @@ return {
 
     name:playerName,
 
-    debut:
+lastMatch:
     formatDate(
         matches[0].Date
     ),
 
-    lastMatch:
+debut:
     formatDate(
         matches[matches.length-1].Date
     ),
