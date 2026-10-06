@@ -952,10 +952,14 @@ return {
     name:playerName,
 
     debut:
-        matches[0].Date || "-",
+    formatDate(
+        matches[0].Date
+    ),
 
     lastMatch:
-        matches[matches.length-1].Date || "-",
+    formatDate(
+        matches[matches.length-1].Date
+    ),
 
     seasons:
         seasons.size,
