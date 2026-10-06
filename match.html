@@ -2403,9 +2403,8 @@ function initPersonSearch(){
     const itemList =
         [...searchItems.values()]
         .sort((a,b) => a.name.localeCompare(b.name));
-      
-      
-function attachSearch(inputId, resultsId){
+
+    function attachSearch(inputId, resultsId){
 
     const input = document.getElementById(inputId);
     const results = document.getElementById(resultsId);
@@ -2415,7 +2414,9 @@ function attachSearch(inputId, resultsId){
     input.addEventListener("input", () => {
 
         const value =
-            input.value.trim().toLowerCase();
+            input.value
+            .trim()
+            .toLowerCase();
 
         if(!value){
             results.innerHTML = "";
@@ -2429,25 +2430,55 @@ function attachSearch(inputId, resultsId){
             )
             .slice(0,20);
 
-        results.innerHTML = 
+        results.innerHTML = `
             <div class="player-search-results">
-                ${filtered.map(item => 
-                    ${
-                            item.type === 'Manager'
-                                ? manager.html?name=${encodeURIComponent(item.name)}
-                                : item.type === 'Opponent'
-                                    ? opponent.html?name=${encodeURIComponent(item.name)}
-                                    : player.html?name=${encodeURIComponent(item.name)}
-                        }
-                        ${item.name}
-                        <span class="search-type ${item.type.toLowerCase()}">
-                            (${item.type})
-                        </span>
-                    </a>
-                ).join("")}
+                ${filtered.map(item => {
+
+                    let url = "";
+
+                    if(item.type === "Manager"){
+                        url = "manager.html?name=" + encodeURIComponent(item.name);
+                    }else if(item.type === "Opponent"){
+                        url = "opponent.html?name=" + encodeURIComponent(item.name);
+                    }else{
+                        url = "player.html?name=" + encodeURIComponent(item.name);
+                    }
+
+                    return `
+                  
+    <a 
+        class="player-search-item"
+        href="${url}">
+
+        ${item.name}
+
+        <span class="search-type ${item.type.toLowerCase()}">
+            (${item.type})
+        </span>
+
+    </a>
+                    `;
+                }).join("")}
             </div>
-        ;
+        `;
     });
+
+    input.addEventListener("blur", () => {
+        setTimeout(() => {
+            results.innerHTML = "";
+        }, 200);
+    });
+
+}
+attachSearch(
+    "personSearch",
+    "personSearchResults"
+);
+
+attachSearch(
+    "mobilePersonSearch",
+    "mobileSearchResults"
+);
 
 }
 
