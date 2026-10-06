@@ -1571,25 +1571,23 @@ function initPersonSearch(){
     const itemList =
         [...searchItems.values()]
         .sort((a,b) => a.name.localeCompare(b.name));
+      
+      
+function attachSearch(inputId, resultsId){
 
-    const input =
-        document.getElementById("personSearch");
+    const input = document.getElementById(inputId);
+    const results = document.getElementById(resultsId);
 
-    const results =
-        document.getElementById("personSearchResults");
+    if(!input || !results) return;
 
     input.addEventListener("input", () => {
 
         const value =
-            input.value
-            .trim()
-            .toLowerCase();
+            input.value.trim().toLowerCase();
 
         if(!value){
-
             results.innerHTML = "";
             return;
-
         }
 
         const filtered =
@@ -1599,27 +1597,26 @@ function initPersonSearch(){
             )
             .slice(0,20);
 
-            results.innerHTML = `
+        results.innerHTML = 
             <div class="player-search-results">
-            ${filtered.map(item => `
-            <a
-                class="player-search-item"
-                href="${
-				    item.type === 'Manager'
-				        ? `manager.html?name=${encodeURIComponent(item.name)}`
-				        : item.type === 'Opponent'
-				            ? `opponent.html?name=${encodeURIComponent(item.name)}`
-				            : `player.html?name=${encodeURIComponent(item.name)}`
-				}">
-				${item.name}
-				<span class="search-type ${item.type.toLowerCase()}">
-				   (${item.type})
-				</span>
-            </a>
-            `).join("")}
+                ${filtered.map(item => 
+                    ${
+                            item.type === 'Manager'
+                                ? manager.html?name=${encodeURIComponent(item.name)}
+                                : item.type === 'Opponent'
+                                    ? opponent.html?name=${encodeURIComponent(item.name)}
+                                    : player.html?name=${encodeURIComponent(item.name)}
+                        }
+                        ${item.name}
+                        <span class="search-type ${item.type.toLowerCase()}">
+                            (${item.type})
+                        </span>
+                    </a>
+                ).join("")}
             </div>
-            `;
-});
+        ;
+    });
+
 }
 
 const menuToggle =
