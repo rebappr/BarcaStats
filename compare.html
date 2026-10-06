@@ -370,39 +370,65 @@
 
     <div class="compare-selector">
 
-        <div class="compare-search">
+<div class="compare-search">
 
-            <label>
-                Player A
-            </label>
+    <label>
+        Player A
+    </label>
 
-            <input
-                type="search"
-                id="comparePlayerA"
-                placeholder="Search player...">
+    <div class="compare-input-wrap">
 
-            <div id="compareResultsA"></div>
+        <input
+            type="text"
+            id="comparePlayerA"
+            placeholder="Search player...">
 
-        </div>
+        <button
+            type="button"
+            class="clear-input"
+            onclick="clearCompareInput('A')">
+
+            ✕
+
+        </button>
+
+    </div>
+
+    <div id="compareResultsA"></div>
+
+</div>
 
         <div class="compare-vs">
             VS
         </div>
 
-        <div class="compare-search">
+<div class="compare-search">
 
-            <label>
-                Player B
-            </label>
+    <label>
+        Player B
+    </label>
 
-            <input
-                type="search"
-                id="comparePlayerB"
-                placeholder="Search player...">
+    <div class="compare-input-wrap">
 
-            <div id="compareResultsB"></div>
+        <input
+            type="text"
+            id="comparePlayerB"
+            placeholder="Search player...">
 
-        </div>
+        <button
+            type="button"
+            class="clear-input"
+            onclick="clearCompareInput('B')">
+
+            ✕
+
+        </button>
+
+    </div>
+
+    <div id="compareResultsB"></div>
+
+</div>
 
     </div>
 
