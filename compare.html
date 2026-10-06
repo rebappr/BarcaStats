@@ -923,6 +923,62 @@ vs
 
 updateBasicInfo();
 
+function updateBasicInfo(){
+
+    if(
+        !selectedPlayerA ||
+        !selectedPlayerB
+    ){
+        return;
+    }
+
+    const playerA =
+        getPlayerInfo(selectedPlayerA);
+
+    const playerB =
+        getPlayerInfo(selectedPlayerB);
+
+    if(!playerA || !playerB){
+        return;
+    }
+
+    document
+        .getElementById("basicInfoCard")
+        .style.display = "block";
+
+    document.getElementById(
+        "playerAName"
+    ).textContent = playerA.name;
+
+    document.getElementById(
+        "playerADebut"
+    ).textContent = playerA.debut;
+
+    document.getElementById(
+        "playerALastMatch"
+    ).textContent = playerA.lastMatch;
+
+    document.getElementById(
+        "playerAMatches"
+    ).textContent = playerA.matches;
+
+    document.getElementById(
+        "playerBName"
+    ).textContent = playerB.name;
+
+    document.getElementById(
+        "playerBDebut"
+    ).textContent = playerB.debut;
+
+    document.getElementById(
+        "playerBLastMatch"
+    ).textContent = playerB.lastMatch;
+
+    document.getElementById(
+        "playerBMatches"
+    ).textContent = playerB.matches;
+
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
