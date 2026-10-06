@@ -2482,82 +2482,121 @@ attachSearch(
 
 }
 
-const menuToggle =
-document.getElementById("menuToggle");
+function showMobileSection(section, button){
 
-const menuOverlay =
-document.getElementById("menuOverlay");
+if(window.innerWidth > 820) return;
 
-const mainMenu =
-document.querySelector(".main-menu");
+document.querySelectorAll(
+'.mobile-section-btn'
+).forEach(btn =>
+btn.classList.remove('active')
+);
 
-if(menuToggle && menuOverlay && mainMenu){
+button.classList.add('active');
 
-    menuToggle.addEventListener("click", () => {
+document.getElementById(
+'mobileMatchesSection'
+).style.display = 'none';
 
-        mainMenu.classList.toggle("open");
-        menuOverlay.classList.toggle("show");
+document.getElementById(
+'laligaWidget'
+).style.display = 'none';
 
-        menuToggle.textContent =
-        mainMenu.classList.contains("open")
-        ? "✕"
-        : "☰";
+document.getElementById(
+'mobileDebutantsSection'
+).style.display = 'none';
 
-    });
+document.getElementById(
+'mobileStatisticsSection'
+).style.display = 'none';
 
-    menuOverlay.addEventListener("click", () => {
+if(section === 'matches'){
+document.getElementById(
+'mobileMatchesSection'
+).style.display = 'block';
+}
 
-        mainMenu.classList.remove("open");
-        menuOverlay.classList.remove("show");
+if(section === 'table'){
 
-        menuToggle.textContent = "☰";
+    document.getElementById(
+        'laligaWidget'
+    ).style.display = 'block';
 
-    });
+    renderLaLigaTable();
+}
+
+if(section === 'debutants'){
+document.getElementById(
+'mobileDebutantsSection'
+).style.display = 'block';
+}
+
+if(section === 'statistics'){
+document.getElementById(
+'mobileStatisticsSection'
+).style.display = 'block';
+}
 
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const mobileInput =
-    document.getElementById("mobilePersonSearch");
+    const menuToggle = document.getElementById("menuToggle");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const mainMenu = document.querySelector(".main-menu");
 
-    const desktopInput =
-    document.getElementById("personSearch");
-
-    if(!mobileInput || !desktopInput){
+    if(!menuToggle || !menuOverlay || !mainMenu){
         return;
     }
 
-    mobileInput.addEventListener("input", () => {
+    function closeMenu(){
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+        menuToggle.textContent = "☰";
+    }
 
-        desktopInput.value =
-        mobileInput.value;
+    function openMenu(){
+        mainMenu.classList.add("open");
+        menuOverlay.classList.add("show");
+        menuToggle.textContent = "✕";
+    }
 
-        desktopInput.dispatchEvent(
-            new Event("input")
-        );
+    menuToggle.addEventListener("click", () => {
 
-        const desktopResults =
-        document.getElementById(
-            "personSearchResults"
-        );
+        if(mainMenu.classList.contains("open")){
+            closeMenu();
+        }else{
+            openMenu();
+        }
 
-        const mobileResults =
-        document.getElementById(
-            "mobileSearchResults"
-        );
+    });
 
-        if(desktopResults && mobileResults){
+    menuOverlay.addEventListener("click", closeMenu);
 
-            mobileResults.innerHTML =
-            desktopResults.innerHTML;
+    window.addEventListener("resize", () => {
+
+        if(window.innerWidth > 820){
+            closeMenu();
         }
 
     });
 
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    if(window.innerWidth <= 820){
+
+        document.getElementById("laligaWidget").style.display = "none";
+        document.getElementById("mobileDebutantsSection").style.display = "none";
+        document.getElementById("mobileStatisticsSection").style.display = "none";
+
+        document.getElementById("mobileMatchesSection").style.display = "block";
+    }
+
+});
 
 </script>
 </body>
 </html>
+
