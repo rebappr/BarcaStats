@@ -625,25 +625,6 @@ awayGoals < homeGoals ? "L" : "D";
 
 allMatches = matchesData;
 
-debug("✅ DATA LOADED");
-
-renderHome();
-
-debug("✅ RENDER HOME");
-
-})
-.catch(error => {
-
-    console.error(error);
-
-    debug(
-        ❌ FETCH ERROR<br>
-        ${error.message}
-    );
-
-});
-
-
 function renderHome(){
 
 renderLastMatch();
