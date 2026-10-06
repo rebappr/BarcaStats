@@ -580,7 +580,7 @@ function attachCompareSearch(
             )
             .slice(0,15);
 
-        results.innerHTML =
+        results.innerHTML = `
 
         <div class="player-search-results">
 
@@ -597,7 +597,7 @@ function attachCompareSearch(
 
             ).join("")}
 
-        </div>;
+        </div> `;
 
     });
 
@@ -671,7 +671,7 @@ function updateCompareResult(){
 
     }
 
-    resultText.innerHTML =
+    resultText.innerHTML = `
 
         <span class="player-a">
             ${selectedPlayerA}
@@ -681,7 +681,7 @@ function updateCompareResult(){
 
         <span class="player-b">
             ${selectedPlayerB}
-        </span>;
+        </span> `;
 
 }
 
