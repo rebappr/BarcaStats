@@ -356,7 +356,7 @@
             </label>
 
             <input
-                type="text"
+                type="search"
                 id="comparePlayerA"
                 placeholder="Search player...">
 
@@ -375,7 +375,7 @@
             </label>
 
             <input
-                type="text"
+                type="search"
                 id="comparePlayerB"
                 placeholder="Search player...">
 
@@ -1139,6 +1139,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+function clearCompareInput(side){
+
+    if(side === "A"){
+
+        document.getElementById(
+            "comparePlayerA"
+        ).value = "";
+
+        document.getElementById(
+            "compareResultsA"
+        ).innerHTML = "";
+
+        selectedPlayerA = null;
+
+    }else{
+
+        document.getElementById(
+            "comparePlayerB"
+        ).value = "";
+
+        document.getElementById(
+            "compareResultsB"
+        ).innerHTML = "";
+
+        selectedPlayerB = null;
+
+    }
+
+    document.getElementById(
+        "basicInfoCard"
+    ).style.display = "none";
+
+}
 
 </script>
 
