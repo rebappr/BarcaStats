@@ -576,7 +576,18 @@ initCompareSearch();
 let comparePlayers = [];
 
 let selectedPlayerA = null;
+document
+    .querySelector("#comparePlayerA")
+    .parentElement
+    .querySelector(".clear-input")
+    .classList.remove("show");
+
 let selectedPlayerB = null;
+document
+    .querySelector("#comparePlayerB")
+    .parentElement
+    .querySelector(".clear-input")
+    .classList.remove("show");
 
 function initPersonSearch(){
 
