@@ -868,39 +868,6 @@ function attachCompareSearch(
 
 function updateCompareResult(){
 
-    const resultText =
-        document.querySelector(
-            ".compare-result-text"
-        );
-
-    if(!resultText){
-        return;
-    }
-
-    if(
-        !selectedPlayerA ||
-        !selectedPlayerB
-    ){
-
-        resultText.textContent =
-            "Select two players to begin comparison";
-
-        return;
-
-    }
-
-    resultText.innerHTML = `
-
-        <span class="player-a">
-            ${selectedPlayerA}
-        </span>
-
-        vs
-
-        <span class="player-b">
-            ${selectedPlayerB}
-        </span> `;
-
 updateBasicInfo();
 
 }
