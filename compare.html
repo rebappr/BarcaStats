@@ -897,17 +897,27 @@ function attachCompareSearch(
 
         results.innerHTML = "";
 
-        if(side === "A"){
+if(side === "A"){
 
-            selectedPlayerA =
-                playerName;
+    selectedPlayerA =
+        playerName;
 
-        }else{
+    input
+        .parentElement
+        .querySelector(".clear-input")
+        .classList.add("show");
 
-            selectedPlayerB =
-                playerName;
+}else{
 
-        }
+    selectedPlayerB =
+        playerName;
+
+    input
+        .parentElement
+        .querySelector(".clear-input")
+        .classList.add("show");
+
+}
 
         updateCompareResult();
 
