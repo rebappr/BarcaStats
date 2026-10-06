@@ -229,6 +229,27 @@
     padding:20px;
 }
 
+.compare-input-wrap{
+    position:relative;
+}
+
+.clear-input{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    color:var(--muted);
+    cursor:pointer;
+    font-size:18px;
+    padding:4px;
+}
+
+.clear-input:hover{
+    color:var(--text);
+}
+
 @media(max-width:820px){
     .compare-selector{
         grid-template-columns:1fr;
