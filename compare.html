@@ -428,6 +428,16 @@
                 </strong>
 
             </div>
+            
+            <div class="basic-row">
+
+                <span>Seasons</span>
+
+                <strong id="playerASeasons">
+                    -
+                </strong>
+
+            </div>
 
             <div class="basic-row">
 
@@ -466,6 +476,16 @@
                 <span>Last Match</span>
 
                 <strong id="playerBLastMatch">
+                    -
+                </strong>
+
+            </div>
+            
+            <div class="basic-row">
+
+                <span>Seasons</span>
+
+                <strong id="playerBSeasons">
                     -
                 </strong>
 
@@ -933,20 +953,33 @@ for(let i=1;i<=12;i++){
         return null;
     }
 
-    return {
+const seasons = new Set();
 
-        name:playerName,
+matches.forEach(match => {
 
-        debut:
-            matches[0].Date || "-",
+    if(match.Season){
+        seasons.add(match.Season);
+    }
 
-        lastMatch:
-            matches[matches.length-1].Date || "-",
+});
 
-        matches:
-            matches.length
+return {
 
-    };
+    name:playerName,
+
+    debut:
+        matches[0].Date || "-",
+
+    lastMatch:
+        matches[matches.length-1].Date || "-",
+
+    seasons:
+        seasons.size,
+
+    matches:
+        matches.length
+
+};
 
 }
 
@@ -985,6 +1018,10 @@ function updateBasicInfo(){
         "playerALastMatch"
     ).textContent = playerA.lastMatch;
 
+document.getElementById(
+    "playerASeasons"
+).textContent = playerA.seasons;
+
     document.getElementById(
         "playerAMatches"
     ).textContent = playerA.matches;
@@ -1000,6 +1037,10 @@ function updateBasicInfo(){
     document.getElementById(
         "playerBLastMatch"
     ).textContent = playerB.lastMatch;
+
+document.getElementById(
+    "playerBSeasons"
+).textContent = playerB.seasons;
 
     document.getElementById(
         "playerBMatches"
