@@ -555,52 +555,6 @@ Loading...
 
 <script>
 
-function debug(msg){
-
-    const box =
-        document.getElementById("debugBox");
-
-    if(!box) return;
-
-    box.style.display = "block";
-
-    box.innerHTML += 
-        <div style="margin-bottom:6px;">
-            ${msg}
-        </div>
-    ;
-}
-
-window.onerror = function(
-    message,
-    source,
-    line,
-    column
-){
-
-    debug(
-        ❌ JS ERROR<br>
-        Message: ${message}<br>
-        Line: ${line}<br>
-        Column: ${column}
-    );
-
-};
-
-window.addEventListener(
-    "unhandledrejection",
-    event => {
-
-        debug(
-            ❌ PROMISE ERROR<br>
-            ${event.reason}
-        );
-
-    }
-);
-
-debug("✅ SCRIPT START");
-
 let allMatches = [];
 
 let flickSortColumn = "total";
