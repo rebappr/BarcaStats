@@ -1227,6 +1227,12 @@ function clearCompareInput(side){
 
         selectedPlayerA = null;
 
+        document
+            .querySelector("#comparePlayerA")
+            .parentElement
+            .querySelector(".clear-input")
+            .classList.remove("show");
+
     }else{
 
         document.getElementById(
@@ -1238,6 +1244,12 @@ function clearCompareInput(side){
         ).innerHTML = "";
 
         selectedPlayerB = null;
+
+        document
+            .querySelector("#comparePlayerB")
+            .parentElement
+            .querySelector(".clear-input")
+            .classList.remove("show");
 
     }
 
