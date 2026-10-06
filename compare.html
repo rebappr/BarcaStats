@@ -897,15 +897,22 @@ for(let i=1;i<=12;i++){
 
 }
 
-        if(played){
-            matches.push(match);
-        }
+if(played){
+    matches.push(match);
+}
 
-    });
+});
 
-    if(matches.length === 0){
-        return null;
-    }
+matches.sort((a,b) => {
+
+    return new Date(a.Date) -
+           new Date(b.Date);
+
+});
+
+if(matches.length === 0){
+    return null;
+}
 
 const seasons = new Set();
 
