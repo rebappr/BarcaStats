@@ -573,9 +573,20 @@
     id="performanceCard"
     style="display:none;">
 
-    <div class="compare-result-title">
-        Performance Statistics
-    </div>
+<div
+    class="compare-result-title collapsible-title"
+    onclick="toggleSection('performance')">
+
+    <span>Performance Statistics</span>
+
+    <span
+        id="performanceArrow">
+
+        ▼
+
+    </span>
+
+</div>
 
     <div class="summary-table">
 
@@ -739,9 +750,20 @@
     id="resultsCard"
     style="display:none;">
 
-    <div class="compare-result-title">
-        Match Results
-    </div>
+<div
+    class="compare-result-title collapsible-title"
+    onclick="toggleSection('results')">
+
+    <span>Match Results</span>
+
+    <span
+        id="resultsArrow">
+
+        ▼
+
+    </span>
+
+</div>
 
     <div class="summary-table">
 
@@ -859,9 +881,20 @@
     id="competitionCard"
     style="display:none;">
 
-    <div class="compare-result-title">
-        Competition Record
-    </div>
+<div
+    class="compare-result-title collapsible-title"
+    onclick="toggleSection('competition')">
+
+    <span>Competition Record</span>
+
+    <span
+        id="competitionArrow">
+
+        ▼
+
+    </span>
+
+</div>
 
     <div id="competitionContent"></div>
 
