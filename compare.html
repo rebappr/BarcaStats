@@ -1704,10 +1704,16 @@ function competitionRow(
         <span class="summary-label">
 
             ${stat === "WinPct"
-                ? "Win %"
-                : stat === "PPM"
-                ? "Points / Match"
-                : stat}
+    ? "Win %"
+    : stat === "PPM"
+    ? "Points / Match"
+    : stat === "GA"
+    ? "Goal Contributions"
+    : stat === "GPM"
+    ? "Goals / Match"
+    : stat === "APM"
+    ? "Assists / Match"
+    : stat}
 
         </span>
 
