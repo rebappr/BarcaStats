@@ -1558,15 +1558,11 @@ function getPlayerInfo(playerName){
     allMatches.forEach(match => {
 
         if(
-    !playerPlayedMatch(
+    playerPlayedMatch(
         match,
         playerName
     )
 ){
-    return;
-}
-
-if(played){
     matches.push(match);
 }
 
