@@ -1550,6 +1550,13 @@ if(
         "playerBAPM"
     ).textContent = playerB.assistsPerMatch;
 
+setComparisonBar(
+    playerA.goals,
+    playerB.goals,
+    "goalsBarA",
+    "goalsBarB"
+);
+
 }
 
 function clearCompareInput(side){
