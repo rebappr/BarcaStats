@@ -1306,11 +1306,11 @@ function getPerformanceStats(playerName){
 
         for(let i=1;i<=20;i++){
 
-            if(match["Goalscorer " + i] === playerName){
+            if(match["Goal player " + i] === playerName){
                 goals++;
             }
 
-            if(match["Assist " + i] === playerName){
+            if(match["Assist player" + i] === playerName){
                 assists++;
             }
 
@@ -1340,6 +1340,72 @@ function getPerformanceStats(playerName){
             : "0.000"
 
     };
+
+}
+
+function updatePerformanceStats(){
+
+    const playerA =
+        getPerformanceStats(
+            selectedPlayerA
+        );
+
+    const playerB =
+        getPerformanceStats(
+            selectedPlayerB
+        );
+
+    document
+        .getElementById("performanceCard")
+        .style.display = "block";
+
+    document.getElementById(
+        "playerAMatchesStat"
+    ).textContent = playerA.matches;
+
+    document.getElementById(
+        "playerBMatchesStat"
+    ).textContent = playerB.matches;
+
+    document.getElementById(
+        "playerAGoals"
+    ).textContent = playerA.goals;
+
+    document.getElementById(
+        "playerBGoals"
+    ).textContent = playerB.goals;
+
+    document.getElementById(
+        "playerAAssists"
+    ).textContent = playerA.assists;
+
+    document.getElementById(
+        "playerBAssists"
+    ).textContent = playerB.assists;
+
+    document.getElementById(
+        "playerAGA"
+    ).textContent = playerA.contributions;
+
+    document.getElementById(
+        "playerBGA"
+    ).textContent = playerB.contributions;
+
+    document.getElementById(
+        "playerAGPM"
+    ).textContent = playerA.goalsPerMatch;
+
+    document.getElementById(
+        "playerBGPM"
+    ).textContent = playerB.goalsPerMatch;
+
+    document.getElementById(
+        "playerAAPM"
+    ).textContent = playerA.assistsPerMatch;
+
+    document.getElementById(
+        "playerBAPM"
+    ).textContent = playerB.assistsPerMatch;
 
 }
 
