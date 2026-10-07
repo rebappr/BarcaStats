@@ -982,19 +982,6 @@ function getMainPosition(playerName){
     return player.Position || "-";
 
 }
-function getMainPosition(playerName){
-
-    const player = playersData.find(p =>
-        p.Player === playerName
-    );
-
-    if(!player){
-        return "-";
-    }
-
-    return player.Position || "-";
-
-}
 
 function getPlayerInfo(playerName){
 
