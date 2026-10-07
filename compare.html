@@ -557,15 +557,19 @@
 
 let allMatches = [];
 
-fetch("data.json")
-.then(r => r.json())
-.then(data => {
+Promise.all([
+    fetch("data.json").then(r => r.json()),
+    fetch("players.json").then(r => r.json())
+])
+.then(([matches, players]) => {
 
-allMatches = data;
+    allMatches = matches;
 
-initPersonSearch();
+    playersData = players;
 
-initCompareSearch();
+    initPersonSearch();
+
+    initCompareSearch();
 
 })
 .catch(error => {
