@@ -2574,9 +2574,17 @@ if(
             selectedPlayerB
         );
 
-    document
-        .getElementById("performanceCard")
-        .style.display = "block";
+document
+    .getElementById("performanceCard")
+    .style.display = "block";
+
+document
+    .getElementById("performanceContent")
+    .style.display = "none";
+
+document
+    .getElementById("performanceArrow")
+    .textContent = "▼";
 
     document.getElementById(
         "playerAMatchesStat"
