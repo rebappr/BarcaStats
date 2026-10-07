@@ -1551,10 +1551,45 @@ if(
     ).textContent = playerB.assistsPerMatch;
 
 setComparisonBar(
+    playerA.matches,
+    playerB.matches,
+    "matchesBarA",
+    "matchesBarB"
+);
+
+setComparisonBar(
     playerA.goals,
     playerB.goals,
     "goalsBarA",
     "goalsBarB"
+);
+
+setComparisonBar(
+    playerA.assists,
+    playerB.assists,
+    "assistsBarA",
+    "assistsBarB"
+);
+
+setComparisonBar(
+    playerA.contributions,
+    playerB.contributions,
+    "gaBarA",
+    "gaBarB"
+);
+
+setComparisonBar(
+    Number(playerA.goalsPerMatch),
+    Number(playerB.goalsPerMatch),
+    "gpmBarA",
+    "gpmBarB"
+);
+
+setComparisonBar(
+    Number(playerA.assistsPerMatch),
+    Number(playerB.assistsPerMatch),
+    "apmBarA",
+    "apmBarB"
 );
 
 }
