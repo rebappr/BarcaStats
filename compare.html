@@ -1994,6 +1994,41 @@ setComparisonBar(
                 playerB.matches
 
             );
+            
+highlightWinner(
+    `${safeId}GoalsLeft`,
+    `${safeId}GoalsRight`,
+    playerA.goals,
+    playerB.goals
+);
+
+highlightWinner(
+    `${safeId}AssistsLeft`,
+    `${safeId}AssistsRight`,
+    playerA.assists,
+    playerB.assists
+);
+
+highlightWinner(
+    `${safeId}GoalContributionsLeft`,
+    `${safeId}GoalContributionsRight`,
+    playerA.contributions,
+    playerB.contributions
+);
+
+highlightWinner(
+    `${safeId}Goals/MatchLeft`,
+    `${safeId}Goals/MatchRight`,
+    Number(playerA.goalsPerMatch),
+    Number(playerB.goalsPerMatch)
+);
+
+highlightWinner(
+    `${safeId}Assists/MatchLeft`,
+    `${safeId}Assists/MatchRight`,
+    Number(playerA.assistsPerMatch),
+    Number(playerB.assistsPerMatch)
+);
 
             highlightWinner(
 
