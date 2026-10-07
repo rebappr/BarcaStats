@@ -515,20 +515,6 @@
 
         <div class="summary-row">
 
-            <span id="playerAName">-</span>
-
-            <div class="summary-center">
-                <span class="summary-label">
-                    Name
-                </span>
-            </div>
-
-            <span id="playerBName">-</span>
-
-        </div>
-
-        <div class="summary-row">
-
             <span id="playerAPosition">-</span>
 
             <div class="summary-center">
@@ -2089,10 +2075,6 @@ if(
         .getElementById("basicInfoCard")
         .style.display = "block";
 
-    document.getElementById(
-        "playerAName"
-    ).textContent = playerA.name;
-
 	document.getElementById(
 	    "playerAPosition"
 	).textContent = playerA.position;
@@ -2108,10 +2090,6 @@ if(
 document.getElementById(
     "playerASeasons"
 ).textContent = playerA.seasons;
-
-    document.getElementById(
-        "playerBName"
-    ).textContent = playerB.name;
 
 document.getElementById(
     "playerBPosition"
