@@ -1413,6 +1413,44 @@ function getPerformanceStats(playerName){
 
 }
 
+function setComparisonBar(
+
+    leftValue,
+    rightValue,
+
+    leftId,
+    rightId
+
+){
+
+    const total =
+        leftValue + rightValue;
+
+    let leftPct = 50;
+    let rightPct = 50;
+
+    if(total > 0){
+
+        leftPct =
+            (leftValue / total) * 100;
+
+        rightPct =
+            (rightValue / total) * 100;
+
+    }
+
+    document.getElementById(
+        leftId
+    ).style.width =
+        leftPct + "%";
+
+    document.getElementById(
+        rightId
+    ).style.width =
+        rightPct + "%";
+
+}
+
 function updatePerformanceStats(){
       
 if(
