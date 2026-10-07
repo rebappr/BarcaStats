@@ -1547,9 +1547,6 @@ function getAllCompetitions(){
 
 function getCompetitionRecord(
 
-let goals = 0;
-let assists = 0;
-
     playerName,
     competition
 
@@ -1559,6 +1556,9 @@ let assists = 0;
     let wins = 0;
     let draws = 0;
     let losses = 0;
+
+    let goals = 0;
+    let assists = 0;
 
     allMatches.forEach(match => {
 
