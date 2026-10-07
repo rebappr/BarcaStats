@@ -1392,6 +1392,17 @@ function getPerformanceStats(playerName){
 }
 
 function updatePerformanceStats(){
+      
+if(
+    !selectedPlayerA ||
+    !selectedPlayerB
+){
+    document.getElementById(
+        "performanceCard"
+    ).style.display = "none";
+
+    return;
+}
 
     const playerA =
         getPerformanceStats(
