@@ -1335,6 +1335,37 @@ if(side === "A"){
 
 }
 
+function playerPlayedMatch(
+    match,
+    playerName
+){
+
+    for(let i=1;i<=11;i++){
+
+        if(
+            match["Player name " + i]
+            === playerName
+        ){
+            return true;
+        }
+
+    }
+
+    for(let i=1;i<=12;i++){
+
+        if(
+            match["Sub on " + i]
+            === playerName
+        ){
+            return true;
+        }
+
+    }
+
+    return false;
+
+}
+
 function updateCompareResult(){
 
     updateBasicInfo();
@@ -1526,22 +1557,13 @@ function getPlayerInfo(playerName){
 
     allMatches.forEach(match => {
 
-        let played = false;
-
-for(let i=1;i<=11;i++){
-
-    if(match["Player name " + i] === playerName){
-        played = true;
-    }
-
-}
-
-for(let i=1;i<=12;i++){
-
-    if(match["Sub on " + i] === playerName){
-        played = true;
-    }
-
+        if(
+    !playerPlayedMatch(
+        match,
+        playerName
+    )
+){
+    return;
 }
 
 if(played){
@@ -1626,29 +1648,14 @@ function getCompetitionRecord(
             return;
         }
 
-        let played = false;
-
-        for(let i=1;i<=11;i++){
-
-            if(
-                match["Player name " + i]
-                === playerName
-            ){
-                played = true;
-            }
-
-        }
-
-        for(let i=1;i<=12;i++){
-
-            if(
-                match["Sub on " + i]
-                === playerName
-            ){
-                played = true;
-            }
-
-        }
+        if(
+    !playerPlayedMatch(
+        match,
+        playerName
+    )
+){
+    return;
+}
 
         if(!played){
             return;
@@ -2055,27 +2062,14 @@ function getMatchResults(playerName){
 
     allMatches.forEach(match => {
 
-        let played = false;
-
-        for(let i=1;i<=11;i++){
-
-            if(match["Player name " + i] === playerName){
-                played = true;
-            }
-
-        }
-
-        for(let i=1;i<=12;i++){
-
-            if(match["Sub on " + i] === playerName){
-                played = true;
-            }
-
-        }
-
-        if(!played){
-            return;
-        }
+        if(
+    !playerPlayedMatch(
+        match,
+        playerName
+    )
+){
+    return;
+}
 
         matches++;
 
@@ -2318,27 +2312,14 @@ function getPerformanceStats(playerName){
 
     allMatches.forEach(match => {
 
-        let played = false;
-
-        for(let i=1;i<=11;i++){
-
-            if(match["Player name " + i] === playerName){
-                played = true;
-            }
-
-        }
-
-        for(let i=1;i<=12;i++){
-
-            if(match["Sub on " + i] === playerName){
-                played = true;
-            }
-
-        }
-
-        if(!played){
-            return;
-        }
+        if(
+    !playerPlayedMatch(
+        match,
+        playerName
+    )
+){
+    return;
+}
 
         matches++;
 
