@@ -309,11 +309,24 @@
 @media(max-width:820px){
       
       
-.summary-row{
-    grid-template-columns:
-        70px
-        1fr
-        70px;
+@media(max-width:820px){
+
+    .summary-row{
+        grid-template-columns:
+            minmax(60px,80px)
+            1fr
+            minmax(60px,80px);
+    }
+
+    .summary-row span:first-child,
+    .summary-row span:last-child{
+
+        font-size:.95rem;
+
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
 }
 
     .compare-selector{
@@ -323,14 +336,6 @@
     .compare-vs{
         text-align:center;
     }
-
-.basic-info-grid{
-    grid-template-columns:1fr;
-}
-
-.basic-divider{
-    text-align:center;
-}
 
       
 	.left-panel,
@@ -2123,6 +2128,13 @@ document.getElementById(
 document.getElementById(
     "playerBSeasons"
 ).textContent = playerB.seasons;
+
+highlightWinner(
+    "playerASeasons",
+    "playerBSeasons",
+    Number(playerA.seasons),
+    Number(playerB.seasons)
+);
 
 }
 
