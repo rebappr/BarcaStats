@@ -1866,48 +1866,52 @@ function updateCompetitionStats(){
         ${comp}
     </div>
 
-    ${competitionRow(
-        safeId,
-        "Matches",
-        playerA.matches,
-        playerB.matches
-    )}
+    <div class="summary-table">
 
-    ${competitionRow(
-        safeId,
-        "Wins",
-        playerA.wins,
-        playerB.wins
-    )}
+        ${competitionRow(
+            safeId,
+            "Matches",
+            playerA.matches,
+            playerB.matches
+        )}
 
-    ${competitionRow(
-        safeId,
-        "Draws",
-        playerA.draws,
-        playerB.draws
-    )}
+        ${competitionRow(
+            safeId,
+            "Wins",
+            playerA.wins,
+            playerB.wins
+        )}
 
-    ${competitionRow(
-        safeId,
-        "Losses",
-        playerA.losses,
-        playerB.losses
-    )}
+        ${competitionRow(
+            safeId,
+            "Draws",
+            playerA.draws,
+            playerB.draws
+        )}
 
-    ${competitionRow(
-        safeId,
-        "WinPct",
-        playerA.winPct,
-        playerB.winPct,
-        "%"
-    )}
+        ${competitionRow(
+            safeId,
+            "Losses",
+            playerA.losses,
+            playerB.losses
+        )}
 
-    ${competitionRow(
-        safeId,
-        "PPM",
-        playerA.ppm,
-        playerB.ppm
-    )}
+        ${competitionRow(
+            safeId,
+            "WinPct",
+            playerA.winPct,
+            playerB.winPct,
+            "%"
+        )}
+
+        ${competitionRow(
+            safeId,
+            "PPM",
+            playerA.ppm,
+            playerB.ppm
+        )}
+
+    </div>
 
 </div>
 
