@@ -1547,6 +1547,9 @@ function getAllCompetitions(){
 
 function getCompetitionRecord(
 
+let goals = 0;
+let assists = 0;
+
     playerName,
     competition
 
@@ -1575,6 +1578,18 @@ function getCompetitionRecord(
 }
 
         matches++;
+      
+for(let i=1;i<=20;i++){
+
+    if(match["Goal Player " + i] === playerName){
+        goals++;
+    }
+
+    if(match["Assist Player " + i] === playerName){
+        assists++;
+    }
+
+}
 
         const scored =
             Number(match.Scored);
@@ -1795,6 +1810,41 @@ function updateCompetitionStats(){
             playerA.matches,
             playerB.matches
         )}
+      
+      ${competitionRow(
+    safeId,
+    "Goals",
+    playerA.goals,
+    playerB.goals
+)}
+
+${competitionRow(
+    safeId,
+    "Assists",
+    playerA.assists,
+    playerB.assists
+)}
+
+${competitionRow(
+    safeId,
+    "Goal Contributions",
+    playerA.contributions,
+    playerB.contributions
+)}
+
+${competitionRow(
+    safeId,
+    "Goals / Match",
+    playerA.goalsPerMatch,
+    playerB.goalsPerMatch
+)}
+
+${competitionRow(
+    safeId,
+    "Assists / Match",
+    playerA.assistsPerMatch,
+    playerB.assistsPerMatch
+)}
 
         ${competitionRow(
             safeId,
@@ -1849,6 +1899,41 @@ function updateCompetitionStats(){
                 `${safeId}MatchesB`
 
             );
+            
+setComparisonBar(
+    Number(playerA.goals),
+    Number(playerB.goals),
+    `${safeId}GoalsA`,
+    `${safeId}GoalsB`
+);
+
+setComparisonBar(
+    Number(playerA.assists),
+    Number(playerB.assists),
+    `${safeId}AssistsA`,
+    `${safeId}AssistsB`
+);
+
+setComparisonBar(
+    Number(playerA.contributions),
+    Number(playerB.contributions),
+    `${safeId}GoalContributionsA`,
+    `${safeId}GoalContributionsB`
+);
+
+setComparisonBar(
+    Number(playerA.goalsPerMatch),
+    Number(playerB.goalsPerMatch),
+    `${safeId}Goals/MatchA`,
+    `${safeId}Goals/MatchB`
+);
+
+setComparisonBar(
+    Number(playerA.assistsPerMatch),
+    Number(playerB.assistsPerMatch),
+    `${safeId}Assists/MatchA`,
+    `${safeId}Assists/MatchB`
+);
 
             setComparisonBar(
 
@@ -2019,6 +2104,23 @@ function getMatchResults(playerName){
         draws,
 
         losses,
+      
+      goals,
+
+assists,
+
+contributions:
+    goals + assists,
+
+goalsPerMatch:
+    matches
+    ? (goals / matches).toFixed(3)
+    : "0.000",
+
+assistsPerMatch:
+    matches
+    ? (assists / matches).toFixed(3)
+    : "0.000",
 
         winPct:
             matches
