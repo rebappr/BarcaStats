@@ -7,6 +7,9 @@
     --barca-blue:#004D98;
     --barca-red:#A50044;
 
+    --stats-left:#004D98;
+    --ststs-right:#A50044;
+
     --bg:#0f172a;
     --text:#ffffff;
 
@@ -49,7 +52,11 @@
 @media (prefers-color-scheme: light){
 
     :root{
+        
 
+        --stats-left:#004D98;
+        --ststs-right:#A50044;
+    
         --bg:#f8fafc;
         --text:#0f172a;
 
