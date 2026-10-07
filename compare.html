@@ -1385,6 +1385,14 @@ function updateMatchResults(){
         "resultsCard"
     ).style.display = "block";
 
+document.getElementById(
+    "resultsContent"
+).style.display = "none";
+
+document.getElementById(
+    "resultsArrow"
+).textContent = "▼";
+
     document.getElementById(
         "playerAWins"
     ).textContent = playerA.wins;
