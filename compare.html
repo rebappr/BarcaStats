@@ -1630,6 +1630,19 @@ function getMatchResults(playerName){
 }
 
 function updateBasicInfo(){
+      
+if(
+    !selectedPlayerA ||
+    !selectedPlayerB
+){
+
+    document.getElementById(
+        "basicInfoCard"
+    ).style.display = "none";
+
+    return;
+
+}
 
     if(
         !selectedPlayerA ||
