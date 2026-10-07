@@ -1409,6 +1409,42 @@ function updateMatchResults(){
         "ppmBarB"
     );
 
+highlightWinner(
+    "playerAWins",
+    "playerBWins",
+    playerA.wins,
+    playerB.wins
+);
+
+highlightWinner(
+    "playerADraws",
+    "playerBDraws",
+    playerA.draws,
+    playerB.draws
+);
+
+highlightWinner(
+    "playerALosses",
+    "playerBLosses",
+    playerA.losses,
+    playerB.losses
+);
+
+highlightWinner(
+    "playerAWinPct",
+    "playerBWinPct",
+    Number(playerA.winPct),
+    Number(playerB.winPct)
+);
+
+highlightWinner(
+    "playerAPPM",
+    "playerBPPM",
+    Number(playerA.ppm),
+    Number(playerB.ppm)
+);
+
+
 }
 
 function formatDate(dateString){
