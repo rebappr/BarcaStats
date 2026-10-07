@@ -1573,6 +1573,39 @@ function setComparisonBar(
 
 }
 
+function highlightWinner(
+
+    leftId,
+    rightId,
+
+    leftValue,
+    rightValue
+
+){
+
+    const left =
+        document.getElementById(leftId);
+
+    const right =
+        document.getElementById(rightId);
+
+    left.style.color = "";
+    right.style.color = "";
+
+    if(leftValue > rightValue){
+
+        left.style.color =
+            "var(--barca-red)";
+
+    }else if(rightValue > leftValue){
+
+        right.style.color =
+            "var(--barca-blue)";
+
+    }
+
+}
+
 function updatePerformanceStats(){
       
 if(
@@ -1688,6 +1721,48 @@ setComparisonBar(
     Number(playerB.assistsPerMatch),
     "apmBarA",
     "apmBarB"
+);
+
+highlightWinner(
+    "playerAMatchesStat",
+    "playerBMatchesStat",
+    playerA.matches,
+    playerB.matches
+);
+
+highlightWinner(
+    "playerAGoals",
+    "playerBGoals",
+    playerA.goals,
+    playerB.goals
+);
+
+highlightWinner(
+    "playerAAssists",
+    "playerBAssists",
+    playerA.assists,
+    playerB.assists
+);
+
+highlightWinner(
+    "playerAGA",
+    "playerBGA",
+    playerA.contributions,
+    playerB.contributions
+);
+
+highlightWinner(
+    "playerAGPM",
+    "playerBGPM",
+    Number(playerA.goalsPerMatch),
+    Number(playerB.goalsPerMatch)
+);
+
+highlightWinner(
+    "playerAAPM",
+    "playerBAPM",
+    Number(playerA.assistsPerMatch),
+    Number(playerB.assistsPerMatch)
 );
 
 }
