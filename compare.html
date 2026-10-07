@@ -975,6 +975,33 @@ function formatDate(dateString){
 
 }
 
+function getMainPosition(playerName){
+
+    const player = playersData.find(p =>
+        p.Player === playerName
+    );
+
+    if(!player){
+        return "-";
+    }
+
+    return player.Position || "-";
+
+}
+function getMainPosition(playerName){
+
+    const player = playersData.find(p =>
+        p.Player === playerName
+    );
+
+    if(!player){
+        return "-";
+    }
+
+    return player.Position || "-";
+
+}
+
 function getPlayerInfo(playerName){
 
     const matches = [];
@@ -1023,6 +1050,9 @@ return {
 
     name:playerName,
 
+position:
+        getMainPosition(playerName),
+
 lastMatch:
     formatDate(
         matches[0].Date
@@ -1034,10 +1064,7 @@ debut:
     ),
 
     seasons:
-        seasons.size,
-
-    matches:
-        matches.length
+        seasons.size
 
 };
 
