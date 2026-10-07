@@ -1920,8 +1920,8 @@ function updateCompetitionStats(){
                 Number(playerA.matches),
                 Number(playerB.matches),
 
-                ${safeId}MatchesA,
-                ${safeId}MatchesB
+                `${safeId}MatchesA`,
+                `${safeId}MatchesB`
 
             );
 
@@ -1930,8 +1930,8 @@ function updateCompetitionStats(){
                 Number(playerA.wins),
                 Number(playerB.wins),
 
-                ${safeId}WinsA,
-                ${safeId}WinsB
+                `${safeId}WinsA`,
+                `${safeId}WinsB`
 
             );
 
@@ -1940,8 +1940,8 @@ function updateCompetitionStats(){
                 Number(playerA.draws),
                 Number(playerB.draws),
 
-                ${safeId}DrawsA,
-                ${safeId}DrawsB
+                `${safeId}DrawsA`,
+                `${safeId}DrawsB`
 
             );
 
@@ -1950,8 +1950,8 @@ function updateCompetitionStats(){
                 Number(playerA.losses),
                 Number(playerB.losses),
 
-                ${safeId}LossesA,
-                ${safeId}LossesB
+                `${safeId}LossesA`,
+                `${safeId}LossesB`
 
             );
 
@@ -1960,8 +1960,8 @@ function updateCompetitionStats(){
                 Number(playerA.winPct),
                 Number(playerB.winPct),
 
-                ${safeId}WinPctA,
-                ${safeId}WinPctB
+                `${safeId}WinPctA`,
+                `${safeId}WinPctB`
 
             );
 
@@ -1970,15 +1970,15 @@ function updateCompetitionStats(){
                 Number(playerA.ppm),
                 Number(playerB.ppm),
 
-                ${safeId}PPMA,
-                ${safeId}PPMB
+                `${safeId}PPMA`,
+                `${safeId}PPMB`
 
             );
 
             highlightWinner(
 
-                ${safeId}MatchesLeft,
-                ${safeId}MatchesRight,
+                `${safeId}MatchesLeft`,
+                `${safeId}MatchesRight`,
 
                 playerA.matches,
                 playerB.matches
@@ -1987,8 +1987,8 @@ function updateCompetitionStats(){
 
             highlightWinner(
 
-                ${safeId}WinsLeft,
-                ${safeId}WinsRight,
+                `${safeId}WinsLeft`,
+                `${safeId}WinsRight`,
 
                 playerA.wins,
                 playerB.wins
@@ -1997,8 +1997,8 @@ function updateCompetitionStats(){
 
             highlightWinner(
 
-                ${safeId}DrawsLeft,
-                ${safeId}DrawsRight,
+                `${safeId}DrawsLeft`,
+                `${safeId}DrawsRight`,
 
                 playerA.draws,
                 playerB.draws
@@ -2007,8 +2007,8 @@ function updateCompetitionStats(){
 
             highlightLowerBetter(
 
-                ${safeId}LossesLeft,
-                ${safeId}LossesRight,
+                `${safeId}LossesLeft`,
+                `${safeId}LossesRight`,
 
                 playerA.losses,
                 playerB.losses
@@ -2017,8 +2017,8 @@ function updateCompetitionStats(){
 
             highlightWinner(
 
-                ${safeId}WinPctLeft,
-                ${safeId}WinPctRight,
+                `${safeId}WinPctLeft`,
+                `${safeId}WinPctRight`,
 
                 Number(playerA.winPct),
                 Number(playerB.winPct)
@@ -2027,8 +2027,8 @@ function updateCompetitionStats(){
 
             highlightWinner(
 
-                ${safeId}PPMLeft,
-                ${safeId}PPMRight,
+                `${safeId}PPMLeft`,
+                `${safeId}PPMRight`,
 
                 Number(playerA.ppm),
                 Number(playerB.ppm)
