@@ -1272,6 +1272,77 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+function getPerformanceStats(playerName){
+
+    let matches = 0;
+    let goals = 0;
+    let assists = 0;
+
+    allMatches.forEach(match => {
+
+        let played = false;
+
+        for(let i=1;i<=11;i++){
+
+            if(match["Player name " + i] === playerName){
+                played = true;
+            }
+
+        }
+
+        for(let i=1;i<=12;i++){
+
+            if(match["Sub on " + i] === playerName){
+                played = true;
+            }
+
+        }
+
+        if(!played){
+            return;
+        }
+
+        matches++;
+
+        for(let i=1;i<=20;i++){
+
+            if(match["Goalscorer " + i] === playerName){
+                goals++;
+            }
+
+            if(match["Assist " + i] === playerName){
+                assists++;
+            }
+
+        }
+
+    });
+
+    return {
+
+        matches,
+
+        goals,
+
+        assists,
+
+        contributions:
+            goals + assists,
+
+        goalsPerMatch:
+            matches
+            ? (goals / matches).toFixed(3)
+            : "0.000",
+
+        assistsPerMatch:
+            matches
+            ? (assists / matches).toFixed(3)
+            : "0.000"
+
+    };
+
+}
+
 function clearCompareInput(side){
 
     if(side === "A"){
