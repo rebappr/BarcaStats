@@ -1307,6 +1307,108 @@ function updateCompareResult(){
 
     updatePerformanceStats();
 
+    updateMatchResults();
+
+}
+
+function updateMatchResults(){
+
+    if(
+        !selectedPlayerA ||
+        !selectedPlayerB
+    ){
+        document.getElementById(
+            "resultsCard"
+        ).style.display = "none";
+
+        return;
+    }
+
+    const playerA =
+        getMatchResults(selectedPlayerA);
+
+    const playerB =
+        getMatchResults(selectedPlayerB);
+
+    document.getElementById(
+        "resultsCard"
+    ).style.display = "block";
+
+    document.getElementById(
+        "playerAWins"
+    ).textContent = playerA.wins;
+
+    document.getElementById(
+        "playerBWins"
+    ).textContent = playerB.wins;
+
+    document.getElementById(
+        "playerADraws"
+    ).textContent = playerA.draws;
+
+    document.getElementById(
+        "playerBDraws"
+    ).textContent = playerB.draws;
+
+    document.getElementById(
+        "playerALosses"
+    ).textContent = playerA.losses;
+
+    document.getElementById(
+        "playerBLosses"
+    ).textContent = playerB.losses;
+
+    document.getElementById(
+        "playerAWinPct"
+    ).textContent = playerA.winPct + "%";
+
+    document.getElementById(
+        "playerBWinPct"
+    ).textContent = playerB.winPct + "%";
+
+    document.getElementById(
+        "playerAPPM"
+    ).textContent = playerA.ppm;
+
+    document.getElementById(
+        "playerBPPM"
+    ).textContent = playerB.ppm;
+
+    setComparisonBar(
+        playerA.wins,
+        playerB.wins,
+        "winsBarA",
+        "winsBarB"
+    );
+
+    setComparisonBar(
+        playerA.draws,
+        playerB.draws,
+        "drawsBarA",
+        "drawsBarB"
+    );
+
+    setComparisonBar(
+        playerA.losses,
+        playerB.losses,
+        "lossesBarA",
+        "lossesBarB"
+    );
+
+    setComparisonBar(
+        Number(playerA.winPct),
+        Number(playerB.winPct),
+        "winPctBarA",
+        "winPctBarB"
+    );
+
+    setComparisonBar(
+        Number(playerA.ppm),
+        Number(playerB.ppm),
+        "ppmBarA",
+        "ppmBarB"
+    );
+
 }
 
 function formatDate(dateString){
@@ -2012,6 +2114,9 @@ document.getElementById(
     "performanceCard"
 ).style.display = "none";
 
+document.getElementById(
+    "resultsCard"
+).style.display = "none";
 
 }
 
