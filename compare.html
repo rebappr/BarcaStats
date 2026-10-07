@@ -1490,7 +1490,7 @@ highlightWinner(
     playerB.draws
 );
 
-highlightWinner(
+highlightLowerBetter(
     "playerALosses",
     "playerBLosses",
     playerA.losses,
@@ -2181,6 +2181,10 @@ document.getElementById(
     "playerBSeasons"
 ).textContent = playerB.seasons;
 
+document.getElementById(
+    "competitionCard"
+).style.display = "block";
+
 }
 
 
@@ -2632,7 +2636,7 @@ document.getElementById(
 
 document.getElementById(
     "competitionCard"
-).style.display = "block";
+).style.display = "none";
 
 }
 
