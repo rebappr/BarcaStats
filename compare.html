@@ -1617,28 +1617,45 @@ for(let i=1;i<=20;i++){
 
     return {
 
-        matches,
+    matches,
 
-        wins,
+    wins,
 
-        draws,
+    draws,
 
-        losses,
+    losses,
 
-        winPct:
-            matches
-            ? ((wins / matches) * 100)
-                .toFixed(1)
-            : "0.0",
+    goals,
 
-        ppm:
-            matches
-            ? (((wins * 3) + draws)
-                / matches)
-                .toFixed(2)
-            : "0.00"
+    assists,
 
-    };
+    contributions:
+        goals + assists,
+
+    goalsPerMatch:
+        matches
+        ? (goals / matches).toFixed(3)
+        : "0.000",
+
+    assistsPerMatch:
+        matches
+        ? (assists / matches).toFixed(3)
+        : "0.000",
+
+    winPct:
+        matches
+        ? ((wins / matches) * 100)
+            .toFixed(1)
+        : "0.0",
+
+    ppm:
+        matches
+        ? (((wins * 3) + draws)
+            / matches)
+            .toFixed(2)
+        : "0.00"
+
+};
 
 }
 
