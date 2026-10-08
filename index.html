@@ -251,6 +251,8 @@
 
 <div class="menu-overlay" id="menuOverlay"></div>
 
+<div id="headerTrigger"></div>
+
 <div class="header">
     <div class="header-inner">
         <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
@@ -745,6 +747,25 @@ window.addEventListener("scroll", () => {
 
 });
 
+const header = document.querySelector(".header");
+const trigger = document.getElementById("headerTrigger");
+
+const observer = new IntersectionObserver(
+    ([entry]) => {
+
+        if(entry.isIntersecting){
+            header.classList.remove("sticky");
+        }else{
+            header.classList.add("sticky");
+        }
+
+    },
+    {
+        threshold: 0
+    }
+);
+
+observer.observe(trigger);
 
 </script>
 
