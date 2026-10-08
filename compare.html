@@ -1778,17 +1778,27 @@ const bothGoalkeepers =
 
     competitions.forEach(comp => {
 
-        const playerA =
-            getCompetitionRecord(
-                selectedPlayerA,
-                comp
-            );
+const playerA =
+    bothGoalkeepers
+    ? getGoalkeeperCompetitionRecord(
+        selectedPlayerA,
+        comp
+    )
+    : getCompetitionRecord(
+        selectedPlayerA,
+        comp
+    );
 
-        const playerB =
-            getCompetitionRecord(
-                selectedPlayerB,
-                comp
-            );
+const playerB =
+    bothGoalkeepers
+    ? getGoalkeeperCompetitionRecord(
+        selectedPlayerB,
+        comp
+    )
+    : getCompetitionRecord(
+        selectedPlayerB,
+        comp
+    );
 
         if(
             playerA.matches === 0 &&
