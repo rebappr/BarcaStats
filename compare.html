@@ -2722,118 +2722,6 @@ if(
     !selectedPlayerA ||
     !selectedPlayerB
 ){
-    document.getElementById(
-        "performanceCard"
-    ).style.display = "none";
-
-    return;
-}
-
-    const playerA =
-        getPerformanceStats(
-            selectedPlayerA
-        );
-
-    const playerB =
-        getPerformanceStats(
-            selectedPlayerB
-        );
-      
-const bothGoalkeepers =
-
-    isGoalkeeper(selectedPlayerA)
-    &&
-    isGoalkeeper(selectedPlayerB);
-
-const container =
-    document.getElementById(
-        "performanceStatsContent"
-    );
-
-if(bothGoalkeepers){
-
-    container.innerHTML =
-
-        performanceRow(
-            "gkMatches",
-            "Matches"
-        )
-
-        +
-
-        performanceRow(
-            "gkConceded",
-            "Goals Conceded"
-        )
-
-        +
-
-        performanceRow(
-            "gkCleanSheets",
-            "Clean Sheets"
-        )
-
-        +
-
-        performanceRow(
-            "gkCPM",
-            "Goals Conceded / Match"
-        )
-
-        +
-
-        performanceRow(
-            "gkCSP",
-            "Clean Sheet %"
-        );
-
-}
-else{
-
-    container.innerHTML =
-
-        performanceRow(
-            "matches",
-            "Matches"
-        )
-
-        +
-
-        performanceRow(
-            "goals",
-            "Goals"
-        )
-
-        +
-
-        performanceRow(
-            "assists",
-            "Assists"
-        )
-
-        +
-
-        performanceRow(
-            "ga",
-            "Goal Contributions"
-        )
-
-        +
-
-        performanceRow(
-            "gpm",
-            "Goals / Match"
-        )
-
-        +
-
-        performanceRow(
-            "apm",
-            "Assists / Match"
-        );
-
-}
-
 document
     .getElementById("performanceCard")
     .style.display = "block";
@@ -2845,6 +2733,255 @@ document
 document
     .getElementById("performanceArrow")
     .textContent = "▼";
+
+if(bothGoalkeepers){
+
+    document.getElementById(
+        "gkMatchesLeft"
+    ).textContent = playerA.matches;
+
+    document.getElementById(
+        "gkMatchesRight"
+    ).textContent = playerB.matches;
+
+    document.getElementById(
+        "gkConcededLeft"
+    ).textContent = playerA.conceded;
+
+    document.getElementById(
+        "gkConcededRight"
+    ).textContent = playerB.conceded;
+
+    document.getElementById(
+        "gkCleanSheetsLeft"
+    ).textContent = playerA.cleanSheets;
+
+    document.getElementById(
+        "gkCleanSheetsRight"
+    ).textContent = playerB.cleanSheets;
+
+    document.getElementById(
+        "gkCPMLeft"
+    ).textContent = playerA.concededPerMatch;
+
+    document.getElementById(
+        "gkCPMRight"
+    ).textContent = playerB.concededPerMatch;
+
+    document.getElementById(
+        "gkCSPLeft"
+    ).textContent =
+        playerA.cleanSheetPct + "%";
+
+    document.getElementById(
+        "gkCSPRight"
+    ).textContent =
+        playerB.cleanSheetPct + "%";
+
+    setComparisonBar(
+        playerA.matches,
+        playerB.matches,
+        "gkMatchesA",
+        "gkMatchesB"
+    );
+
+    setComparisonBar(
+        playerA.conceded,
+        playerB.conceded,
+        "gkConcededA",
+        "gkConcededB"
+    );
+
+    setComparisonBar(
+        playerA.cleanSheets,
+        playerB.cleanSheets,
+        "gkCleanSheetsA",
+        "gkCleanSheetsB"
+    );
+
+    setComparisonBar(
+        Number(playerA.concededPerMatch),
+        Number(playerB.concededPerMatch),
+        "gkCPMA",
+        "gkCPMB"
+    );
+
+    setComparisonBar(
+        Number(playerA.cleanSheetPct),
+        Number(playerB.cleanSheetPct),
+        "gkCSPA",
+        "gkCSPB"
+    );
+
+    highlightWinner(
+        "gkMatchesLeft",
+        "gkMatchesRight",
+        playerA.matches,
+        playerB.matches
+    );
+
+    highlightLowerBetter(
+        "gkConcededLeft",
+        "gkConcededRight",
+        playerA.conceded,
+        playerB.conceded
+    );
+
+    highlightWinner(
+        "gkCleanSheetsLeft",
+        "gkCleanSheetsRight",
+        playerA.cleanSheets,
+        playerB.cleanSheets
+    );
+
+    highlightLowerBetter(
+        "gkCPMLeft",
+        "gkCPMRight",
+        Number(playerA.concededPerMatch),
+        Number(playerB.concededPerMatch)
+    );
+
+    highlightWinner(
+        "gkCSPLeft",
+        "gkCSPRight",
+        Number(playerA.cleanSheetPct),
+        Number(playerB.cleanSheetPct)
+    );
+
+}else{
+
+    document.getElementById(
+        "matchesLeft"
+    ).textContent = playerA.matches;
+
+    document.getElementById(
+        "matchesRight"
+    ).textContent = playerB.matches;
+
+    document.getElementById(
+        "goalsLeft"
+    ).textContent = playerA.goals;
+
+    document.getElementById(
+        "goalsRight"
+    ).textContent = playerB.goals;
+
+    document.getElementById(
+        "assistsLeft"
+    ).textContent = playerA.assists;
+
+    document.getElementById(
+        "assistsRight"
+    ).textContent = playerB.assists;
+
+    document.getElementById(
+        "gaLeft"
+    ).textContent = playerA.contributions;
+
+    document.getElementById(
+        "gaRight"
+    ).textContent = playerB.contributions;
+
+    document.getElementById(
+        "gpmLeft"
+    ).textContent = playerA.goalsPerMatch;
+
+    document.getElementById(
+        "gpmRight"
+    ).textContent = playerB.goalsPerMatch;
+
+    document.getElementById(
+        "apmLeft"
+    ).textContent = playerA.assistsPerMatch;
+
+    document.getElementById(
+        "apmRight"
+    ).textContent = playerB.assistsPerMatch;
+
+    setComparisonBar(
+        playerA.matches,
+        playerB.matches,
+        "matchesA",
+        "matchesB"
+    );
+
+    setComparisonBar(
+        playerA.goals,
+        playerB.goals,
+        "goalsA",
+        "goalsB"
+    );
+
+    setComparisonBar(
+        playerA.assists,
+        playerB.assists,
+        "assistsA",
+        "assistsB"
+    );
+
+    setComparisonBar(
+        playerA.contributions,
+        playerB.contributions,
+        "gaA",
+        "gaB"
+    );
+
+    setComparisonBar(
+        Number(playerA.goalsPerMatch),
+        Number(playerB.goalsPerMatch),
+        "gpmA",
+        "gpmB"
+    );
+
+    setComparisonBar(
+        Number(playerA.assistsPerMatch),
+        Number(playerB.assistsPerMatch),
+        "apmA",
+        "apmB"
+    );
+
+    highlightWinner(
+        "matchesLeft",
+        "matchesRight",
+        playerA.matches,
+        playerB.matches
+    );
+
+    highlightWinner(
+        "goalsLeft",
+        "goalsRight",
+        playerA.goals,
+        playerB.goals
+    );
+
+    highlightWinner(
+        "assistsLeft",
+        "assistsRight",
+        playerA.assists,
+        playerB.assists
+    );
+
+    highlightWinner(
+        "gaLeft",
+        "gaRight",
+        playerA.contributions,
+        playerB.contributions
+    );
+
+    highlightWinner(
+        "gpmLeft",
+        "gpmRight",
+        Number(playerA.goalsPerMatch),
+        Number(playerB.goalsPerMatch)
+    );
+
+    highlightWinner(
+        "apmLeft",
+        "apmRight",
+        Number(playerA.assistsPerMatch),
+        Number(playerB.assistsPerMatch)
+    );
+
 }
 
 function getGoalkeeperStats(playerName){
