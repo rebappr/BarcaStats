@@ -330,9 +330,11 @@ text-decoration:underline;
     visibility:visible;
 }
 
-.header{
+.header,
+.header-inner{
         border-radius: 0;
         padding: 6px 16px;
+        gap:6px;
     }
 
 .header-logo{
