@@ -2184,40 +2184,74 @@ if(bothGoalkeepers){
 
             );
             
-highlightWinner(
-    `${safeId}GoalsLeft`,
-    `${safeId}GoalsRight`,
-    playerA.goals,
-    playerB.goals
-);
+if(bothGoalkeepers){
 
-highlightWinner(
-    `${safeId}AssistsLeft`,
-    `${safeId}AssistsRight`,
-    playerA.assists,
-    playerB.assists
-);
+    highlightLowerBetter(
+        `${safeId}ConcededLeft`,
+        `${safeId}ConcededRight`,
+        playerA.conceded,
+        playerB.conceded
+    );
 
-highlightWinner(
-    `${safeId}GALeft`,
-    `${safeId}GARight`,
-    playerA.contributions,
-    playerB.contributions
-);
+    highlightWinner(
+        `${safeId}CleanSheetsLeft`,
+        `${safeId}CleanSheetsRight`,
+        playerA.cleanSheets,
+        playerB.cleanSheets
+    );
 
-highlightWinner(
-    `${safeId}GPMLeft`,
-    `${safeId}GPMRight`,
-    Number(playerA.goalsPerMatch),
-    Number(playerB.goalsPerMatch)
-);
+    highlightLowerBetter(
+        `${safeId}CPMLeft`,
+        `${safeId}CPMRight`,
+        Number(playerA.concededPerMatch),
+        Number(playerB.concededPerMatch)
+    );
 
-highlightWinner(
-    `${safeId}APMLeft`,
-    `${safeId}APMRight`,
-    Number(playerA.assistsPerMatch),
-    Number(playerB.assistsPerMatch)
-);
+    highlightWinner(
+        `${safeId}CSPLeft`,
+        `${safeId}CSPRight`,
+        Number(playerA.cleanSheetPct),
+        Number(playerB.cleanSheetPct)
+    );
+
+}else{
+
+    highlightWinner(
+        `${safeId}GoalsLeft`,
+        `${safeId}GoalsRight`,
+        playerA.goals,
+        playerB.goals
+    );
+
+    highlightWinner(
+        `${safeId}AssistsLeft`,
+        `${safeId}AssistsRight`,
+        playerA.assists,
+        playerB.assists
+    );
+
+    highlightWinner(
+        `${safeId}GALeft`,
+        `${safeId}GARight`,
+        playerA.contributions,
+        playerB.contributions
+    );
+
+    highlightWinner(
+        `${safeId}GPMLeft`,
+        `${safeId}GPMRight`,
+        Number(playerA.goalsPerMatch),
+        Number(playerB.goalsPerMatch)
+    );
+
+    highlightWinner(
+        `${safeId}APMLeft`,
+        `${safeId}APMRight`,
+        Number(playerA.assistsPerMatch),
+        Number(playerB.assistsPerMatch)
+    );
+
+}
 
             highlightWinner(
 
