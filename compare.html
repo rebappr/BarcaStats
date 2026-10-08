@@ -2442,6 +2442,17 @@ if(
     return;
 }
 
+const bothGoalkeepers =
+
+    isGoalkeeper(selectedPlayerA)
+    &&
+    isGoalkeeper(selectedPlayerB);
+
+const container =
+    document.getElementById(
+        "performanceStatsContent"
+    );
+
     const playerA =
         getPerformanceStats(
             selectedPlayerA
