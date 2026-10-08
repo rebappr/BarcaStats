@@ -95,7 +95,6 @@
     border-radius:10px;
     border:1px solid var(--divider);
     background:var(--select-bg);
-    color:var(--barca-red);
 
     font-size:16px;
     font-weight:800;
@@ -157,14 +156,6 @@
 
 .compare-search-item:hover{
     background:var(--meta-bg);
-}
-
-#compareResultsA{
-    color:var(--barca-red);
-}
-
-#compareResultsB{
-    color:var(--barca-blue);
 }
 
 #compareResultsA,
@@ -286,11 +277,13 @@
 
 }
 
-.bar-left{
+.bar-left,
+#compareResultsA{
     background:var(--barca-red);
 }
 
-.bar-right{
+.bar-right,
+#compareResultsB{
     background:var(--barca-blue);
 }
 
@@ -332,12 +325,6 @@
 
     opacity:.9;
 
-}
-
-#performanceStatsContent{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
 }
 
 
@@ -439,10 +426,6 @@
     <a href="index.html">
         <span>Home page</span>
     </a>
-      
-    <a href="statistics.html">
-        <span>Statistics</span>
-    </a>
 
     <a href="season.html">
         <span>Seasons</span>
@@ -450,6 +433,10 @@
 
     <a href="compare.html" class="active">
         <span>Compare</span>
+    </a>
+
+    <a href="#">
+        <span>Records</span>
     </a>
 
 </nav>
@@ -531,21 +518,6 @@
 </div>
 
     </div>
-
-<div
-    class="compare-card"
-    id="comparisonWarning"
-    style="display:none;">
-
-    <div class="compare-result-title">
-        Notice
-    </div>
-
-    <div class="compare-result-text">
-        Some statistics cannot be compared between goalkeepers and outfield players. Performance and competition statistics are displayed using outfield player metrics only.
-    </div>
-
-</div>
 
 <div
     class="compare-card"
@@ -642,8 +614,10 @@
     id="performanceContent"
     style="display:none;">
 
+<div class="summary-table">
 <div id="performanceStatsContent"></div>
 
+</div>
 </div>
 </div>
 
@@ -1229,30 +1203,6 @@ function playerPlayedMatch(
 }
 
 function updateCompareResult(){
-
-    const playerAGK =
-        isGoalkeeper(selectedPlayerA);
-
-    const playerBGK =
-        isGoalkeeper(selectedPlayerB);
-
-    const mixedComparison =
-        playerAGK !== playerBGK;
-
-    const warning =
-        document.getElementById(
-            "comparisonWarning"
-        );
-
-    if(mixedComparison){
-
-        warning.style.display = "block";
-
-    }else{
-
-        warning.style.display = "none";
-
-    }
 
     updateBasicInfo();
 
@@ -2784,14 +2734,9 @@ function updatePerformanceStats(){
 
     }
 
-const playerAGK =
-    isGoalkeeper(selectedPlayerA);
-
-const playerBGK =
-    isGoalkeeper(selectedPlayerB);
-
-const bothGoalkeepers =
-    playerAGK && playerBGK;
+    const bothGoalkeepers =
+        isGoalkeeper(selectedPlayerA) &&
+        isGoalkeeper(selectedPlayerB);
 
     const playerA =
         bothGoalkeepers
