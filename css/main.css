@@ -333,7 +333,10 @@ text-decoration:underline;
 .header{
         border-radius: 0;
         padding: 4px 10px 6px;
-    }
+        position: sticky;
+        top: 0;
+        z-index: 10000000;
+}
 
 .header-logo{
     width:82px;
