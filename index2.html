@@ -247,33 +247,57 @@
 
 <div class="container">
 
+<div class="menu-overlay" id="menuOverlay"></div>
+
 <div class="header">
-
     <div class="header-inner">
-
-        logos/barcadb-logo.png
+        <img src="logos/barcadb-logo.png" class="header-logo" alt="Barça DB">
 
         <div class="header-text">
-
             <h1>Barça Database</h1>
-
             <div class="hero-subtitle">
-                FC Barcelona Historical Statistics
-            </div>
-
+            Home page
         </div>
-
     </div>
 
+<div class="desktop-search">
+
+    <input
+        type="text"
+        id="personSearch"
+        placeholder="Search player, manager, opponent..."
+        class="desktop-search-input">
+
+    <div id="personSearchResults"></div>
+
+</div>
+
+    <button id="menuToggle" class="menu-toggle">
+    	☰
+    </button>
+
+</div>
 </div>
 
 <nav class="main-menu">
 
-    <a href="index.html" class="active">
-        <span>Home</span>
-    </a>
+    <div class="mobile-menu-search">
 
-    statistics.html
+        <input
+            type="text"
+            id="mobilePersonSearch"
+            placeholder="Search player, manager..."
+            class="mobile-search-input">
+
+        <div id="mobileSearchResults"></div>
+
+    </div>
+
+    <a href="index.html" class="active">
+        <span>Home page</span>
+    </a>
+      
+    <a href="statistics.html">
         <span>Statistics</span>
     </a>
 
