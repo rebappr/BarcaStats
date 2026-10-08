@@ -2717,22 +2717,113 @@ function highlightWinner(
 }
 
 function updatePerformanceStats(){
-      
-if(
-    !selectedPlayerA ||
-    !selectedPlayerB
-){
-document
-    .getElementById("performanceCard")
-    .style.display = "block";
 
-document
-    .getElementById("performanceContent")
-    .style.display = "none";
+    if(
+        !selectedPlayerA ||
+        !selectedPlayerB
+    ){
 
-document
-    .getElementById("performanceArrow")
-    .textContent = "▼";
+        document.getElementById(
+            "performanceCard"
+        ).style.display = "none";
+
+        return;
+
+    }
+
+    const bothGoalkeepers =
+        isGoalkeeper(selectedPlayerA) &&
+        isGoalkeeper(selectedPlayerB);
+
+    const playerA =
+        bothGoalkeepers
+        ? getGoalkeeperStats(selectedPlayerA)
+        : getPerformanceStats(selectedPlayerA);
+
+    const playerB =
+        bothGoalkeepers
+        ? getGoalkeeperStats(selectedPlayerB)
+        : getPerformanceStats(selectedPlayerB);
+
+    const container =
+        document.getElementById(
+            "performanceStatsContent"
+        );
+if(bothGoalkeepers){
+
+    container.innerHTML =
+
+        performanceRow(
+            "gkMatches",
+            "Matches"
+        ) +
+
+        performanceRow(
+            "gkConceded",
+            "Goals Conceded"
+        ) +
+
+        performanceRow(
+            "gkCleanSheets",
+            "Clean Sheets"
+        ) +
+
+        performanceRow(
+            "gkCPM",
+            "Goals Conceded / Match"
+        ) +
+
+        performanceRow(
+            "gkCSP",
+            "Clean Sheet %"
+        );
+
+}else{
+
+    container.innerHTML =
+
+        performanceRow(
+            "matches",
+            "Matches"
+        ) +
+
+        performanceRow(
+            "goals",
+            "Goals"
+        ) +
+
+        performanceRow(
+            "assists",
+            "Assists"
+        ) +
+
+        performanceRow(
+            "ga",
+            "Goal Contributions"
+        ) +
+
+        performanceRow(
+            "gpm",
+            "Goals / Match"
+        ) +
+
+        performanceRow(
+            "apm",
+            "Assists / Match"
+        );
+
+}
+document.getElementById(
+        "performanceCard"
+    ).style.display = "block";
+
+    document.getElementById(
+        "performanceContent"
+    ).style.display = "none";
+
+    document.getElementById(
+        "performanceArrow"
+    ).textContent = "▼";
 
 if(bothGoalkeepers){
 
