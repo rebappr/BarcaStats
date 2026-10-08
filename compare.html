@@ -526,6 +526,21 @@
 
 <div
     class="compare-card"
+    id="comparisonWarning"
+    style="display:none;">
+
+    <div class="compare-result-title">
+        Notice
+    </div>
+
+    <div class="compare-result-text">
+        Some statistics cannot be compared between goalkeepers and outfield players. Performance and competition statistics are displayed using outfield player metrics only.
+    </div>
+
+</div>
+
+<div
+    class="compare-card"
     id="basicInfoCard"
     style="display:none;">
 
@@ -1206,6 +1221,30 @@ function playerPlayedMatch(
 }
 
 function updateCompareResult(){
+
+    const playerAGK =
+        isGoalkeeper(selectedPlayerA);
+
+    const playerBGK =
+        isGoalkeeper(selectedPlayerB);
+
+    const mixedComparison =
+        playerAGK !== playerBGK;
+
+    const warning =
+        document.getElementById(
+            "comparisonWarning"
+        );
+
+    if(mixedComparison){
+
+        warning.style.display = "block";
+
+    }else{
+
+        warning.style.display = "none";
+
+    }
 
     updateBasicInfo();
 
@@ -2737,9 +2776,14 @@ function updatePerformanceStats(){
 
     }
 
-    const bothGoalkeepers =
-        isGoalkeeper(selectedPlayerA) &&
-        isGoalkeeper(selectedPlayerB);
+const playerAGK =
+    isGoalkeeper(selectedPlayerA);
+
+const playerBGK =
+    isGoalkeeper(selectedPlayerB);
+
+const bothGoalkeepers =
+    playerAGK && playerBGK;
 
     const playerA =
         bothGoalkeepers
