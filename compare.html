@@ -1927,9 +1927,16 @@ const playerB =
 
     <div class="summary-table">
 
+${competitionRow(
+    safeId,
+    "Matches",
+    playerA.matches,
+    playerB.matches
+)}
+
 ${bothGoalkeepers
 
-? 
+? `
 
 ${competitionRow(
     safeId,
@@ -1960,9 +1967,8 @@ ${competitionRow(
     "%"
 )}
 
-
-
-: 
+`
+: `
 
 ${competitionRow(
     safeId,
@@ -1998,8 +2004,7 @@ ${competitionRow(
     playerA.assistsPerMatch,
     playerB.assistsPerMatch
 )}
-
-
+`
 }
 
         ${competitionRow(
@@ -2840,7 +2845,7 @@ document
 document
     .getElementById("performanceArrow")
     .textContent = "▼";
-
+/
     document.getElementById(
         "playerAMatchesStat"
     ).textContent = playerA.matches;
@@ -2972,7 +2977,7 @@ highlightWinner(
     Number(playerA.assistsPerMatch),
     Number(playerB.assistsPerMatch)
 );
-
+/
 }
 
 function getGoalkeeperStats(playerName){
