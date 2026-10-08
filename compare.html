@@ -1578,6 +1578,110 @@ for(let i=1;i<=20;i++){
 
 }
 
+function getGoalkeeperCompetitionRecord(
+
+    playerName,
+    competition
+
+){
+
+    let matches = 0;
+    let wins = 0;
+    let draws = 0;
+    let losses = 0;
+
+    let conceded = 0;
+    let cleanSheets = 0;
+
+    allMatches.forEach(match => {
+
+        if(
+            match.Competition !== competition
+        ){
+            return;
+        }
+
+        if(
+            !playerPlayedMatch(
+                match,
+                playerName
+            )
+        ){
+            return;
+        }
+
+        matches++;
+
+        const goalsAgainst =
+            Number(match.Conceded);
+
+        conceded += goalsAgainst;
+
+        if(goalsAgainst === 0){
+            cleanSheets++;
+        }
+
+        const scored =
+            Number(match.Scored);
+
+        if(scored > goalsAgainst){
+
+            wins++;
+
+        }else if(scored < goalsAgainst){
+
+            losses++;
+
+        }else{
+
+            draws++;
+
+        }
+
+    });
+
+    return {
+
+        matches,
+
+        wins,
+
+        draws,
+
+        losses,
+
+        conceded,
+
+        cleanSheets,
+
+        concededPerMatch:
+            matches
+            ? (conceded / matches).toFixed(2)
+            : "0.00",
+
+        cleanSheetPct:
+            matches
+            ? ((cleanSheets / matches) * 100)
+                .toFixed(1)
+            : "0.0",
+
+        winPct:
+            matches
+            ? ((wins / matches) * 100)
+                .toFixed(1)
+            : "0.0",
+
+        ppm:
+            matches
+            ? (((wins * 3) + draws)
+                / matches)
+                .toFixed(2)
+            : "0.00"
+
+    };
+
+}
+
 function highlightLowerBetter(
 
     leftId,
@@ -1951,40 +2055,74 @@ ${competitionRow(
 
             );
             
-setComparisonBar(
-    Number(playerA.goals),
-    Number(playerB.goals),
-    `${safeId}GoalsA`,
-    `${safeId}GoalsB`
-);
+if(bothGoalkeepers){
 
-setComparisonBar(
-    Number(playerA.assists),
-    Number(playerB.assists),
-    `${safeId}AssistsA`,
-    `${safeId}AssistsB`
-);
+    setComparisonBar(
+        Number(playerA.conceded),
+        Number(playerB.conceded),
+        `${safeId}ConcededA`,
+        `${safeId}ConcededB`
+    );
 
-setComparisonBar(
-    Number(playerA.contributions),
-    Number(playerB.contributions),
-    `${safeId}GAA`,
-    `${safeId}GAB`
-);
+    setComparisonBar(
+        Number(playerA.cleanSheets),
+        Number(playerB.cleanSheets),
+        `${safeId}CleanSheetsA`,
+        `${safeId}CleanSheetsB`
+    );
 
-setComparisonBar(
-    Number(playerA.goalsPerMatch),
-    Number(playerB.goalsPerMatch),
-    `${safeId}GPMA`,
-    `${safeId}GPMB`
-);
+    setComparisonBar(
+        Number(playerA.concededPerMatch),
+        Number(playerB.concededPerMatch),
+        `${safeId}CPMA`,
+        `${safeId}CPMB`
+    );
 
-setComparisonBar(
-    Number(playerA.assistsPerMatch),
-    Number(playerB.assistsPerMatch),
-    `${safeId}APMA`,
-    `${safeId}APMB`
-);
+    setComparisonBar(
+        Number(playerA.cleanSheetPct),
+        Number(playerB.cleanSheetPct),
+        `${safeId}CSPA`,
+        `${safeId}CSPB`
+    );
+
+}else{
+
+    setComparisonBar(
+        Number(playerA.goals),
+        Number(playerB.goals),
+        `${safeId}GoalsA`,
+        `${safeId}GoalsB`
+    );
+
+    setComparisonBar(
+        Number(playerA.assists),
+        Number(playerB.assists),
+        `${safeId}AssistsA`,
+        `${safeId}AssistsB`
+    );
+
+    setComparisonBar(
+        Number(playerA.contributions),
+        Number(playerB.contributions),
+        `${safeId}GAA`,
+        `${safeId}GAB`
+    );
+
+    setComparisonBar(
+        Number(playerA.goalsPerMatch),
+        Number(playerB.goalsPerMatch),
+        `${safeId}GPMA`,
+        `${safeId}GPMB`
+    );
+
+    setComparisonBar(
+        Number(playerA.assistsPerMatch),
+        Number(playerB.assistsPerMatch),
+        `${safeId}APMA`,
+        `${safeId}APMB`
+    );
+
+}
 
             setComparisonBar(
 
