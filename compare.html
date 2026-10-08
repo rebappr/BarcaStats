@@ -1684,6 +1684,52 @@ function competitionRow(
 
 }
 
+function performanceRow(
+
+    id,
+    label
+
+){
+
+    return `
+
+<div class="summary-row">
+
+    <span id="${id}Left">-</span>
+
+    <div class="summary-center">
+
+        <span class="summary-label">
+
+            ${label}
+
+        </span>
+
+        <div class="compare-bar">
+
+            <div
+                id="${id}A"
+                class="bar-left">
+
+            </div>
+
+            <div
+                id="${id}B"
+                class="bar-right">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <span id="${id}Right">-</span>
+
+</div>
+
+`;
+
+}
 
 function updateCompetitionStats(){
 
