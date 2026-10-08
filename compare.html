@@ -1643,12 +1643,26 @@ function competitionRow(
     ? "Win %"
     : stat === "PPM"
     ? "Points / Match"
-    : stat === "GA"
-    ? "Goal Contributions"
-    : stat === "GPM"
-    ? "Goals / Match"
-    : stat === "APM"
-    ? "Assists / Match"
+: stat === "GA"
+? "Goal Contributions"
+
+: stat === "GPM"
+? "Goals / Match"
+
+: stat === "APM"
+? "Assists / Match"
+
+: stat === "Conceded"
+? "Goals Conceded"
+
+: stat === "CleanSheets"
+? "Clean Sheets"
+
+: stat === "CPM"
+? "Goals Conceded / Match"
+
+: stat === "CSP"
+? "Clean Sheet %"
     : stat}
 
         </span>
@@ -1746,6 +1760,12 @@ function updateCompetitionStats(){
 
     }
 
+const bothGoalkeepers =
+
+    isGoalkeeper(selectedPlayerA)
+    &&
+    isGoalkeeper(selectedPlayerB);
+
     const container =
         document.getElementById(
             "competitionContent"
@@ -1792,13 +1812,43 @@ function updateCompetitionStats(){
 
     <div class="summary-table">
 
-        ${competitionRow(
-            safeId,
-            "Matches",
-            playerA.matches,
-            playerB.matches
-        )}
-      
+${bothGoalkeepers
+
+? 
+
+${competitionRow(
+    safeId,
+    "Conceded",
+    playerA.conceded,
+    playerB.conceded
+)}
+
+${competitionRow(
+    safeId,
+    "CleanSheets",
+    playerA.cleanSheets,
+    playerB.cleanSheets
+)}
+
+${competitionRow(
+    safeId,
+    "CPM",
+    playerA.concededPerMatch,
+    playerB.concededPerMatch
+)}
+
+${competitionRow(
+    safeId,
+    "CSP",
+    playerA.cleanSheetPct,
+    playerB.cleanSheetPct,
+    "%"
+)}
+
+
+
+: 
+
 ${competitionRow(
     safeId,
     "Goals",
@@ -1833,6 +1883,9 @@ ${competitionRow(
     playerA.assistsPerMatch,
     playerB.assistsPerMatch
 )}
+
+
+}
 
         ${competitionRow(
             safeId,
@@ -2488,6 +2541,16 @@ if(
     return;
 }
 
+    const playerA =
+        getPerformanceStats(
+            selectedPlayerA
+        );
+
+    const playerB =
+        getPerformanceStats(
+            selectedPlayerB
+        );
+      
 const bothGoalkeepers =
 
     isGoalkeeper(selectedPlayerA)
@@ -2499,15 +2562,89 @@ const container =
         "performanceStatsContent"
     );
 
-    const playerA =
-        getPerformanceStats(
-            selectedPlayerA
+if(bothGoalkeepers){
+
+    container.innerHTML =
+
+        performanceRow(
+            "gkMatches",
+            "Matches"
+        )
+
+        +
+
+        performanceRow(
+            "gkConceded",
+            "Goals Conceded"
+        )
+
+        +
+
+        performanceRow(
+            "gkCleanSheets",
+            "Clean Sheets"
+        )
+
+        +
+
+        performanceRow(
+            "gkCPM",
+            "Goals Conceded / Match"
+        )
+
+        +
+
+        performanceRow(
+            "gkCSP",
+            "Clean Sheet %"
         );
 
-    const playerB =
-        getPerformanceStats(
-            selectedPlayerB
+}
+else{
+
+    container.innerHTML =
+
+        performanceRow(
+            "matches",
+            "Matches"
+        )
+
+        +
+
+        performanceRow(
+            "goals",
+            "Goals"
+        )
+
+        +
+
+        performanceRow(
+            "assists",
+            "Assists"
+        )
+
+        +
+
+        performanceRow(
+            "ga",
+            "Goal Contributions"
+        )
+
+        +
+
+        performanceRow(
+            "gpm",
+            "Goals / Match"
+        )
+
+        +
+
+        performanceRow(
+            "apm",
+            "Assists / Match"
         );
+
+}
 
 document
     .getElementById("performanceCard")
