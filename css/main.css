@@ -330,6 +330,11 @@ text-decoration:underline;
     visibility:visible;
 }
 
+.header{
+        border-radius: 0;
+        padding: 6px 16px;
+    }
+
 .header-logo{
     width:82px;
     height:82px;
