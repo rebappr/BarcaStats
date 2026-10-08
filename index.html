@@ -634,9 +634,62 @@ attachSearch(
 
 }
 
+function showMobileSection(section, button){
 
+if(window.innerWidth > 820) return;
 
+document.querySelectorAll(
+'.mobile-section-btn'
+).forEach(btn =>
+btn.classList.remove('active')
+);
 
+button.classList.add('active');
+
+document.getElementById(
+'mobileMatchesSection'
+).style.display = 'none';
+
+document.getElementById(
+'laligaWidget'
+).style.display = 'none';
+
+document.getElementById(
+'mobileDebutantsSection'
+).style.display = 'none';
+
+document.getElementById(
+'mobileStatisticsSection'
+).style.display = 'none';
+
+if(section === 'matches'){
+document.getElementById(
+'mobileMatchesSection'
+).style.display = 'block';
+}
+
+if(section === 'table'){
+
+    document.getElementById(
+        'laligaWidget'
+    ).style.display = 'block';
+
+    renderLaLigaTable();
+}
+
+if(section === 'debutants'){
+document.getElementById(
+'mobileDebutantsSection'
+).style.display = 'block';
+}
+
+if(section === 'statistics'){
+document.getElementById(
+'mobileStatisticsSection'
+).style.display = 'block';
+}
+
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
