@@ -669,6 +669,60 @@ attachSearch(
 
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const menuOverlay =
+        document.getElementById("menuOverlay");
+
+    const mainMenu =
+        document.querySelector(".main-menu");
+
+    if(!menuToggle || !menuOverlay || !mainMenu){
+        return;
+    }
+
+    function closeMenu(){
+
+        mainMenu.classList.remove("open");
+        menuOverlay.classList.remove("show");
+
+        menuToggle.textContent = "☰";
+    }
+
+    function openMenu(){
+
+        mainMenu.classList.add("open");
+        menuOverlay.classList.add("show");
+
+        menuToggle.textContent = "✕";
+    }
+
+    menuToggle.addEventListener("click", () => {
+
+        if(mainMenu.classList.contains("open")){
+            closeMenu();
+        }else{
+            openMenu();
+        }
+
+    });
+
+    menuOverlay.addEventListener("click", closeMenu);
+
+    window.addEventListener("resize", () => {
+
+        if(window.innerWidth > 820){
+            closeMenu();
+        }
+
+    });
+
+});
+
+
 </script>
 
 </body>
