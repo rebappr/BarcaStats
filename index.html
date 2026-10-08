@@ -43,14 +43,8 @@
 <meta name="author"
       content="RE">
 
-<link rel="canonical"
-      href="https://barcadb.com/">
-
 <meta property="og:image"
       content="https://barcadb.com/logos/barcadb-logo.png">
-
-<meta property="og:url"
-      content="https://barcadb.com/">
 
 <meta property="og:type"
       content="website">
@@ -447,6 +441,18 @@
 
 <script>
 
+let allMatches = [];
+
+fetch("data.json")
+    .then(r => r.json())
+    .then(data => {
+
+        allMatches = data;
+
+        renderHome();
+
+    });
+
 function renderHome(){
 
 initPersonSearch();
@@ -639,120 +645,6 @@ attachSearch(
 );
 
 }
-
-function showMobileSection(section, button){
-
-if(window.innerWidth > 820) return;
-
-document.querySelectorAll(
-'.mobile-section-btn'
-).forEach(btn =>
-btn.classList.remove('active')
-);
-
-button.classList.add('active');
-
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'none';
-
-document.getElementById(
-'laligaWidget'
-).style.display = 'none';
-
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'none';
-
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'none';
-
-if(section === 'matches'){
-document.getElementById(
-'mobileMatchesSection'
-).style.display = 'block';
-}
-
-if(section === 'table'){
-
-    document.getElementById(
-        'laligaWidget'
-    ).style.display = 'block';
-
-    renderLaLigaTable();
-}
-
-if(section === 'debutants'){
-document.getElementById(
-'mobileDebutantsSection'
-).style.display = 'block';
-}
-
-if(section === 'statistics'){
-document.getElementById(
-'mobileStatisticsSection'
-).style.display = 'block';
-}
-
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const menuToggle = document.getElementById("menuToggle");
-    const menuOverlay = document.getElementById("menuOverlay");
-    const mainMenu = document.querySelector(".main-menu");
-
-    if(!menuToggle || !menuOverlay || !mainMenu){
-        return;
-    }
-
-    function closeMenu(){
-        mainMenu.classList.remove("open");
-        menuOverlay.classList.remove("show");
-        menuToggle.textContent = "☰";
-    }
-
-    function openMenu(){
-        mainMenu.classList.add("open");
-        menuOverlay.classList.add("show");
-        menuToggle.textContent = "✕";
-    }
-
-    menuToggle.addEventListener("click", () => {
-
-        if(mainMenu.classList.contains("open")){
-            closeMenu();
-        }else{
-            openMenu();
-        }
-
-    });
-
-    menuOverlay.addEventListener("click", closeMenu);
-
-    window.addEventListener("resize", () => {
-
-        if(window.innerWidth > 820){
-            closeMenu();
-        }
-
-    });
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    if(window.innerWidth <= 820){
-
-        document.getElementById("laligaWidget").style.display = "none";
-        document.getElementById("mobileDebutantsSection").style.display = "none";
-        document.getElementById("mobileStatisticsSection").style.display = "none";
-
-        document.getElementById("mobileMatchesSection").style.display = "block";
-    }
-
-});
 
 </script>
 
