@@ -793,10 +793,10 @@ const team =
     (match["Team"] || "").toLowerCase();
 
 const gf =
-    parseInt(match["GF"] || 0);
+    parseInt(match["Scored"] || 0);
 
 const ga =
-    parseInt(match["GA"] || 0);
+    parseInt(match["Conceded"] || 0);
 
 if(gf === ga){
 
@@ -821,9 +821,6 @@ else{
     }
 
 }
-        else{
-            draws++;
-        }
 
     });
 
