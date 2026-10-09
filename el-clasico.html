@@ -717,22 +717,7 @@ function getClasicos(){
 
 function renderGoals(){
 
-    const clasicos = allMatches.filter(match => {
-
-    const team =
-        (match["Team"] || "")
-        .toLowerCase();
-
-    const opponent =
-        (match["Opp. Team"] || "")
-        .toLowerCase();
-
-    return (
-        (team === "fc barcelona" && opponent === "real madrid") ||
-        (team === "real madrid" && opponent === "fc barcelona")
-    );
-
-});
+    const clasicos = getClasicos();
 
     let barcaGoals = 0;
     let madridGoals = 0;
@@ -794,14 +779,7 @@ else{
 
 function renderHeadToHead(){
 
-    const clasicos = allMatches.filter(match => {
-
-        const opponent =
-            (match["Opp. Team"] || "")
-            .toLowerCase();
-
-        return opponent === "real madrid";
-    });
+    const clasicos = getClasicos();
 
     const totalMatches = clasicos.length;
 
