@@ -720,11 +720,27 @@ function renderGoals(){
 
     clasicos.forEach(match => {
 
-        barcaGoals +=
-            parseInt(match["GF"] || 0);
+        const team =
+    (match["Team"] || "").toLowerCase();
 
-        madridGoals +=
-            parseInt(match["GA"] || 0);
+const gf =
+    parseInt(match["GF"] || 0);
+
+const ga =
+    parseInt(match["GA"] || 0);
+
+if(team === "fc barcelona"){
+
+    barcaGoals += gf;
+    madridGoals += ga;
+
+}
+else{
+
+    madridGoals += gf;
+    barcaGoals += ga;
+
+}
 
     });
 
