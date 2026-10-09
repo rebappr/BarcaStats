@@ -74,6 +74,26 @@
     gap:16px;
 }
 
+.dashboard-layout{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,2fr)
+        minmax(320px,1fr);
+
+    gap:16px;
+
+    align-items:start;
+}
+
+.dashboard-wide{
+    min-width:0;
+}
+
+.dashboard-side{
+    min-width:0;
+}
+
 .hero-card{
     background:var(--card-bg);
     border:1px solid var(--card-border);
@@ -516,7 +536,8 @@ records from one of football's greatest rivalries.
 
 <div class="dashboard-layout">
 
-<section id="head-to-head" class="home-card">
+<section id="head-to-head"
+         class="home-card dashboard-wide">
 
     <h2>All-Time Head-to-Head</h2>
 
@@ -556,7 +577,8 @@ records from one of football's greatest rivalries.
 
 </section>
 
-<section id="goals" class="home-card">
+<section id="goals"
+         class="home-card dashboard-side">
 
     <h2>Goals in El Clásico</h2>
 
@@ -606,7 +628,8 @@ records from one of football's greatest rivalries.
 
 </section>
 
-<section id="matches" class="home-card">
+<section id="matches"
+         class="home-card dashboard-wide">
 
     <h2>Match History</h2>
 
@@ -616,7 +639,8 @@ records from one of football's greatest rivalries.
 
 </section>
 
-<section id="top-scorers" class="home-card">
+<section id="top-scorers"
+         class="home-card dashboard-side">
 
     <h2>Top Goalscorers</h2>
 
