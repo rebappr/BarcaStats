@@ -700,12 +700,20 @@ function renderGoals(){
 
     const clasicos = allMatches.filter(match => {
 
-        const opponent =
-            (match["Opp. Team"] || "")
-            .toLowerCase();
+    const team =
+        (match["Team"] || "")
+        .toLowerCase();
 
-        return opponent === "real madrid";
-    });
+    const opponent =
+        (match["Opp. Team"] || "")
+        .toLowerCase();
+
+    return (
+        (team === "fc barcelona" && opponent === "real madrid") ||
+        (team === "real madrid" && opponent === "fc barcelona")
+    );
+
+});
 
     let barcaGoals = 0;
     let madridGoals = 0;
@@ -768,18 +776,38 @@ function renderHeadToHead(){
 
     clasicos.forEach(match => {
 
-        const gf =
-            parseInt(match["GF"] || 0);
+const team =
+    (match["Team"] || "").toLowerCase();
 
-        const ga =
-            parseInt(match["GA"] || 0);
+const gf =
+    parseInt(match["GF"] || 0);
 
-        if(gf > ga){
-            barcaWins++;
-        }
-        else if(gf < ga){
-            madridWins++;
-        }
+const ga =
+    parseInt(match["GA"] || 0);
+
+if(gf === ga){
+
+    draws++;
+
+}
+else if(team === "fc barcelona"){
+
+    if(gf > ga){
+        barcaWins++;
+    }else{
+        madridWins++;
+    }
+
+}
+else{
+
+    if(gf > ga){
+        madridWins++;
+    }else{
+        barcaWins++;
+    }
+
+}
         else{
             draws++;
         }
