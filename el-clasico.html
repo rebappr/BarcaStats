@@ -680,6 +680,59 @@ fetch("data.json")
 
     });
 
+function renderGoals(){
+
+    const clasicos = allMatches.filter(match => {
+
+        const opponent =
+            (match["Opp. Team"] || "")
+            .toLowerCase();
+
+        return opponent === "real madrid";
+    });
+
+    let barcaGoals = 0;
+    let madridGoals = 0;
+
+    clasicos.forEach(match => {
+
+        barcaGoals +=
+            parseInt(match["GF"] || 0);
+
+        madridGoals +=
+            parseInt(match["GA"] || 0);
+
+    });
+
+    document.getElementById("barcaGoals").textContent =
+        barcaGoals;
+
+    document.getElementById("madridGoals").textContent =
+        madridGoals;
+
+    const totalGoals =
+        barcaGoals + madridGoals;
+
+    const barcaPct =
+        totalGoals
+        ? (barcaGoals / totalGoals) * 100
+        : 50;
+
+    const madridPct =
+        totalGoals
+        ? (madridGoals / totalGoals) * 100
+        : 50;
+
+    document.getElementById(
+        "barcaGoalsProgress"
+    ).style.width = `${barcaPct}%`;
+
+    document.getElementById(
+        "madridGoalsProgress"
+    ).style.width = `${madridPct}%`;
+
+}
+
 function renderHeadToHead(){
 
     const clasicos = allMatches.filter(match => {
@@ -758,8 +811,8 @@ function renderHeadToHead(){
 function renderHome(){
 
     initPersonSearch();
-
     renderHeadToHead();
+    renderGoals();
 
 }
 
