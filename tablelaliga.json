@@ -19826,6 +19826,18 @@
   {
     "season": "2026/27",
     "position": "11",
+    "club": "RCD Espanyol",
+    "matches": "8",
+    "wins": "2",
+    "draws": "2",
+    "losses": "4",
+    "goals": "11:11",
+    "difference": "0",
+    "points": "8"
+  },
+  {
+    "season": "2026/27",
+    "position": "12",
     "club": "Getafe CF",
     "matches": "7",
     "wins": "2",
@@ -19837,7 +19849,7 @@
   },
   {
     "season": "2026/27",
-    "position": "12",
+    "position": "13",
     "club": "Rayo Vallecano",
     "matches": "7",
     "wins": "2",
@@ -19849,7 +19861,7 @@
   },
   {
     "season": "2026/27",
-    "position": "13",
+    "position": "14",
     "club": "CA Osasuna",
     "matches": "7",
     "wins": "2",
@@ -19861,7 +19873,7 @@
   },
   {
     "season": "2026/27",
-    "position": "14",
+    "position": "15",
     "club": "Celta de Vigo",
     "matches": "7",
     "wins": "1",
@@ -19869,18 +19881,6 @@
     "losses": "2",
     "goals": "8:6",
     "difference": "2",
-    "points": "7"
-  },
-  {
-    "season": "2026/27",
-    "position": "15",
-    "club": "RCD Espanyol",
-    "matches": "7",
-    "wins": "2",
-    "draws": "1",
-    "losses": "4",
-    "goals": "10:10",
-    "difference": "0",
     "points": "7"
   },
   {
@@ -19922,6 +19922,18 @@
   {
     "season": "2026/27",
     "position": "19",
+    "club": "Málaga CF",
+    "matches": "8",
+    "wins": "0",
+    "draws": "4",
+    "losses": "4",
+    "goals": "4:13",
+    "difference": "-9",
+    "points": "4"
+  },
+  {
+    "season": "2026/27",
+    "position": "19",
     "club": "Valencia CF",
     "matches": "7",
     "wins": "1",
@@ -19930,17 +19942,5 @@
     "goals": "4:13",
     "difference": "-9",
     "points": "4"
-  },
-  {
-    "season": "2026/27",
-    "position": "20",
-    "club": "Málaga CF",
-    "matches": "7",
-    "wins": "0",
-    "draws": "3",
-    "losses": "4",
-    "goals": "3:12",
-    "difference": "-9",
-    "points": "3"
   }
 ]
