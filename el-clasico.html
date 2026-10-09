@@ -696,6 +696,25 @@ fetch("data.json")
 
     });
 
+function getClasicos(){
+
+    return allMatches.filter(match => {
+
+        const team =
+            (match["Team"] || "").toLowerCase();
+
+        const opponent =
+            (match["Opp. Team"] || "").toLowerCase();
+
+        return (
+            (team === "fc barcelona" && opponent === "real madrid") ||
+            (team === "real madrid" && opponent === "fc barcelona")
+        );
+
+    });
+
+}
+
 function renderGoals(){
 
     const clasicos = allMatches.filter(match => {
