@@ -699,15 +699,9 @@ function getClasicos(){
 
     return allMatches.filter(match => {
 
-        const team =
-            (match["Team"] || "").toLowerCase();
-
-        const opponent =
-            (match["Opp. Team"] || "").toLowerCase();
-
         return (
-            (team === "fc barcelona" && opponent === "real madrid") ||
-            (team === "real madrid" && opponent === "fc barcelona")
+            match["Opp. Team"] === "Real Madrid" &&
+            match["Result"] !== "-:-"
         );
 
     });
@@ -721,31 +715,18 @@ function renderGoals(){
     let barcaGoals = 0;
     let madridGoals = 0;
 
-    clasicos.forEach(match => {
+clasicos.forEach(match => {
 
-        const team =
-    (match["Team"] || "").toLowerCase();
+    const gf =
+        Number(match["Scored"]) || 0;
 
-const gf =
-    parseInt(match["Scored"] || 0);
-
-const ga =
-    parseInt(match["Conceded"] || 0);
-
-if(team === "fc barcelona"){
+    const ga =
+        Number(match["Conceded"]) || 0;
 
     barcaGoals += gf;
     madridGoals += ga;
 
-}
-else{
-
-    madridGoals += gf;
-    barcaGoals += ga;
-
-}
-
-    });
+});
 
     document.getElementById("barcaGoals").textContent =
         barcaGoals;
@@ -786,42 +767,31 @@ function renderHeadToHead(){
     let madridWins = 0;
     let draws = 0;
 
-    clasicos.forEach(match => {
+clasicos.forEach(match => {
 
-const team =
-    (match["Team"] || "").toLowerCase();
+    const gf =
+        Number(match["Scored"]) || 0;
 
-const gf =
-    parseInt(match["Scored"] || 0);
-
-const ga =
-    parseInt(match["Conceded"] || 0);
-
-if(gf === ga){
-
-    draws++;
-
-}
-else if(team === "fc barcelona"){
+    const ga =
+        Number(match["Conceded"]) || 0;
 
     if(gf > ga){
+
         barcaWins++;
-    }else{
+
+    }
+    else if(gf < ga){
+
         madridWins++;
+
+    }
+    else{
+
+        draws++;
+
     }
 
-}
-else{
-
-    if(gf > ga){
-        madridWins++;
-    }else{
-        barcaWins++;
-    }
-
-}
-
-    });
+});
 
     document.getElementById("totalMatches").textContent =
         totalMatches;
