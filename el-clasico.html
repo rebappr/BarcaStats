@@ -252,7 +252,73 @@
     z-index: 9998;
 }
 
+.h2h-dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:16px;
+}
+
+.h2h-stat{
+    background:var(--meta-bg);
+    border:1px solid var(--meta-border);
+    border-radius:16px;
+    padding:18px;
+    text-align:center;
+}
+
+.h2h-stat.barca{
+    border-color:rgba(0,77,152,.4);
+}
+
+.h2h-stat.draw{
+    border-color:rgba(253,197,44,.4);
+}
+
+.h2h-stat.madrid{
+    border-color:rgba(165,0,68,.4);
+}
+
+.h2h-value{
+    display:block;
+    font-size:2rem;
+    font-weight:800;
+    color:var(--number);
+}
+
+.h2h-label{
+    display:block;
+    margin-top:6px;
+    color:var(--muted);
+    font-size:13px;
+    text-transform:uppercase;
+}
+
+.h2h-progress{
+    display:flex;
+    height:18px;
+    overflow:hidden;
+    border-radius:999px;
+    margin-top:20px;
+}
+
+.barca-progress{
+    background:#004D98;
+}
+
+.draw-progress{
+    background:#FDC52C;
+}
+
+.madrid-progress{
+    background:#A50044;
+}
+
 @media(max-width:820px){
+
+    .h2h-dashboard{
+        grid-template-columns:repeat(2,1fr);
+    }
 
     .hero-card{
         padding:32px 18px;
@@ -395,6 +461,46 @@ records from one of football's greatest rivalries.
     <p>
         Complete head-to-head statistics between FC Barcelona and Real Madrid.
     </p>
+
+</section>
+
+<section id="head-to-head" class="home-card">
+
+    <h2>All-Time Head-to-Head Record</h2>
+
+    <div class="h2h-dashboard">
+
+        <div class="h2h-stat">
+            <span class="h2h-value" id="totalMatches">0</span>
+            <span class="h2h-label">Matches</span>
+        </div>
+
+        <div class="h2h-stat barca">
+            <span class="h2h-value" id="barcaWins">0</span>
+            <span class="h2h-label">Barcelona Wins</span>
+        </div>
+
+        <div class="h2h-stat draw">
+            <span class="h2h-value" id="draws">0</span>
+            <span class="h2h-label">Draws</span>
+        </div>
+
+        <div class="h2h-stat madrid">
+            <span class="h2h-value" id="madridWins">0</span>
+            <span class="h2h-label">Real Madrid Wins</span>
+        </div>
+
+    </div>
+
+    <div class="h2h-progress">
+
+        <div class="barca-progress" id="barcaProgress"></div>
+
+        <div class="draw-progress" id="drawProgress"></div>
+
+        <div class="madrid-progress" id="madridProgress"></div>
+
+    </div>
 
 </section>
 
