@@ -562,6 +562,81 @@ fetch("data.json")
 
     });
 
+function renderHeadToHead(){
+
+    const clasicos = allMatches.filter(match => {
+
+        const opponent =
+            (match["Opp. Team"] || "")
+            .toLowerCase();
+
+        return opponent === "real madrid";
+    });
+
+    const totalMatches = clasicos.length;
+
+    let barcaWins = 0;
+    let madridWins = 0;
+    let draws = 0;
+
+    clasicos.forEach(match => {
+
+        const gf =
+            parseInt(match["GF"] || 0);
+
+        const ga =
+            parseInt(match["GA"] || 0);
+
+        if(gf > ga){
+            barcaWins++;
+        }
+        else if(gf < ga){
+            madridWins++;
+        }
+        else{
+            draws++;
+        }
+
+    });
+
+    document.getElementById("totalMatches").textContent =
+        totalMatches;
+
+    document.getElementById("barcaWins").textContent =
+        barcaWins;
+
+    document.getElementById("draws").textContent =
+        draws;
+
+    document.getElementById("madridWins").textContent =
+        madridWins;
+
+    const barcaPct =
+        totalMatches
+        ? (barcaWins / totalMatches) * 100
+        : 0;
+
+    const drawPct =
+        totalMatches
+        ? (draws / totalMatches) * 100
+        : 0;
+
+    const madridPct =
+        totalMatches
+        ? (madridWins / totalMatches) * 100
+        : 0;
+
+    document.getElementById("barcaProgress").style.width =
+        `${barcaPct}%`;
+
+    document.getElementById("drawProgress").style.width =
+        `${drawPct}%`;
+
+    document.getElementById("madridProgress").style.width =
+        `${madridPct}%`;
+
+}
+
 function renderHome(){
 
 initPersonSearch();
