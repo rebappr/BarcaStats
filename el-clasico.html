@@ -76,14 +76,16 @@
 
 .dashboard-layout{
     display:grid;
-
-    grid-template-columns:
-        minmax(0,2fr)
-        minmax(320px,1fr);
-
+    grid-template-columns:minmax(0,2fr) 380px;
     gap:16px;
-
     align-items:start;
+}
+
+.dashboard-main,
+.dashboard-sidebar{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
 }
 
 .dashboard-wide{
@@ -389,7 +391,7 @@
 @media(max-width:820px){
       
     .dashboard-layout{
-       grid-template-columns:1fr;
+        grid-template-columns:1fr;
     }
 
     .goals-dashboard{
@@ -539,6 +541,8 @@ records from one of football's greatest rivalries.
 </section>
 
 <div class="dashboard-layout">
+      
+<div class="dashboard-main">
 
 <section id="head-to-head"
          class="home-card dashboard-wide">
@@ -655,6 +659,8 @@ records from one of football's greatest rivalries.
     </p>
 
 </section>
+
+</div>
 
 </div>
 
