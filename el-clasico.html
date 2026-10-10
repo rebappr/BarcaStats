@@ -825,27 +825,27 @@ records from one of football's greatest rivalries.
 
 <section id="matches"
          class="home-card">
-      
-<div class="filters">
-
-    <div class="filter-group">
-
-        <label for="competitionFilter">
-            Competition
-        </label>
-
-        <select id="competitionFilter"
-                onchange="changeCompetitionFilter(this.value)">
-
-            <option value="All">All Competitions</option>
-
-        </select>
-
-    </div>
-
-</div>
 
     <h2>Match History</h2>
+
+    <div class="filters">
+
+        <div class="filter-group">
+
+            <label for="competitionFilter">
+                Competition
+            </label>
+
+            <select id="competitionFilter"
+                    onchange="changeCompetitionFilter(this.value)">
+                <option value="All">
+                    All Competitions
+                </option>
+            </select>
+
+        </div>
+
+    </div>
 
     <div class="matches-view-switch">
 
@@ -1020,6 +1020,14 @@ function renderCompetitionFilter(){
         `).join("")}
 
     `;
+
+}
+
+function changeCompetitionFilter(value){
+
+    selectedCompetition = value;
+
+    renderClasicoMatches();
 
 }
 
