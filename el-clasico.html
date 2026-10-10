@@ -646,17 +646,32 @@ records from one of football's greatest rivalries.
 
         </section>
 
-        <section id="matches"
-                 class="home-card">
+<section id="matches"
+         class="home-card">
 
-            <h2>Match History</h2>
+    <h2>Match History</h2>
 
-            <p>
-                Browse every official El Clásico match with detailed
-                results and statistics.
-            </p>
+    <div class="matches-view-switch">
 
-        </section>
+        <button id="toggleClasicosBtn"
+                onclick="toggleClasicos()">
+            Show All Matches
+        </button>
+
+    </div>
+
+    <div class="matches-header">
+
+        <div>Season</div>
+        <div>Date</div>
+        <div>Venue</div>
+        <div>Result</div>
+
+    </div>
+
+    <div id="clasicoMatches"></div>
+
+</section>
 
     </div>
 
@@ -703,6 +718,7 @@ records from one of football's greatest rivalries.
 <script>
 
 let allMatches = [];
+let showAllClasicos = false;
 
 fetch("data.json")
     .then(r => r.json())
@@ -773,6 +789,83 @@ clasicos.forEach(match => {
     document.getElementById(
         "madridGoalsProgress"
     ).style.width = `${madridPct}%`;
+
+}
+
+function renderClasicoMatches(){
+
+    const clasicos =
+        getClasicos()
+        .sort((a,b) => Number(b.ID) - Number(a.ID));
+
+    const matches =
+        showAllClasicos
+        ? clasicos
+        : clasicos.slice(0,10);
+
+    let html = "";
+
+    matches.forEach(match => {
+
+        let resultClass = "result-draw";
+
+        if(match["Result type"] === "W"){
+            resultClass = "result-win";
+        }
+
+        if(match["Result type"] === "L"){
+            resultClass = "result-loss";
+        }
+
+        html += `
+
+            match.html?id=${match.ID}
+
+                <div>
+                    ${match.Season}
+                </div>
+
+                <div>
+                    ${match.Date}
+                </div>
+
+                <div>
+                    ${match.Venue}
+                </div>
+
+                <div>
+
+                    <span class="result-badge ${resultClass}">
+                        ${match.Result}
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "clasicoMatches"
+    ).innerHTML = html;
+
+}
+
+function toggleClasicos(){
+
+    showAllClasicos =
+        !showAllClasicos;
+
+    document.getElementById(
+        "toggleClasicosBtn"
+    ).textContent =
+        showAllClasicos
+        ? "Show Last 10 Matches"
+        : "Show All Matches";
+
+    renderClasicoMatches();
 
 }
 
@@ -855,8 +948,10 @@ function renderHome(){
     initPersonSearch();
     renderHeadToHead();
     renderGoals();
+    renderClasicoMatches();
 
 }
+
 
 function initPersonSearch(){
 
