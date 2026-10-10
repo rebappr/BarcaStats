@@ -788,7 +788,9 @@ records from one of football's greatest rivalries.
         <section id="head-to-head"
                  class="home-card">
 
-            <h2>Head-to-Head</h2>
+            <h2 id="h2hTitle">
+                All-Time Head-to-Head
+            </h2>
             
 <div class="matches-view-switch">
 
@@ -984,6 +986,8 @@ let allMatches = [];
 let selectedCompetition = "All";
 let showAllClasicos = false;
 
+let h2hView = "all";
+
 fetch("data.json")
     .then(r => r.json())
     .then(data => {
@@ -1009,7 +1013,15 @@ function getClasicos(){
 
 function renderGoals(){
 
-    const clasicos = getClasicos();
+    let clasicos = getClasicos();
+
+if(h2hView === "laliga"){
+
+    clasicos = clasicos.filter(
+        match => match.Competition === "La Liga"
+    );
+
+}
 
     let barcaGoals = 0;
     let madridGoals = 0;
@@ -1189,9 +1201,39 @@ function toggleClasicos(){
 
 }
 
+function setH2HView(view){
+
+    h2hView = view;
+
+    document
+        .querySelectorAll("[data-h2h-view]")
+        .forEach(btn => btn.classList.remove("active"));
+
+    document
+        .querySelector(`[data-h2h-view="${view}"]`)
+        ?.classList.add("active");
+
+document.getElementById("h2hTitle").textContent =
+    view === "laliga"
+    ? "La Liga Head-to-Head"
+    : "All-Time Head-to-Head";
+
+    renderHeadToHead();
+    renderGoals();
+
+}
+
 function renderHeadToHead(){
 
-    const clasicos = getClasicos();
+    let clasicos = getClasicos();
+
+if(h2hView === "laliga"){
+
+    clasicos = clasicos.filter(
+        match => match.Competition === "La Liga"
+    );
+
+}
 
     const totalMatches = clasicos.length;
 
