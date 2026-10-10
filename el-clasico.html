@@ -659,6 +659,48 @@ color:var(--muted);
     color:#fff;
 }
 
+.scorer-item{
+    margin-bottom:14px;
+}
+
+.scorer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:6px;
+
+    font-size:14px;
+    font-weight:600;
+}
+
+.scorer-name a{
+    color:var(--text);
+    text-decoration:none;
+}
+
+.scorer-name a:hover{
+    color:#004D98;
+}
+
+.scorer-goals{
+    font-weight:700;
+}
+
+.scorer-bar{
+    height:10px;
+    border-radius:999px;
+    overflow:hidden;
+
+    background:var(--meta-bg);
+}
+
+.scorer-fill{
+    height:100%;
+    background:#004D98;
+    border-radius:999px;
+}
+
 @media(max-width:820px){
 
     .h2h-switch{
@@ -990,16 +1032,13 @@ records from one of football's greatest rivalries.
     <div class="dashboard-sidebar">
 
         <section id="top-scorers"
-                 class="home-card">
+         class="home-card">
 
-            <h2>Top Goalscorers</h2>
+    <h2>Top Goalscorers</h2>
 
-            <p>
-                Discover the players who scored the most goals
-                in El Clásico history.
-            </p>
+    <div id="topScorers"></div>
 
-        </section>
+</section>
 
     </div>
 
@@ -1112,6 +1151,82 @@ clasicos.forEach(match => {
     document.getElementById(
         "madridGoalsProgress"
     ).style.width = `${madridPct}%`;
+
+}
+
+function renderTopScorers(){
+
+    const scorers = {};
+
+    getClasicos().forEach(match => {
+
+        for(let i = 1; i <= 12; i++){
+
+            const player =
+                match[`Goal Player ${i}`];
+
+            if(!player) continue;
+
+            if(player.includes("(OG)"))
+                continue;
+
+            scorers[player] =
+                (scorers[player] || 0) + 1;
+
+        }
+
+    });
+
+    const sorted =
+        Object.entries(scorers)
+        .sort((a,b) => b[1] - a[1])
+        .slice(0,10);
+
+    const maxGoals =
+        sorted[0]?.[1] || 1;
+
+    let html = "";
+
+    sorted.forEach(([name, goals]) => {
+
+        const width =
+            (goals / maxGoals) * 100;
+
+        html += `
+
+            <div class="scorer-item">
+
+                <div class="scorer-row">
+
+                    <div class="scorer-name">
+                        ">
+                            ${name}
+                        </a>
+                    </div>
+
+                    <div class="scorer-goals">
+                        ${goals}
+                    </div>
+
+                </div>
+
+                <div class="scorer-bar">
+
+                    <div class="scorer-fill"
+                         style="width:${width}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "topScorers"
+    ).innerHTML = html;
 
 }
 
