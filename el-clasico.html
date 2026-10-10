@@ -660,7 +660,11 @@ color:var(--muted);
 }
 
 .scorer-item{
-    margin-bottom:14px;
+    margin-bottom:12px;
+}
+
+.scorer-item:last-child{
+    margin-bottom:0;
 }
 
 .scorer-row{
@@ -1199,7 +1203,7 @@ function renderTopScorers(){
                 <div class="scorer-row">
 
                     <div class="scorer-name">
-                        <a class="player-link" href="player.html?name=${encodeURIComponent(player)}">
+                        <a class="player-link" href="player.html?name=${encodeURIComponent(name)}">
                             ${name}
                         </a>
                     </div>
