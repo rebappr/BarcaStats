@@ -1257,22 +1257,9 @@ style="width:${width}%">
 
 }
 
-function getClasicos(){
-
-    return allMatches.filter(match => {
-
-        return (
-            match["Opp. Team"] === "Real Madrid" &&
-            match["Result"] !== "-:-"
-        );
-
-    });
-
-}
-
 function getFilteredClasicos(){
 
-    let clasicos = getFilteredClasicos();
+    let clasicos = getClasicos();
 
     if(selectedCompetition !== "All"){
 
