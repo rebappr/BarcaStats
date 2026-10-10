@@ -884,7 +884,8 @@ function renderClasicoMatches(){
 
         html += `
 
-            match.html?id=${match.ID}
+            <div class="matches-line"
+            onclick="location.href='match.html?id=${match.ID}'">
 
                 <div>
                     ${match.Season}
