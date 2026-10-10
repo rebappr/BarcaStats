@@ -959,6 +959,21 @@ records and head-to-head comparisons.
 
     </div>
 
+<div class="filter-group">
+
+    <label>Venue</label>
+
+    <select id="globalVenueFilter"
+            onchange="updateGlobalFilters()">
+
+        <option value="All">
+            All Venues
+        </option>
+
+    </select>
+
+</div>
+
 <div class="filter-note">
 
     📊 Filters apply to all El Clásico statistics
@@ -1139,6 +1154,7 @@ let showAllClasicos = false;
 
 let selectedCompetition = "All";
 let selectedSeason = "All";
+let selectedVenue = "All";
 
 fetch("data.json")
     .then(r => r.json())
@@ -1330,6 +1346,15 @@ function getFilteredClasicos(){
 
     }
 
+    if(selectedVenue !== "All"){
+
+        clasicos = clasicos.filter(
+            match =>
+            match.Venue === selectedVenue
+        );
+
+    }
+
     return clasicos;
 
 }
@@ -1382,6 +1407,34 @@ function renderGlobalFilters(){
         )]
         .sort()
         .reverse();
+      
+let venueSource = allClasicos;
+
+if(selectedCompetition !== "All"){
+
+    venueSource = venueSource.filter(
+        match =>
+        match.Competition === selectedCompetition
+    );
+
+}
+
+if(selectedSeason !== "All"){
+
+    venueSource = venueSource.filter(
+        match =>
+        match.Season === selectedSeason
+    );
+
+}
+
+const venues =
+    [...new Set(
+        venueSource.map(
+            match => match.Venue
+        )
+    )]
+    .sort();
 
     document.getElementById(
         "globalCompetitionFilter"
@@ -1423,6 +1476,46 @@ function renderGlobalFilters(){
 
     `;
 
+document.getElementById(
+    "globalVenueFilter"
+).innerHTML = `
+
+    <option value="All">
+        All Venues
+    </option>
+
+    ${venues.map(venue => `
+
+        <option
+            value="${venue}"
+            ${venue === selectedVenue ? "selected" : ""}>
+            ${venue}
+        </option>
+
+    `).join("")}
+
+`;
+
+document.getElementById(
+    "globalVenueFilter"
+).innerHTML = `
+
+    <option value="All">
+        All Venues
+    </option>
+
+    ${venues.map(venue => `
+
+        <option
+            value="${venue}"
+            ${venue === selectedVenue ? "selected" : ""}>
+            ${venue}
+        </option>
+
+    `).join("")}
+
+`;
+
 }
 
 function updateGlobalFilters(){
@@ -1436,6 +1529,11 @@ function updateGlobalFilters(){
         document.getElementById(
             "globalSeasonFilter"
         ).value;
+
+selectedVenue =
+    document.getElementById(
+        "globalVenueFilter"
+    ).value;
 
     renderGlobalFilters();
 
