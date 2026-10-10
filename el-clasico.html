@@ -1122,6 +1122,15 @@ records and head-to-head comparisons.
 
 </section>
 
+<section id="top-appearances"
+         class="home-card">
+
+    <h2>Top Appearances</h2>
+
+    <div id="topAppearances"></div>
+
+</section>
+
     </div>
 
 </div>
@@ -1321,6 +1330,98 @@ style="width:${width}%">
 
     document.getElementById(
         "topScorers"
+    ).innerHTML = html;
+
+}
+
+function renderTopAppearances(){
+
+    const appearances = {};
+    const playerClubs = {};
+
+    getFilteredClasicos().forEach(match => {
+
+        for(let i = 1; i <= 11; i++){
+
+            const player =
+                match[`Player name ${i}`];
+
+            if(player){
+
+                appearances[player] =
+                    (appearances[player] || 0) + 1;
+
+                playerClubs[player] = "barca";
+            }
+
+            const oppPlayer =
+                match[`Opp. Player name ${i}`];
+
+            if(oppPlayer){
+
+                appearances[oppPlayer] =
+                    (appearances[oppPlayer] || 0) + 1;
+
+                playerClubs[oppPlayer] = "madrid";
+            }
+
+        }
+
+    });
+
+    const sorted =
+        Object.entries(appearances)
+        .sort((a,b) => b[1] - a[1])
+        .slice(0,10);
+
+    const maxApps =
+        sorted[0]?.[1] || 1;
+
+    let html = "";
+
+    sorted.forEach(([name, apps]) => {
+
+        const width =
+            (apps / maxApps) * 100;
+
+        html += `
+
+            <div class="scorer-item">
+
+                <div class="scorer-row">
+
+                    <div class="scorer-name">
+                        <a class="player-link" href="player.html?name=${encodeURIComponent(name)}">
+                            ${name}
+                        </a>
+                    </div>
+
+                    <div class="scorer-goals">
+                        ${apps}
+                    </div>
+
+                </div>
+
+                <div class="scorer-bar">
+
+                    <div class="scorer-fill ${
+                        playerClubs[name] === "madrid"
+                        ? "madrid-scorer"
+                        : "barca-scorer"
+                    }"
+                    style="width:${width}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "topAppearances"
     ).innerHTML = html;
 
 }
