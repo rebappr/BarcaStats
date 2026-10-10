@@ -486,9 +486,10 @@
 
 #toggleClasicosBtn{
 
-    padding:8px 12px;
+    height:38px;
 
-    border:none;
+    padding:0 18px;
+
     border-radius:14px;
 
     cursor:pointer;
@@ -501,11 +502,15 @@
     color:var(--text);
 
     border:1px solid var(--card-border);
+
+    white-space:nowrap;
+
+    transition:.2s;
 }
 
 #toggleClasicosBtn:hover{
     background:#004D98;
-    color:white;
+    color:#fff;
 }
 
 #matches .matches-view-switch{
@@ -607,7 +612,24 @@ color:var(--muted);
     font-size:13px;
 }
 
+.clasico-filters{
+    align-items:flex-end;
+}
+
+.clasico-filters .filter-group{
+    flex:1;
+}
+
 @media(max-width:820px){
+
+    .clasico-filters{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    #toggleClasicosBtn{
+        width:100%;
+    }
 
     #matches .matches-header,
     #matches .matches-line{
@@ -858,22 +880,31 @@ records from one of football's greatest rivalries.
 
     <h2>Match History</h2>
 
-    <div class="filters">
+<div class="filters clasico-filters">
 
-        <div class="filter-group">
+    <div class="filter-group">
 
-            <label for="competitionFilter">
-                Competition
-            </label>
+        <label for="competitionFilter">
+            Competition
+        </label>
 
-            <select id="competitionFilter"
-                    onchange="changeCompetitionFilter(this.value)">
-                <option value="All">
-                    All Competitions
-                </option>
-            </select>
+        <select id="competitionFilter"
+                onchange="changeCompetitionFilter(this.value)">
 
-        </div>
+            <option value="All">
+                All Competitions
+            </option>
+
+        </select>
+
+    </div>
+
+    <button id="toggleClasicosBtn"
+            onclick="toggleClasicos()">
+        Show All Matches
+    </button>
+
+</div>
 
     </div>
 
