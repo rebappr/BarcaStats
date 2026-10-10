@@ -900,20 +900,33 @@ records and head-to-head comparisons.
     All-Time Head-to-Head
 </h2>
 
-<div class="h2h-switch">
+<div class="filters">
 
-    <button
-        class="active"
-        data-h2h-view="all"
-        onclick="setH2HView('all')">
-        All-Time
-    </button>
+    <div class="filter-group">
 
-    <button
-        data-h2h-view="laliga"
-        onclick="setH2HView('laliga')">
-        La Liga
-    </button>
+        <label>Competition</label>
+
+        <select id="globalCompetitionFilter"
+                onchange="updateGlobalFilters()">
+            <option value="All">
+                All Competitions
+            </option>
+        </select>
+
+    </div>
+
+    <div class="filter-group">
+
+        <label>Season</label>
+
+        <select id="globalSeasonFilter"
+                onchange="updateGlobalFilters()">
+            <option value="All">
+                All Seasons
+            </option>
+        </select>
+
+    </div>
 
 </div>
 
@@ -1009,19 +1022,6 @@ records and head-to-head comparisons.
 
 <div class="filters clasico-filters">
 
-    <div class="filter-group">
-
-        <select id="competitionFilter"
-                onchange="changeCompetitionFilter(this.value)">
-
-            <option value="All">
-                All Competitions
-            </option>
-
-        </select>
-
-    </div>
-
     <button id="toggleClasicosBtn"
             onclick="toggleClasicos()">
         Show All Matches
@@ -1087,7 +1087,8 @@ let allMatches = [];
 let selectedCompetition = "All";
 let showAllClasicos = false;
 
-let h2hView = "all";
+let selectedCompetition = "All";
+let selectedSeason = "All";
 
 fetch("data.json")
     .then(r => r.json())
@@ -1114,7 +1115,7 @@ function getClasicos(){
 
 function renderGoals(){
 
-    let clasicos = getClasicos();
+    let clasicos = getFilteredClasicos();
 
 if(h2hView === "laliga"){
 
@@ -1265,46 +1266,95 @@ style="width:${width}%">
 
 }
 
-function renderCompetitionFilter(){
+function getFilteredClasicos(){
+
+    let clasicos = getFilteredClasicos();
+
+    if(selectedCompetition !== "All"){
+
+        clasicos = clasicos.filter(
+            match =>
+            match.Competition === selectedCompetition
+        );
+
+    }
+
+    if(selectedSeason !== "All"){
+
+        clasicos = clasicos.filter(
+            match =>
+            match.Season === selectedSeason
+        );
+
+    }
+
+    return clasicos;
+
+}
+
+function renderGlobalFilters(){
 
     const competitions =
         [...new Set(
-
             getClasicos()
-            .map(match => match.Competition)
+            .map(m => m.Competition)
+        )].sort();
 
-        )]
-        .sort();
+    const seasons =
+        [...new Set(
+            getClasicos()
+            .map(m => m.Season)
+        )].sort().reverse();
 
-    const select =
-        document.getElementById(
-            "competitionFilter"
-        );
-
-    select.innerHTML = `
+    document.getElementById(
+        "globalCompetitionFilter"
+    ).innerHTML = `
 
         <option value="All">
             All Competitions
         </option>
 
-        ${competitions.map(comp => `
-
-            <option value="${comp}">
-                ${comp}
+        ${competitions.map(c => `
+            <option value="${c}">
+                ${c}
             </option>
-
         `).join("")}
 
     `;
 
+    document.getElementById(
+        "globalSeasonFilter"
+    ).innerHTML = `
+
+        <option value="All">
+            All Seasons
+        </option>
+
+        ${seasons.map(s => `
+            <option value="${s}">
+                ${s}
+            </option>
+        `).join("")}
+
+    `;
 }
 
-function changeCompetitionFilter(value){
+function updateGlobalFilters(){
 
-    selectedCompetition = value;
+    selectedCompetition =
+        document.getElementById(
+            "globalCompetitionFilter"
+        ).value;
 
+    selectedSeason =
+        document.getElementById(
+            "globalSeasonFilter"
+        ).value;
+
+    renderHeadToHead();
+    renderGoals();
+    renderTopScorers();
     renderClasicoMatches();
-
 }
 
 function renderClasicoMatches(){
@@ -1422,7 +1472,7 @@ document.getElementById("h2hTitle").textContent =
 
 function renderHeadToHead(){
 
-    let clasicos = getClasicos();
+    let clasicos = getFilteredClasicos();
 
 if(h2hView === "laliga"){
 
