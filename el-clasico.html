@@ -1287,17 +1287,52 @@ function getFilteredClasicos(){
 
 function renderGlobalFilters(){
 
+    const allClasicos = getClasicos();
+
+    // Competition options podľa vybranej sezóny
+
+    let competitionSource = allClasicos;
+
+    if(selectedSeason !== "All"){
+
+        competitionSource =
+            competitionSource.filter(
+                match =>
+                match.Season === selectedSeason
+            );
+
+    }
+
     const competitions =
         [...new Set(
-            getClasicos()
-            .map(m => m.Competition)
-        )].sort();
+            competitionSource.map(
+                match => match.Competition
+            )
+        )]
+        .sort();
+
+    // Season options podľa vybranej súťaže
+
+    let seasonSource = allClasicos;
+
+    if(selectedCompetition !== "All"){
+
+        seasonSource =
+            seasonSource.filter(
+                match =>
+                match.Competition === selectedCompetition
+            );
+
+    }
 
     const seasons =
         [...new Set(
-            getClasicos()
-            .map(m => m.Season)
-        )].sort().reverse();
+            seasonSource.map(
+                match => match.Season
+            )
+        )]
+        .sort()
+        .reverse();
 
     document.getElementById(
         "globalCompetitionFilter"
@@ -1307,10 +1342,14 @@ function renderGlobalFilters(){
             All Competitions
         </option>
 
-        ${competitions.map(c => `
-            <option value="${c}">
-                ${c}
+        ${competitions.map(comp => `
+
+            <option
+                value="${comp}"
+                ${comp === selectedCompetition ? "selected" : ""}>
+                ${comp}
             </option>
+
         `).join("")}
 
     `;
@@ -1323,13 +1362,18 @@ function renderGlobalFilters(){
             All Seasons
         </option>
 
-        ${seasons.map(s => `
-            <option value="${s}">
-                ${s}
+        ${seasons.map(season => `
+
+            <option
+                value="${season}"
+                ${season === selectedSeason ? "selected" : ""}>
+                ${season}
             </option>
+
         `).join("")}
 
     `;
+
 }
 
 function updateGlobalFilters(){
