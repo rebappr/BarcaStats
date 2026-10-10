@@ -1084,7 +1084,6 @@ records and head-to-head comparisons.
 <script>
 
 let allMatches = [];
-let selectedCompetition = "All";
 let showAllClasicos = false;
 
 let selectedCompetition = "All";
@@ -1116,14 +1115,6 @@ function getClasicos(){
 function renderGoals(){
 
     let clasicos = getFilteredClasicos();
-
-if(h2hView === "laliga"){
-
-    clasicos = clasicos.filter(
-        match => match.Competition === "La Liga"
-    );
-
-}
 
     let barcaGoals = 0;
     let madridGoals = 0;
@@ -1175,7 +1166,7 @@ function renderTopScorers(){
     const scorers = {};
     const scorerClubs = {};
 
-getClasicos().forEach(match => {
+getFilteredClasicos().forEach(match => {
 
 for(let i = 1; i <= 12; i++){
 
@@ -1263,6 +1254,19 @@ style="width:${width}%">
     document.getElementById(
         "topScorers"
     ).innerHTML = html;
+
+}
+
+function getClasicos(){
+
+    return allMatches.filter(match => {
+
+        return (
+            match["Opp. Team"] === "Real Madrid" &&
+            match["Result"] !== "-:-"
+        );
+
+    });
 
 }
 
@@ -1360,17 +1364,7 @@ function updateGlobalFilters(){
 function renderClasicoMatches(){
 
     let clasicos =
-    getClasicos();
-
-if(selectedCompetition !== "All"){
-
-    clasicos =
-        clasicos.filter(
-            match =>
-            match.Competition === selectedCompetition
-        );
-
-}
+    getFilteredClasicos();
 
 clasicos.sort(
     (a,b) => Number(b.ID) - Number(a.ID)
@@ -1448,39 +1442,9 @@ function toggleClasicos(){
 
 }
 
-function setH2HView(view){
-
-    h2hView = view;
-
-    document
-        .querySelectorAll("[data-h2h-view]")
-        .forEach(btn => btn.classList.remove("active"));
-
-    document
-        .querySelector(`[data-h2h-view="${view}"]`)
-        ?.classList.add("active");
-
-document.getElementById("h2hTitle").textContent =
-    view === "laliga"
-    ? "La Liga Head-to-Head"
-    : "All-Time Head-to-Head";
-
-    renderHeadToHead();
-    renderGoals();
-
-}
-
 function renderHeadToHead(){
 
     let clasicos = getFilteredClasicos();
-
-if(h2hView === "laliga"){
-
-    clasicos = clasicos.filter(
-        match => match.Competition === "La Liga"
-    );
-
-}
 
     const totalMatches = clasicos.length;
 
@@ -1555,11 +1519,14 @@ clasicos.forEach(match => {
 function renderHome(){
 
     initPersonSearch();
+
+    renderGlobalFilters();
+
     renderHeadToHead();
     renderGoals();
-    renderCompetitionFilter();
     renderClasicoMatches();
     renderTopScorers();
+
 }
 
 
