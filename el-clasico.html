@@ -620,7 +620,54 @@ color:var(--muted);
     flex:1;
 }
 
+.h2h-switch{
+    display:flex;
+    gap:6px;
+    margin-bottom:12px;
+}
+
+.h2h-switch button{
+
+    height:38px;
+
+    padding:0 18px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+
+    background:var(--card-bg);
+    color:var(--text);
+
+    border:1px solid var(--card-border);
+
+    transition:.2s;
+}
+
+.h2h-switch button.active{
+    background:#004D98;
+    color:#fff;
+    border-color:#004D98;
+}
+
+.h2h-switch button:hover{
+    background:#004D98;
+    color:#fff;
+}
+
 @media(max-width:820px){
+
+    .h2h-switch{
+        flex-wrap:wrap;
+    }
+
+    .h2h-switch button{
+        flex:1;
+    }
 
     .clasico-filters{
         flex-direction:column;
@@ -788,11 +835,11 @@ records from one of football's greatest rivalries.
         <section id="head-to-head"
                  class="home-card">
 
-            <h2 id="h2hTitle">
-                All-Time Head-to-Head
-            </h2>
-            
-<div class="matches-view-switch">
+<h2 id="h2hTitle">
+    All-Time Head-to-Head
+</h2>
+
+<div class="h2h-switch">
 
     <button
         class="active"
