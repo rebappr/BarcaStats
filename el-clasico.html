@@ -485,6 +485,7 @@
 }
 
 #toggleClasicosBtn{
+
     padding:8px 12px;
 
     border:none;
@@ -504,7 +505,7 @@
 
 #toggleClasicosBtn:hover{
     background:#004D98;
-    color:#fff;
+    color:white;
 }
 
 #matches .matches-view-switch{
@@ -559,22 +560,51 @@ background:var(--card-bg);
 color:var(--muted);
 }
 
-#matches .filters{
+##matches .filters{
     display:flex;
+    flex-wrap:wrap;
     gap:8px;
+
     background:var(--card-bg);
+    backdrop-filter:blur(20px);
+
     border:1px solid var(--card-border);
+
     padding:12px;
     border-radius:24px;
+
     margin-bottom:10px;
 }
 
 #matches .filter-group{
-    width:100%;
+    flex:1 1 0;
+    min-width:200px;
+}
+
+#matches .filter-group label{
+    font-weight:700;
+    font-size:13px;
+    display:block;
+    margin-bottom:4px;
 }
 
 #matches select{
+
     width:100%;
+
+    height:38px;
+
+    background:var(--meta-bg);
+
+    color:var(--text);
+
+    border:1px solid var(--meta-border);
+
+    border-radius:14px;
+
+    padding:0 12px;
+
+    font-size:13px;
 }
 
 @media(max-width:820px){
