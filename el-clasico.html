@@ -1448,16 +1448,35 @@ function renderTopManagers(){
 
     const managers = {};
 
-    getFilteredClasicos().forEach(match => {
+    const managerClubs = {};
 
-        const manager = match.Manager;
+getFilteredClasicos().forEach(match => {
 
-        if(!manager) return;
+    const barcaManager =
+        match.Manager;
 
-        managers[manager] =
-            (managers[manager] || 0) + 1;
+    if(barcaManager){
 
-    });
+        managers[barcaManager] =
+            (managers[barcaManager] || 0) + 1;
+
+        managerClubs[barcaManager] =
+            "barca";
+    }
+
+    const madridManager =
+        match["Opp. Manager"];
+
+    if(madridManager){
+
+        managers[madridManager] =
+            (managers[madridManager] || 0) + 1;
+
+        managerClubs[madridManager] =
+            "madrid";
+    }
+
+});
 
     const sorted =
         Object.entries(managers)
@@ -1494,10 +1513,15 @@ function renderTopManagers(){
 
                 <div class="scorer-bar">
 
-                    <div
-                        class="scorer-fill barca-scorer"
-                        style="width:${width}%">
-                    </div>
+<div
+    class="scorer-fill ${
+        managerClubs[name] === "madrid"
+        ? "madrid-scorer"
+        : "barca-scorer"
+    }"
+    style="width:${width}%">
+</div>
+
 
                 </div>
 
@@ -1517,21 +1541,41 @@ function renderTopManagerWins(){
 
     const wins = {};
 
-    getFilteredClasicos().forEach(match => {
+    const managerClubs = {};
 
-        const manager = match.Manager;
+getFilteredClasicos().forEach(match => {
 
-        if(
-            !manager ||
-            match["Result type"] !== "W"
-        ){
-            return;
-        }
+    const barcaManager =
+        match.Manager;
 
-        wins[manager] =
-            (wins[manager] || 0) + 1;
+    const madridManager =
+        match["Opp. Manager"];
 
-    });
+    if(
+        match["Result type"] === "W" &&
+        barcaManager
+    ){
+
+        wins[barcaManager] =
+            (wins[barcaManager] || 0) + 1;
+
+        managerClubs[barcaManager] =
+            "barca";
+    }
+
+    if(
+        match["Result type"] === "L" &&
+        madridManager
+    ){
+
+        wins[madridManager] =
+            (wins[madridManager] || 0) + 1;
+
+        managerClubs[madridManager] =
+            "madrid";
+    }
+
+});
 
     const sorted =
         Object.entries(wins)
@@ -1568,10 +1612,15 @@ function renderTopManagerWins(){
 
                 <div class="scorer-bar">
 
-                    <div
-                        class="scorer-fill barca-scorer"
-                        style="width:${width}%">
-                    </div>
+<div
+    class="scorer-fill ${
+        managerClubs[name] === "madrid"
+        ? "madrid-scorer"
+        : "barca-scorer"
+    }"
+    style="width:${width}%">
+</div>
+
 
                 </div>
 
