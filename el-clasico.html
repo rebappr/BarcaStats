@@ -755,6 +755,17 @@ color:var(--muted);
 
 }
 
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.section-header h2{
+    margin:0;
+}
 
 @media(max-width:820px){
 
@@ -1060,12 +1071,16 @@ records and head-to-head comparisons.
 <section id="matches"
          class="home-card">
 
-    <h2>Match History</h2>
+    <div class="section-header">
 
-    <button id="toggleClasicosBtn"
-            onclick="toggleClasicos()">
-        Show All Matches
-    </button>
+        <h2>Match History</h2>
+
+        <button id="toggleClasicosBtn"
+                onclick="toggleClasicos()">
+            Show All Matches
+        </button>
+
+    </div>
 
     <div class="matches-header">
 
