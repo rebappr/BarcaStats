@@ -559,6 +559,23 @@ background:var(--card-bg);
 color:var(--muted);
 }
 
+#matches .filters{
+    display:flex;
+    gap:8px;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    padding:12px;
+    border-radius:24px;
+    margin-bottom:10px;
+}
+
+#matches .filter-group{
+    width:100%;
+}
+
+#matches select{
+    width:100%;
+}
 
 @media(max-width:820px){
 
@@ -808,6 +825,25 @@ records from one of football's greatest rivalries.
 
 <section id="matches"
          class="home-card">
+      
+<div class="filters">
+
+    <div class="filter-group">
+
+        <label for="competitionFilter">
+            Competition
+        </label>
+
+        <select id="competitionFilter"
+                onchange="changeCompetitionFilter(this.value)">
+
+            <option value="All">All Competitions</option>
+
+        </select>
+
+    </div>
+
+</div>
 
     <h2>Match History</h2>
 
@@ -878,6 +914,7 @@ records from one of football's greatest rivalries.
 <script>
 
 let allMatches = [];
+let selectedCompetition = "All";
 let showAllClasicos = false;
 
 fetch("data.json")
@@ -952,11 +989,58 @@ clasicos.forEach(match => {
 
 }
 
+function renderCompetitionFilter(){
+
+    const competitions =
+        [...new Set(
+
+            getClasicos()
+            .map(match => match.Competition)
+
+        )]
+        .sort();
+
+    const select =
+        document.getElementById(
+            "competitionFilter"
+        );
+
+    select.innerHTML = `
+
+        <option value="All">
+            All Competitions
+        </option>
+
+        ${competitions.map(comp => `
+
+            <option value="${comp}">
+                ${comp}
+            </option>
+
+        `).join("")}
+
+    `;
+
+}
+
 function renderClasicoMatches(){
 
-    const clasicos =
-        getClasicos()
-        .sort((a,b) => Number(b.ID) - Number(a.ID));
+    let clasicos =
+    getClasicos();
+
+if(selectedCompetition !== "All"){
+
+    clasicos =
+        clasicos.filter(
+            match =>
+            match.Competition === selectedCompetition
+        );
+
+}
+
+clasicos.sort(
+    (a,b) => Number(b.ID) - Number(a.ID)
+);
 
     const matches =
         showAllClasicos
@@ -1107,8 +1191,13 @@ clasicos.forEach(match => {
 function renderHome(){
 
     initPersonSearch();
+
     renderHeadToHead();
+
     renderGoals();
+
+    renderCompetitionFilter();
+
     renderClasicoMatches();
 
 }
