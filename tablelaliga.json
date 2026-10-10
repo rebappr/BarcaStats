@@ -19802,6 +19802,30 @@
   {
     "season": "2026/27",
     "position": "9",
+    "club": "Athletic Club",
+    "matches": "7",
+    "wins": "2",
+    "draws": "3",
+    "losses": "2",
+    "goals": "7:6",
+    "difference": "1",
+    "points": "9"
+  },
+  {
+    "season": "2026/27",
+    "position": "10",
+    "club": "Rayo Vallecano",
+    "matches": "8",
+    "wins": "2",
+    "draws": "3",
+    "losses": "3",
+    "goals": "11:16",
+    "difference": "-5",
+    "points": "9"
+  },
+  {
+    "season": "2026/27",
+    "position": "11",
     "club": "Villarreal CF",
     "matches": "7",
     "wins": "2",
@@ -19813,19 +19837,7 @@
   },
   {
     "season": "2026/27",
-    "position": "10",
-    "club": "Athletic Club",
-    "matches": "6",
-    "wins": "2",
-    "draws": "2",
-    "losses": "2",
-    "goals": "7:6",
-    "difference": "1",
-    "points": "8"
-  },
-  {
-    "season": "2026/27",
-    "position": "11",
+    "position": "12",
     "club": "RCD Espanyol",
     "matches": "8",
     "wins": "2",
@@ -19837,7 +19849,7 @@
   },
   {
     "season": "2026/27",
-    "position": "12",
+    "position": "13",
     "club": "Getafe CF",
     "matches": "7",
     "wins": "2",
@@ -19845,18 +19857,6 @@
     "losses": "3",
     "goals": "4:7",
     "difference": "-3",
-    "points": "8"
-  },
-  {
-    "season": "2026/27",
-    "position": "13",
-    "club": "Rayo Vallecano",
-    "matches": "7",
-    "wins": "2",
-    "draws": "2",
-    "losses": "3",
-    "goals": "11:16",
-    "difference": "-5",
     "points": "8"
   },
   {
