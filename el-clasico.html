@@ -412,7 +412,72 @@
     margin-top:20px;
 }
 
+#clasicoMatches{
+    margin-top:6px;
+}
+
+#toggleClasicosBtn{
+    padding:8px 14px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+
+    background:var(--card-bg);
+    color:var(--text);
+
+    border:1px solid var(--card-border);
+}
+
+#toggleClasicosBtn:hover{
+    background:var(--meta-bg);
+}
+
+#matches .matches-header{
+    display:grid;
+
+    grid-template-columns:
+    90px
+    90px
+    1fr
+    90px;
+
+    gap:4px;
+}
+
+#matches .matches-line{
+    display:grid;
+
+    grid-template-columns:
+    90px
+    90px
+    1fr
+    90px;
+
+    gap:4px;
+
+    align-items:center;
+}
+
+#matches .matches-line div:last-child{
+    display:flex;
+    justify-content:center;
+}
+
 @media(max-width:820px){
+
+    #matches .matches-header,
+    #matches .matches-line{
+
+        grid-template-columns:
+        70px
+        75px
+        1fr
+        70px;
+
+        font-size:11px;
+    }
       
     .dashboard-layout{
         grid-template-columns:1fr;
