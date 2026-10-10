@@ -1131,6 +1131,24 @@ records and head-to-head comparisons.
 
 </section>
 
+<section id="top-managers"
+         class="home-card">
+
+    <h2>Managers by Matches</h2>
+
+    <div id="topManagers"></div>
+
+</section>
+
+<section id="top-manager-wins"
+         class="home-card">
+
+    <h2>Managers by Wins</h2>
+
+    <div id="topManagerWins"></div>
+
+</section>
+
     </div>
 
 </div>
@@ -1426,6 +1444,149 @@ function renderTopAppearances(){
 
 }
 
+function renderTopManagers(){
+
+    const managers = {};
+
+    getFilteredClasicos().forEach(match => {
+
+        const manager = match.Manager;
+
+        if(!manager) return;
+
+        managers[manager] =
+            (managers[manager] || 0) + 1;
+
+    });
+
+    const sorted =
+        Object.entries(managers)
+        .sort((a,b) => b[1] - a[1])
+        .slice(0,10);
+
+    const max =
+        sorted[0]?.[1] || 1;
+
+    let html = "";
+
+    sorted.forEach(([name, matches]) => {
+
+        const width =
+            (matches / max) * 100;
+
+        html += `
+
+            <div class="scorer-item">
+
+                <div class="scorer-row">
+
+                    <div class="scorer-name">
+                        <a class="player-link" href="manager.html?name=${encodeURIComponent(name)}">
+                            ${name}
+                        </a>
+                    </div>
+
+                    <div class="scorer-goals">
+                        ${matches}
+                    </div>
+
+                </div>
+
+                <div class="scorer-bar">
+
+                    <div
+                        class="scorer-fill barca-scorer"
+                        style="width:${width}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "topManagers"
+    ).innerHTML = html;
+
+}
+
+function renderTopManagerWins(){
+
+    const wins = {};
+
+    getFilteredClasicos().forEach(match => {
+
+        const manager = match.Manager;
+
+        if(
+            !manager ||
+            match["Result type"] !== "W"
+        ){
+            return;
+        }
+
+        wins[manager] =
+            (wins[manager] || 0) + 1;
+
+    });
+
+    const sorted =
+        Object.entries(wins)
+        .sort((a,b) => b[1] - a[1])
+        .slice(0,10);
+
+    const max =
+        sorted[0]?.[1] || 1;
+
+    let html = "";
+
+    sorted.forEach(([name, winCount]) => {
+
+        const width =
+            (winCount / max) * 100;
+
+        html += `
+
+            <div class="scorer-item">
+
+                <div class="scorer-row">
+
+                    <div class="scorer-name">
+                        <a class="player-link" href="manager.html?name=${encodeURIComponent(name)}">
+                            ${name}
+                        </a>
+                    </div>
+
+                    <div class="scorer-goals">
+                        ${winCount}
+                    </div>
+
+                </div>
+
+                <div class="scorer-bar">
+
+                    <div
+                        class="scorer-fill barca-scorer"
+                        style="width:${width}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById(
+        "topManagerWins"
+    ).innerHTML = html;
+
+}
+
 function getFilteredClasicos(){
 
     let clasicos = getClasicos();
@@ -1645,6 +1806,9 @@ selectedVenue =
     renderTopAppearances();
     renderClasicoMatches();
 
+    renderTopManagers();
+    renderTopManagerWins();
+
 }
 
 function renderClasicoMatches(){
@@ -1814,8 +1978,10 @@ function renderHome(){
     renderTopScorers();
     renderTopAppearances();
 
-}
+    renderTopManagers();
+    renderTopManagerWins();
 
+}
 
 function initPersonSearch(){
 
