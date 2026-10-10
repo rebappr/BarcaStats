@@ -1179,6 +1179,7 @@ clasicos.forEach(match => {
 function renderTopScorers(){
 
     const scorers = {};
+    const scorerClubs = {};
 
 getClasicos().forEach(match => {
 
@@ -1187,24 +1188,25 @@ getClasicos().forEach(match => {
         const barcaPlayer =
             match[`Goal Player ${i}`];
 
-        if(
-            barcaPlayer &&
-            !barcaPlayer.includes("(OG)")
-        ){
-            scorers[barcaPlayer] =
-                (scorers[barcaPlayer] || 0) + 1;
-        }
+if(
+    barcaPlayer &&
+    !barcaPlayer.includes("(OG)")
+){
+    scorers[barcaPlayer] =
+        (scorers[barcaPlayer] || 0) + 1;
 
-        const madridPlayer =
-            match[`Opp. Goal Player ${i}`];
+    scorerClubs[barcaPlayer] = "barca";
+}
 
-        if(
-            madridPlayer &&
-            !madridPlayer.includes("(OG)")
-        ){
-            scorers[madridPlayer] =
-                (scorers[madridPlayer] || 0) + 1;
-        }
+if(
+    madridPlayer &&
+    !madridPlayer.includes("(OG)")
+){
+    scorers[madridPlayer] =
+        (scorers[madridPlayer] || 0) + 1;
+
+    scorerClubs[madridPlayer] = "madrid";
+}
 
     }
 
@@ -1245,9 +1247,13 @@ getClasicos().forEach(match => {
 
                 <div class="scorer-bar">
 
-                    <div class="scorer-fill"
-                         style="width:${width}%">
-                    </div>
+                    <div class="scorer-fill ${
+    scorerClubs[name] === "madrid"
+    ? "madrid-scorer"
+    : "barca-scorer"
+}"
+style="width:${width}%">
+</div>
 
                 </div>
 
