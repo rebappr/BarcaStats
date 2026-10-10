@@ -1091,7 +1091,7 @@ records and head-to-head comparisons.
 
         <button id="toggleClasicosBtn"
                 onclick="toggleClasicos()">
-            Show All Matches
+            Show More
         </button>
 
     </div>
@@ -1885,8 +1885,8 @@ function toggleClasicos(){
         "toggleClasicosBtn"
     ).textContent =
         showAllClasicos
-        ? "Show Last 10 Matches"
-        : "Show All Matches";
+        ? "Show Less"
+        : "Show More";
 
     renderClasicoMatches();
 
